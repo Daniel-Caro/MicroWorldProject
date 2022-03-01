@@ -41,7 +41,7 @@ public class GridBuildingSystem : MonoBehaviour
             return;
         }   
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetAxis("Mouse X")!=0 || Input.GetAxis("Mouse Y")!=0)//(Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (EventSystem.current.IsPointerOverGameObject(0))
             {
@@ -60,10 +60,16 @@ public class GridBuildingSystem : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (temp.CanBePlaced())
             {
+                TempTileMap.ClearAllTiles();
+                SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
+                sr.color = new Color(1f,1f,1f,1f);
+                Transform objectTransform = temp.GetComponent<Transform>();
+                Transform spriteTransform = temp.transform.GetChild(0).gameObject.GetComponent<Transform>();
+                spriteTransform.position = new Vector3(spriteTransform.position.x, spriteTransform.position.y, objectTransform.position.y/0.55f);
                 temp.Place();
             }
         }
@@ -79,7 +85,9 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<Building>();
+        temp = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity).GetComponent<Building>();
+        SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
+        sr.color = new Color(1f,1f,1f,.5f);
         FollowBuilding();
     }
 
