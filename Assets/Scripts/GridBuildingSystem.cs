@@ -11,12 +11,15 @@ public class GridBuildingSystem : MonoBehaviour
     public GridLayout gridLayout;
     public Tilemap MainTileMap;
     public Tilemap TempTileMap;
+    public AudioSource constructionSound;
 
     private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
 
     private Building temp;
     private Vector3 prevPos;
     private BoundsInt prevArea;
+    private bool buildingPicked = false;
+
 
     #region Unity Methods
 
@@ -70,7 +73,10 @@ public class GridBuildingSystem : MonoBehaviour
                 Transform objectTransform = temp.GetComponent<Transform>();
                 Transform spriteTransform = temp.transform.GetChild(0).gameObject.GetComponent<Transform>();
                 spriteTransform.position = new Vector3(spriteTransform.position.x, spriteTransform.position.y, objectTransform.position.y/0.55f);
+                constructionSound.Play();
                 temp.Place();
+                buildingPicked = false;
+                Destroy(temp);
             }
         }
         
@@ -88,6 +94,8 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
+        if(buildingPicked) Destroy(temp.gameObject);
+        buildingPicked = true;
         temp = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity).GetComponent<Building>();
         SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
         sr.color = new Color(1f,1f,1f,.5f);

@@ -7,6 +7,23 @@ public class Building : MonoBehaviour
     public bool Placed { get; private set; }
     public BoundsInt area;
     public int level;
+  
+  // Update is called once per frame    
+    void Update() {  
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Debug.Log("clicaste la casa");
+            GameObject text = this.transform.Find("InfoText").gameObject;
+            text.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+            this.transform.Find("Panel").gameObject.SetActive(true);
+        } 
+    }
+
+    public void showPanel(){
+        GameObject text = this.transform.Find("LevelUpText").gameObject;
+        text.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+        this.transform.Find("Canvas").gameObject.SetActive(true);
+    }
 
     public bool CanBePlaced()
     {
