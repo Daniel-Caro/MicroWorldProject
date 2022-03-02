@@ -73,11 +73,14 @@ public class GridBuildingSystem : MonoBehaviour
                 temp.Place();
             }
         }
+        
+        /* CODIGO PARA ELIMINAR EDIFICIOS UNA VEZ PUESTO
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             ClearArea();
             Destroy(temp.gameObject);
         }
+        */
     }
     #endregion
 
