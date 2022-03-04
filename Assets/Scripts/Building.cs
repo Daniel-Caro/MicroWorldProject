@@ -7,17 +7,29 @@ public class Building : MonoBehaviour
     public bool Placed { get; private set; }
     public BoundsInt area;
     public int level;
+    public int cost;
   
-  // Update is called once per frame    
-    void Update() {  
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+    void Update() { 
+        /*
+        if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("clicaste la casa");
-            GameObject text = this.transform.Find("InfoText").gameObject;
-            text.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
-            this.transform.Find("Panel").gameObject.SetActive(true);
-        } 
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+            if (hit.collider != null)
+            {   
+                Debug.Log("clicaste la casa");
+                GameObject text = this.transform.Find("InfoText").gameObject;
+                text.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+                this.transform.Find("Panel").gameObject.SetActive(true);
+                Debug.Log("Target Name: " + hit.collider.gameObject.name);
+            } 
+        } */
     }
+
+    public void onClick(){
+        Debug.Log("Clicky puta");
+    }
+
 
     public void showPanel(){
         GameObject text = this.transform.Find("LevelUpText").gameObject;
@@ -36,6 +48,10 @@ public class Building : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void PrintName(GameObject go){
+        print(go.name);
     }
 
     public void Place()
