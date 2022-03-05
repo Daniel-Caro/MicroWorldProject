@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameResource
 {
-    private string nameR;
-    private int currentR;
+    public string nameR;
+    public int currentR;
 
     public GameResource(string nameres, int initial){
         nameR = nameres;
@@ -17,7 +17,7 @@ public class GameResource
         if(currentR < 0) currentR = 0;
     }
 
-    public void DedactResource(int quantity){
+    public void DedactResources(int quantity){
         currentR -= quantity;
         if(currentR < 0) currentR = 0;
     }

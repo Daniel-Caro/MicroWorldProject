@@ -12,10 +12,12 @@ public class GridBuildingSystem : MonoBehaviour
     public Tilemap MainTileMap;
     public Tilemap TempTileMap;
     public AudioSource constructionSound;
+    public AudioSource noSound;
 
     private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
 
     private Building temp;
+    private GameObject buildingGeneral;
     private Vector3 prevPos;
     private BoundsInt prevArea;
     private bool buildingPicked = false;
@@ -76,17 +78,24 @@ public class GridBuildingSystem : MonoBehaviour
                 constructionSound.Play();
                 temp.Place();
                 buildingPicked = false;
+                BuildScript buildingData = buildingGeneral.GetComponent<BuildScript>();
+                Globals.gameResources["Coins"].DedactResources(buildingData.cost);
+                Globals.buildingTypesDic.Add(buildingGeneral.GetInstanceID(), buildingData.type);
+                Globals.buildingLevelsDic.Add(buildingGeneral.GetInstanceID(), buildingData.level);
+                Globals.buildingCostsDic.Add(buildingGeneral.GetInstanceID(), buildingData.cost);
                 Destroy(temp);
             }
         }
         
-        /* CODIGO PARA ELIMINAR EDIFICIOS UNA VEZ PUESTO
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ClearArea();
-            Destroy(temp.gameObject);
+            if (buildingPicked){
+                ClearArea();
+                Destroy(temp.gameObject);
+                buildingPicked = false;
+            }
         }
-        */
+        
     }
     #endregion
 
@@ -94,13 +103,17 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        if(buildingPicked) Destroy(temp.gameObject);
-        buildingPicked = true;
-        temp = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity).GetComponent<Building>();
-        temp.gameObject.SetActive(true);
-        SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
-        sr.color = new Color(1f,1f,1f,.5f);
-        FollowBuilding();
+        if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost) noSound.Play();
+        else{
+            if (buildingPicked) Destroy(temp.gameObject);
+            buildingPicked = true;
+            buildingGeneral = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            temp = buildingGeneral.GetComponent<Building>();
+            temp.gameObject.SetActive(true);
+            SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
+            sr.color = new Color(1f,1f,1f,.5f);
+            FollowBuilding();
+        }
     }
 
     private void ClearArea()
