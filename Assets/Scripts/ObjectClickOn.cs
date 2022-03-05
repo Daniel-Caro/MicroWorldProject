@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class ObjectClickOn : MonoBehaviour
 {
-    
-    void Update()
+    private GameObject panel;
+    private Building building;
+
+    private void Start() {
+        panel = GameObject.Find("InfoBuildingPanel");
+    }
+
+    /*void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
@@ -14,6 +20,7 @@ public class ObjectClickOn : MonoBehaviour
             if (hit.collider != null)
             {
                 if(hit.collider.tag == "Player"){
+                    //building = hit.collider.gameObject;
                     IClick click = hit.collider.gameObject.GetComponent<IClick>();
                     if(click != null){
                         click.onClickAction();
@@ -22,5 +29,5 @@ public class ObjectClickOn : MonoBehaviour
                 Debug.Log("Target Name: " + hit.collider.gameObject.tag);
             } 
         } 
-    }
+    }*/
 }

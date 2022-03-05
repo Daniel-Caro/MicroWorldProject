@@ -97,6 +97,7 @@ public class GridBuildingSystem : MonoBehaviour
         if(buildingPicked) Destroy(temp.gameObject);
         buildingPicked = true;
         temp = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity).GetComponent<Building>();
+        temp.gameObject.SetActive(true);
         SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
         sr.color = new Color(1f,1f,1f,.5f);
         FollowBuilding();
