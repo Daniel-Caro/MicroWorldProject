@@ -17,6 +17,11 @@ public class GameResource
         if(currentR < 0) currentR = 0;
     }
 
+    public void DedactResource(int quantity){
+        currentR -= quantity;
+        if(currentR < 0) currentR = 0;
+    }
+
     public string Name {
         get => nameR;
     }

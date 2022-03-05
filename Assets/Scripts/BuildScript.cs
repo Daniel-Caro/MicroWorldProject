@@ -11,7 +11,6 @@ public class BuildScript : MonoBehaviour//, IClick
     public int cost;
 
     private void Start() {
-        //panel = GameObject.Find("InfoBuildingPanel");
     }
 
     void Update()
@@ -19,35 +18,37 @@ public class BuildScript : MonoBehaviour//, IClick
         if(Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
+            Debug.Log(hit.collider.gameObject.tag);
             if (hit.collider != null)
             {
-                /*if(hit.collider.tag == "Player"){
-                    //building = hit.collider.gameObject;
-                    IClick click = hit.collider.gameObject.GetComponent<IClick>();
-                    if(click != null){
-                        click.onClickAction();
-                    }
-                }*/
-                //building = hit.collider.gameObject.GetComponent<Building>();
-                Debug.Log("Target Name: " + hit.collider.gameObject.tag);
-                panel.SetActive(true);
-                building = hit.collider.gameObject.transform.parent.gameObject;
-                Debug.Log("Se ha clicado el edificio: " + building.name);
-                //Debug.Log("Nivel del edificio: " + building.level);
+                if(hit.collider.gameObject.tag == "building"){
+                    building = hit.collider.gameObject.transform.parent.gameObject;
+                    showPanel();
+                }
             } 
+            
         } 
     }
 
-    /*public void onClickAction(){
-        Debug.Log("clicaste la casa");
-        Debug.Log("Se ha clicado el edificio: " + building.gameObject.name);
-        Debug.Log("Está el panel: " + panel.name);
-    }*/
-
-    /*public void showPanel(){
-        GameObject text = this.transform.Find("LevelUpText").gameObject;
+    public void showPanel(){
+        GameObject text = panel.transform.Find("InfoText").gameObject;
         text.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
-        this.transform.Find("Canvas").gameObject.SetActive(true);
-    }*/
+        GameObject button = panel.transform.Find("LevelUpButton").gameObject;
+        GameObject buttonText = button.transform.Find("LevelUpText").gameObject;
+        
+        button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
+            LevelUp();
+        });
+        buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+        panel.SetActive(true);
+    }
+
+    public void LevelUp(){
+        if(true) { //Condicion de coste (recursos >= coste)
+            level++;
+            GameObject text = panel.transform.Find("InfoText").gameObject;
+            text.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+        }
+    }
 }
