@@ -7787,6 +7787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 798449980}
+  thisBuilding: {fileID: 1714508644}
   type: Bank
   level: 0
   cost: 150
@@ -7807,7 +7808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 2
-  quantity: 5
+  quantity: 100
+  storage: 100
 --- !u!1 &1730001465
 GameObject:
   m_ObjectHideFlags: 0
@@ -7976,6 +7978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 798449980}
+  thisBuilding: {fileID: 1746263642}
   type: Factory
   level: 0
   cost: 200
@@ -8588,6 +8591,10 @@ PrefabInstance:
       propertyPath: lvlUpSound
       value: 
       objectReference: {fileID: 1486878879}
+    - target: {fileID: 1375814022572683967, guid: 0924d7bddb1b549498ac83542778335e, type: 3}
+      propertyPath: thisBuilding
+      value: 
+      objectReference: {fileID: 581177560}
     - target: {fileID: 1498412906290949221, guid: 0924d7bddb1b549498ac83542778335e, type: 3}
       propertyPath: m_Name
       value: House
