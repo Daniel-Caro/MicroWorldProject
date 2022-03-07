@@ -18,6 +18,6 @@ public class Money : MonoBehaviour
     void Update()
     {
         gameR = Globals.gameResources["Coins"];
-        counter.GetComponent<TextMeshProUGUI>().text = gameR.currentR.ToString();
+        counter.GetComponent<TextMeshProUGUI>().text = gameR.currentR.ToString() + "//" + Globals.moneyCapacity.ToString();
     }
 }

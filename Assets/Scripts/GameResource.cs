@@ -14,7 +14,7 @@ public class GameResource
 
     public void AddResource(int quantity){
         currentR += quantity;
-        if(currentR < 0) currentR = 0;
+        if(currentR > Globals.moneyCapacity) currentR = Globals.moneyCapacity;
     }
 
     public void DedactResources(int quantity){

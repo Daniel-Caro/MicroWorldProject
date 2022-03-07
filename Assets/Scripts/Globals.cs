@@ -10,8 +10,10 @@ public class Globals
         {"Minioms", new GameResource("Minioms", 0)}
     };
 
-    public static Dictionary<int, string> buildingTypesDic = new Dictionary<int,string>();
-    public static Dictionary<int, int> buildingLevelsDic = new Dictionary<int,int>();
-    public static Dictionary<int, int> buildingCostsDic = new Dictionary<int,int>();
-    public static Dictionary<int, Tuple<int, int>> bankDataDic = new Dictionary<int, Tuple<int, int>>();
+    public static int moneyCapacity = 1000;
+
+    public static Dictionary<int, string> buildingTypesDic = new Dictionary<int,string>(); // Clave: ID instancia edificio Valor: tipo del edificio (TownHall, Bank, Factory)
+    public static Dictionary<int, int> buildingLevelsDic = new Dictionary<int,int>(); // Clave: ID instancia edificio Valor: nivel del edificio
+    public static Dictionary<int, int> buildingCostsDic = new Dictionary<int,int>(); // Clave: ID instancia edificio Valor: coste subida nivel
+    public static Dictionary<int, Dictionary<string, int>> bankDataDic = new Dictionary<int, Dictionary<string, int>>(); // Clave: ID instancia edificio banco Valor: diccionario con valores de almacenamiento, cantidad que genera, acumulación en el edificio
 }

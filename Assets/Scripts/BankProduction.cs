@@ -8,15 +8,28 @@ public class BankProduction : MonoBehaviour
 {
     public int time;
     public int quantity;
+    public int storage;
+    private bool producing;
 
-    public async void BeginProducing(GameObject building){
-        Globals.bankDataDic.Add(building.GetInstanceID(), new Tuple<int,int>(quantity,0));
-        while (true) //Condicional de parada si se llena el almacenamiento
+    public void BeginProducing(GameObject building){
+        Dictionary<string, int> bankInitialProperties = new Dictionary<string, int>();
+        bankInitialProperties.Add("Storage", storage);
+        bankInitialProperties.Add("Quantity", quantity);
+        bankInitialProperties.Add("Accumulated", 0);
+        Globals.moneyCapacity += storage;
+        Globals.bankDataDic.Add(building.GetInstanceID(), bankInitialProperties);
+        Produce(building);
+    }
+
+    public async void Produce(GameObject building)
+    {
+        while (Globals.bankDataDic[building.GetInstanceID()]["Storage"] > Globals.bankDataDic[building.GetInstanceID()]["Accumulated"]) //Condicional de parada si se llena el almacenamiento
         {
+            producing = true;
             await Task.Delay(TimeSpan.FromSeconds(time));
-            Tuple<int,int> oldEntry = Globals.bankDataDic[building.GetInstanceID()];
-            Globals.bankDataDic[building.GetInstanceID()] = new Tuple<int,int>(oldEntry.Item1,oldEntry.Item2 + oldEntry.Item1);
+            Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] += Globals.bankDataDic[building.GetInstanceID()]["Quantity"];
         }
+        producing = false;
     }
 
     IEnumerator waiter()
@@ -25,9 +38,12 @@ public class BankProduction : MonoBehaviour
     }
     
     public bool HarvestResource(GameObject building){
-        if (Globals.bankDataDic[building.GetInstanceID()].Item2 > 0){
-            Globals.gameResources["Coins"].currentR += Globals.bankDataDic[building.GetInstanceID()].Item2;
-            Globals.bankDataDic[building.GetInstanceID()] = new Tuple<int,int>(Globals.bankDataDic[building.GetInstanceID()].Item1, 0);
+        if (Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] > 0){
+            int left = 0;
+            if (Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] > Globals.moneyCapacity) left = Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] - Globals.moneyCapacity;
+            Globals.gameResources["Coins"].AddResource(Globals.bankDataDic[building.GetInstanceID()]["Accumulated"]);
+            Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] = left;
+            if(!producing) Produce(building);
             return true;
         }
         else return false;
