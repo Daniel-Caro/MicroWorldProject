@@ -1,6 +1,8 @@
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 
@@ -83,6 +85,7 @@ public class GridBuildingSystem : MonoBehaviour
                 Globals.buildingTypesDic.Add(buildingGeneral.GetInstanceID(), buildingData.type);
                 Globals.buildingLevelsDic.Add(buildingGeneral.GetInstanceID(), buildingData.level);
                 Globals.buildingCostsDic.Add(buildingGeneral.GetInstanceID(), buildingData.cost);
+                if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
                 Destroy(temp);
             }
         }

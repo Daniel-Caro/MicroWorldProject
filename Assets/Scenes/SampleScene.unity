@@ -7648,7 +7648,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d5791fceedb97364bb79cdfbc0f2427b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.69
   m_Pitch: 1
   Loop: 1
@@ -7793,6 +7793,21 @@ MonoBehaviour:
   factor: 0.8
   lvlUpSound: {fileID: 1486878879}
   noSound: {fileID: 1202963118}
+  bankProduction: {fileID: 1714508646}
+--- !u!114 &1714508646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714508644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a8748bf02d58a40bf3936467274293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 2
+  quantity: 5
 --- !u!1 &1730001465
 GameObject:
   m_ObjectHideFlags: 0
@@ -7967,6 +7982,7 @@ MonoBehaviour:
   factor: 0.8
   lvlUpSound: {fileID: 1486878879}
   noSound: {fileID: 1202963118}
+  bankProduction: {fileID: 0}
 --- !u!1 &1785051909
 GameObject:
   m_ObjectHideFlags: 0

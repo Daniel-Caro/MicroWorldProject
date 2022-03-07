@@ -7,6 +7,7 @@ public class BuildScript : MonoBehaviour//, IClick
 {
 
     public GameObject panel;
+    public GameObject thisBuilding;
     private GameObject building;
     public string type;
     public int level;
@@ -16,6 +17,7 @@ public class BuildScript : MonoBehaviour//, IClick
     private GameObject lvlUpButton; 
     public AudioSource lvlUpSound;
     public AudioSource noSound;
+    public BankProduction bankProduction;
 
     private void Start() {
     }
@@ -29,8 +31,9 @@ public class BuildScript : MonoBehaviour//, IClick
             {
                 if(hit.collider.gameObject.tag == "building"){
                     building = hit.collider.gameObject.transform.parent.gameObject;
-                    Debug.Log(building.GetInstanceID());
+                    if (building.GetInstanceID() != thisBuilding.GetInstanceID()) return;
                     type = Globals.buildingTypesDic[building.GetInstanceID()];
+                    if (type == "Bank") if (bankProduction.HarvestResource(building)) return;
                     level = Globals.buildingLevelsDic[building.GetInstanceID()];
                     cost = Globals.buildingCostsDic[building.GetInstanceID()]; 
                     showPanel();
