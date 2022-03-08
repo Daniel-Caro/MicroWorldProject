@@ -1,6 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using System.Threading;
 using UnityEngine;
 
 public class BuildScript : MonoBehaviour//, IClick
@@ -81,6 +82,9 @@ public class BuildScript : MonoBehaviour//, IClick
 
     public void LevelUp(){
         if(Globals.gameResources["Coins"].currentR >= cost) { //Condicion de coste (recursos >= coste)
+            if (Globals.buildingTypesDic[building.GetInstanceID()] == "Bank") {
+                bankProduction.chooseAttribute(building);
+            }
             level++;
             Globals.buildingLevelsDic[building.GetInstanceID()] = level;
 
@@ -102,6 +106,7 @@ public class BuildScript : MonoBehaviour//, IClick
             GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
             buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
             lvlUpSound.Play();
+            
         }
         else
         {
