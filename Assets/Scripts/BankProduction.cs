@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,6 @@ public class BankProduction : MonoBehaviour
     public int storage;
     private bool producing;
     private CancellationTokenSource cts;
-    private CancellationToken token;
 
     public void BeginProducing(GameObject building){
         Dictionary<string, int> bankInitialProperties = new Dictionary<string, int>();
@@ -21,8 +21,8 @@ public class BankProduction : MonoBehaviour
         Globals.moneyCapacity += storage;
         Globals.bankDataDic.Add(building.GetInstanceID(), bankInitialProperties);
         cts = new CancellationTokenSource();
-        token = cts.token;
-        Produce(building);
+        CancellationToken token = cts.Token;
+        Produce(building, token);
     }
 
     public async void Produce(GameObject building, CancellationToken token)
@@ -32,7 +32,10 @@ public class BankProduction : MonoBehaviour
             producing = true;
             await Task.Delay(TimeSpan.FromSeconds(time));
             Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] += Globals.bankDataDic[building.GetInstanceID()]["Quantity"];
-            if(token.IsCancellationRequested) break;
+            if(token.IsCancellationRequested){
+                Debug.Log("Producción cancelada");
+                break;
+            }
         }
         producing = false;
     }
@@ -43,13 +46,15 @@ public class BankProduction : MonoBehaviour
             if (Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] > Globals.moneyCapacity) left = Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] - Globals.moneyCapacity;
             Globals.gameResources["Coins"].AddResource(Globals.bankDataDic[building.GetInstanceID()]["Accumulated"]);
             Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] = left;
-            if(!producing) Produce(building);
+            cts = new CancellationTokenSource();
+            CancellationToken token = cts.Token;
+            if(!producing) Produce(building, token);
             return true;
         }
         else return false;
     }
 
-    public void chooseAttribute(GameObject building){
+    public void chooseAttribute(GameObject building, GameObject panel, BuildScript buildScript){
         GameObject choosePanel = panel.transform.Find("ChoosingPanel").gameObject;
         choosePanel.SetActive(true);
         Dictionary<string, int> bankData = Globals.bankDataDic[building.GetInstanceID()];
@@ -63,16 +68,22 @@ public class BankProduction : MonoBehaviour
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
             Globals.bankDataDic[building.GetInstanceID()]["Storage"] = storage + 50;
             Globals.moneyCapacity += 50;
-            token.Cancel();
-            Produce(building);
+            cts.Cancel();
+            cts = new CancellationTokenSource();
+            CancellationToken token = cts.Token;
+            Produce(building,token);
             choosePanel.SetActive(false);
+            buildScript.LevelUp();
         });
         quantityButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         quantityButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
             Globals.bankDataDic[building.GetInstanceID()]["Quantity"] = quantity + 50;
-            token.Cancel();
-            Produce(building);
+            cts.Cancel();
+            cts = new CancellationTokenSource();
+            CancellationToken token = cts.Token;
+            Produce(building, token);
             choosePanel.SetActive(false);
+            buildScript.LevelUp();
         });
     }
 }
