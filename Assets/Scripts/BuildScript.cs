@@ -33,14 +33,25 @@ public class BuildScript : MonoBehaviour//, IClick
                     building = hit.collider.gameObject.transform.parent.gameObject;
                     if (building.GetInstanceID() != thisBuilding.GetInstanceID()) return;
                     type = Globals.buildingTypesDic[building.GetInstanceID()];
-                    if (type == "Bank") if (bankProduction.HarvestResource(building)) return;
+                    
                     level = Globals.buildingLevelsDic[building.GetInstanceID()];
-                    cost = Globals.buildingCostsDic[building.GetInstanceID()]; 
-                    showPanel();
+                    cost = Globals.buildingCostsDic[building.GetInstanceID()];
+                    if (type == "Bank"){
+                        if (bankProduction.HarvestResource(building)) StartCoroutine(HoldTimer());
+                    } 
+                    else showPanel();
+                    
                 }
             } 
-            
-        } 
+        }
+
+        if(!Input.GetMouseButtonDown(0)) StopCoroutine(HoldTimer());
+    }
+
+    IEnumerator HoldTimer()
+    {
+        yield return new WaitForSeconds(1);
+        showPanel();
     }
 
     public void showPanel(){

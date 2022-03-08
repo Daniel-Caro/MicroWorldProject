@@ -31,11 +31,6 @@ public class BankProduction : MonoBehaviour
         }
         producing = false;
     }
-
-    IEnumerator waiter()
-    {
-        yield return new WaitForSeconds(time);
-    }
     
     public bool HarvestResource(GameObject building){
         if (Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] > 0){
