@@ -14,6 +14,7 @@ public class BuildScript : MonoBehaviour//, IClick
     public int level;
     public int cost;
     public double factor;
+    public AudioSource coinSound;
     private GameObject infoText;
     private GameObject lvlUpButton; 
     public AudioSource lvlUpSound;
@@ -41,6 +42,9 @@ public class BuildScript : MonoBehaviour//, IClick
                     cost = Globals.buildingCostsDic[building.GetInstanceID()];
                     if (type == "Bank"){
                         if (bankProduction.HarvestResource(building)){
+                            building.transform.Find("money").gameObject.SetActive(false);
+                            coinSound.Play();
+
                             Debug.Log("Comienza la rutina");
                             lastRoutine = StartCoroutine(HoldTimer());
                         } else showPanel();

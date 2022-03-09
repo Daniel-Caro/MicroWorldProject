@@ -28,9 +28,7 @@ public class Building : MonoBehaviour
         } */
     }
 
-    public void onClick(){
-        Debug.Log("Clicky puta");
-    }
+    
 
 
     

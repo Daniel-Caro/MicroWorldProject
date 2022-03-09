@@ -4,12 +4,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BankProduction : MonoBehaviour
 {
     public int time;
     public int quantity;
     public int storage;
+    public GameObject imageCoin;
     private bool producing;
     private CancellationTokenSource cts;
 
@@ -36,6 +38,10 @@ public class BankProduction : MonoBehaviour
             int quantity = Globals.bankDataDic[building.GetInstanceID()]["Quantity"];
             if (accumulated + quantity > storage) Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] = storage; //añadir if de almacenamiento
             else Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] += quantity;
+
+            imageCoin.SetActive(true);
+            Debug.Log("activasion de monedas");
+
             if(token.IsCancellationRequested){
                 Debug.Log("Producción cancelada");
                 break;
@@ -46,6 +52,7 @@ public class BankProduction : MonoBehaviour
     
     public bool HarvestResource(GameObject building){
         if (Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] > 0){
+            
             int left = 0;
             if (Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] > Globals.moneyCapacity) left = Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] - Globals.moneyCapacity;
             Globals.gameResources["Coins"].AddResource(Globals.bankDataDic[building.GetInstanceID()]["Accumulated"]);
@@ -65,9 +72,9 @@ public class BankProduction : MonoBehaviour
         int storage = bankData["Storage"];
         int quantity = bankData["Quantity"];
         GameObject storageButton = choosePanel.transform.Find("StorageButton").gameObject;
-        storageButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = "Almacenamiento: " + storage.ToString() + " > " + (storage+50).ToString();
+        storageButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = storage.ToString() + " > " + (storage+50).ToString();
         GameObject quantityButton = choosePanel.transform.Find("QuantityButton").gameObject;
-        quantityButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = "Producción: " + quantity.ToString() + " > " + (quantity+50).ToString();
+        quantityButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = quantity.ToString() + " > " + (quantity+50).ToString();
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
             Globals.bankDataDic[building.GetInstanceID()]["Storage"] = storage + 50;
