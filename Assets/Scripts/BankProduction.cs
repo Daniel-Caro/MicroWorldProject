@@ -31,7 +31,11 @@ public class BankProduction : MonoBehaviour
         {
             producing = true;
             await Task.Delay(TimeSpan.FromSeconds(time));
-            Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] += Globals.bankDataDic[building.GetInstanceID()]["Quantity"];
+            int accumulated = Globals.bankDataDic[building.GetInstanceID()]["Accumulated"];
+            int storage = Globals.bankDataDic[building.GetInstanceID()]["Storage"];
+            int quantity = Globals.bankDataDic[building.GetInstanceID()]["Quantity"];
+            if (accumulated + quantity > storage) Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] = storage; //añadir if de almacenamiento
+            else Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] += quantity;
             if(token.IsCancellationRequested){
                 Debug.Log("Producción cancelada");
                 break;
