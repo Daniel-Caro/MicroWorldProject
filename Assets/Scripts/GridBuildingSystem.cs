@@ -46,31 +46,34 @@ public class GridBuildingSystem : MonoBehaviour
         switch(style){
 
             case(Style.Future): 
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_14"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_13"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_12"));
-                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentilefuture"));
+                //whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter1"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter2"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic2"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic3"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "future_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
                 break;
             case(Style.Pirate):
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "desert-sliced_17"));
-                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentilepirate"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_concha"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_estrella"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "arena_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
                 break;
 
             case(Style.Princess):
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_06"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_10"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_02"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_28"));
-                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentileprincess"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_tocon"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
                 break;
         }
-        BoundsInt area = new BoundsInt(-24,-42,0,58,58,1);
+        BoundsInt area = new BoundsInt(-15,-15,0,29,29,1);
 
         SetTilesBlock(area, TileType.White, MainTileMap);
     }
