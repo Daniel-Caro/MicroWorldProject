@@ -46,9 +46,11 @@ public class GridBuildingSystem : MonoBehaviour
         switch(style){
 
             case(Style.Future): 
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter1"));
+                //whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter1"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter2"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic2"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic3"));
                 greenTiles.Add( Resources.Load<TileBase>(tilePath + "future_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
