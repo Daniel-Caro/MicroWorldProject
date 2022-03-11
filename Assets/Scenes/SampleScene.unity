@@ -5026,7 +5026,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -11, y: -11, z: 0}
   m_Size: {x: 20, y: 21, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 6
   m_TileOrientationMatrix:
     e00: 1.76
@@ -8286,6 +8286,7 @@ MonoBehaviour:
   TempTileMap: {fileID: 2050511095}
   constructionSound: {fileID: 2125792290}
   noSound: {fileID: 1202963118}
+  style: 2
 --- !u!1 &1634232620
 GameObject:
   m_ObjectHideFlags: 0
@@ -10296,7 +10297,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -11, y: -14, z: 0}
   m_Size: {x: 16, y: 15, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 6
   m_TileOrientationMatrix:
     e00: 1.76

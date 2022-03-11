@@ -2,10 +2,10 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
-
+public enum Style {Future,Pirate,Princess}
 public class GridBuildingSystem : MonoBehaviour
 {
     public static GridBuildingSystem current;
@@ -15,16 +15,17 @@ public class GridBuildingSystem : MonoBehaviour
     public Tilemap TempTileMap;
     public AudioSource constructionSound;
     public AudioSource noSound;
-
-    private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
-
+    
+    private static Dictionary<TileType, List<TileBase>> tileBases = new Dictionary<TileType, List<TileBase>>();
+    
     private Building temp;
     private GameObject buildingGeneral;
     private Vector3 prevPos;
     private BoundsInt prevArea;
     private bool buildingPicked = false;
-
-
+    
+    
+    public Style style;
     #region Unity Methods
 
     private void Awake()
@@ -36,9 +37,42 @@ public class GridBuildingSystem : MonoBehaviour
     {
         string tilePath = @"Tiles\";
         tileBases.Add(TileType.Empty, null);
-        tileBases.Add(TileType.White, Resources.Load<TileBase>(tilePath + "white"));
-        tileBases.Add(TileType.Red, Resources.Load<TileBase>(tilePath + "red"));
-        tileBases.Add(TileType.Green, Resources.Load<TileBase>(tilePath + "green"));
+        List<TileBase> whiteTiles = new List<TileBase>();
+        List<TileBase> greenTiles = new List<TileBase>();
+        List<TileBase> redtiles = new List<TileBase>();
+        redtiles.Add(Resources.Load<TileBase>(tilePath + "red"));
+        tileBases.Add(TileType.Red, redtiles);
+
+        switch(style){
+
+            case(Style.Future): 
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_14"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_13"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_12"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentilefuture"));
+                tileBases.Add(TileType.White, whiteTiles);
+                tileBases.Add(TileType.Green, greenTiles);
+                break;
+            case(Style.Pirate):
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "desert-sliced_17"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentilepirate"));
+                tileBases.Add(TileType.White, whiteTiles);
+                tileBases.Add(TileType.Green, greenTiles);
+                break;
+
+            case(Style.Princess):
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_06"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_10"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_02"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_28"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentileprincess"));
+                tileBases.Add(TileType.White, whiteTiles);
+                tileBases.Add(TileType.Green, greenTiles);
+                break;
+        }
+        BoundsInt area = new BoundsInt(-24,-42,0,58,58,1);
+
+        SetTilesBlock(area, TileType.White, MainTileMap);
     }
 
     void Update()
@@ -140,9 +174,9 @@ public class GridBuildingSystem : MonoBehaviour
 
         for (int i = 0; i < baseArray.Length; i++)
         {
-            if (baseArray[i] == tileBases[TileType.White])
+            if (tileBases[TileType.White].Contains(baseArray[i]))
             {
-                tileArray[i] = tileBases[TileType.Green];
+                tileArray[i] = tileBases[TileType.Green][0];
             }
             else
             {
@@ -160,7 +194,7 @@ public class GridBuildingSystem : MonoBehaviour
         TileBase[] baseArray = GetTilesBlock(area, MainTileMap);
         foreach (var b in baseArray)
         {
-            if (b != tileBases[TileType.White])
+            if (!tileBases[TileType.White].Contains(b))
             {
                 Debug.Log("Cannot place here");
                 return false;
@@ -206,7 +240,20 @@ public class GridBuildingSystem : MonoBehaviour
     {
         for(int i = 0; i < arr.Length; i++)
         {
-            arr[i] = tileBases[type];
+            switch(type){
+                case(TileType.White):
+                    
+                    int index = Globals.random.Next(tileBases[type].Count);
+                    arr[i] = tileBases[type].ElementAt(index);
+                    break;
+                case(TileType.Empty):
+                    arr[i] = null;
+                    break;
+                default:
+                    arr[i] = tileBases[type].First();
+                    break;
+            }
+           
         }
     }
     #endregion
