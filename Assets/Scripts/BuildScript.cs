@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ public class BuildScript : MonoBehaviour//, IClick
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            //Debug.Log(hit.collider.gameObject.transform.parent.gameObject.GetInstanceID());
             if (hit.collider != null && !panel.activeSelf)
             {
                 if(hit.collider.gameObject.tag == "building"){
@@ -39,7 +41,7 @@ public class BuildScript : MonoBehaviour//, IClick
                     if (building.GetInstanceID() != thisBuilding.GetInstanceID()) return;
                     type = Globals.buildingDataDic[building.GetInstanceID()]["Type"];
                     level = Int32.Parse(Globals.buildingDataDic[building.GetInstanceID()]["Level"]);
-                    cost = Int32.Parse(Globals.buildingDataDic[building.GetInstanceID()]["Cost"]);
+                    cost = Globals.buildingCostsDic[type].ElementAt(level);
                     if (type == "Bank"){
                         if (bankProduction.HarvestResource(building)){
                             building.transform.Find("money").gameObject.SetActive(false);
@@ -70,6 +72,9 @@ public class BuildScript : MonoBehaviour//, IClick
     public void showPanel(){
         infoText = panel.transform.Find("InfoText").gameObject;
         switch(type){
+            case("TownHall"):
+                infoText.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+                break;
             case("House"):
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
                 break;
@@ -83,19 +88,30 @@ public class BuildScript : MonoBehaviour//, IClick
         
         lvlUpButton = panel.transform.Find("LevelUpButton").gameObject;
         GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
-        
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
-        lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            AdditionalPanels();
-        });
-        buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+        if(level >= 10)
+        {
+            buttonText.GetComponent<UnityEngine.UI.Text>().text = "Nivel Máximo";
+        }
+        else
+        {
+            lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
+                AdditionalPanels();
+            });
+            buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+        }
         panel.SetActive(true);
     }
 
     public void AdditionalPanels() {
         if(Globals.gameResources["Coins"].currentR >= cost) {
-            if (Globals.buildingDataDic[building.GetInstanceID()]["Type"] == "Bank") bankProduction.chooseAttribute(building, panel, this);
-            else LevelUp();
+            if (type == "TownHall") LevelUp();
+            else if (level+1 <= Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"]))
+            {
+                if (Globals.buildingDataDic[building.GetInstanceID()]["Type"] == "Bank") bankProduction.chooseAttribute(building, panel, this);
+                else LevelUp();
+            }
+            else noSound.Play();
         }
         else
         {
@@ -108,10 +124,11 @@ public class BuildScript : MonoBehaviour//, IClick
         Globals.buildingDataDic[building.GetInstanceID()]["Level"] = level.ToString();
 
         Globals.gameResources["Coins"].DedactResources(cost);
-        cost = RoundOff(cost + Convert.ToInt32(Math.Pow(10, level*factor)));
-        Globals.buildingDataDic[building.GetInstanceID()]["Cost"] = cost.ToString();
 
         switch(type){
+            case("TownHall"):
+                infoText.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+                break;
             case("House"):
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
                 break;
@@ -127,16 +144,17 @@ public class BuildScript : MonoBehaviour//, IClick
         lvlUpButton = panel.transform.Find("LevelUpButton").gameObject;
         GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
-        lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            AdditionalPanels();
-        });
-        buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
-    }
-
-    
-
-    private int RoundOff (int i)
-    {
-        return ((int)Math.Round(i / 10.0)) * 10;
+        if(level >= 10)
+        {
+            buttonText.GetComponent<UnityEngine.UI.Text>().text = "Nivel Máximo";
+        }
+        else
+        {
+            cost = Globals.buildingCostsDic[type].ElementAt(level);
+            lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
+                AdditionalPanels();
+            });
+            buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+        }
     }
 }

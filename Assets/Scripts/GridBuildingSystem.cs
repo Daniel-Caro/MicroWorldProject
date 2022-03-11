@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,10 +36,6 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
-        Globals.buildingTypesDic.Add("House", new List<int>());
-        Globals.buildingTypesDic.Add("Bank", new List<int>());
-        Globals.buildingTypesDic.Add("Factory", new List<int>());
-
         string tilePath = @"Tiles\";
         tileBases.Add(TileType.Empty, null);
         List<TileBase> whiteTiles = new List<TileBase>();
@@ -123,7 +120,6 @@ public class GridBuildingSystem : MonoBehaviour
                 Dictionary<string, string> buildingDataEntry = new Dictionary<string, string>();
                 buildingDataEntry.Add("Type", buildingData.type);
                 buildingDataEntry.Add("Level", buildingData.level.ToString());
-                buildingDataEntry.Add("Cost", buildingData.cost.ToString());
                 Globals.buildingDataDic.Add(buildingGeneral.GetInstanceID(), buildingDataEntry);
                 Globals.buildingTypesDic[buildingData.type].Add(buildingGeneral.GetInstanceID());
                 if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
@@ -147,7 +143,69 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost) noSound.Play();
+        int numHouses = Globals.buildingTypesDic["House"].Count();
+        int numBanks = Globals.buildingTypesDic["Bank"].Count();
+        int numFactories = Globals.buildingTypesDic["Factory"].Count();
+        int limHouses = 0;
+        int limBanks = 0;
+        int limFactories = 0;
+        switch(Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"]))
+        {
+            case(1):
+                limHouses = 1;
+                limBanks = 1;
+                limFactories = 1;
+                break;
+            case(2):
+                limHouses = 2;
+                limBanks = 1;
+                limFactories = 1;
+                break;
+            case(3):
+                limHouses = 2;
+                limBanks = 2;
+                limFactories = 1;
+                break;
+            case(4):
+                limHouses = 3;
+                limBanks = 2;
+                limFactories = 1;
+                break;
+            case(5):
+                limHouses = 3;
+                limBanks = 2;
+                limFactories = 2;
+                break;
+            case(6):
+                limHouses = 3;
+                limBanks = 3;
+                limFactories = 2;
+                break;
+            case(7):
+                limHouses = 4;
+                limBanks = 3;
+                limFactories = 2;
+                break;
+            case(8):
+                limHouses = 4;
+                limBanks = 3;
+                limFactories = 3;
+                break;
+            case(9):
+                limHouses = 4;
+                limBanks = 4;
+                limFactories = 3;
+                break;
+            case(10):
+                limHouses = 5;
+                limBanks = 4;
+                limFactories = 3;
+                break;
+        }
+        if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost ||
+        (building.GetComponent<BuildScript>().type == "House" && numHouses == limHouses) ||
+        (building.GetComponent<BuildScript>().type == "Bank" && numBanks == limBanks) ||
+        (building.GetComponent<BuildScript>().type == "Factory" && numFactories == limFactories)) noSound.Play();
         else{
             if (buildingPicked) Destroy(temp.gameObject);
             buildingPicked = true;
