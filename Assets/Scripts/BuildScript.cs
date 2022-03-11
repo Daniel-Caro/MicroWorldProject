@@ -23,7 +23,8 @@ public class BuildScript : MonoBehaviour//, IClick
 
     private Coroutine lastRoutine = null;
 
-    private void Start() {
+    void Start() {
+        
     }
 
     void Update()
@@ -36,10 +37,9 @@ public class BuildScript : MonoBehaviour//, IClick
                 if(hit.collider.gameObject.tag == "building"){
                     building = hit.collider.gameObject.transform.parent.gameObject;
                     if (building.GetInstanceID() != thisBuilding.GetInstanceID()) return;
-                    type = Globals.buildingTypesDic[building.GetInstanceID()];
-                    
-                    level = Globals.buildingLevelsDic[building.GetInstanceID()];
-                    cost = Globals.buildingCostsDic[building.GetInstanceID()];
+                    type = Globals.buildingDataDic[building.GetInstanceID()]["Type"];
+                    level = Int32.Parse(Globals.buildingDataDic[building.GetInstanceID()]["Level"]);
+                    cost = Int32.Parse(Globals.buildingDataDic[building.GetInstanceID()]["Cost"]);
                     if (type == "Bank"){
                         if (bankProduction.HarvestResource(building)){
                             building.transform.Find("money").gameObject.SetActive(false);
@@ -70,8 +70,8 @@ public class BuildScript : MonoBehaviour//, IClick
     public void showPanel(){
         infoText = panel.transform.Find("InfoText").gameObject;
         switch(type){
-            case("TownHall"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+            case("House"):
+                infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
                 break;
             case("Bank"):
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Banco nivel: " + level.ToString();
@@ -94,7 +94,7 @@ public class BuildScript : MonoBehaviour//, IClick
 
     public void AdditionalPanels() {
         if(Globals.gameResources["Coins"].currentR >= cost) {
-            if (Globals.buildingTypesDic[building.GetInstanceID()] == "Bank") bankProduction.chooseAttribute(building, panel, this);
+            if (Globals.buildingDataDic[building.GetInstanceID()]["Type"] == "Bank") bankProduction.chooseAttribute(building, panel, this);
             else LevelUp();
         }
         else
@@ -105,15 +105,15 @@ public class BuildScript : MonoBehaviour//, IClick
 
     public void LevelUp(){
         level++;
-        Globals.buildingLevelsDic[building.GetInstanceID()] = level;
+        Globals.buildingDataDic[building.GetInstanceID()]["Level"] = level.ToString();
 
         Globals.gameResources["Coins"].DedactResources(cost);
         cost = RoundOff(cost + Convert.ToInt32(Math.Pow(10, level*factor)));
-        Globals.buildingCostsDic[building.GetInstanceID()] = cost;
+        Globals.buildingDataDic[building.GetInstanceID()]["Cost"] = cost.ToString();
 
         switch(type){
-            case("TownHall"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+            case("House"):
+                infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
                 break;
             case("Bank"):
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Banco nivel: " + level.ToString();

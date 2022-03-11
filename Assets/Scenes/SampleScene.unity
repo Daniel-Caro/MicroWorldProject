@@ -9695,7 +9695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1375814022572683967, guid: 0924d7bddb1b549498ac83542778335e, type: 3}
       propertyPath: type
-      value: TownHall
+      value: House
       objectReference: {fileID: 0}
     - target: {fileID: 1375814022572683967, guid: 0924d7bddb1b549498ac83542778335e, type: 3}
       propertyPath: panel

@@ -35,6 +35,10 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
+        Globals.buildingTypesDic.Add("House", new List<int>());
+        Globals.buildingTypesDic.Add("Bank", new List<int>());
+        Globals.buildingTypesDic.Add("Factory", new List<int>());
+
         string tilePath = @"Tiles\";
         tileBases.Add(TileType.Empty, null);
         List<TileBase> whiteTiles = new List<TileBase>();
@@ -116,9 +120,12 @@ public class GridBuildingSystem : MonoBehaviour
                 buildingPicked = false;
                 BuildScript buildingData = buildingGeneral.GetComponent<BuildScript>();
                 Globals.gameResources["Coins"].DedactResources(buildingData.cost);
-                Globals.buildingTypesDic.Add(buildingGeneral.GetInstanceID(), buildingData.type);
-                Globals.buildingLevelsDic.Add(buildingGeneral.GetInstanceID(), buildingData.level);
-                Globals.buildingCostsDic.Add(buildingGeneral.GetInstanceID(), buildingData.cost);
+                Dictionary<string, string> buildingDataEntry = new Dictionary<string, string>();
+                buildingDataEntry.Add("Type", buildingData.type);
+                buildingDataEntry.Add("Level", buildingData.level.ToString());
+                buildingDataEntry.Add("Cost", buildingData.cost.ToString());
+                Globals.buildingDataDic.Add(buildingGeneral.GetInstanceID(), buildingDataEntry);
+                Globals.buildingTypesDic[buildingData.type].Add(buildingGeneral.GetInstanceID());
                 if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
                 Destroy(temp);
             }
