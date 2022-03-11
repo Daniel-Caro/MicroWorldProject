@@ -13042,7 +13042,7 @@ MonoBehaviour:
   TempTileMap: {fileID: 2050511095}
   constructionSound: {fileID: 2125792290}
   noSound: {fileID: 1202963118}
-  style: 0
+  style: 2
 --- !u!1 &1634232620
 GameObject:
   m_ObjectHideFlags: 0
