@@ -72,13 +72,13 @@ public class BankProduction : MonoBehaviour
         int storage = bankData["Storage"];
         int quantity = bankData["Quantity"];
         GameObject storageButton = choosePanel.transform.Find("StorageButton").gameObject;
-        storageButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = storage.ToString() + " > " + (storage+50).ToString();
+        storageButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = storage.ToString() + " > " + (storage+500).ToString();
         GameObject quantityButton = choosePanel.transform.Find("QuantityButton").gameObject;
-        quantityButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = quantity.ToString() + " > " + (quantity+50).ToString();
+        quantityButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = quantity.ToString() + " > " + (quantity+3).ToString();
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            Globals.bankDataDic[building.GetInstanceID()]["Storage"] = storage + 50;
-            Globals.moneyCapacity += 50;
+            Globals.bankDataDic[building.GetInstanceID()]["Storage"] = storage + 500;
+            Globals.moneyCapacity += 500;
             cts.Cancel();
             cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
@@ -88,7 +88,7 @@ public class BankProduction : MonoBehaviour
         });
         quantityButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         quantityButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            Globals.bankDataDic[building.GetInstanceID()]["Quantity"] = quantity + 50;
+            Globals.bankDataDic[building.GetInstanceID()]["Quantity"] = quantity + 3;
             cts.Cancel();
             cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;

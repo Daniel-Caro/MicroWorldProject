@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +6,6 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
-public enum Style {Future,Pirate,Princess}
 public class GridBuildingSystem : MonoBehaviour
 {
     public static GridBuildingSystem current;
@@ -24,8 +24,6 @@ public class GridBuildingSystem : MonoBehaviour
     private BoundsInt prevArea;
     private bool buildingPicked = false;
     
-    
-    public Style style;
     #region Unity Methods
 
     private void Awake()
@@ -43,7 +41,7 @@ public class GridBuildingSystem : MonoBehaviour
         redtiles.Add(Resources.Load<TileBase>(tilePath + "red"));
         tileBases.Add(TileType.Red, redtiles);
 
-        switch(style){
+        switch(Globals.style){
 
             case(Style.Future): 
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter1"));
@@ -165,9 +163,11 @@ public class GridBuildingSystem : MonoBehaviour
                 buildingPicked = false;
                 BuildScript buildingData = buildingGeneral.GetComponent<BuildScript>();
                 Globals.gameResources["Coins"].DedactResources(buildingData.cost);
-                Globals.buildingTypesDic.Add(buildingGeneral.GetInstanceID(), buildingData.type);
-                Globals.buildingLevelsDic.Add(buildingGeneral.GetInstanceID(), buildingData.level);
-                Globals.buildingCostsDic.Add(buildingGeneral.GetInstanceID(), buildingData.cost);
+                Dictionary<string, string> buildingDataEntry = new Dictionary<string, string>();
+                buildingDataEntry.Add("Type", buildingData.type);
+                buildingDataEntry.Add("Level", buildingData.level.ToString());
+                Globals.buildingDataDic.Add(buildingGeneral.GetInstanceID(), buildingDataEntry);
+                Globals.buildingTypesDic[buildingData.type].Add(buildingGeneral.GetInstanceID());
                 if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
                 Destroy(temp);
             }
@@ -189,7 +189,18 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost) noSound.Play();
+        int numHouses = Globals.buildingTypesDic["House"].Count();
+        int numBanks = Globals.buildingTypesDic["Bank"].Count();
+        int numFactories = Globals.buildingTypesDic["Factory"].Count();
+        Dictionary<string, int> limByLevel = Globals.numBuildingsByLevel[Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"])];
+        int limHouses = limByLevel["House"];
+        int limBanks = limByLevel["Bank"];;
+        int limFactories = limByLevel["Factory"];;
+
+        if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost ||
+        (building.GetComponent<BuildScript>().type == "House" && numHouses == limHouses) ||
+        (building.GetComponent<BuildScript>().type == "Bank" && numBanks == limBanks) ||
+        (building.GetComponent<BuildScript>().type == "Factory" && numFactories == limFactories)) noSound.Play();
         else{
             if (buildingPicked) Destroy(temp.gameObject);
             buildingPicked = true;
