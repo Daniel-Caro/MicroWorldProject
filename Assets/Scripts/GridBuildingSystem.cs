@@ -146,62 +146,11 @@ public class GridBuildingSystem : MonoBehaviour
         int numHouses = Globals.buildingTypesDic["House"].Count();
         int numBanks = Globals.buildingTypesDic["Bank"].Count();
         int numFactories = Globals.buildingTypesDic["Factory"].Count();
-        int limHouses = 0;
-        int limBanks = 0;
-        int limFactories = 0;
-        switch(Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"]))
-        {
-            case(1):
-                limHouses = 1;
-                limBanks = 1;
-                limFactories = 1;
-                break;
-            case(2):
-                limHouses = 2;
-                limBanks = 1;
-                limFactories = 1;
-                break;
-            case(3):
-                limHouses = 2;
-                limBanks = 2;
-                limFactories = 1;
-                break;
-            case(4):
-                limHouses = 3;
-                limBanks = 2;
-                limFactories = 1;
-                break;
-            case(5):
-                limHouses = 3;
-                limBanks = 2;
-                limFactories = 2;
-                break;
-            case(6):
-                limHouses = 3;
-                limBanks = 3;
-                limFactories = 2;
-                break;
-            case(7):
-                limHouses = 4;
-                limBanks = 3;
-                limFactories = 2;
-                break;
-            case(8):
-                limHouses = 4;
-                limBanks = 3;
-                limFactories = 3;
-                break;
-            case(9):
-                limHouses = 4;
-                limBanks = 4;
-                limFactories = 3;
-                break;
-            case(10):
-                limHouses = 5;
-                limBanks = 4;
-                limFactories = 3;
-                break;
-        }
+        Dictionary<string, int> limByLevel = Globals.numBuildingsByLevel[Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"])];
+        int limHouses = limByLevel["House"];
+        int limBanks = limByLevel["Bank"];;
+        int limFactories = limByLevel["Factory"];;
+        
         if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost ||
         (building.GetComponent<BuildScript>().type == "House" && numHouses == limHouses) ||
         (building.GetComponent<BuildScript>().type == "Bank" && numBanks == limBanks) ||

@@ -31,5 +31,18 @@ public class Globals
         {"Bank", new List<int> {2000, 2500, 3000, 4000, 4500, 5000, 5000, 5500, 6000, 6000}},
         {"Factory", new List<int> {3000, 3000, 3500, 3500, 4000, 5000, 5500, 6000, 6500, 6500}}
     }; // Clave: tipo del edificio (House, Bank, Factory) edificio Valor: lista de costes por nivel
+
+    public static Dictionary<int, Dictionary<string, int>> numBuildingsByLevel = new Dictionary<int, Dictionary<string, int>>{
+        {1, new Dictionary<string, int>{{"House", 1}, {"Bank", 1}, {"Factory", 1}}},
+        {2, new Dictionary<string, int>{{"House", 2}, {"Bank", 1}, {"Factory", 1}}},
+        {3, new Dictionary<string, int>{{"House", 2}, {"Bank", 2}, {"Factory", 1}}},
+        {4, new Dictionary<string, int>{{"House", 3}, {"Bank", 2}, {"Factory", 1}}},
+        {5, new Dictionary<string, int>{{"House", 3}, {"Bank", 2}, {"Factory", 2}}},
+        {6, new Dictionary<string, int>{{"House", 3}, {"Bank", 3}, {"Factory", 2}}},
+        {7, new Dictionary<string, int>{{"House", 4}, {"Bank", 3}, {"Factory", 2}}},
+        {8, new Dictionary<string, int>{{"House", 4}, {"Bank", 3}, {"Factory", 3}}},
+        {9, new Dictionary<string, int>{{"House", 4}, {"Bank", 4}, {"Factory", 3}}},
+        {10, new Dictionary<string, int>{{"House", 5}, {"Bank", 4}, {"Factory", 3}}}
+    };
     public static Dictionary<int, Dictionary<string, int>> bankDataDic = new Dictionary<int, Dictionary<string, int>>(); // Clave: ID instancia edificio banco Valor: diccionario con valores de almacenamiento, cantidad que genera, acumulación en el edificio
 }
