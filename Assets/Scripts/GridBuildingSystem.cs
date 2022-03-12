@@ -6,7 +6,6 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
-public enum Style {Future,Pirate,Princess}
 public class GridBuildingSystem : MonoBehaviour
 {
     public static GridBuildingSystem current;
@@ -25,8 +24,6 @@ public class GridBuildingSystem : MonoBehaviour
     private BoundsInt prevArea;
     private bool buildingPicked = false;
     
-    
-    public Style style;
     #region Unity Methods
 
     private void Awake()
@@ -44,7 +41,7 @@ public class GridBuildingSystem : MonoBehaviour
         redtiles.Add(Resources.Load<TileBase>(tilePath + "red"));
         tileBases.Add(TileType.Red, redtiles);
 
-        switch(style){
+        switch(Globals.style){
 
             case(Style.Future): 
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_14"));
@@ -150,7 +147,7 @@ public class GridBuildingSystem : MonoBehaviour
         int limHouses = limByLevel["House"];
         int limBanks = limByLevel["Bank"];;
         int limFactories = limByLevel["Factory"];;
-        
+
         if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost ||
         (building.GetComponent<BuildScript>().type == "House" && numHouses == limHouses) ||
         (building.GetComponent<BuildScript>().type == "Bank" && numBanks == limBanks) ||
