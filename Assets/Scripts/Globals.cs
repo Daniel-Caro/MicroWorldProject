@@ -11,7 +11,7 @@ public class Globals
     };
 
     public static int moneyCapacity = 1000;
-    public static int townHallId = -1840;
+    public static int townHallId = GameObject.Find("House4").GetInstanceID();
     public static System.Random random = new System.Random();
 
     public static Dictionary<int, Dictionary<string, string>> buildingDataDic = new Dictionary<int, Dictionary<string, string>>{
