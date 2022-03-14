@@ -15,14 +15,15 @@ public class BuildScript : MonoBehaviour//, IClick
     public int cost;
     public double factor;
     public AudioSource coinSound;
+    public AudioSource minionSound;
     private GameObject infoText;
     private GameObject lvlUpButton; 
     public AudioSource lvlUpSound;
     public AudioSource noSound;
     public BankProduction bankProduction;
-
+    public MinionProduction minionProduction;
     private Coroutine lastRoutine = null;
-
+    private GameObject cMinion;
     private void Start() {
     }
 
@@ -48,8 +49,39 @@ public class BuildScript : MonoBehaviour//, IClick
                             Debug.Log("Comienza la rutina");
                             lastRoutine = StartCoroutine(HoldTimer());
                         } else showPanel();
-                    } 
+                    }else if (type == "Factory"){
+                        if(minionProduction.HarvestResource(building)){
+                            building.transform.Find("pngwing.com (2)").gameObject.SetActive(false);
+                            Dictionary<int,int> buildingFactory = Globals.factoryDataDic[building.GetInstanceID()];
+                            if(Globals.houseDataDic.Count == 0  ){
+                                Debug.Log("No hay casas aun construidas");
+                            }else{
+                                bool todascompletas = minionProduction.storageComplete();
+                                if(todascompletas == true){
+                                    Debug.Log("Todas las casas están completas");
+                                }else{
+                                    
+                                    for(int i = 1; i < buildingFactory.Count+1; i++){
+                                        if(Globals.minionsQuantity.ContainsKey(i)){
+                                            Globals.minionsQuantity[i] += buildingFactory[i];
+                                        }
+                                        else Globals.minionsQuantity.Add(i,buildingFactory[i]);
+                                        Globals.factoryDataDic[building.GetInstanceID()][i] -= buildingFactory[i];
+                                    }
+                                    Debug.Log("Se recoge el minion");
+                                }
+                                
+                            }
+                            //minionSoung.Play();
+                            
+                            lastRoutine = StartCoroutine(HoldTimer());
+                        } else showPanelMinion();
+                        
+                    }else if (type == "House"){
+                        showPanelInfoMinion(building);
+                    }
                     else showPanel();
+                   
                     
                 }
             } 
@@ -80,7 +112,7 @@ public class BuildScript : MonoBehaviour//, IClick
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Fábrica nivel: " + level.ToString();
                 break;
         }
-        
+    
         lvlUpButton = panel.transform.Find("LevelUpButton").gameObject;
         GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
         
@@ -91,10 +123,97 @@ public class BuildScript : MonoBehaviour//, IClick
         buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
         panel.SetActive(true);
     }
-
+    public void showPanelMinion(){
+        infoText = panel.transform.Find("InfoText").gameObject;
+        infoText.GetComponent<UnityEngine.UI.Text>().text = "Fabrica nivel: " + level.ToString();
+        lvlUpButton = panel.transform.Find("LevelUpButton").gameObject;
+        GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
+        buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+        lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => { 
+            LevelUp();
+        });
+        
+        GameObject choosePanelMinion =panel.transform.Find("ChoosingMinion").gameObject;
+        GameObject tier1button = choosePanelMinion.transform.Find("miniontier1").gameObject;
+        GameObject text1button = tier1button.transform.Find("Text").gameObject;
+        text1button.GetComponent<UnityEngine.UI.Text>().text = "Tier 1: " + 250; 
+        tier1button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        tier1button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
+            if(Globals.gameResources["Coins"].currentR >= 250){
+                Globals.gameResources["Coins"].currentR -= 250;
+                minionProduction.Produce(building, "Tier1");
+            }else{
+                Debug.Log("No tienes recursos suficientes para fabricar este minion tier 1");
+            }
+            
+        });
+        GameObject tier2button = choosePanelMinion.transform.Find("miniontier2").gameObject;
+        GameObject text2button = tier2button.transform.Find("Text").gameObject;
+        text2button.GetComponent<UnityEngine.UI.Text>().text = "Tier 2: " + 500; 
+        tier2button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        tier2button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
+            if(Globals.gameResources["Coins"].currentR >= 500&& Globals.buildingLevelsDic[building.GetInstanceID()] >= 4){
+                Globals.gameResources["Coins"].currentR -= 500;
+                minionProduction.Produce(building, "Tier2");
+            }else{
+                Debug.Log("No tienes recursos/nivel de fabrica suficientes para fabricar este minion tier 2");
+            }
+        });
+        GameObject tier3button = choosePanelMinion.transform.Find("miniontier3").gameObject;
+        GameObject text3button = tier3button.transform.Find("Text").gameObject;
+        text3button.GetComponent<UnityEngine.UI.Text>().text = "Tier 3: " + 1000; 
+        tier3button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        tier3button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
+            if(Globals.gameResources["Coins"].currentR >= 1000 && Globals.buildingLevelsDic[building.GetInstanceID()] >= 7){
+                Globals.gameResources["Coins"].currentR -= 1000;
+                minionProduction.Produce(building, "Tier3");
+            }else{
+                Debug.Log("No tienes recursos suficientes para fabricar este minion tier 3");
+            }
+        });
+        GameObject tier4button = choosePanelMinion.transform.Find("miniontier4").gameObject;
+        GameObject text4button = tier4button.transform.Find("Text").gameObject;
+        text4button.GetComponent<UnityEngine.UI.Text>().text = "Tier 4: " + 2000; 
+        tier4button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        tier4button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
+             if(Globals.gameResources["Coins"].currentR >= 2000 && Globals.buildingLevelsDic[building.GetInstanceID()] >= 10){
+                Globals.gameResources["Coins"].currentR -= 2000;
+                minionProduction.Produce(building, "Tier4");
+            }else{
+                Debug.Log("No tienes recursos suficientes para fabricar este minion tier 4");
+            }
+        });
+        panel.SetActive(true);
+    }
+    public void showPanelInfoMinion(GameObject bulding){
+        infoText = panel.transform.Find("InfoText").gameObject;
+        infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
+        lvlUpButton = panel.transform.Find("LevelUpButton").gameObject;
+        GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
+        buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+        lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
+            
+            LevelUp();
+        });
+        /*
+        GameObject minionInfoHouse = panel.transform.Find("MinionInfoHouse").gameObject;
+        GameObject qminion1 = minionInfoHouse.transform.Find("qminion1").gameObject;
+        qminion1.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 1: "+ qtiers[1];
+        GameObject qminion2 = minionInfoHouse.transform.Find("qminion2").gameObject;
+        qminion2.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 2: "+ qtiers[2];
+        GameObject qminion3 = minionInfoHouse.transform.Find("qminion3").gameObject;
+        qminion3.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 3: "+ qtiers[3];
+        GameObject qminion4 = minionInfoHouse.transform.Find("qminion4").gameObject;
+        qminion4.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 4: "+ qtiers[4];
+        */
+        panel.SetActive(true);
+    }
     public void AdditionalPanels() {
         if(Globals.gameResources["Coins"].currentR >= cost) {
             if (Globals.buildingTypesDic[building.GetInstanceID()] == "Bank") bankProduction.chooseAttribute(building, panel, this);
+            //else if(Globals.buildingTypesDic[building.GetInstanceID()] == "Factory") minionProduction.chooseMinion(building, panel, this);
             else LevelUp();
         }
         else
@@ -105,6 +224,9 @@ public class BuildScript : MonoBehaviour//, IClick
 
     public void LevelUp(){
         level++;
+        if(Globals.buildingTypesDic[building.GetInstanceID()] == "House"){
+            Globals.houseDataDic[building.GetInstanceID()] += 1;
+        }
         Globals.buildingLevelsDic[building.GetInstanceID()] = level;
 
         Globals.gameResources["Coins"].DedactResources(cost);

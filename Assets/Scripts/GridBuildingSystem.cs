@@ -119,7 +119,15 @@ public class GridBuildingSystem : MonoBehaviour
                 Globals.buildingTypesDic.Add(buildingGeneral.GetInstanceID(), buildingData.type);
                 Globals.buildingLevelsDic.Add(buildingGeneral.GetInstanceID(), buildingData.level);
                 Globals.buildingCostsDic.Add(buildingGeneral.GetInstanceID(), buildingData.cost);
-                if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
+                if (buildingData.type == "Bank"){ 
+                    Debug.Log("Componente banco"+buildingGeneral.GetComponent<BankProduction>());
+                    buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
+                } 
+                else if (buildingData.type == "Factory") {
+                    buildingGeneral.GetComponent<MinionProduction>().RegisterFactory(buildingGeneral);
+                }else if (buildingData.type == "House"){
+                    buildingGeneral.GetComponent<MinionProduction>().RegisterHouse(buildingGeneral);
+                }
                 Destroy(temp);
             }
         }
