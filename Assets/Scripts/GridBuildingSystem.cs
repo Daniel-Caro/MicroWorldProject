@@ -170,6 +170,11 @@ public class GridBuildingSystem : MonoBehaviour
                 Globals.buildingDataDic.Add(buildingGeneral.GetInstanceID(), buildingDataEntry);
                 Globals.buildingTypesDic[buildingData.type].Add(buildingGeneral.GetInstanceID());
                 if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
+                else if (buildingData.type == "Factory") {
+                    buildingGeneral.GetComponent<MinionProduction>().RegisterFactory(buildingGeneral);
+                }else if (buildingData.type == "House"){
+                    buildingGeneral.GetComponent<MinionProduction>().RegisterHouse(buildingGeneral);
+                }
                 Destroy(temp);
             }
         }

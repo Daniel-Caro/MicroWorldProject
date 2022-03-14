@@ -9,11 +9,12 @@ public class Globals
 {
     public static Style style = Style.Princess;
     public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>(){
-        {"Coins", new GameResource("Coins", 100000000)},
+        {"Coins", new GameResource("Coins", 100000)},
         {"Minions", new GameResource("Minions", 0)}
     };
 
-    public static int moneyCapacity = 1000;
+    public static int moneyCapacity = 100000;
+    public static int minionCapacity = 2;
     public static int townHallId = GameObject.Find("House4").GetInstanceID();
     public static System.Random random = new System.Random();
 
@@ -48,4 +49,9 @@ public class Globals
         {10, new Dictionary<string, int>{{"House", 5}, {"Bank", 4}, {"Factory", 3}}}
     };
     public static Dictionary<int, Dictionary<string, int>> bankDataDic = new Dictionary<int, Dictionary<string, int>>(); // Clave: ID instancia edificio banco Valor: diccionario con valores de almacenamiento, cantidad que genera, acumulación en el edificio
+    public static Dictionary<int, Dictionary<int, int>> factoryDataDic = new Dictionary<int, Dictionary<int, int>>(); //
+    public static Dictionary<int, List<int>> colaFactoria = new Dictionary<int, List<int>>(); // Clave ID Factoria: Lista con cola de Minions por factoria
+    public static Dictionary<int,int> minionsQuantity = new Dictionary<int,int>(); // Clave Tier minion: Valor cantidad minions
+    public static Dictionary<int, int> houseDataDic = new Dictionary<int, int>();
+
 }
