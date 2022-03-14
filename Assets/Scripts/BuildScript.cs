@@ -209,18 +209,20 @@ public class BuildScript : MonoBehaviour//, IClick
             
             LevelUp();
         });
-        /*
-        GameObject minionInfoHouse = panel.transform.Find("MinionInfoHouse").gameObject;
+        
+        //Globals.minionsQuantity[1];
+        GameObject minionInfoHouse = panel.transform.Find("ChoosingMinion").gameObject;
         GameObject qminion1 = minionInfoHouse.transform.Find("qminion1").gameObject;
-        qminion1.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 1: "+ qtiers[1];
+        qminion1.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 1: "+ Globals.minionsQuantity[1];
         GameObject qminion2 = minionInfoHouse.transform.Find("qminion2").gameObject;
-        qminion2.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 2: "+ qtiers[2];
+        qminion2.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 2: "+ Globals.minionsQuantity[2];
         GameObject qminion3 = minionInfoHouse.transform.Find("qminion3").gameObject;
-        qminion3.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 3: "+ qtiers[3];
+        qminion3.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 3: "+ Globals.minionsQuantity[3];
         GameObject qminion4 = minionInfoHouse.transform.Find("qminion4").gameObject;
-        qminion4.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 4: "+ qtiers[4];
-        */
+        qminion4.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 4: "+ Globals.minionsQuantity[4];
         panel.SetActive(true);
+        
+        
     }
     public void AdditionalPanels() {
         if(Globals.gameResources["Coins"].currentR >= cost) {
