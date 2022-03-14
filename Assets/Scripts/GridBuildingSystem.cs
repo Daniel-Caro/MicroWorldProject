@@ -118,8 +118,9 @@ public class GridBuildingSystem : MonoBehaviour
                 break;
         }
         BoundsInt area = new BoundsInt(-15,-15,0,29,29,1);
-
+        BoundsInt green_area = new BoundsInt(-4,-4,0,7,7,1);
         SetTilesBlock(area, TileType.White, MainTileMap);
+        SetTilesBlock(green_area, TileType.Green, MainTileMap);
     }
 
     void Update()
@@ -302,13 +303,19 @@ public class GridBuildingSystem : MonoBehaviour
         {
             switch(type){
                 case(TileType.White):
-                    
                     int index = Globals.random.Next(tileBases[type].Count);
                     arr[i] = tileBases[type].ElementAt(index);
                     break;
+
                 case(TileType.Empty):
                     arr[i] = null;
                     break;
+
+                /*case(TileType.Green):
+                    int ind = Globals.random.Next(tileBases[type].Count);
+                    arr[i] = tileBases[type].ElementAt(ind);
+                    break;*/
+
                 default:
                     arr[i] = tileBases[type].First();
                     break;
