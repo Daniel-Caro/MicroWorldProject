@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +6,6 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
-public enum Style {Future,Pirate,Princess}
 public class GridBuildingSystem : MonoBehaviour
 {
     public static GridBuildingSystem current;
@@ -24,8 +24,6 @@ public class GridBuildingSystem : MonoBehaviour
     private BoundsInt prevArea;
     private bool buildingPicked = false;
     
-    
-    public Style style;
     #region Unity Methods
 
     private void Awake()
@@ -43,36 +41,86 @@ public class GridBuildingSystem : MonoBehaviour
         redtiles.Add(Resources.Load<TileBase>(tilePath + "red"));
         tileBases.Add(TileType.Red, redtiles);
 
-        switch(style){
+        switch(Globals.style){
 
             case(Style.Future): 
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_14"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_13"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "temple-sliced_12"));
-                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentilefuture"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter1"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter2"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic2"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic2"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic2"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic3"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic3"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic3"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic3"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "future_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
                 break;
             case(Style.Pirate):
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "desert-sliced_17"));
-                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentilepirate"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_concha"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_estrella"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_textura"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "arena_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
                 break;
 
             case(Style.Princess):
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_06"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_10"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_02"));
-                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "plains-sliced_28"));
-                greenTiles.Add( Resources.Load<TileBase>(tilePath + "greentileprincess"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_normal"));
+                whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_tocon"));
+                greenTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
                 break;
         }
-        BoundsInt area = new BoundsInt(-24,-42,0,58,58,1);
-
+        BoundsInt area = new BoundsInt(-15,-15,0,29,29,1);
+        BoundsInt green_area = new BoundsInt(-4,-4,0,7,7,1);
         SetTilesBlock(area, TileType.White, MainTileMap);
+        SetTilesBlock(green_area, TileType.Green, MainTileMap);
     }
 
     void Update()
@@ -116,13 +164,13 @@ public class GridBuildingSystem : MonoBehaviour
                 buildingPicked = false;
                 BuildScript buildingData = buildingGeneral.GetComponent<BuildScript>();
                 Globals.gameResources["Coins"].DedactResources(buildingData.cost);
-                Globals.buildingTypesDic.Add(buildingGeneral.GetInstanceID(), buildingData.type);
-                Globals.buildingLevelsDic.Add(buildingGeneral.GetInstanceID(), buildingData.level);
-                Globals.buildingCostsDic.Add(buildingGeneral.GetInstanceID(), buildingData.cost);
-                if (buildingData.type == "Bank"){ 
-                    Debug.Log("Componente banco"+buildingGeneral.GetComponent<BankProduction>());
-                    buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
-                } 
+
+                Dictionary<string, string> buildingDataEntry = new Dictionary<string, string>();
+                buildingDataEntry.Add("Type", buildingData.type);
+                buildingDataEntry.Add("Level", buildingData.level.ToString());
+                Globals.buildingDataDic.Add(buildingGeneral.GetInstanceID(), buildingDataEntry);
+                Globals.buildingTypesDic[buildingData.type].Add(buildingGeneral.GetInstanceID());
+                if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
                 else if (buildingData.type == "Factory") {
                     buildingGeneral.GetComponent<MinionProduction>().RegisterFactory(buildingGeneral);
                 }else if (buildingData.type == "House"){
@@ -131,6 +179,7 @@ public class GridBuildingSystem : MonoBehaviour
                 Destroy(temp);
             }
         }
+        
         
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -148,7 +197,18 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost) noSound.Play();
+        int numHouses = Globals.buildingTypesDic["House"].Count();
+        int numBanks = Globals.buildingTypesDic["Bank"].Count();
+        int numFactories = Globals.buildingTypesDic["Factory"].Count();
+        Dictionary<string, int> limByLevel = Globals.numBuildingsByLevel[Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"])];
+        int limHouses = limByLevel["House"];
+        int limBanks = limByLevel["Bank"];;
+        int limFactories = limByLevel["Factory"];;
+
+        if (Globals.gameResources["Coins"].currentR < building.GetComponent<BuildScript>().cost ||
+        (building.GetComponent<BuildScript>().type == "House" && numHouses == limHouses) ||
+        (building.GetComponent<BuildScript>().type == "Bank" && numBanks == limBanks) ||
+        (building.GetComponent<BuildScript>().type == "Factory" && numFactories == limFactories)) noSound.Play();
         else{
             if (buildingPicked) Destroy(temp.gameObject);
             buildingPicked = true;
@@ -250,13 +310,19 @@ public class GridBuildingSystem : MonoBehaviour
         {
             switch(type){
                 case(TileType.White):
-                    
                     int index = Globals.random.Next(tileBases[type].Count);
                     arr[i] = tileBases[type].ElementAt(index);
                     break;
+
                 case(TileType.Empty):
                     arr[i] = null;
                     break;
+
+                /*case(TileType.Green):
+                    int ind = Globals.random.Next(tileBases[type].Count);
+                    arr[i] = tileBases[type].ElementAt(ind);
+                    break;*/
+
                 default:
                     arr[i] = tileBases[type].First();
                     break;
