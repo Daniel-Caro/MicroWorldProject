@@ -87,7 +87,6 @@ public class TuberiasGameManager : MonoBehaviour
                             Globals.selectedPipe.GetComponent<PipeScript>().type = secondType;
                             Globals.selectedPipe.transform.eulerAngles = new Vector3(0f, 0f, secondRotation);
 
-
                             pipe.GetComponent<PipeScript>().drySprite = selectedDrySprite;
                             pipe.GetComponent<SpriteRenderer>().sprite = selectedDrySprite;
                             pipe.GetComponent<PipeScript>().waterSprite = selectedWaterSprite;

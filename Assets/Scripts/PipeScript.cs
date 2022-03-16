@@ -26,7 +26,15 @@ public class PipeScript : MonoBehaviour
     {
         Debug.Log("click");
         transform.Rotate(new Vector3(0,0,90));
-        if (this.name == "startPipe" && this.transform.eulerAngles.z != 0) this.hasWater = true;
+        if (this.name == "startPipe" && this.transform.eulerAngles.z != 0)
+        {
+            this.hasWater = true;
+            this.GetComponent<SpriteRenderer>().sprite = this.waterSprite;
+        } 
+        else{
+            this.hasWater = false;
+            this.GetComponent<SpriteRenderer>().sprite = this.drySprite;
+        } 
         GameObject allPipes = GameObject.Find("Pipes");
         foreach (Transform child in allPipes.transform) {
             child.gameObject.GetComponent<PipeScript>().hasWater = false;
