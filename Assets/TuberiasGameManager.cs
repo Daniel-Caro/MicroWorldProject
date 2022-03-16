@@ -22,7 +22,7 @@ public class TuberiasGameManager : MonoBehaviour
         {
             while (x < 7f)
             {
-                if ((y == 3f && x == -6f) || (y == -3f && x == 6f))
+                if (y == 3f && x == -6f)
                 {
                     x += 1.5f;
                     continue;
