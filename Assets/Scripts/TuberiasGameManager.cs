@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class TuberiasGameManager : MonoBehaviour
 {
-    public GameObject PipesHolder;
-    public GameObject[] Pipes;
-    public GameObject[] noWaterPipes;
-    public GameObject[] WaterPipes;
-
-    [SerializeField]
-    int totalPipes = 0;
+    public static GameObject PipesHolder;
+    public static GameObject[] Pipes;
+    public static GameObject[] noWaterPipes;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Inicio de variables estáticas
+        PipesHolder = GameObject.Find("Pipes");
+        GameObject drySpriteHolder = GameObject.Find("emptyPipes");
+        noWaterPipes = new GameObject[4];
+        int j = 0;
+        foreach (Transform child in drySpriteHolder.transform) {
+            noWaterPipes[j] = child.gameObject;
+            j++;
+        }
+        drySpriteHolder.SetActive(false);
+        
         float x = -6f;
         float y = 3f;
 
@@ -37,9 +44,7 @@ public class TuberiasGameManager : MonoBehaviour
             y -= 1.5f;
         }
 
-        totalPipes = PipesHolder.transform.childCount;
-
-        Pipes = new GameObject[totalPipes];
+        Pipes = new GameObject[PipesHolder.transform.childCount];
 
         for (int i = 0; i < Pipes.Length; i++)
         {
@@ -108,6 +113,47 @@ public class TuberiasGameManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public static void RestartGame(){
+        GameObject pipes = GameObject.Find("Pipes");
+        foreach (Transform child in pipes.transform) {
+            Destroy(child.gameObject);
+        }
+
+        GameObject startPipe = GameObject.Find("startPipe");
+        startPipe.transform.eulerAngles = new Vector3(0f, 0f, 0F);
+        startPipe.GetComponent<PipeScript>().hasWater = false;
+        startPipe.GetComponent<SpriteRenderer>().sprite = startPipe.GetComponent<PipeScript>().drySprite;
+
+        float x = -6f;
+        float y = 3f;
+
+        while (y > -4f)
+        {
+            while (x < 7f)
+            {
+                if (y == 3f && x == -6f)
+                {
+                    x += 1.5f;
+                    continue;
+                }
+                int rand = Random.Range(0, noWaterPipes.Length);
+                GameObject newPipe = Instantiate(noWaterPipes[rand], new Vector3(x, y, -1f), Quaternion.identity);
+                newPipe.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+                newPipe.transform.parent = PipesHolder.transform;
+                x += 1.5f;
+            }
+            x = -6f;
+            y -= 1.5f;
+        }
+
+        Pipes = new GameObject[PipesHolder.transform.childCount];
+
+        for (int i = 0; i < Pipes.Length; i++)
+        {
+            Pipes[i] = PipesHolder.transform.GetChild(i).gameObject;
         }
     }
 }

@@ -51,8 +51,8 @@ public class PipeScript : MonoBehaviour
         GameObject bottomPipe = null;
         GameObject leftPipe = null;
         GameObject rightPipe = null;
-        float x = (float)Math.Floor(pipe.transform.position.x);
-        float y = (float)Math.Floor(pipe.transform.position.y);
+        float x = pipe.transform.position.x;
+        float y = pipe.transform.position.y;
         if (y != 3f) upPipe = Physics2D.OverlapCircle(new Vector2(x, y + 1.5f), 0.2f).gameObject;
         if (y != -3f) bottomPipe = Physics2D.OverlapCircle(new Vector2(x, y - 1.5f), 0.2f).gameObject;
         if (x != -6f) leftPipe = Physics2D.OverlapCircle(new Vector2(x - 1.5f, y), 0.2f).gameObject;
@@ -64,7 +64,6 @@ public class PipeScript : MonoBehaviour
         {
             float adjacentRotation = (float)Math.Floor(upPipe.transform.eulerAngles.z);
             string adjacentType = upPipe.GetComponent<PipeScript>().type;
-            Debug.Log("Tuberia arriba " + upPipe.name + " con tipo " + adjacentType + " y rotación " + adjacentRotation.ToString());
             if (upPipe.GetComponent<PipeScript>().hasWater){
                 switch(pipeScript.type) 
                 {
@@ -152,7 +151,6 @@ public class PipeScript : MonoBehaviour
         {
             float adjacentRotation = (float)Math.Floor(bottomPipe.transform.eulerAngles.z);
             string adjacentType = bottomPipe.GetComponent<PipeScript>().type;
-            Debug.Log("Tuberia abajo " + bottomPipe.name + " con tipo " + adjacentType + " y rotación " + adjacentRotation.ToString());
             if (bottomPipe.GetComponent<PipeScript>().hasWater){
                 switch(pipeScript.type) 
                 {
@@ -240,7 +238,6 @@ public class PipeScript : MonoBehaviour
         {
             float adjacentRotation = (float)Math.Floor(leftPipe.transform.eulerAngles.z);
             string adjacentType = leftPipe.GetComponent<PipeScript>().type;
-            Debug.Log("Tuberia izquierda " + leftPipe.name + " con tipo " + adjacentType + " y rotación " + adjacentRotation.ToString());
             if (leftPipe.GetComponent<PipeScript>().hasWater){
                 switch(pipeScript.type) 
                 {
@@ -328,7 +325,6 @@ public class PipeScript : MonoBehaviour
         {
             float adjacentRotation = (float)Math.Floor(rightPipe.transform.eulerAngles.z);
             string adjacentType = rightPipe.GetComponent<PipeScript>().type;
-            Debug.Log("Tuberia derecha " + rightPipe.name + " con tipo " + adjacentType + " y rotación " + adjacentRotation.ToString());
             if (rightPipe.GetComponent<PipeScript>().hasWater){
                 switch(pipeScript.type) 
                 {
@@ -418,6 +414,46 @@ public class PipeScript : MonoBehaviour
             //Se cambia el sprite a mojado
             SpriteRenderer spriteRenderer = pipe.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = pipeScript.waterSprite;
+            //Si la casilla es la final y está girada hacia el lado correcto se gana el juego
+            Debug.Log(x.ToString() + " - " + y.ToString());
+            if (x == 6f && y == -3f)
+            {
+                bool finished = false;
+                Debug.Log("Casilla final");
+                switch(pipeScript.type) 
+                {
+                    case("straight"):
+                        if (rotation == 90f || rotation == 270f)
+                        {
+                            Debug.Log("Juego terminado");
+                            finished = true;
+                        }
+                        break;
+                    case("curve"):
+                        if (rotation == 0f || rotation == 90f)
+                        {
+                            Debug.Log("Juego terminado");
+                            finished = true;
+                        }
+                        break;
+                    case("3dir"):
+                        if (rotation == 0f || rotation == 90f || rotation == 270f)
+                        {
+                            Debug.Log("Juego terminado");
+                            finished = true;
+                        }
+                        break;
+                    case("cross"):
+                        Debug.Log("Juego terminado");
+                        finished = true;
+                        break;
+                }
+                if (finished)
+                {
+                    TuberiasGameManager.RestartGame();
+                }
+            }
+            
             //Se comprueba el resto
             if (upPipe != null) if (!upPipe.GetComponent<PipeScript>().hasWater) PipeScript.checkWater(upPipe);
             if (bottomPipe != null) if (!bottomPipe.GetComponent<PipeScript>().hasWater) PipeScript.checkWater(bottomPipe);
