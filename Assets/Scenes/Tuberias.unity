@@ -345,6 +345,7 @@ MonoBehaviour:
   type: 3dir
   drySprite: {fileID: 21300000, guid: 3a3953d90e0a0aa40add47bfa481128e, type: 3}
   waterSprite: {fileID: 21300000, guid: 3404428a1e1893c4fa3c962dd8f8149a, type: 3}
+  timeUpText: {fileID: 744637768}
 --- !u!212 &435373899
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -451,6 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b5ecf476252314c93bc3cc85dd67cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeUpText: {fileID: 744637768}
 --- !u!4 &469241203
 Transform:
   m_ObjectHideFlags: 0
@@ -544,6 +546,7 @@ MonoBehaviour:
   type: straight
   drySprite: {fileID: 21300000, guid: 4ea2105d349ea1544875640649eaf447, type: 3}
   waterSprite: {fileID: 21300000, guid: 87ad3f3433f08bd459f7923173a63b2e, type: 3}
+  timeUpText: {fileID: 0}
 --- !u!212 &551600307
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -656,6 +659,7 @@ MonoBehaviour:
   type: 3dir
   drySprite: {fileID: 21300000, guid: 3a3953d90e0a0aa40add47bfa481128e, type: 3}
   waterSprite: {fileID: 21300000, guid: 3404428a1e1893c4fa3c962dd8f8149a, type: 3}
+  timeUpText: {fileID: 744637768}
 --- !u!212 &641207612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -964,6 +968,7 @@ MonoBehaviour:
   type: curve
   drySprite: {fileID: 21300000, guid: d9b1cd4b4c45de747a21c00b70085e12, type: 3}
   waterSprite: {fileID: 21300000, guid: 75c2071c680c0834484e0248de1efb36, type: 3}
+  timeUpText: {fileID: 0}
 --- !u!212 &795438993
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1090,6 +1095,7 @@ MonoBehaviour:
   type: straight
   drySprite: {fileID: 21300000, guid: 4ea2105d349ea1544875640649eaf447, type: 3}
   waterSprite: {fileID: 21300000, guid: 87ad3f3433f08bd459f7923173a63b2e, type: 3}
+  timeUpText: {fileID: 744637768}
 --- !u!212 &903686444
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1216,6 +1222,7 @@ MonoBehaviour:
   type: cross
   drySprite: {fileID: 21300000, guid: 0d44bcfd5860d314188aa249bd055c87, type: 3}
   waterSprite: {fileID: 21300000, guid: ac2acf3605e10464fb0611906a63c221, type: 3}
+  timeUpText: {fileID: 0}
 --- !u!212 &1044074581
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1408,6 +1415,7 @@ MonoBehaviour:
   type: curve
   drySprite: {fileID: 21300000, guid: d9b1cd4b4c45de747a21c00b70085e12, type: 3}
   waterSprite: {fileID: 21300000, guid: 75c2071c680c0834484e0248de1efb36, type: 3}
+  timeUpText: {fileID: 744637768}
 --- !u!212 &1638549668
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1568,6 +1576,7 @@ MonoBehaviour:
   type: 3dir
   drySprite: {fileID: 21300000, guid: 3a3953d90e0a0aa40add47bfa481128e, type: 3}
   waterSprite: {fileID: 21300000, guid: 3404428a1e1893c4fa3c962dd8f8149a, type: 3}
+  timeUpText: {fileID: 0}
 --- !u!212 &1938685535
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1795,6 +1804,7 @@ MonoBehaviour:
   type: cross
   drySprite: {fileID: 21300000, guid: 0d44bcfd5860d314188aa249bd055c87, type: 3}
   waterSprite: {fileID: 21300000, guid: ac2acf3605e10464fb0611906a63c221, type: 3}
+  timeUpText: {fileID: 744637768}
 --- !u!212 &2136183514
 SpriteRenderer:
   m_ObjectHideFlags: 0

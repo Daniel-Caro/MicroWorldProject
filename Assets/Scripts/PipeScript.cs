@@ -10,6 +10,7 @@ public class PipeScript : MonoBehaviour
     public string type;
     public Sprite drySprite;
     public Sprite waterSprite;
+    public GameObject timeUpText;
 
     
 
@@ -24,6 +25,7 @@ public class PipeScript : MonoBehaviour
 
     private void OnMouseDown() 
     {
+        if (timeUpText.activeSelf) return;
         Debug.Log("click");
         transform.Rotate(new Vector3(0,0,90));
         if (this.name == "startPipe" && this.transform.eulerAngles.z != 0)

@@ -7,6 +7,7 @@ public class TuberiasGameManager : MonoBehaviour
     public static GameObject PipesHolder;
     public static GameObject[] Pipes;
     public static GameObject[] noWaterPipes;
+    public GameObject timeUpText;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,7 @@ public class TuberiasGameManager : MonoBehaviour
     void Update() {
         if(Input.GetMouseButtonDown(1))
         {
+            if (timeUpText.activeSelf) return;
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null)
             {
