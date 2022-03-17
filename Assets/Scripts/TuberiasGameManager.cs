@@ -5,6 +5,7 @@ using UnityEngine;
 public class TuberiasGameManager : MonoBehaviour
 {
     public static GameObject PipesHolder;
+    public static GameObject coinPrefab;
     public static GameObject[] Pipes;
     public static GameObject[] noWaterPipes;
     public GameObject timeUpText;
@@ -22,6 +23,8 @@ public class TuberiasGameManager : MonoBehaviour
             j++;
         }
         drySpriteHolder.SetActive(false);
+        coinPrefab = GameObject.Find("coinPrefab");
+        coinPrefab.SetActive(false);
         
         float x = -6f;
         float y = 3f;
@@ -36,9 +39,16 @@ public class TuberiasGameManager : MonoBehaviour
                     continue;
                 }
                 int rand = Random.Range(0, noWaterPipes.Length);
+                int coinTrigger = Random.Range(0, 6);
                 GameObject newPipe = Instantiate(noWaterPipes[rand], new Vector3(x, y, -1f), Quaternion.identity);
                 newPipe.transform.localScale = new Vector3(0.3f, 0.3f, 1);
                 newPipe.transform.parent = PipesHolder.transform;
+                if (coinTrigger == 5)
+                {
+                    GameObject coin = Instantiate(coinPrefab, new Vector3(x, y, -2f), Quaternion.identity);
+                    coin.SetActive(true);
+                    newPipe.GetComponent<PipeScript>().hasCoin = true;
+                } 
                 x += 1.5f;
             }
             x = -6f;
@@ -121,6 +131,7 @@ public class TuberiasGameManager : MonoBehaviour
     public static void RestartGame(){
         GameObject pipes = GameObject.Find("Pipes");
         foreach (Transform child in pipes.transform) {
+            if (child.gameObject.GetComponent<PipeScript>().hasCoin && child.gameObject.GetComponent<PipeScript>().hasWater) Globals.obtainedCoins++;
             Destroy(child.gameObject);
         }
 
@@ -142,9 +153,16 @@ public class TuberiasGameManager : MonoBehaviour
                     continue;
                 }
                 int rand = Random.Range(0, noWaterPipes.Length);
+                int coinTrigger = Random.Range(0, 6);
                 GameObject newPipe = Instantiate(noWaterPipes[rand], new Vector3(x, y, -1f), Quaternion.identity);
                 newPipe.transform.localScale = new Vector3(0.3f, 0.3f, 1);
                 newPipe.transform.parent = PipesHolder.transform;
+                if (coinTrigger == 5)
+                {
+                    GameObject coin = Instantiate(coinPrefab, new Vector3(x, y, -2f), Quaternion.identity);
+                    coin.SetActive(true);
+                    newPipe.GetComponent<PipeScript>().hasCoin = true;
+                } 
                 x += 1.5f;
             }
             x = -6f;

@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ca2a075bd3f564ca730d16ebe772c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 5
+  maxTime: 30
   timesUpText: {fileID: 744637768}
 --- !u!1 &230304133
 GameObject:
@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: 3dir
   drySprite: {fileID: 21300000, guid: 3a3953d90e0a0aa40add47bfa481128e, type: 3}
   waterSprite: {fileID: 21300000, guid: 3404428a1e1893c4fa3c962dd8f8149a, type: 3}
@@ -543,6 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: straight
   drySprite: {fileID: 21300000, guid: 4ea2105d349ea1544875640649eaf447, type: 3}
   waterSprite: {fileID: 21300000, guid: 87ad3f3433f08bd459f7923173a63b2e, type: 3}
@@ -656,6 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: 3dir
   drySprite: {fileID: 21300000, guid: 3a3953d90e0a0aa40add47bfa481128e, type: 3}
   waterSprite: {fileID: 21300000, guid: 3404428a1e1893c4fa3c962dd8f8149a, type: 3}
@@ -965,6 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: curve
   drySprite: {fileID: 21300000, guid: d9b1cd4b4c45de747a21c00b70085e12, type: 3}
   waterSprite: {fileID: 21300000, guid: 75c2071c680c0834484e0248de1efb36, type: 3}
@@ -1092,6 +1096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: straight
   drySprite: {fileID: 21300000, guid: 4ea2105d349ea1544875640649eaf447, type: 3}
   waterSprite: {fileID: 21300000, guid: 87ad3f3433f08bd459f7923173a63b2e, type: 3}
@@ -1219,6 +1224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: cross
   drySprite: {fileID: 21300000, guid: 0d44bcfd5860d314188aa249bd055c87, type: 3}
   waterSprite: {fileID: 21300000, guid: ac2acf3605e10464fb0611906a63c221, type: 3}
@@ -1300,6 +1306,88 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!1 &1323764000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1323764002}
+  - component: {fileID: 1323764001}
+  m_Layer: 0
+  m_Name: coinPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1323764001
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323764000}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 736cfa16185cc85408477aa213b9e482, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1323764002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323764000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1554816531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +1500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: curve
   drySprite: {fileID: 21300000, guid: d9b1cd4b4c45de747a21c00b70085e12, type: 3}
   waterSprite: {fileID: 21300000, guid: 75c2071c680c0834484e0248de1efb36, type: 3}
@@ -1573,6 +1662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: 3dir
   drySprite: {fileID: 21300000, guid: 3a3953d90e0a0aa40add47bfa481128e, type: 3}
   waterSprite: {fileID: 21300000, guid: 3404428a1e1893c4fa3c962dd8f8149a, type: 3}
@@ -1801,6 +1891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWater: 0
+  hasCoin: 0
   type: cross
   drySprite: {fileID: 21300000, guid: 0d44bcfd5860d314188aa249bd055c87, type: 3}
   waterSprite: {fileID: 21300000, guid: ac2acf3605e10464fb0611906a63c221, type: 3}

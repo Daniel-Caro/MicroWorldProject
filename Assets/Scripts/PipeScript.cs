@@ -7,6 +7,7 @@ public class PipeScript : MonoBehaviour
 {
     float[] rotations = { 0, 90, 180, 270 };
     public bool hasWater;
+    public bool hasCoin = false;
     public string type;
     public Sprite drySprite;
     public Sprite waterSprite;

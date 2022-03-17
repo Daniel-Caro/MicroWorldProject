@@ -49,7 +49,12 @@ public class Globals
     public static Dictionary<int,int> minionsQuantity = new Dictionary<int,int>(); // Clave Tier minion: Valor cantidad minions
     public static Dictionary<int, int> houseDataDic = new Dictionary<int, int>();
 
+    //VARIABLES COMUNES MINIJUEGOS
+    public static int obtainedCoins;
+
     //MINIJUEGO TUBERIAS
     public static GameObject selectedPipe = null;
+
+
 
 }
