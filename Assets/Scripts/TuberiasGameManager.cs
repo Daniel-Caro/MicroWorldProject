@@ -15,7 +15,25 @@ public class TuberiasGameManager : MonoBehaviour
     {
         //Inicio de variables estáticas
         PipesHolder = GameObject.Find("Pipes");
-        GameObject drySpriteHolder = GameObject.Find("emptyPipes");
+        GameObject drySpriteHolder = null;
+        switch (Globals.style)
+        {
+            case(Style.Future):
+                GameObject.Find("startPipePirate").SetActive(false);
+                GameObject.Find("startPipePrincess").SetActive(false);
+                drySpriteHolder = GameObject.Find("emptyPipesFuture");
+                break;
+            case(Style.Pirate):
+                GameObject.Find("startPipePrincess").SetActive(false);
+                GameObject.Find("startPipeFuture").SetActive(false);
+                drySpriteHolder = GameObject.Find("emptyPipesPirate");
+                break;
+            case(Style.Princess):
+                GameObject.Find("startPipePirate").SetActive(false);
+                GameObject.Find("startPipeFuture").SetActive(false);
+                drySpriteHolder = GameObject.Find("emptyPipesPrincess");
+                break;
+        }
         noWaterPipes = new GameObject[4];
         int j = 0;
         foreach (Transform child in drySpriteHolder.transform) {
