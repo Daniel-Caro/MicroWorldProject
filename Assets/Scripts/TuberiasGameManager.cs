@@ -90,7 +90,7 @@ public class TuberiasGameManager : MonoBehaviour
             if (hit.collider != null)
             {
                 GameObject pipe = hit.collider.gameObject;
-                if(pipe.name != "startPipe"){
+                if(pipe.name != "startPipePirate" && pipe.name != "startPipePrincess" && pipe.name != "startPipeFuture"){
                     if (Globals.selectedPipe == null)
                     {
                         Globals.selectedPipe = pipe;
@@ -138,7 +138,20 @@ public class TuberiasGameManager : MonoBehaviour
                                 child.gameObject.GetComponent<PipeScript>().hasWater = false;
                                 child.gameObject.GetComponent<SpriteRenderer>().sprite = child.gameObject.GetComponent<PipeScript>().drySprite;
                             }
-                            PipeScript.checkWater(GameObject.Find("startPipe"));
+                            GameObject startPipe = null;
+                            switch(Globals.style)
+                            {
+                                case(Style.Future):
+                                    startPipe = GameObject.Find("startPipeFuture");
+                                    break;
+                                case(Style.Pirate):
+                                    startPipe = GameObject.Find("startPipePirate");
+                                    break;
+                                case(Style.Princess):
+                                    startPipe = GameObject.Find("startPipePrincess");
+                                    break;
+                            }
+                            PipeScript.checkWater(startPipe);
                         }
                     }
                 }
@@ -153,7 +166,19 @@ public class TuberiasGameManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        GameObject startPipe = GameObject.Find("startPipe");
+        GameObject startPipe = null;
+        switch(Globals.style)
+        {
+            case(Style.Future):
+                startPipe = GameObject.Find("startPipeFuture");
+                break;
+            case(Style.Pirate):
+                startPipe = GameObject.Find("startPipePirate");
+                break;
+            case(Style.Princess):
+                startPipe = GameObject.Find("startPipePrincess");
+                break;
+        }
         startPipe.transform.eulerAngles = new Vector3(0f, 0f, 0F);
         startPipe.GetComponent<PipeScript>().hasWater = false;
         startPipe.GetComponent<SpriteRenderer>().sprite = startPipe.GetComponent<PipeScript>().drySprite;

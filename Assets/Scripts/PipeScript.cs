@@ -17,7 +17,7 @@ public class PipeScript : MonoBehaviour
 
     void Start() 
     {
-        if (this.name != "startPipe")
+        if (this.name != "startPipePirate" && this.name != "startPipePrincess" && this.name != "startPipeFuture")
         {
             int rand = UnityEngine.Random.Range(0, rotations.Length);
             transform.eulerAngles = new Vector3(0,0,rotations[rand]);
@@ -29,7 +29,7 @@ public class PipeScript : MonoBehaviour
         if (timeUpText.activeSelf) return;
         Debug.Log("click");
         transform.Rotate(new Vector3(0,0,90));
-        if (this.name == "startPipe" && this.transform.eulerAngles.z != 0)
+        if ((this.name == "startPipePirate" || this.name == "startPipePrincess" || this.name == "startPipeFuture") && this.transform.eulerAngles.z != 0)
         {
             this.hasWater = true;
             this.GetComponent<SpriteRenderer>().sprite = this.waterSprite;
@@ -43,7 +43,19 @@ public class PipeScript : MonoBehaviour
             child.gameObject.GetComponent<PipeScript>().hasWater = false;
             child.gameObject.GetComponent<SpriteRenderer>().sprite = child.gameObject.GetComponent<PipeScript>().drySprite;
         }
-        GameObject startPipe = GameObject.Find("startPipe");
+        GameObject startPipe = null;
+        switch(Globals.style)
+        {
+             case(Style.Future):
+                startPipe = GameObject.Find("startPipeFuture");
+                break;
+            case(Style.Pirate):
+                startPipe = GameObject.Find("startPipePirate");
+                break;
+            case(Style.Princess):
+                startPipe = GameObject.Find("startPipePrincess");
+                break;
+        }
         if(startPipe.GetComponent<PipeScript>().hasWater) PipeScript.checkWater(startPipe); 
     }
 
