@@ -18,6 +18,7 @@ public class ControladorEscena : MonoBehaviour
     }
     public void youLose(){
         
+        puntajeScript.meterMonedas();
         canvasPerdiste.SetActive(true);
         
         Time.timeScale = 0;

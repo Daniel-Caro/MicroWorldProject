@@ -26,7 +26,7 @@ public class creadorObstaculoScript : MonoBehaviour
                 obstaculoNuevo.transform.position=transform.position+new Vector3(0,Random.Range(-altura,altura),0);
                 Destroy(obstaculoNuevo,10);
                 tiempoInicial = 0;
-                tiempoMax = Random.Range(1.5f,2);
+                tiempoMax = Random.Range(1,1.5f);
         }else{
             tiempoInicial  += Time.deltaTime;
         }

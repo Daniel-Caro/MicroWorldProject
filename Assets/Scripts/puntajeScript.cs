@@ -15,7 +15,11 @@ public class puntajeScript : MonoBehaviour
     void Update()
     {
         GetComponent<TextMeshProUGUI>().text = monedasGanadas.ToString();
-        /*Globals.gameResources["Coins"].currentR += monedasGanadas;
-        Debug.Log("Monedas totales" + Globals.gameResources["Coins"].currentR);*/
+        
+    }
+    
+    public static void meterMonedas(){
+        Globals.gameResources["Coins"].currentR += monedasGanadas;
+        Debug.Log(Globals.gameResources["Coins"].currentR);
     }
 }
