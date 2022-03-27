@@ -19,4 +19,9 @@ public class platformScript : MonoBehaviour
             }
         }
     }
+
+    private void Update() 
+    {
+        if (transform.position.y + 5 < GameObject.Find("Player").transform.position.y) Destroy(gameObject);
+    }
 }
