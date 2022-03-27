@@ -5,6 +5,7 @@ using UnityEngine;
 public class platformScript : MonoBehaviour
 {
     public float jumpForce = 10f;
+    public bool hasCoin;
 
     private void OnCollisionEnter2D(Collision2D collision) 
     {
@@ -16,6 +17,10 @@ public class platformScript : MonoBehaviour
                 Vector2 velocity = rb.velocity;
                 velocity.y = jumpForce;
                 rb.velocity = velocity;
+                if (hasCoin) {
+                    Globals.obtainedCoins += 1;
+                    hasCoin = false;
+                } 
             }
         }
     }

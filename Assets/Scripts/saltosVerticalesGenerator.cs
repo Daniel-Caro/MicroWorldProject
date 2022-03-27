@@ -17,15 +17,14 @@ public class saltosVerticalesGenerator : MonoBehaviour
         Vector3 spawnPosition = new Vector3();
         for (int i = 0; i < numberOfPlatforms; i++)
         {
+            int coinTrigger = Random.Range(0, 5);
             spawnPosition.y += Random.Range(minY,maxY);
             spawnPosition.x = Random.Range(-levelWidth, levelWidth);
-            Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+            GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+            if (coinTrigger == 4)
+            {
+                newPlatform.GetComponent<platformScript>().hasCoin = true;
+            }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
