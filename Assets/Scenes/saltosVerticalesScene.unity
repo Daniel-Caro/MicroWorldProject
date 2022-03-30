@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 10
+  hasCoin: 0
 --- !u!251 &690187430
 PlatformEffector2D:
   m_ObjectHideFlags: 0
