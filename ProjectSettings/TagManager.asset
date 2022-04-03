@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - building
+  - Red Dot
+  - Yellow Dot
+  - Blue Dot
+  - Green Dot
   layers:
   - Default
   - TransparentFX

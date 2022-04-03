@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 863627161}
   m_Layer: 0
   m_Name: GreenDot
-  m_TagString: Untagged
+  m_TagString: Green Dot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 1292947617}
   m_Layer: 0
   m_Name: RedDot
-  m_TagString: Untagged
+  m_TagString: Red Dot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 1354599738}
   m_Layer: 0
   m_Name: YellowDot
-  m_TagString: Untagged
+  m_TagString: Yellow Dot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 1565183007}
   m_Layer: 0
   m_Name: BlueDot
-  m_TagString: Untagged
+  m_TagString: Blue Dot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
