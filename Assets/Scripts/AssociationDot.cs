@@ -13,6 +13,7 @@ public class AssociationDot : MonoBehaviour
     public int targetY;
     public bool isMatched = false;
     
+    private AssociationFindMatches findMatches;
     private AssociationBoard board;
     private GameObject otherDot;
     private Vector2 firstTouchPosition;
@@ -25,18 +26,20 @@ public class AssociationDot : MonoBehaviour
     void Start()
     {
         board = FindObjectOfType<AssociationBoard>();
-        targetX = (int)transform.position.x;
-        targetY = (int)transform.position.y;
-        row = targetY;
-        column = targetX;
-        previousColumn = column;
-        previousRow = row;
+        findMatches = FindObjectOfType<AssociationFindMatches>();
+        //targetX = (int)transform.position.x;
+        //targetY = (int)transform.position.y;
+        //row = targetY;
+        //column = targetX;
+        //previousColumn = column;
+        //previousRow = row;
     }
 
     // Update is called once per frame
     void Update()
     {
-        FindMatches();
+        //FindMatches();
+
         if (isMatched)
         {
             SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
@@ -47,13 +50,14 @@ public class AssociationDot : MonoBehaviour
         targetY = row;
         if (Mathf.Abs(targetX - transform.position.x) > .1)
         {
-            //Move Towaards the target
+            //Move Towards the target
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, tempPosition, .4f);
             if (board.allDots[column, row] != this.gameObject)
             {
                 board.allDots[column,row] = this.gameObject;
             }
+            findMatches.FindAllMatches();
         }
         else
         {
@@ -63,13 +67,14 @@ public class AssociationDot : MonoBehaviour
         }
         if (Mathf.Abs(targetY - transform.position.y) > .1)
         {
-            //Move Towaards the target
+            //Move Towards the target
             tempPosition = new Vector2(transform.position.x, targetY);
             transform.position = Vector2.Lerp(transform.position, tempPosition, .4f);
             if (board.allDots[column, row] != this.gameObject)
             {
                 board.allDots[column,row] = this.gameObject;
             }
+            findMatches.FindAllMatches();
         }
         else
         {
@@ -81,14 +86,19 @@ public class AssociationDot : MonoBehaviour
 
     private void OnMouseDown() 
     {
-        firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        if (board.currentState == GameState.MOVE)
+        {
+            firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
     }
 
     private void OnMouseUp() 
     {
-        finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        CalculateAngle();
+        if (board.currentState == GameState.MOVE)
+        {
+            finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            CalculateAngle();
+        }
     }
 
     void CalculateAngle()
@@ -97,6 +107,11 @@ public class AssociationDot : MonoBehaviour
         {
             swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x) * 180 / Mathf.PI;
             MovePieces();
+            board.currentState = GameState.WAIT;
+        }
+        else
+        {
+            board.currentState = GameState.MOVE;
         }
     }
 
@@ -106,6 +121,8 @@ public class AssociationDot : MonoBehaviour
         {
             //Right Swupe
             otherDot = board.allDots[column + 1, row];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<AssociationDot>().column -= 1;
             column += 1;
         }
@@ -113,6 +130,8 @@ public class AssociationDot : MonoBehaviour
         {
             //Up Swupe
             otherDot = board.allDots[column, row + 1];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<AssociationDot>().row -= 1;
             row += 1;
         }
@@ -120,6 +139,8 @@ public class AssociationDot : MonoBehaviour
         {
             //Left Swupe
             otherDot = board.allDots[column - 1, row];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<AssociationDot>().column += 1;
             column -= 1;
         }
@@ -127,6 +148,8 @@ public class AssociationDot : MonoBehaviour
         {
             //Down Swupe
             otherDot = board.allDots[column, row - 1];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<AssociationDot>().row += 1;
             row -= 1;
         }
@@ -144,6 +167,8 @@ public class AssociationDot : MonoBehaviour
                 otherDot.GetComponent<AssociationDot>().column = column;
                 row = previousRow;
                 column = previousColumn;
+                yield return new WaitForSeconds(.5f);
+                board.currentState = GameState.MOVE;
             }
             else
             {
