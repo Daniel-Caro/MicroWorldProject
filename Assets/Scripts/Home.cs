@@ -7,7 +7,7 @@ public class Home : MonoBehaviour
 {
     public GameObject frog;
     private BoxCollider2D boxCollider;
-
+    public GameObject frogger;
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -16,6 +16,7 @@ public class Home : MonoBehaviour
     private void OnEnable()
     {
         frog.SetActive(true);
+        frogger.SetActive(false);
         boxCollider.enabled = false;
     }
 

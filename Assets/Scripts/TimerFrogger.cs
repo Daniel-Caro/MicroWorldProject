@@ -8,6 +8,7 @@ public class TimerFrogger : MonoBehaviour
     public float maxTime;
     float timeLeft;
     public GameObject timeUpText;
+    public GameObject frogger;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class TimerFrogger : MonoBehaviour
             timeBar.fillAmount = timeLeft/maxTime;
         }else{
             timeUpText.SetActive(true);
+            frogger.SetActive(false);
             Time.timeScale = 0;
         }
 
