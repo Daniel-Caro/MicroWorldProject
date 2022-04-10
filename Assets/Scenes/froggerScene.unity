@@ -201,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3205760944826350335, guid: 3f42a2d35a99dca4095fe3713d98a7d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.039
+      value: 1.229
       objectReference: {fileID: 0}
     - target: {fileID: 3205760944826350335, guid: 3f42a2d35a99dca4095fe3713d98a7d7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4061,10 +4061,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5a3c66edd9a610b41894a3a684b88974, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -4090,8 +4090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92dbe62133c21a147a68697f9361ad9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBar: {fileID: 1852374056}
-  maxTime: 5
+  maxTime: 25
   timeUpText: {fileID: 1543582759}
 --- !u!1 &1874692968 stripped
 GameObject:

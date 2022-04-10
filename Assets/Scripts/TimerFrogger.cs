@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TimerFrogger : MonoBehaviour 
 {
-    public Image timeBar;
-    public float maxTime = 5f;
+    Image timeBar;
+    public float maxTime;
     float timeLeft;
     public GameObject timeUpText;
     // Start is called before the first frame update
