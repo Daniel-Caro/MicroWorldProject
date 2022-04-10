@@ -4,11 +4,29 @@ using UnityEngine;
 
 public class Frogger : MonoBehaviour
 {
-    
+    private SpriteRenderer spriteRenderer;
+    public Sprite deadSpritePirate;
+    public Sprite idleSpritePirate;
+    public Sprite deadSpritePrincess;
+    public Sprite idleSpritePrincess;
+    public Sprite deadSpriteFuture;
+    public Sprite idleSpriteFuture;
+    public string type;
     // Start is called before the first frame update
+    private void Awake(){
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
+    }
     void Start()
     {
-        
+        if(type == "Princess"){
+            spriteRenderer.sprite = idleSpritePrincess;
+        }
+        else if(type == "Pirate"){
+            spriteRenderer.sprite = idleSpritePirate;
+        }
+        else if(type == "Future"){
+            spriteRenderer.sprite = idleSpriteFuture;
+        }
     }
 
     // Update is called once per frame
@@ -36,6 +54,42 @@ public class Frogger : MonoBehaviour
         }
     }
     private void Move(Vector3 direction){
-        transform.position += direction;
+        Vector3 destination = transform.position + direction;
+        Collider2D barrier = Physics2D.OverlapBox(destination, Vector2.zero, 0f,LayerMask.GetMask("Barrier"));
+        Collider2D obstacle = Physics2D.OverlapBox(destination, Vector2.zero, 0f,LayerMask.GetMask("Obstacle"));
+        if(barrier != null){
+            return;
+        }else{
+            transform.position = destination;
+        }
+        if(obstacle != null){
+            transform.position = destination;
+            Death();
+        }else{
+            transform.position = destination;
+        }
+    }
+    private void Death(){
+        if(type == "Princess"){
+            spriteRenderer.sprite = deadSpritePrincess;
+        }
+        else if(type == "Pirate"){
+            spriteRenderer.sprite = deadSpritePirate;
+        }
+        else if(type == "Future"){
+            spriteRenderer.sprite = deadSpriteFuture;
+        }
+        transform.rotation = Quaternion.identity;
+        enabled = false;
+    }
+    private void Respawn(){
+
+        enabled = true;
+
+    }
+    private void OnTriggerEnter2D(Collider2D other){
+        if(enabled && other.gameObject.layer == LayerMask.NameToLayer("Obstacle")){
+            Death();
+        }
     }
 }

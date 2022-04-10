@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5529260689208712170}
   - component: {fileID: 8601227462641928408}
   - component: {fileID: -4446921737085972610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Car1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &-4446921737085972610
 MonoBehaviour:
