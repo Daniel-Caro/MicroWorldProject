@@ -7,12 +7,22 @@ public class creadorObstaculoScript : MonoBehaviour
     public float tiempoMax;
     private float tiempoInicial = 0;
     
-    public GameObject obstaculo;
+    public GameObject obstaculoPirata;
+    public GameObject obstaculoPrincesa;
+    public GameObject obstaculoFuturo;
+    private GameObject obstaculo;
     public float altura;
+    public string type;
     // Start is called before the first frame update
     void Start()
     {
-       
+        if(type == "Princess"){
+            obstaculo = obstaculoPrincesa;
+        }else if (type == "Pirate"){
+            obstaculo = obstaculoPirata;
+        }else if(type == "Future"){
+            obstaculo = obstaculoFuturo;
+        }
         GameObject obstaculoNuevo = Instantiate(obstaculo);
         obstaculoNuevo.transform.position=transform.position+new Vector3(0,0,0);
         Destroy(obstaculoNuevo,10);
@@ -31,5 +41,4 @@ public class creadorObstaculoScript : MonoBehaviour
             tiempoInicial  += Time.deltaTime;
         }
     }
-   
 }
