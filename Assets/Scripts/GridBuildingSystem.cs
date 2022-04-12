@@ -33,6 +33,14 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
+        //Inicio de variables globales
+        Globals.townHallId = GameObject.Find("House4").GetInstanceID();
+        Globals.buildingDataDic.Add(Globals.townHallId, new Dictionary<string, string>{
+            {"Level", "1"},
+            {"Type", "TownHall"}
+        });
+
+        //Inicio de tilemap
         string tilePath = @"Tiles\";
         tileBases.Add(TileType.Empty, null);
         List<TileBase> whiteTiles = new List<TileBase>();
