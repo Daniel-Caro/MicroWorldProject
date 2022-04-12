@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae72d92f72ede5448b241a30b5f506d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 5
+  maxTime: 300
   timesUpText: {fileID: 1799688497}
 --- !u!1 &863627158
 GameObject:

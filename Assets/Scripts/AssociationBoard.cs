@@ -109,6 +109,7 @@ public class AssociationBoard : MonoBehaviour
 
     public void DestroyMatches()
     {
+        currentState = GameState.WAIT;
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -124,6 +125,7 @@ public class AssociationBoard : MonoBehaviour
 
     private IEnumerator DecreaseRowCo()
     {
+        currentState = GameState.WAIT;
         int nullCount = 0;
         for (int i = 0; i < width; i++)
         {
@@ -190,8 +192,9 @@ public class AssociationBoard : MonoBehaviour
 
         while(MatchesOnBoard())
         {
-            yield return new WaitForSeconds(.5f);
+            currentState = GameState.WAIT;
             DestroyMatches();
+            yield return new WaitForSeconds(2f);
         }
 
         yield return new WaitForSeconds(.5f);

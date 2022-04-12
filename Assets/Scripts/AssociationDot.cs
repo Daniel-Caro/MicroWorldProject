@@ -39,7 +39,6 @@ public class AssociationDot : MonoBehaviour
     void Update()
     {
         //FindMatches();
-
         if (isMatched)
         {
             SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
