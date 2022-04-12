@@ -15,14 +15,18 @@ public class AssociationBoard : MonoBehaviour
     public int height;
     public int offSet = 20;
     public GameObject tilePrefab;
+    public static GameObject coinPrefab;
     public GameObject[] dots;
     private AssociationBackgroundTile[,] allTiles;
     public GameObject[,] allDots;
     private AssociationFindMatches findMatches;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        coinPrefab = GameObject.Find("coinPrefab");
+        coinPrefab.SetActive(false);
         findMatches = FindObjectOfType<AssociationFindMatches>();
         allTiles = new AssociationBackgroundTile[width, height];
         allDots = new GameObject[width, height];
@@ -56,6 +60,10 @@ public class AssociationBoard : MonoBehaviour
                 dot.SetActive(true);
                 dot.GetComponent<AssociationDot>().row = j;
                 dot.GetComponent<AssociationDot>().column = i;
+                if (UnityEngine.Random.Range(0, 7) == 6)
+                {
+                    dot.GetComponent<AssociationDot>().hasCoin = true; 
+                } 
 
                 dot.transform.parent = this.transform;
                 dot.name = "(" + i.ToString() + " , " + j.ToString() +")";
@@ -102,6 +110,7 @@ public class AssociationBoard : MonoBehaviour
         if (allDots[column, row].GetComponent<AssociationDot>().isMatched)
         {
             findMatches.currentMatches.Remove(allDots[column, row]);
+            if (allDots[column, row].GetComponent<AssociationDot>().hasCoin) Globals.obtainedCoins++;
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
         }

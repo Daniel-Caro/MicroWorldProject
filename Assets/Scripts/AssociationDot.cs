@@ -12,6 +12,7 @@ public class AssociationDot : MonoBehaviour
     public int targetX;
     public int targetY;
     public bool isMatched = false;
+    public bool hasCoin = false;
     
     private AssociationFindMatches findMatches;
     private AssociationBoard board;
