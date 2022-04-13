@@ -9,13 +9,36 @@ public class SceneControlScript : MonoBehaviour
     public int griCols = 4;
     public float offSetX = 1f;
     public float offSetY = 2f;
+    [SerializeField] private cartaScript originalCardPirate;
+    [SerializeField] private cartaScript originalCardPrincess;
+    [SerializeField] private cartaScript originalCardFuture;
     [SerializeField] private cartaScript originalCard;
     [SerializeField] private Sprite[] images;
     public int score = 0;
     public string type;
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        if(type == "Princess"){
+            originalCard = originalCardPrincess;
+            GameObject cartaPrincesa = GameObject.Find("/SceneControl/cartas/princess");
+            cartaPrincesa.SetActive(true);
+            GameObject fondoPrincesa = GameObject.Find("/SceneControl/fondos/princess");
+            fondoPrincesa.SetActive(true);
+        } else if(type == "Pirate"){
+            originalCard =originalCardPirate;
+            GameObject cartaPirata = GameObject.Find("/SceneControl/cartas/pirate");
+            cartaPirata.SetActive(true);
+            GameObject fondoPirata = GameObject.Find("/SceneControl/fondos/pirata");
+            fondoPirata.SetActive(true);
+        }
+        else if(type == "Future"){
+            originalCard = originalCardFuture;
+            GameObject cartaFuturo = GameObject.Find("/SceneControl/cartas/future");
+            cartaFuturo.SetActive(true);
+            GameObject fondoFuturo = GameObject.Find("/SceneControl/fondos/future");
+            fondoFuturo.SetActive(true);
+        }
         Vector3 startPos = originalCard.transform.position;
         int[] numbers = new int[16];
         if(type == "Princess"){
@@ -41,7 +64,7 @@ public class SceneControlScript : MonoBehaviour
                 card.ChangeSprite(id, images[id]);
                 float posX = (offSetX*i) + startPos.x;
                 float posY = (offSetY*j) + startPos.y;
-                card.transform.position = new Vector3(posX, posY*0.75f,startPos.z);
+                card.transform.position = new Vector3(posX*0.5f, posY*0.5f,startPos.z);
             }
         }
     } 
