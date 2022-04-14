@@ -20,17 +20,23 @@ public class TuberiasGameManager : MonoBehaviour
         {
             case(Style.Future):
                 GameObject.Find("startPipePirate").SetActive(false);
+                GameObject.Find("emptyPipesPirate").SetActive(false);
                 GameObject.Find("startPipePrincess").SetActive(false);
+                GameObject.Find("emptyPipesPrincess").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesFuture");
                 break;
             case(Style.Pirate):
                 GameObject.Find("startPipePrincess").SetActive(false);
+                GameObject.Find("emptyPipesPrincess").SetActive(false);
                 GameObject.Find("startPipeFuture").SetActive(false);
+                GameObject.Find("emptyPipesFuture").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesPirate");
                 break;
             case(Style.Princess):
                 GameObject.Find("startPipePirate").SetActive(false);
+                GameObject.Find("emptyPipesPirate").SetActive(false);
                 GameObject.Find("startPipeFuture").SetActive(false);
+                GameObject.Find("emptyPipesFuture").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesPrincess");
                 break;
         }
