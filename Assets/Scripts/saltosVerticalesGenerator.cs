@@ -50,7 +50,7 @@ public class saltosVerticalesGenerator : MonoBehaviour
                 platformPrefab.GetComponent<SpriteRenderer>().sprite = princessPlatform;
                 break;
         }
-        for (int j = 0; j < 300; j++){
+        for (int j = 1; j < 210; j++){
             Vector3 backgroundSpawn = new Vector3(0.09f, j*10f, 10f);
             bool bckBool = false;
             switch (Globals.style)
@@ -96,5 +96,9 @@ public class saltosVerticalesGenerator : MonoBehaviour
                 newPlatform.GetComponent<platformScript>().hasCoin = true;
             }
         }
+    }
+
+    void Update() {
+        
     }
 }
