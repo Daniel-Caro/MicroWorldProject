@@ -312,8 +312,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118774328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.34, y: 1.65, z: 0.18518114}
-  m_LocalScale: {x: 0.5, y: 0.3834, z: 1}
+  m_LocalPosition: {x: -0.36, y: 0.96, z: 0.18518114}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2038007993}
   m_RootOrder: 1
@@ -622,7 +622,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f72b6acba61d24d488a0936859734f94, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -688,8 +688,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401040454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08303499, y: 2.8478687, z: 0.18518114}
-  m_LocalScale: {x: 0.4, y: 0.6, z: 1}
+  m_LocalPosition: {x: -0.21, y: 0.94, z: 0.18518114}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2038007993}
   m_RootOrder: 0
@@ -805,7 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25df09f44cc02648a300335b846cb01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Future
+  type: Pirate
 --- !u!1 &997975595
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +831,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997975595}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.571095, y: 0.54156977, z: -5.074417}
+  m_LocalPosition: {x: 3.92, y: 0.54156977, z: -5.074417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 990554206}
@@ -854,7 +854,7 @@ MonoBehaviour:
   obstaculoPrincesa: {fileID: 6094955432832159036, guid: 9aa6b491075508343b0d446bdc21c7be, type: 3}
   obstaculoFuturo: {fileID: 6094955432832159036, guid: 7e4e12c180af44a44a146150c23008ba, type: 3}
   altura: 0.2
-  type: Future
+  type: Pirate
 --- !u!1 &1039651834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1017,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1472704233}
   - component: {fileID: 1472704234}
+  - component: {fileID: 1472704235}
+  - component: {fileID: 1472704236}
   m_Layer: 0
   m_Name: sueloPrincesa
   m_TagString: Untagged
@@ -1032,8 +1034,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472704232}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.176965, y: 2.26, z: 0.18518114}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.23, y: 1.18, z: 0.1851811}
+  m_LocalScale: {x: 0.2932133, y: 0.2932133, z: 0.2932133}
   m_Children: []
   m_Father: {fileID: 2038007993}
   m_RootOrder: 2
@@ -1082,13 +1084,58 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 2
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1472704235
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472704232}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f49724316bbdc247b2a3aa2ec861fd1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1472704236
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472704232}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -4.773115}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 19.2, y: 10.8}
+    newSize: {x: 19.2, y: 10.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 2
+    adaptiveTiling: 0
+  m_AutoTiling: 1
+  serializedVersion: 2
+  m_Size: {x: 19.2, y: 1.2537713}
+  m_EdgeRadius: 0
 --- !u!1 &1516068858
 GameObject:
   m_ObjectHideFlags: 0
