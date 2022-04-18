@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2222481564842591803}
   - component: {fileID: 1076426731848854659}
   m_Layer: 0
-  m_Name: HomeFrog
+  m_Name: HomeFrogPirate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: acfec27707096b545a74a41ae87b39d0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d8ccd9ac3d598d40b722e1b4671c049, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
