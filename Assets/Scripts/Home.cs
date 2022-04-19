@@ -13,8 +13,8 @@ public class Home : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
     }
     
-    private void OnEnable()
-    {
+    private void activar()
+    {  
         frog.SetActive(true);
         frogger.SetActive(false);
         boxCollider.enabled = false;
@@ -29,11 +29,11 @@ public class Home : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!enabled && other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("La rana llega");
-    
-            enabled = true;
+            
+            activar();
             //FindObjectOfType<GameManager>().HomeOccupied();
         }
     }

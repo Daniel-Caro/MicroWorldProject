@@ -18,7 +18,8 @@ public class Frogger : MonoBehaviour
     }
     void Start()
     {
-        if(type == "Princess"){
+        
+        if(type== "Princess"){
             spriteRenderer.sprite = idleSpritePrincess;
         }
         else if(type == "Pirate"){

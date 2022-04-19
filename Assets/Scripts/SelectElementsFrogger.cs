@@ -11,9 +11,13 @@ public class SelectElementsFrogger : MonoBehaviour
     private GameObject car4;
     private GameObject car5;
     private GameObject home;
+    private GameObject median;
+    private GameObject road;
+    
     // Start is called before the first frame update
     void Start()
     {
+        
         if(type == "Pirate"){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Pirate");
             car1.SetActive(true);
@@ -27,6 +31,10 @@ public class SelectElementsFrogger : MonoBehaviour
             car5.SetActive(true);
             home = GameObject.Find("/SceneController/HomeGroup/HomePirate");
             home.SetActive(true);
+            median = GameObject.Find("/SceneController/MedianGroup/MedianPirateGroup");
+            median.SetActive(true);
+            road = GameObject.Find("/SceneController/RoadGroup/RoadPirateGroupMax");
+            road.SetActive(true);
         }else if(type == "Princess"){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Princess");
             car1.SetActive(true);
@@ -40,6 +48,10 @@ public class SelectElementsFrogger : MonoBehaviour
             car5.SetActive(true);
             home = GameObject.Find("/SceneController/HomeGroup/HomePrincess");
             home.SetActive(true);
+            median = GameObject.Find("/SceneController/MedianGroup/MedianPrincessGroup");
+            median.SetActive(true);
+            road = GameObject.Find("/SceneController/RoadGroup/RoadPrincessGroupMax");
+            road.SetActive(true);
         }else if(type == "Future"){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Future");
             car1.SetActive(true);
@@ -53,7 +65,12 @@ public class SelectElementsFrogger : MonoBehaviour
             car5.SetActive(true);
             home = GameObject.Find("/SceneController/HomeGroup/HomeFuture");
             home.SetActive(true);
+            median = GameObject.Find("/SceneController/MedianGroup/MedianFutureGroup");
+            median.SetActive(true);
+            road = GameObject.Find("/SceneController/RoadGroup/RoadFutureGroupMax");
+            road.SetActive(true);
         }
+        
     }
 
     // Update is called once per frame
