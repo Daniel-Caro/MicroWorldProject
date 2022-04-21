@@ -20,7 +20,23 @@ public class AssociationBoard : MonoBehaviour
     private AssociationBackgroundTile[,] allTiles;
     public GameObject[,] allDots;
     private AssociationFindMatches findMatches;
-    
+
+    //Sprites de casillas
+    //Pirata
+    public Sprite dotRedPirate; 
+    public Sprite dotYellowPirate; 
+    public Sprite dotBluePirate; 
+    public Sprite dotGreenPirate; 
+    //Futuro
+    public Sprite dotRedFuture; 
+    public Sprite dotYellowFuture; 
+    public Sprite dotBlueFuture; 
+    public Sprite dotGreenFuture; 
+    //Principe
+    public Sprite dotRedPrincess; 
+    public Sprite dotYellowPrincess; 
+    public Sprite dotBluePrincess; 
+    public Sprite dotGreenPrincess;     
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +46,29 @@ public class AssociationBoard : MonoBehaviour
         findMatches = FindObjectOfType<AssociationFindMatches>();
         allTiles = new AssociationBackgroundTile[width, height];
         allDots = new GameObject[width, height];
+        switch (Globals.style)
+        {
+            case Style.Pirate:
+                dots[0].GetComponent<SpriteRenderer>().sprite = dotRedPirate;
+                dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowPirate;
+                dots[2].GetComponent<SpriteRenderer>().sprite = dotBluePirate;
+                dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenPirate;
+                break;
+            case Style.Future:
+                dots[0].GetComponent<SpriteRenderer>().sprite = dotRedFuture;
+                dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowFuture;
+                dots[2].GetComponent<SpriteRenderer>().sprite = dotBlueFuture;
+                dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenFuture;
+                break;
+            case Style.Princess:
+                dots[0].GetComponent<SpriteRenderer>().sprite = dotRedPrincess;
+                dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowPrincess;
+                dots[2].GetComponent<SpriteRenderer>().sprite = dotBluePrincess;
+                dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenPrincess;
+                break;
+            default:
+                break;
+        }
         SetUp();
     }
 
