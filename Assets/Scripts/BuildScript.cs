@@ -107,15 +107,19 @@ public class BuildScript : MonoBehaviour//, IClick
         switch(type){
             case("TownHall"):
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+                panel.transform.Find("MinigamesButton").gameObject.SetActive(true);
                 break;
             case("House"):
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
+                panel.transform.Find("MinigamesButton").gameObject.SetActive(false);
                 break;
             case("Bank"):
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Banco nivel: " + level.ToString();
+                panel.transform.Find("MinigamesButton").gameObject.SetActive(false);
                 break;
             case("Factory"):
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Fábrica nivel: " + level.ToString();
+                panel.transform.Find("MinigamesButton").gameObject.SetActive(false);
                 break;
         }
         
