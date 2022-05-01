@@ -12,15 +12,15 @@ public class creadorObstaculoScript : MonoBehaviour
     public GameObject obstaculoFuturo;
     private GameObject obstaculo;
     public float altura;
-    public string type;
+    
     // Start is called before the first frame update
     void Start()
     {
-        if(type == "Princess"){
+        if(Globals.style == Style.Princess){
             obstaculo = obstaculoPrincesa;
-        }else if (type == "Pirate"){
+        }else if (Globals.style == Style.Pirate){
             obstaculo = obstaculoPirata;
-        }else if(type == "Future"){
+        }else if(Globals.style == Style.Future){
             obstaculo = obstaculoFuturo;
         }
         GameObject obstaculoNuevo = Instantiate(obstaculo);

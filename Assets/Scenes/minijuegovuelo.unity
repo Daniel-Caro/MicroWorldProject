@@ -297,6 +297,8 @@ GameObject:
   m_Component:
   - component: {fileID: 118774329}
   - component: {fileID: 118774330}
+  - component: {fileID: 118774331}
+  - component: {fileID: 118774332}
   m_Layer: 0
   m_Name: sueloFuturo
   m_TagString: Untagged
@@ -312,8 +314,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118774328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.36, y: 0.96, z: 0.18518114}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: 7.3361, y: 0.91, z: 0.1851811}
+  m_LocalScale: {x: 0.33563685, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2038007993}
   m_RootOrder: 1
@@ -362,13 +364,58 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 19.2, y: 10.8}
+  m_DrawMode: 2
+  m_Size: {x: 59.684525, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &118774331
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118774328}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.034553528, y: -4.7445493}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 19.2, y: 10.8}
+    newSize: {x: 59.684525, y: 10.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 2
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 59.769608, y: 1.3109007}
+  m_EdgeRadius: 0
+--- !u!95 &118774332
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118774328}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f384bfbc278db941a074954bc59d869, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &335076373
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,8 +648,8 @@ GameObject:
   m_Component:
   - component: {fileID: 401040457}
   - component: {fileID: 401040456}
-  - component: {fileID: 401040455}
   - component: {fileID: 401040458}
+  - component: {fileID: 401040455}
   m_Layer: 0
   m_Name: sueloPirata
   m_TagString: Untagged
@@ -620,9 +667,9 @@ Animator:
   m_GameObject: {fileID: 401040454}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f72b6acba61d24d488a0936859734f94, type: 2}
+  m_Controller: {fileID: 9100000, guid: f58aa19bcd2da6747b13f99a7b2d27d0, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 1
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -674,7 +721,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 38.375076, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -688,7 +735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401040454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21, y: 0.94, z: 0.18518114}
+  m_LocalPosition: {x: 2.1869, y: 0.94, z: 0.1851811}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2038007993}
@@ -712,7 +759,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
+    newSize: {x: 38.375076, y: 10.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
@@ -854,7 +901,6 @@ MonoBehaviour:
   obstaculoPrincesa: {fileID: 6094955432832159036, guid: 9aa6b491075508343b0d446bdc21c7be, type: 3}
   obstaculoFuturo: {fileID: 6094955432832159036, guid: 7e4e12c180af44a44a146150c23008ba, type: 3}
   altura: 0.2
-  type: Pirate
 --- !u!1 &1039651834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +1080,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472704232}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.23, y: 1.18, z: 0.1851811}
+  m_LocalPosition: {x: 1.13, y: 1.1468, z: 0.1851811}
   m_LocalScale: {x: 0.2932133, y: 0.2932133, z: 0.2932133}
   m_Children: []
   m_Father: {fileID: 2038007993}
@@ -1085,7 +1131,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 54.45347, y: 10.709851}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1128,7 +1174,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
+    newSize: {x: 54.45347, y: 10.709851}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
