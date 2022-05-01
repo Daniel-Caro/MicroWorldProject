@@ -15,24 +15,24 @@ public class SceneControlScript : MonoBehaviour
     [SerializeField] private cartaScript originalCard;
     [SerializeField] private Sprite[] images;
     public int score = 0;
-    public string type;
+    
     // Start is called before the first frame update
     void Start()
     {   
-        if(type == "Princess"){
+        if(Globals.style == Style.Princess){
             originalCard = originalCardPrincess;
             GameObject cartaPrincesa = GameObject.Find("/SceneControl/cartas/princess");
             cartaPrincesa.SetActive(true);
             GameObject fondoPrincesa = GameObject.Find("/SceneControl/fondos/princess");
             fondoPrincesa.SetActive(true);
-        } else if(type == "Pirate"){
+        } else if(Globals.style == Style.Pirate){
             originalCard =originalCardPirate;
             GameObject cartaPirata = GameObject.Find("/SceneControl/cartas/pirate");
             cartaPirata.SetActive(true);
             GameObject fondoPirata = GameObject.Find("/SceneControl/fondos/pirata");
             fondoPirata.SetActive(true);
         }
-        else if(type == "Future"){
+        else if(Globals.style == Style.Future){
             originalCard = originalCardFuture;
             GameObject cartaFuturo = GameObject.Find("/SceneControl/cartas/future");
             cartaFuturo.SetActive(true);
@@ -41,12 +41,12 @@ public class SceneControlScript : MonoBehaviour
         }
         Vector3 startPos = originalCard.transform.position;
         int[] numbers = new int[16];
-        if(type == "Princess"){
+        if(Globals.style == Style.Princess){
             numbers = new int[] {4,4,5,5,6,6,7,7,4,4,5,5,6,6,7,7};
-        } else if(type == "Pirate"){
+        } else if(Globals.style == Style.Pirate){
             numbers = new int[]{0,0,1,1,2,2,3,3,0,0,1,1,2,2,3,3};
         }
-        else if(type == "Future"){
+        else if(Globals.style == Style.Future){
             numbers = new int[]{8,8,9,9,10,10,11,11,8,8,9,9,10,10,11,11};
         }
         
