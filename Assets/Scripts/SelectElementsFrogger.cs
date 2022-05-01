@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SelectElementsFrogger : MonoBehaviour
 {
-    public string type;
     private GameObject car1;
     private GameObject car2;
     private GameObject car3;
@@ -18,7 +17,7 @@ public class SelectElementsFrogger : MonoBehaviour
     void Start()
     {
         
-        if(type == "Pirate"){
+        if(Globals.style == Style.Pirate){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Pirate");
             car1.SetActive(true);
             car2 = GameObject.Find("/SceneController/Car2Group/Car2Pirate");
@@ -35,7 +34,7 @@ public class SelectElementsFrogger : MonoBehaviour
             median.SetActive(true);
             road = GameObject.Find("/SceneController/RoadGroup/RoadPirateGroupMax");
             road.SetActive(true);
-        }else if(type == "Princess"){
+        }else if(Globals.style == Style.Princess){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Princess");
             car1.SetActive(true);
             car2 = GameObject.Find("/SceneController/Car2Group/Car2Princess");
@@ -52,7 +51,7 @@ public class SelectElementsFrogger : MonoBehaviour
             median.SetActive(true);
             road = GameObject.Find("/SceneController/RoadGroup/RoadPrincessGroupMax");
             road.SetActive(true);
-        }else if(type == "Future"){
+        }else if(Globals.style == Style.Future){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Future");
             car1.SetActive(true);
             car2 = GameObject.Find("/SceneController/Car2Group/Car2Future");
