@@ -45,6 +45,7 @@ public class GridBuildingSystem : MonoBehaviour
         List<TileBase> whiteTiles = new List<TileBase>();
         List<TileBase> greenTiles = new List<TileBase>();
         List<TileBase> redtiles = new List<TileBase>();
+        
         redtiles.Add(Resources.Load<TileBase>(tilePath + "red"));
         tileBases.Add(TileType.Red, redtiles);
 
