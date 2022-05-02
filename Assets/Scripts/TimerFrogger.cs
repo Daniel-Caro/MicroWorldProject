@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class TimerFrogger : MonoBehaviour 
 {
     //
@@ -26,7 +27,10 @@ public class TimerFrogger : MonoBehaviour
             timeLeft-=Time.deltaTime;
             timeBar.fillAmount = timeLeft/maxTime;
         }else{
+            
+            timeUpText.GetComponent<TextMeshProUGUI>().text = "Has ganado "+ MoneyGenerateFrogger.monedasGanadas;
             timeUpText.SetActive(true);
+
             frogger.SetActive(false);
             Time.timeScale = 0;
         }

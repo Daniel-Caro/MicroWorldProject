@@ -73,12 +73,19 @@ public class Frogger : MonoBehaviour
     private void Death(){
         if(type == "Princess"){
             spriteRenderer.sprite = deadSpritePrincess;
+            GameObject image = GameObject.Find("/Canvas/Image");
+            image.SetActive(false);
         }
         else if(type == "Pirate"){
             spriteRenderer.sprite = deadSpritePirate;
+            GameObject image = GameObject.Find("/Canvas/Image");
+            image.SetActive(false);
         }
         else if(type == "Future"){
             spriteRenderer.sprite = deadSpriteFuture;
+            GameObject image = GameObject.Find("/Canvas/Image");
+            image.SetActive(false);
+            
         }
         transform.rotation = Quaternion.identity;
         enabled = false;
