@@ -15,6 +15,15 @@ public class Globals
         {"Minions", new GameResource("Minions", 0)}
     };
 
+    public static Dictionary<string, bool> minigameAccess = new Dictionary<string,bool>(){
+        {"Pipes", false},
+        {"Frogger", false},
+        {"Association", false},
+        {"Memory", false},
+        {"Jumps", false},
+        {"Flappy", false},
+    };
+
     public static int moneyCapacity = 100000;
     public static int minionCapacity = 2;
     public static int townHallId;
