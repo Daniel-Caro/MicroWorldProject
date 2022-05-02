@@ -15,15 +15,10 @@ public class Globals
 
     public static int moneyCapacity = 100000;
     public static int minionCapacity = 2;
-    public static int townHallId = GameObject.Find("House4").GetInstanceID();
+    public static int townHallId;
     public static System.Random random = new System.Random();
 
-    public static Dictionary<int, Dictionary<string, string>> buildingDataDic = new Dictionary<int, Dictionary<string, string>>{
-        {townHallId, new Dictionary<string, string>{
-            {"Level", "1"},
-            {"Type", "TownHall"}
-        }}
-    }; // Clave: ID instancia edificio Valor: diccionario con valores de tipo, nivel y coste
+    public static Dictionary<int, Dictionary<string, string>> buildingDataDic = new Dictionary<int, Dictionary<string, string>>();  // Clave: ID instancia edificio Valor: diccionario con valores de tipo, nivel y coste
     public static Dictionary<string, List<int>> buildingTypesDic = new Dictionary<string, List<int>>(){
         {"House", new List<int>()},
         {"Bank", new List<int>()},
