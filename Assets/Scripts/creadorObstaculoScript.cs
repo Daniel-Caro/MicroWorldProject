@@ -12,7 +12,7 @@ public class creadorObstaculoScript : MonoBehaviour
     public GameObject obstaculoFuturo;
     private GameObject obstaculo;
     public float altura;
-    
+    public int probMoneda;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +33,11 @@ public class creadorObstaculoScript : MonoBehaviour
     {
         if(tiempoInicial > tiempoMax){
                 GameObject obstaculoNuevo = Instantiate(obstaculo);
+                
+                int numProb = Random.Range(0,100);
+                if(numProb>probMoneda){
+                    
+                }
                 obstaculoNuevo.transform.position=transform.position+new Vector3(0,Random.Range(-altura,altura),0);
                 Destroy(obstaculoNuevo,10);
                 tiempoInicial = 0;
