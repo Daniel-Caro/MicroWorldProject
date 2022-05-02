@@ -41,7 +41,8 @@ public class ChangeSceneScript : MonoBehaviour
     {
         if (Globals.minigameAccess["Pipes"])
         {
-            SceneManager.LoadScene("Tuberias", LoadSceneMode.Single);
+            GameObject.Find("SampleSceneObject").SetActive(false);
+            SceneManager.LoadScene("Tuberias", LoadSceneMode.Additive);
         }
         else
         {
@@ -53,7 +54,8 @@ public class ChangeSceneScript : MonoBehaviour
     {
         if (Globals.minigameAccess["Flappy"])
         {
-            SceneManager.LoadScene("minijuegovuelo", LoadSceneMode.Single);
+            GameObject.Find("SampleSceneObject").SetActive(false);
+            SceneManager.LoadScene("minijuegovuelo", LoadSceneMode.Additive);
         }
         else
         {
@@ -65,10 +67,12 @@ public class ChangeSceneScript : MonoBehaviour
     {
         if (Globals.minigameAccess["Jumps"])
         {
-            SceneManager.LoadScene("saltosVerticalesScene", LoadSceneMode.Single);
+            GameObject.Find("SampleSceneObject").SetActive(false);
+            SceneManager.LoadScene("saltosVerticalesScene", LoadSceneMode.Additive);
         }
         else
         {
+            GameObject.Find("SampleSceneObject").SetActive(false);
             payMinigame("Jumps");
         }
     }
@@ -77,10 +81,12 @@ public class ChangeSceneScript : MonoBehaviour
     {
         if (Globals.minigameAccess["Frogger"])
         {
-            SceneManager.LoadScene("froggerScene", LoadSceneMode.Single);
+            GameObject.Find("SampleSceneObject").SetActive(false);
+            SceneManager.LoadScene("froggerScene", LoadSceneMode.Additive);
         }
         else
         {
+            GameObject.Find("SampleSceneObject").SetActive(false);
             payMinigame("Frogger");
         }
     }
@@ -89,7 +95,8 @@ public class ChangeSceneScript : MonoBehaviour
     {
         if (Globals.minigameAccess["Memory"])
         {
-            SceneManager.LoadScene("memoriaScene", LoadSceneMode.Single);
+            GameObject.Find("SampleSceneObject").SetActive(false);
+            SceneManager.LoadScene("memoriaScene", LoadSceneMode.Additive);
         }
         else
         {
@@ -101,7 +108,9 @@ public class ChangeSceneScript : MonoBehaviour
     {
         if (Globals.minigameAccess["Association"])
         {
-            SceneManager.LoadScene("minijuego-asociacion", LoadSceneMode.Single);
+            GameObject.Find("SampleSceneObject").SetActive(false);
+            SceneManager.LoadScene("minijuego-asociacion", LoadSceneMode.Additive);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("minijuego-asociacion"));
         }
         else
         {

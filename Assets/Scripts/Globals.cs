@@ -10,12 +10,12 @@ public class Globals
 
     public static Style style = Style.Future;
 
-    public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>(){
+    public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>() {
         {"Coins", new GameResource("Coins", 100000)},
         {"Minions", new GameResource("Minions", 0)}
     };
 
-    public static Dictionary<string, bool> minigameAccess = new Dictionary<string,bool>(){
+    public static Dictionary<string, bool> minigameAccess = new Dictionary<string,bool>() {
         {"Pipes", false},
         {"Frogger", false},
         {"Association", false},

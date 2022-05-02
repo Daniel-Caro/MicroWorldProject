@@ -113,8 +113,5 @@ public class SceneControlScript : MonoBehaviour
             _firstRevealed = null;
             _secondRevealed = null;
         }
-        void cardCoparion(List<int> c){
-            
-        }
     }
 }
