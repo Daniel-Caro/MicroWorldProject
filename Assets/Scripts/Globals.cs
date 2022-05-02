@@ -20,7 +20,6 @@ public class Globals
     public static int townHallId;
     public static System.Random random = new System.Random();
 
-
     public static Dictionary<int, Dictionary<string, string>> buildingDataDic = new Dictionary<int, Dictionary<string, string>>(); // Clave: ID instancia edificio Valor: diccionario con valores de tipo, nivel y coste
 
     public static Dictionary<string, List<int>> buildingTypesDic = new Dictionary<string, List<int>>(){
@@ -55,6 +54,7 @@ public class Globals
 
     //VARIABLES COMUNES MINIJUEGOS
     public static int obtainedCoins;
+
 
     //MINIJUEGO TUBERIAS
     public static GameObject selectedPipe = null;
