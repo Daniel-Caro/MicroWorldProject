@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TimerFrogger : MonoBehaviour 
 {
+    //
     Image timeBar;
     public float maxTime;
     float timeLeft;
