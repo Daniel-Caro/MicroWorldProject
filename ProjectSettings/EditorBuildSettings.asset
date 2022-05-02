@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/minijuegovuelo.unity
+    guid: e5f3c163d5f11f540a69c0169bb3abe9
   m_configObjects: {}
