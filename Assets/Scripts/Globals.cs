@@ -7,7 +7,9 @@ public enum Style {Future,Pirate,Princess}
 
 public class Globals
 {
-    public static Style style = Style.Future;
+
+    public static Style style = Style.Pirate;
+
     public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>(){
         {"Coins", new GameResource("Coins", 100000)},
         {"Minions", new GameResource("Minions", 0)}
@@ -50,5 +52,13 @@ public class Globals
     public static Dictionary<int, List<int>> colaFactoria = new Dictionary<int, List<int>>(); // Clave ID Factoria: Lista con cola de Minions por factoria
     public static Dictionary<int,int> minionsQuantity = new Dictionary<int,int>(); // Clave Tier minion: Valor cantidad minions
     public static Dictionary<int, int> houseDataDic = new Dictionary<int, int>();
+
+    //VARIABLES COMUNES MINIJUEGOS
+    public static int obtainedCoins;
+
+    //MINIJUEGO TUBERIAS
+    public static GameObject selectedPipe = null;
+
+
 
 }

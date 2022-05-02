@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class BuildScript : MonoBehaviour//, IClick
 {
-
     public GameObject panel;
     public GameObject thisBuilding;
     private GameObject building;
