@@ -36,6 +36,7 @@ public class DialogueStart : MonoBehaviour
     private bool onetime = false;
     private GameObject movilInteraccion;
     private bool coroutineCalled = false;
+    private bool haTerminado = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -303,10 +304,12 @@ public class DialogueStart : MonoBehaviour
                 }
                 
             }); 
-        }else if((Input.GetButtonDown("Fire1")) && (lineIndex == 3 || lineIndex == 6 || lineIndex == 7 || lineIndex == 9 || lineIndex == 12)){
+        }else if((Input.GetButtonDown("Fire1")) && (lineIndex == 3 || lineIndex == 6 || lineIndex == 7 || lineIndex == 9 || lineIndex == 12) && haTerminado == true){
                 lineIndex++;
                 NextDialogueLine();
-        }else if((Input.GetButtonDown("Fire1")) &&(lineIndex == 0 || lineIndex == 1 || lineIndex == 2 || lineIndex == 4 || lineIndex == 5 || lineIndex == 8 || lineIndex ==10 || lineIndex == 11)){
+                haTerminado =false;
+                
+        }else if((Input.GetButtonDown("Fire1")) &&(lineIndex == 0 || lineIndex == 1 || lineIndex == 2 || lineIndex == 4 || lineIndex == 5 || lineIndex == 8 || lineIndex ==10 || lineIndex == 11) && haTerminado == true){
             Debug.Log("Primera linea");
             StartCoroutine(ShowLine(true));
         }else if (videoFinal.activeSelf)
@@ -316,6 +319,7 @@ public class DialogueStart : MonoBehaviour
                 StartCoroutine(changeScene());
                 coroutineCalled = true;
             }
+            haTerminado = false;
         }
     }
     private void StartDialogue(){
@@ -352,7 +356,10 @@ public class DialogueStart : MonoBehaviour
             foreach(char ch in dialogueLines[lineIndex]){
                 text.text += ch;
                 yield return new WaitForSeconds(timeChar);
-            }if(lineIndex == 13){
+                
+            }
+            haTerminado = true;
+            if(lineIndex == 13){
                 controladorPanel(lineIndex);
             }
         }else{
