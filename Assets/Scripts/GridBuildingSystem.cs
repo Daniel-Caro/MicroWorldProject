@@ -33,13 +33,13 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(Globals.minigameAccess["Memory"]);
         Globals.townHallId = GameObject.Find("House4").GetInstanceID();
         if (!Globals.buildingDataDic.ContainsKey(Globals.townHallId))
         {
+            Debug.Log("Cargar diccionario edificios");
             Globals.buildingDataDic.Add(Globals.townHallId, new Dictionary<string, string>{
-            {"Level", "1"},
-            {"Type", "TownHall"}
+                {"Level", "1"},
+                {"Type", "TownHall"}
             });
         }
 

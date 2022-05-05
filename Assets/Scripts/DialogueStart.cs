@@ -35,6 +35,7 @@ public class DialogueStart : MonoBehaviour
     private float timeChar;
     private bool onetime = false;
     private GameObject movilInteraccion;
+    private bool coroutineCalled = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -310,9 +311,10 @@ public class DialogueStart : MonoBehaviour
             StartCoroutine(ShowLine(true));
         }else if (videoFinal.activeSelf)
         {
-            if ((componenteVideoFinal.frame) > 0 && (componenteVideoFinal.isPlaying == false)){
+            if ((componenteVideoFinal.frame) > 0 && (componenteVideoFinal.isPlaying == false && !coroutineCalled)){
                 Debug.Log("Finaliza el video");
                 StartCoroutine(changeScene());
+                coroutineCalled = true;
             }
         }
     }
@@ -405,6 +407,7 @@ public class DialogueStart : MonoBehaviour
         Debug.Log("Empieza la corrutina");
         yield return new WaitForSeconds(3f);
         Debug.Log("Termina el tiempo");
+        Globals.tutorialStep = 1;
         SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
     }
   
