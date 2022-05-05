@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class TimerFrogger : MonoBehaviour 
 {
     //
@@ -10,6 +12,7 @@ public class TimerFrogger : MonoBehaviour
     float timeLeft;
     public GameObject timeUpText;
     public GameObject frogger;
+    private bool coroutineCalled = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +31,23 @@ public class TimerFrogger : MonoBehaviour
         }else{
             timeUpText.SetActive(true);
             frogger.SetActive(false);
-            Time.timeScale = 0;
+            Time.timeScale = 1;
+            if (!coroutineCalled)
+            {
+                StartCoroutine(changeScene());
+                Debug.Log("after calling corot");
+                coroutineCalled = true;
+            }
         }
+    }
 
+    IEnumerator changeScene() {
+        Debug.Log("Empieza la corrutina");
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Termina el tiempo");
+        Scene mainScene = SceneManager.GetSceneByName("SampleScene");
+        SceneManager.SetActiveScene(mainScene);
+        mainScene.GetRootGameObjects().First().gameObject.SetActive(true);
+        SceneManager.UnloadSceneAsync("froggerScene");
     }
 }

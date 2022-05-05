@@ -16,7 +16,7 @@ public class GridBuildingSystem : MonoBehaviour
     public AudioSource constructionSound;
     public AudioSource noSound;
     
-    private static Dictionary<TileType, List<TileBase>> tileBases = new Dictionary<TileType, List<TileBase>>();
+    private static Dictionary<TileType, List<TileBase>> tileBases;
     
     private Building temp;
     private GameObject buildingGeneral;
@@ -33,13 +33,18 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
-
         Globals.townHallId = GameObject.Find("House4").GetInstanceID();
-        Globals.buildingDataDic.Add(Globals.townHallId, new Dictionary<string, string>{
-            {"Level", "1"},
-            {"Type", "TownHall"}
-        });
+        if (!Globals.buildingDataDic.ContainsKey(Globals.townHallId))
+        {
+            Debug.Log("Cargar diccionario edificios");
+            Globals.buildingDataDic.Add(Globals.townHallId, new Dictionary<string, string>{
+                {"Level", "1"},
+                {"Type", "TownHall"}
+            });
+        }
 
+        tileBases = new Dictionary<TileType, List<TileBase>>();
+        
         string tilePath = @"Tiles\";
         tileBases.Add(TileType.Empty, null);
         List<TileBase> whiteTiles = new List<TileBase>();

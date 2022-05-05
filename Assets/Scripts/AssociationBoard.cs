@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public enum GameState
@@ -41,6 +42,8 @@ public class AssociationBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("minijuego-asociacion"));
+
         coinPrefab = GameObject.Find("coinPrefab");
         coinPrefab.SetActive(false);
         findMatches = FindObjectOfType<AssociationFindMatches>();

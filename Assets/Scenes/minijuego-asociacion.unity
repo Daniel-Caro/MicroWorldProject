@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae72d92f72ede5448b241a30b5f506d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 300
+  maxTime: 20
   timesUpText: {fileID: 1799688497}
 --- !u!1 &863627158
 GameObject:
@@ -1272,6 +1272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Timer
       objectReference: {fileID: 0}
+    - target: {fileID: 8447839328761292182, guid: 3d8f94fe31b03f1448ea773cb99d68dc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d22bd6a9f8264f40a7e0b55518ba15e, type: 3}
     - target: {fileID: 8447839328761292182, guid: 3d8f94fe31b03f1448ea773cb99d68dc, type: 3}
       propertyPath: m_Color.b
       value: 0
