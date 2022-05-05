@@ -23,7 +23,7 @@ public class SceneControlInicioScript : MonoBehaviour
     {
         videoIntro = GameObject.Find("/SceneControl/Controlador/VideoIntro");
         componenteVideoIntro = videoIntro.GetComponent<VideoPlayer>();
-        notificacion =GameObject.Find("/SceneControl/Controlador/MovilNotificacion");
+        notificacion = GameObject.Find("/SceneControl/Controlador/MovilNotificacion");
         movilCorreo = GameObject.Find("/SceneControl/Controlador/MovilCorreo");
         movilInteraccion = GameObject.Find("/SceneControl/Controlador/MovilInteraccion");
         buttonNotificacion = GameObject.Find("/SceneControl/Controlador/MovilNotificacion/Canvas/BotonNotificacion");
@@ -35,9 +35,10 @@ public class SceneControlInicioScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (( componenteVideoIntro.frame) > 0 && (componenteVideoIntro.isPlaying == false)){
+        if ((componenteVideoIntro.frame) > 0 && (componenteVideoIntro.isPlaying == false)){
             videoIntro.SetActive(false);
-            esperarNotificacion();
+            notificacion.SetActive(true);
+            backRoom.SetActive(true);
         }
         Button compoButtonNotificacion = buttonNotificacion.GetComponent<Button>();
         Button compoBotonCorreo = botonCorreo.GetComponent<Button>();
@@ -52,11 +53,6 @@ public class SceneControlInicioScript : MonoBehaviour
             movilInteraccion.SetActive(true);
             objetoDialogo.SetActive(true);
         });
-
-    }
-    private async Task esperarNotificacion(){
-        notificacion.SetActive(true);
-        backRoom.SetActive(true);
 
     }
     

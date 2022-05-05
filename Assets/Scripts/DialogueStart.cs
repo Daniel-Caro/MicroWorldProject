@@ -1,7 +1,10 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 using TMPro;
 using System.Threading.Tasks;
 public class DialogueStart : MonoBehaviour
@@ -19,6 +22,7 @@ public class DialogueStart : MonoBehaviour
     [SerializeField] private GameObject insertarNombre;
     [SerializeField] private GameObject insertarEdad;
     private GameObject videoFinal;
+    private VideoPlayer componenteVideoFinal;
     private Button enviarEdad;
     private Text respuestaEdad;
     private Button enviarNombre;
@@ -39,6 +43,7 @@ public class DialogueStart : MonoBehaviour
         enviarNombre = insertarNombre.transform.Find("EnviarNombre").gameObject.GetComponent<Button>();
         enviarEdad = insertarEdad.transform.Find("EnviarEdad").gameObject.GetComponent<Button>();
         videoFinal = GameObject.Find("/SceneControl/Controlador/VideoFinal");
+        componenteVideoFinal = videoFinal.GetComponent<VideoPlayer>();
     }
 
     // Update is called once per frame
@@ -303,8 +308,12 @@ public class DialogueStart : MonoBehaviour
         }else if((Input.GetButtonDown("Fire1")) &&(lineIndex == 0 || lineIndex == 1 || lineIndex == 2 || lineIndex == 4 || lineIndex == 5 || lineIndex == 8 || lineIndex ==10 || lineIndex == 11)){
             Debug.Log("Primera linea");
             StartCoroutine(ShowLine(true));
-                    
-
+        }else if (videoFinal.activeSelf)
+        {
+            if ((componenteVideoFinal.frame) > 0 && (componenteVideoFinal.isPlaying == false)){
+                Debug.Log("Finaliza el video");
+                StartCoroutine(changeScene());
+            }
         }
     }
     private void StartDialogue(){
@@ -353,56 +362,50 @@ public class DialogueStart : MonoBehaviour
             panel.SetActive(false);
             movilInteraccion.SetActive(false);
             videoFinal.SetActive(true);
-
         }
         else if(lineIndex == 12){
-      
             panel.SetActive(false);
             decisionPanel7.SetActive(true);
         }
         else if(lineIndex == 11){
-       
             panel.SetActive(false);
             decisionPanel6.SetActive(true);
         }
         else if(lineIndex == 10){
-     
             panel.SetActive(false);
             decisionPanel5.SetActive(true);
         }
         else if(lineIndex == 8){
-           
             panel.SetActive(false);
             decisionPanel4.SetActive(true);
         }
         else if(lineIndex == 5){
-           
             panel.SetActive(false);
             decisionPanel3.SetActive(true);
         }
         else if(lineIndex == 4){
-         
             panel.SetActive(false);
             decisionPanel2.SetActive(true);
         }
         else if(lineIndex == 2){
-    
             panel.SetActive(false);
             decisionPanel1.SetActive(true);
-        }else if(lineIndex == 1){
-           
+        }
+        else if(lineIndex == 1){
             panel.SetActive(false);
             insertarEdad.SetActive(true);
-            
-        }else if(lineIndex == 0){
-            
+        }
+        else if(lineIndex == 0){
             panel.SetActive(false);
             insertarNombre.SetActive(true);
-           
-           
-            
         }
     }
-  
 
+    IEnumerator changeScene() {
+        Debug.Log("Empieza la corrutina");
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Termina el tiempo");
+        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+    }
+  
 }
