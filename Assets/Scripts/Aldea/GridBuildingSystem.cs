@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 public class GridBuildingSystem : MonoBehaviour
@@ -41,6 +42,16 @@ public class GridBuildingSystem : MonoBehaviour
                 {"Level", "1"},
                 {"Type", "TownHall"}
             });
+        }
+        
+
+        if (Globals.tutorialStep >= 10)
+        {
+            GameObject.Find("Character").SetActive(false);
+        }
+        else
+        {
+            GameObject.Find("OpenBuilds").gameObject.GetComponent<Button>().enabled = false;
         }
 
         tileBases = new Dictionary<TileType, List<TileBase>>();
