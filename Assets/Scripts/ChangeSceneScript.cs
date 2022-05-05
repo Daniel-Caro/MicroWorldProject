@@ -72,7 +72,6 @@ public class ChangeSceneScript : MonoBehaviour
         }
         else
         {
-            GameObject.Find("SampleSceneObject").SetActive(false);
             payMinigame("Jumps");
         }
     }
@@ -86,7 +85,6 @@ public class ChangeSceneScript : MonoBehaviour
         }
         else
         {
-            GameObject.Find("SampleSceneObject").SetActive(false);
             payMinigame("Frogger");
         }
     }
@@ -110,7 +108,6 @@ public class ChangeSceneScript : MonoBehaviour
         {
             GameObject.Find("SampleSceneObject").SetActive(false);
             SceneManager.LoadScene("minijuego-asociacion", LoadSceneMode.Additive);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("minijuego-asociacion"));
         }
         else
         {

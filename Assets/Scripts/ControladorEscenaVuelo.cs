@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControladorEscenaVuelo : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class ControladorEscenaVuelo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("minijuegovuelo"));
+
         if(Globals.style == Style.Princess){
             GameObject fondoPrincesa = GameObject.Find("/SceneController/fondos/fondoPrincesa");
             fondoPrincesa.SetActive(true);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SelectElementsFrogger : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class SelectElementsFrogger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("froggerScene"));
         
         if(Globals.style == Style.Pirate){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Pirate");

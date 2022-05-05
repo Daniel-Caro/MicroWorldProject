@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class saltosVerticalesGenerator : MonoBehaviour
@@ -31,6 +32,8 @@ public class saltosVerticalesGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("saltosVerticalesScene"));
+
         Vector3 spawnPosition = new Vector3();
         switch (Globals.style)
         {
