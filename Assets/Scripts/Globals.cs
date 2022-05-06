@@ -8,7 +8,15 @@ public enum Style {Future,Pirate,Princess}
 public class Globals
 {
 
-
+    public static int tutorialStep = 1;
+    public static Dictionary<string, bool> minigameAccess = new Dictionary<string,bool>() {
+        {"Pipes", false},
+        {"Frogger", false},
+        {"Association", false},
+        {"Memory", false},
+        {"Jumps", false},
+        {"Flappy", false},
+    };
     public static Style style = Style.Future;
 
 
