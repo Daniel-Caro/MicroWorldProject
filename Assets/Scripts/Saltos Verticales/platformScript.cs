@@ -6,6 +6,7 @@ public class platformScript : MonoBehaviour
 {
     public float jumpForce = 10f;
     public bool hasCoin;
+    public Sprite normalPlatform;
 
     private void OnCollisionEnter2D(Collision2D collision) 
     {
@@ -18,6 +19,7 @@ public class platformScript : MonoBehaviour
                 velocity.y = jumpForce;
                 rb.velocity = velocity;
                 if (hasCoin) {
+                    this.GetComponent<SpriteRenderer>().sprite = normalPlatform;
                     Globals.obtainedCoins += 1;
                     hasCoin = false;
                 } 

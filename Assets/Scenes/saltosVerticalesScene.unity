@@ -715,7 +715,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5cf23bfddf96c440b7dbfcd524bb06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 4
   futurePlayer: {fileID: 21300000, guid: 5731a78529ce5bf4f9351a23503f914d, type: 3}
   piratePlayer: {fileID: 21300000, guid: 5a640969c01b6794c96a058c0e38353f, type: 3}
   princessPlayer: {fileID: 21300000, guid: 7113a07e4eb1876479e40e7b2d04a482, type: 3}
@@ -884,6 +884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 10
   hasCoin: 0
+  normalPlatform: {fileID: 21300000, guid: 4934ef75bc3182640b750ef510b9df55, type: 3}
 --- !u!251 &690187430
 PlatformEffector2D:
   m_ObjectHideFlags: 0

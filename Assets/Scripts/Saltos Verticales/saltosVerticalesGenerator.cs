@@ -82,15 +82,27 @@ public class saltosVerticalesGenerator : MonoBehaviour
             switch (Globals.style)
             {
                 case (Style.Future):
-                    if (coinTrigger == 4) sr.sprite = futurePlatformShiny;
+                    if (coinTrigger == 4) 
+                    {
+                        sr.sprite = futurePlatformShiny;
+                        newPlatform.GetComponent<platformScript>().normalPlatform = futurePlatform;
+                    }
                     else sr.sprite = futurePlatform;
                     break;
                 case (Style.Pirate):
-                    if (coinTrigger == 4) sr.sprite = piratePlatformShiny;
+                    if (coinTrigger == 4)
+                    {
+                        sr.sprite = piratePlatformShiny;
+                        newPlatform.GetComponent<platformScript>().normalPlatform = piratePlatform;
+                    } 
                     else sr.sprite = piratePlatform;
                     break;
                 case (Style.Princess):
-                    if (coinTrigger == 4) sr.sprite = princessPlatformShiny;
+                    if (coinTrigger == 4)
+                    {
+                        sr.sprite = princessPlatformShiny;
+                        newPlatform.GetComponent<platformScript>().normalPlatform = princessPlatform;
+                    } 
                     else sr.sprite = princessPlatform;
                     break;
             }
