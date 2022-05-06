@@ -9,7 +9,7 @@ public class Globals
 {
 
 
-    public static Style style = Style.Pirate;
+    public static Style style = Style.Future;
 
 
     public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>(){

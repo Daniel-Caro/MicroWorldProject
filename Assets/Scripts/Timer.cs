@@ -7,11 +7,10 @@ public class Timer : MonoBehaviour
     Image timeBar;
     public float maxTime = 5f;
     float timeLeft;
-    public GameObject timeUpText;
     // Start is called before the first frame update
     void Start()
     {
-        timeUpText.SetActive(false);
+       
         timeBar = GetComponent<Image>();
         timeLeft = maxTime;
 
@@ -24,7 +23,6 @@ public class Timer : MonoBehaviour
             timeLeft-=Time.deltaTime;
             timeBar.fillAmount = timeLeft/maxTime;
         }else{
-            timeUpText.SetActive(true);
             Time.timeScale = 0;
         }
 

@@ -25,12 +25,16 @@ public class SceneControlScript : MonoBehaviour
             cartaPrincesa.SetActive(true);
             GameObject fondoPrincesa = GameObject.Find("/SceneControl/fondos/princess");
             fondoPrincesa.SetActive(true);
+            GameObject monedaPrincesa = GameObject.Find("/SceneControl/Canvas/DIAMANTE");
+            monedaPrincesa.SetActive(true);
         } else if(Globals.style == Style.Pirate){
             originalCard =originalCardPirate;
             GameObject cartaPirata = GameObject.Find("/SceneControl/cartas/pirate");
             cartaPirata.SetActive(true);
             GameObject fondoPirata = GameObject.Find("/SceneControl/fondos/pirata");
             fondoPirata.SetActive(true);
+            GameObject monedaPirate = GameObject.Find("/SceneControl/Canvas/PIRATACOIN");
+            monedaPirate.SetActive(true);
         }
         else if(Globals.style == Style.Future){
             originalCard = originalCardFuture;
@@ -38,6 +42,8 @@ public class SceneControlScript : MonoBehaviour
             cartaFuturo.SetActive(true);
             GameObject fondoFuturo = GameObject.Find("/SceneControl/fondos/future");
             fondoFuturo.SetActive(true);
+            GameObject monedaFuturo = GameObject.Find("/SceneControl/Canvas/CHIP");
+            monedaFuturo.SetActive(true);
         }
         Vector3 startPos = originalCard.transform.position;
         int[] numbers = new int[16];
