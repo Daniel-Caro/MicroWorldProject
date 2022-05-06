@@ -368,6 +368,7 @@ MonoBehaviour:
   targetY: 0
   isMatched: 0
   hasCoin: 0
+  shinySprite: {fileID: 0}
   swipeAngle: 0
   swipeResist: 1
 --- !u!1 &968972380
@@ -652,18 +653,31 @@ MonoBehaviour:
   - {fileID: 1354599735}
   - {fileID: 1565183004}
   - {fileID: 863627158}
+  coinSound: {fileID: 2125908043}
   dotRedPirate: {fileID: 21300000, guid: 2ebc775d915e44252b7b10bb19bae197, type: 3}
   dotYellowPirate: {fileID: 21300000, guid: 3f1d60c2aa5614514b2cc331bbab2cee, type: 3}
   dotBluePirate: {fileID: 21300000, guid: af43187fe78bf4124b5b3d89ceae73e6, type: 3}
   dotGreenPirate: {fileID: 21300000, guid: 5a406b2b036474f3ba1c04a948c6d544, type: 3}
+  dotRedPirateShiny: {fileID: 21300000, guid: a813d39c07943c24a8e3e62e9b4e70ce, type: 3}
+  dotYellowPirateShiny: {fileID: 21300000, guid: e386eccb424a1274694777c23fbdcfcc, type: 3}
+  dotBluePirateShiny: {fileID: 21300000, guid: 6c3e285ec8c2a394598a6f2fe88bbd97, type: 3}
+  dotGreenPirateShiny: {fileID: 21300000, guid: 39bfdeb54a51e5b4989520387b719dac, type: 3}
   dotRedFuture: {fileID: 21300000, guid: cf14558b4e18843d3a2df64c787d8286, type: 3}
   dotYellowFuture: {fileID: 21300000, guid: 1f4e0442942964fb5a4b3094cf0b9435, type: 3}
   dotBlueFuture: {fileID: 21300000, guid: 2cc42ba925fd5421fa0bae958962b79b, type: 3}
   dotGreenFuture: {fileID: 21300000, guid: 331dbb453bae54f3793427425fe65c6e, type: 3}
+  dotRedFutureShiny: {fileID: 21300000, guid: 5ddb9177d634ccf4aa71da15d08df1e1, type: 3}
+  dotYellowFutureShiny: {fileID: 21300000, guid: 4e196c0fc27b2d64f846262ae4c88702, type: 3}
+  dotBlueFutureShiny: {fileID: 21300000, guid: ffdedf623c74e5549b1d2addd617b55b, type: 3}
+  dotGreenFutureShiny: {fileID: 21300000, guid: 82611cb68598d57448d2480443f2aa59, type: 3}
   dotRedPrincess: {fileID: 21300000, guid: a70a206f073274fb4a0b7e0c12ce8f36, type: 3}
   dotYellowPrincess: {fileID: 21300000, guid: 776193d58955a4bf397f92baa08f4151, type: 3}
   dotBluePrincess: {fileID: 21300000, guid: 7e014759b47794e55b8a8ec42ab79f18, type: 3}
   dotGreenPrincess: {fileID: 21300000, guid: c27148fcc9ef7428ead2778dbf31a9d2, type: 3}
+  dotRedPrincessShiny: {fileID: 21300000, guid: 1e8f362855d781645b660cd151480015, type: 3}
+  dotYellowPrincessShiny: {fileID: 21300000, guid: 6b5e3a16396186e40b5d4b74604e1c7a, type: 3}
+  dotBluePrincessShiny: {fileID: 21300000, guid: 99a064b2c7a28194c9126a86361ddd06, type: 3}
+  dotGreenPrincessShiny: {fileID: 21300000, guid: b2a43a4dea6649f45934eba17f4de05e, type: 3}
 --- !u!4 &1265700625
 Transform:
   m_ObjectHideFlags: 0
@@ -798,6 +812,7 @@ MonoBehaviour:
   targetY: 0
   isMatched: 0
   hasCoin: 0
+  shinySprite: {fileID: 0}
   swipeAngle: 0
   swipeResist: 1
 --- !u!1 &1336135845
@@ -1003,6 +1018,7 @@ MonoBehaviour:
   targetY: 0
   isMatched: 0
   hasCoin: 0
+  shinySprite: {fileID: 0}
   swipeAngle: 0
   swipeResist: 1
 --- !u!1 &1565183004
@@ -1125,6 +1141,7 @@ MonoBehaviour:
   targetY: 0
   isMatched: 0
   hasCoin: 0
+  shinySprite: {fileID: 0}
   swipeAngle: 0
   swipeResist: 1
 --- !u!1 &1799688497
@@ -1419,3 +1436,130 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMatches: []
+--- !u!1 &2125908042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2125908044}
+  - component: {fileID: 2125908043}
+  m_Layer: 0
+  m_Name: CoinSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &2125908043
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125908042}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 53f6aafaa730ca547bb5701a33afa04c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &2125908044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125908042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.10874398, y: 1.6355268, z: -4331.711}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

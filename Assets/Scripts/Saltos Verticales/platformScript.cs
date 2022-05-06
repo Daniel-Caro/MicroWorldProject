@@ -7,6 +7,7 @@ public class platformScript : MonoBehaviour
     public float jumpForce = 10f;
     public bool hasCoin;
     public Sprite normalPlatform;
+    public AudioSource coinSound;
 
     private void OnCollisionEnter2D(Collision2D collision) 
     {
@@ -22,6 +23,7 @@ public class platformScript : MonoBehaviour
                     this.GetComponent<SpriteRenderer>().sprite = normalPlatform;
                     Globals.obtainedCoins += 1;
                     hasCoin = false;
+                    coinSound.Play();
                 } 
             }
         }

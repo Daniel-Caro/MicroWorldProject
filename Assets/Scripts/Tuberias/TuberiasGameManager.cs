@@ -10,6 +10,9 @@ public class TuberiasGameManager : MonoBehaviour
     public static GameObject[] Pipes;
     public static GameObject[] noWaterPipes;
     public GameObject timeUpText;
+    public Sprite coinSpriteFuture;
+    public Sprite coinSpritePirate;
+    public Sprite coinSpritePrincess;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,8 @@ public class TuberiasGameManager : MonoBehaviour
         //Inicio de variables estáticas
         PipesHolder = GameObject.Find("Pipes");
         GameObject drySpriteHolder = null;
+        coinPrefab = GameObject.Find("coinPrefab");
+        coinPrefab.SetActive(false);
         switch (Globals.style)
         {
             case(Style.Future):
@@ -29,6 +34,7 @@ public class TuberiasGameManager : MonoBehaviour
                 GameObject.Find("emptyPipesPrincess").SetActive(false);
                 GameObject.Find("PrincessBackground").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesFuture");
+                coinPrefab.GetComponent<SpriteRenderer>().sprite = coinSpriteFuture;
                 break;
             case(Style.Pirate):
                 GameObject.Find("startPipePrincess").SetActive(false);
@@ -38,6 +44,7 @@ public class TuberiasGameManager : MonoBehaviour
                 GameObject.Find("emptyPipesFuture").SetActive(false);
                 GameObject.Find("FutureBackground").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesPirate");
+                coinPrefab.GetComponent<SpriteRenderer>().sprite = coinSpritePirate;
                 break;
             case(Style.Princess):
                 GameObject.Find("startPipePirate").SetActive(false);
@@ -47,6 +54,7 @@ public class TuberiasGameManager : MonoBehaviour
                 GameObject.Find("emptyPipesFuture").SetActive(false);
                 GameObject.Find("FutureBackground").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesPrincess");
+                coinPrefab.GetComponent<SpriteRenderer>().sprite = coinSpritePrincess;
                 break;
         }
         noWaterPipes = new GameObject[4];
@@ -56,8 +64,6 @@ public class TuberiasGameManager : MonoBehaviour
             j++;
         }
         drySpriteHolder.SetActive(false);
-        coinPrefab = GameObject.Find("coinPrefab");
-        coinPrefab.SetActive(false);
         
         float x = -6f;
         float y = 3f;

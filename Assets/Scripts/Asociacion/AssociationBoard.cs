@@ -21,6 +21,7 @@ public class AssociationBoard : MonoBehaviour
     private AssociationBackgroundTile[,] allTiles;
     public GameObject[,] allDots;
     private AssociationFindMatches findMatches;
+    public AudioSource coinSound;
 
     //Sprites de casillas
     //Pirata
@@ -28,16 +29,28 @@ public class AssociationBoard : MonoBehaviour
     public Sprite dotYellowPirate; 
     public Sprite dotBluePirate; 
     public Sprite dotGreenPirate; 
+    public Sprite dotRedPirateShiny; 
+    public Sprite dotYellowPirateShiny; 
+    public Sprite dotBluePirateShiny; 
+    public Sprite dotGreenPirateShiny; 
     //Futuro
     public Sprite dotRedFuture; 
     public Sprite dotYellowFuture; 
     public Sprite dotBlueFuture; 
-    public Sprite dotGreenFuture; 
+    public Sprite dotGreenFuture;
+    public Sprite dotRedFutureShiny; 
+    public Sprite dotYellowFutureShiny; 
+    public Sprite dotBlueFutureShiny; 
+    public Sprite dotGreenFutureShiny;  
     //Principe
     public Sprite dotRedPrincess; 
     public Sprite dotYellowPrincess; 
     public Sprite dotBluePrincess; 
-    public Sprite dotGreenPrincess;     
+    public Sprite dotGreenPrincess;
+    public Sprite dotRedPrincessShiny; 
+    public Sprite dotYellowPrincessShiny; 
+    public Sprite dotBluePrincessShiny; 
+    public Sprite dotGreenPrincessShiny;       
 
     // Start is called before the first frame update
     void Start()
@@ -53,21 +66,33 @@ public class AssociationBoard : MonoBehaviour
         {
             case Style.Pirate:
                 dots[0].GetComponent<SpriteRenderer>().sprite = dotRedPirate;
+                dots[0].GetComponent<AssociationDot>().shinySprite = dotRedPirateShiny;
                 dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowPirate;
+                dots[1].GetComponent<AssociationDot>().shinySprite = dotYellowPirateShiny;
                 dots[2].GetComponent<SpriteRenderer>().sprite = dotBluePirate;
+                dots[2].GetComponent<AssociationDot>().shinySprite = dotBluePirateShiny;
                 dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenPirate;
+                dots[3].GetComponent<AssociationDot>().shinySprite = dotGreenPirateShiny;
                 break;
             case Style.Future:
                 dots[0].GetComponent<SpriteRenderer>().sprite = dotRedFuture;
+                dots[0].GetComponent<AssociationDot>().shinySprite = dotRedFutureShiny;
                 dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowFuture;
+                dots[1].GetComponent<AssociationDot>().shinySprite = dotYellowFutureShiny;
                 dots[2].GetComponent<SpriteRenderer>().sprite = dotBlueFuture;
+                dots[2].GetComponent<AssociationDot>().shinySprite = dotBlueFutureShiny;
                 dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenFuture;
+                dots[3].GetComponent<AssociationDot>().shinySprite = dotGreenFutureShiny;
                 break;
             case Style.Princess:
                 dots[0].GetComponent<SpriteRenderer>().sprite = dotRedPrincess;
+                dots[0].GetComponent<AssociationDot>().shinySprite = dotRedPrincessShiny;
                 dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowPrincess;
+                dots[1].GetComponent<AssociationDot>().shinySprite = dotYellowPrincessShiny;
                 dots[2].GetComponent<SpriteRenderer>().sprite = dotBluePrincess;
+                dots[2].GetComponent<AssociationDot>().shinySprite = dotBluePrincessShiny;
                 dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenPrincess;
+                dots[3].GetComponent<AssociationDot>().shinySprite = dotGreenPrincessShiny;
                 break;
             default:
                 break;
@@ -105,6 +130,7 @@ public class AssociationBoard : MonoBehaviour
                 if (UnityEngine.Random.Range(0, 7) == 6)
                 {
                     dot.GetComponent<AssociationDot>().hasCoin = true; 
+                    dot.GetComponent<SpriteRenderer>().sprite = dot.GetComponent<AssociationDot>().shinySprite;
                 } 
 
                 dot.transform.parent = this.transform;
@@ -152,7 +178,11 @@ public class AssociationBoard : MonoBehaviour
         if (allDots[column, row].GetComponent<AssociationDot>().isMatched)
         {
             findMatches.currentMatches.Remove(allDots[column, row]);
-            if (allDots[column, row].GetComponent<AssociationDot>().hasCoin) Globals.obtainedCoins++;
+            if (allDots[column, row].GetComponent<AssociationDot>().hasCoin)
+            {
+                coinSound.Play();
+                Globals.obtainedCoins++;
+            }
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
         }
