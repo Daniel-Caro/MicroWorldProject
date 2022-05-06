@@ -17,12 +17,6 @@ public class CorreoDialogue : MonoBehaviour
     {
         StartDialogue();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void StartDialogue(){
         didDialogueStart = true;
         panel.SetActive(true);
