@@ -115,7 +115,6 @@ public class ChangeSceneScript : MonoBehaviour
                 noSound.Play();
             }
         });
-
     }
 
     private void chooseMinion(string scene)
