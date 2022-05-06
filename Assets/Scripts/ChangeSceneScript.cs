@@ -156,6 +156,5 @@ public class ChangeSceneScript : MonoBehaviour
                 noSound.Play();
             }
         });
-
     }
 }
