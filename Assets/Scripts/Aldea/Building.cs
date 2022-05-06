@@ -56,6 +56,7 @@ public class Building : MonoBehaviour
         BoundsInt areaTemp = area;
         areaTemp.position = positionInt;
         Placed = true;
+        this.transform.parent = GameObject.Find("SampleSceneObject").transform;
         GridBuildingSystem.current.TakeArea(areaTemp);
     }
 }

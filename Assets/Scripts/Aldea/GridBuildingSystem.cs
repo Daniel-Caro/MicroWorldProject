@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
+using TMPro;
 public class GridBuildingSystem : MonoBehaviour
 {
     public static GridBuildingSystem current;
@@ -23,6 +25,8 @@ public class GridBuildingSystem : MonoBehaviour
     private Vector3 prevPos;
     private BoundsInt prevArea;
     private bool buildingPicked = false;
+
+    private GameObject character;
     
     #region Unity Methods
 
@@ -42,6 +46,18 @@ public class GridBuildingSystem : MonoBehaviour
                 {"Type", "TownHall"}
             });
         }
+        
+        character = GameObject.Find("Character").gameObject;
+
+        if (Globals.tutorialStep >= 10)
+        {
+            character.SetActive(false);
+        }
+        else
+        {
+            GameObject.Find("OpenBuilds").gameObject.GetComponent<Button>().enabled = false;
+        }
+
 
         tileBases = new Dictionary<TileType, List<TileBase>>();
         
@@ -166,6 +182,28 @@ public class GridBuildingSystem : MonoBehaviour
         {
             if (temp.CanBePlaced())
             {
+                if (Globals.tutorialStep == 3)
+                {
+                    Globals.tutorialStep++;
+                    character.SetActive(true);
+                    GameObject.Find("TutorialText").gameObject.GetComponent<TextMeshProUGUI>().text = "Sigue los mismos pasos para construir un banco y una fábrica";
+                    GameObject.Find("Build1").gameObject.GetComponent<Button>().enabled = false;
+                    GameObject.Find("Build2").gameObject.GetComponent<Button>().enabled = true;
+                }
+                else if (Globals.tutorialStep == 4)
+                {
+                    Globals.tutorialStep++;
+                    GameObject.Find("Build2").gameObject.GetComponent<Button>().enabled = false;
+                    GameObject.Find("Build3").gameObject.GetComponent<Button>().enabled = true;
+                }
+                else if (Globals.tutorialStep == 5)
+                {
+                    Globals.tutorialStep++;
+                    character.SetActive(true);
+                    GameObject.Find("Build1").gameObject.GetComponent<Button>().enabled = true;
+                    GameObject.Find("Build2").gameObject.GetComponent<Button>().enabled = true;
+                    GameObject.Find("TutorialText").gameObject.GetComponent<TextMeshProUGUI>().text = "Estos son los tres edificios principales con los que contarás durante tu aventura";
+                }
                 TempTileMap.ClearAllTiles();
                 SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
                 sr.color = new Color(1f,1f,1f,1f);
@@ -188,6 +226,7 @@ public class GridBuildingSystem : MonoBehaviour
                 }else if (buildingData.type == "House"){
                     buildingGeneral.GetComponent<MinionProduction>().RegisterHouse(buildingGeneral);
                 }
+                
                 Destroy(temp);
             }
         }
@@ -224,6 +263,7 @@ public class GridBuildingSystem : MonoBehaviour
             if (buildingPicked) Destroy(temp.gameObject);
             buildingPicked = true;
             buildingGeneral = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            //buildingGeneral.transform.parent = GameObject.Find("SampleSceneObject").transform;
             temp = buildingGeneral.GetComponent<Building>();
             temp.gameObject.SetActive(true);
             SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
