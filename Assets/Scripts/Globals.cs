@@ -16,7 +16,7 @@ public class Globals
         {"Coins", new GameResource("Coins", 6000)},
         {"Minions", new GameResource("Minions", 0)}
     };
-
+    
     public static Dictionary<string, bool> minigameAccess = new Dictionary<string,bool>() {
         {"Pipes", false},
         {"Frogger", false},
@@ -24,6 +24,13 @@ public class Globals
         {"Memory", false},
         {"Jumps", false},
         {"Flappy", false},
+    };
+    public static Style style = Style.Future;
+
+
+    public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>(){
+        {"Coins", new GameResource("Coins", 100000)},
+        {"Minions", new GameResource("Minions", 0)}
     };
 
     public static int moneyCapacity = 100000;
@@ -33,7 +40,6 @@ public class Globals
 
 
     public static Dictionary<int, Dictionary<string, string>> buildingDataDic = new Dictionary<int, Dictionary<string, string>>();  // Clave: ID instancia edificio Valor: diccionario con valores de tipo, nivel y coste
-
 
     public static Dictionary<string, List<int>> buildingTypesDic = new Dictionary<string, List<int>>(){
         {"House", new List<int>()},
