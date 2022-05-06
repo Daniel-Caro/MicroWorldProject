@@ -31,11 +31,16 @@ public class TutorialScript : MonoBehaviour
         "*PEE* *PO* *PEE* *PO* *PEEPO*",
         "Diagnóstico correcto! El sujeto humano ha despertado.",
         "Mi nombre es PEETO. Programa Especializado en Enseñanza de Tareas Organizativas. Estoy aquí para guiarte en tu tarea. ¿No sabes cual es?",
-        "Te encuentras en el año 3487, unos años después de la Gran Guerra humano-robot. Tras la guerra, los robots pensamos que sería sencillo construir una sociedad sin humanos, pero lo cierto es que todo apuntó al caos, nada fue como esperábamos.",
-        "Nuestros gobernantes TRIFAS y KO, llegaron a la conclusión de que necesitábamos a los humanos, la raza creadora para poder entender como el corazón humano podía construir civilizaciones sin llegar a la extinción. Es por esto que ansiabamos tu llegada.",
-        "Como humano solo tendrás que tomar decisiones y dirigir nuestra villa. Nosotros analizaremos los datos de tu actividad y comenzaremos a crear modelos más refinados de metahumanos, para finalmente, crear una sociedad de metahumanos en simbiosis con los robots.",
+        "Te encuentras en el año 3487, unos años después de la Gran Guerra humano-robot.",
+        "Tras la guerra, los robots pensamos que sería sencillo construir una sociedad sin humanos, pero lo cierto es que todo apuntó al caos, nada fue como esperábamos.",
+        "Nuestros gobernantes TRIFAS y KO, llegaron a la conclusión de que necesitábamos a los humanos, la raza creadora.",
+        "Para poder entender como el corazón humano podía construir civilizaciones sin llegar a la extinción.",
+        "Es por esto que ansiabamos tu llegada.",
+        "Como humano solo tendrás que tomar decisiones y dirigir nuestra villa.",
+        "Nosotros analizaremos los datos de tu actividad y comenzaremos a crear modelos más refinados de metahumanos, para finalmente, crear una sociedad de metahumanos en simbiosis con los robots.",
         "A cambio de tu ayuda, te devolveremos a casa. Podrás salir de tu teléfono móvil y acabar esta historia. ¿Aceptas?", //Panel
-        "Efectivamente, lo esperábamos. Un programador de este videojuego solo ha permitido que se pueda pulsar el botón Sí como decisión. Recuerda, lo sabemos todo de ti. Disfruta de la aventura."
+        "Efectivamente, lo esperábamos. Un programador de este videojuego solo ha permitido que se pueda pulsar el botón Sí como decisión.",
+        "Recuerda, lo sabemos todo de ti. Disfruta de la aventura."
     };
 
     private string[] princessDialog = {
@@ -43,8 +48,10 @@ public class TutorialScript : MonoBehaviour
         "Hola, ¿se encuentra bien? ¡Acaba de caer del cielo!",
         "No sé qué clase de hechicero es, pero no importa, necesito su ayuda urgentemente.",
         "Mi nombre es Heleen Leclerc, la princesa de Bracktenbury. Desde que han fallecido mis padres , que en paz descansen, he tenido muchos problemas con el trono.",
-        "No he parado de recibir pretendientes que quieren mi mano para acceder al poder. Incluso mi prometido aprovechó el momento de duelo para intentar acelerar el proceso matrimonial… Estoy harta.",
-        "Es por esto que necesito su ayuda para poder desconectar del reino sin tener que sacrificar el legado de mi familia. Tu misión es sencilla, solo tendrías que hacer las funciones de monarca desde las sombras hasta mi vuelta del retiro espiritual de Bigbury.",
+        "No he parado de recibir pretendientes que quieren mi mano para acceder al poder.",
+        "Incluso mi prometido aprovechó el momento de duelo para intentar acelerar el proceso matrimonial… Estoy harta.",
+        "Es por esto que necesito su ayuda para poder desconectar del reino sin tener que sacrificar el legado de mi familia.",
+        "Tu misión es sencilla, solo tendrías que hacer las funciones de monarca desde las sombras hasta mi vuelta del retiro espiritual de Bigbury.",
         "Si lo consigue, hablaré con el gran mago Bertín y le llevaremos de vuelta a casa.",
         "¿Acepta el trato?", //Panel
         "Como esperaba. No olvide que soy la nueva Reina y, en dos segundos, puede tener su cabeza rodando por el suelo jeje. Qué amable es."
@@ -66,10 +73,12 @@ public class TutorialScript : MonoBehaviour
             case Style.Future:
                 usedSprites = futureSprites;
                 usedDialog = futureDialog;
+                character.GetComponent<Image>().sprite = usedSprites[2];
                 break;
             case Style.Princess:
                 usedSprites = princessSprites;
                 usedDialog = princessDialog;
+                character.GetComponent<Image>().sprite = usedSprites[0];
                 break;
             case Style.Pirate:
                 usedSprites = pirateSprites;
@@ -90,29 +99,78 @@ public class TutorialScript : MonoBehaviour
                 switch (Globals.style)
                 {
                     case Style.Future:
+                        if (dialogIndex == 10){
+                            panelDecisionSioSi.SetActive(true);
+                            character.GetComponent<Image>().sprite = usedSprites[2];
+                            GameObject botonSi = panelDecisionSioSi.transform.Find("BotonSi").gameObject;
+                            Button compoBotonSi = botonSi.GetComponent<Button>();
+                            GameObject botonNo = panelDecisionSioSi.transform.Find("BotonNo").gameObject;
+                            Button compoBotonNo = botonNo.GetComponent<Button>();
+                            compoBotonSi.onClick.RemoveAllListeners();
+                            compoBotonSi.onClick.AddListener(() => {
+                                    dialogIndex++;
+                                    dialogText.text = usedDialog[dialogIndex];
+                                    panelDecisionSioSi.SetActive(false);
+                                    character.GetComponent<Image>().sprite = usedSprites[0];
+                            }); 
+                        }
+                        else
+                        {
+                            dialogIndex++;
+                            if (dialogIndex == 1 || dialogIndex == 2 || dialogIndex == 7 || dialogIndex == 8 || dialogIndex == 11) character.GetComponent<Image>().sprite = usedSprites[0];
+                            if (dialogIndex == 4 || dialogIndex == 12) character.GetComponent<Image>().sprite = usedSprites[1];
+                            if (dialogIndex == 3 || dialogIndex == 5 || dialogIndex == 6 || dialogIndex == 9 || dialogIndex == 10) character.GetComponent<Image>().sprite = usedSprites[2];
+                            dialogText.text = usedDialog[dialogIndex];
+                        }
                         break;
                     case Style.Princess:
-                        break;
-                    case Style.Pirate:
-                        if (dialogIndex == 12){
+                        if (dialogIndex == 9){
                             panelDecisionSioSi.SetActive(true);
                             character.GetComponent<Image>().sprite = usedSprites[0];
                             GameObject botonSi = panelDecisionSioSi.transform.Find("BotonSi").gameObject;
                             Button compoBotonSi = botonSi.GetComponent<Button>();
                             GameObject botonNo = panelDecisionSioSi.transform.Find("BotonNo").gameObject;
                             Button compoBotonNo = botonNo.GetComponent<Button>();
+                            compoBotonSi.onClick.RemoveAllListeners();
                             compoBotonSi.onClick.AddListener(() => {
                                     dialogIndex++;
                                     dialogText.text = usedDialog[dialogIndex];
                                     panelDecisionSioSi.SetActive(false);
+                                    character.GetComponent<Image>().sprite = usedSprites[2];
                             }); 
                         }
                         else
                         {
-                            if (dialogIndex == 1 || dialogIndex == 9 || dialogIndex == 11 || dialogIndex == 13) character.GetComponent<Image>().sprite = usedSprites[2];
-                            if (dialogIndex == 4 || dialogIndex == 5 || dialogIndex == 6 || dialogIndex == 7 || dialogIndex == 10) character.GetComponent<Image>().sprite = usedSprites[1];
-                            if (dialogIndex == 2 || dialogIndex == 3 || dialogIndex == 8) character.GetComponent<Image>().sprite = usedSprites[0];
                             dialogIndex++;
+                            if (dialogIndex == 4 || dialogIndex == 5 || dialogIndex == 9) character.GetComponent<Image>().sprite = usedSprites[0];
+                            if (dialogIndex == 1 || dialogIndex == 2 || dialogIndex == 7) character.GetComponent<Image>().sprite = usedSprites[1];
+                            if (dialogIndex == 3 || dialogIndex == 6 || dialogIndex == 8 || dialogIndex == 10) character.GetComponent<Image>().sprite = usedSprites[2];
+                            dialogText.text = usedDialog[dialogIndex];
+                        }
+                        break;
+                    case Style.Pirate:
+                        if (dialogIndex == 12){
+                            panelDecisionSioSi.SetActive(true);
+                            character.GetComponent<Image>().sprite = usedSprites[2];
+                            GameObject botonSi = panelDecisionSioSi.transform.Find("BotonSi").gameObject;
+                            Button compoBotonSi = botonSi.GetComponent<Button>();
+                            GameObject botonNo = panelDecisionSioSi.transform.Find("BotonNo").gameObject;
+                            Button compoBotonNo = botonNo.GetComponent<Button>();
+                            compoBotonSi.onClick.RemoveAllListeners();
+                            compoBotonSi.onClick.AddListener(() => {
+                                    dialogIndex++;
+                                    dialogText.text = usedDialog[dialogIndex];
+                                    panelDecisionSioSi.SetActive(false);
+                                    character.GetComponent<Image>().sprite = usedSprites[0];
+                            }); 
+                        }
+                        else
+                        {
+                            dialogIndex++;
+                            Debug.Log(dialogIndex);
+                            if (dialogIndex == 1 || dialogIndex == 3 || dialogIndex == 9 || dialogIndex ==11 || dialogIndex ==13) character.GetComponent<Image>().sprite = usedSprites[0];
+                            if (dialogIndex == 4 || dialogIndex == 5 || dialogIndex == 6 || dialogIndex == 7 || dialogIndex == 10) character.GetComponent<Image>().sprite = usedSprites[1];
+                            if (dialogIndex == 2 || dialogIndex == 3 || dialogIndex == 8 || dialogIndex == 12) character.GetComponent<Image>().sprite = usedSprites[2];
                             dialogText.text = usedDialog[dialogIndex];
                         }
                         break;
