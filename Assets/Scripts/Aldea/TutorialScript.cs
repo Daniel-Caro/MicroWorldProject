@@ -62,12 +62,14 @@ public class TutorialScript : MonoBehaviour
     private TextMeshProUGUI dialogText;
     private GameObject character;
     public GameObject panelDecisionSioSi;
+    private GameObject openBuilds;
 
     // Start is called before the first frame update
     void Start()
     {
         character = GameObject.Find("Character");
         dialogText = GameObject.Find("TutorialText").gameObject.GetComponent<TextMeshProUGUI>();
+        openBuilds = GameObject.Find("OpenBuilds").gameObject;
         switch (Globals.style)
         {
             case Style.Future:
@@ -94,10 +96,12 @@ public class TutorialScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (Globals.tutorialStep <= 10)
+            if (Globals.tutorialStep <= 14)
             {
-                switch (Globals.style)
+                if (Globals.tutorialStep == 1)
                 {
+                    switch (Globals.style)
+                    {
                     case Style.Future:
                         if (dialogIndex == 10){
                             panelDecisionSioSi.SetActive(true);
@@ -117,6 +121,15 @@ public class TutorialScript : MonoBehaviour
                         else
                         {
                             dialogIndex++;
+                            if (dialogIndex == 13) 
+                            {
+                                Globals.tutorialStep++;
+                                character.GetComponent<Image>().sprite = usedSprites[0];
+                                dialogText.text = "Debemos crear Casas para almacenar a tus minions, pulsa en la tienda";
+                                openBuilds.GetComponent<Button>().enabled = true;
+                                openBuilds.GetComponent<Button>().onClick.AddListener(() => openShopTutorial1());
+                                break;
+                            }
                             if (dialogIndex == 1 || dialogIndex == 2 || dialogIndex == 7 || dialogIndex == 8 || dialogIndex == 11) character.GetComponent<Image>().sprite = usedSprites[0];
                             if (dialogIndex == 4 || dialogIndex == 12) character.GetComponent<Image>().sprite = usedSprites[1];
                             if (dialogIndex == 3 || dialogIndex == 5 || dialogIndex == 6 || dialogIndex == 9 || dialogIndex == 10) character.GetComponent<Image>().sprite = usedSprites[2];
@@ -142,6 +155,15 @@ public class TutorialScript : MonoBehaviour
                         else
                         {
                             dialogIndex++;
+                            if (dialogIndex == 11) 
+                            {
+                                Globals.tutorialStep++;
+                                character.GetComponent<Image>().sprite = usedSprites[1];
+                                dialogText.text = "Debemos crear Casas para almacenar a tus minions, pulsa en la tienda";
+                                openBuilds.GetComponent<Button>().enabled = true;
+                                openBuilds.GetComponent<Button>().onClick.AddListener(() => openShopTutorial1());
+                                break;
+                            }
                             if (dialogIndex == 4 || dialogIndex == 5 || dialogIndex == 9) character.GetComponent<Image>().sprite = usedSprites[0];
                             if (dialogIndex == 1 || dialogIndex == 2 || dialogIndex == 7) character.GetComponent<Image>().sprite = usedSprites[1];
                             if (dialogIndex == 3 || dialogIndex == 6 || dialogIndex == 8 || dialogIndex == 10) character.GetComponent<Image>().sprite = usedSprites[2];
@@ -168,14 +190,99 @@ public class TutorialScript : MonoBehaviour
                         {
                             dialogIndex++;
                             Debug.Log(dialogIndex);
+                            if (dialogIndex == 14) 
+                            {
+                                Globals.tutorialStep++;
+                                dialogText.text = "Debemos crear Casas para almacenar a tus minions, pulsa en la tienda";
+                                openBuilds.GetComponent<Button>().enabled = true;
+                                openBuilds.GetComponent<Button>().onClick.AddListener(() => openShopTutorial1());
+                                break;
+                            }
                             if (dialogIndex == 1 || dialogIndex == 3 || dialogIndex == 9 || dialogIndex ==11 || dialogIndex ==13) character.GetComponent<Image>().sprite = usedSprites[0];
                             if (dialogIndex == 4 || dialogIndex == 5 || dialogIndex == 6 || dialogIndex == 7 || dialogIndex == 10) character.GetComponent<Image>().sprite = usedSprites[1];
                             if (dialogIndex == 2 || dialogIndex == 3 || dialogIndex == 8 || dialogIndex == 12) character.GetComponent<Image>().sprite = usedSprites[2];
                             dialogText.text = usedDialog[dialogIndex];
                         }
                         break;
+                    }
+                }
+                else if (Globals.tutorialStep == 3)
+                {
+                    character.SetActive(false);
+                    GameObject.Find("Build1").gameObject.GetComponent<Button>().enabled = true;
+                    GameObject.Find("Build1").gameObject.GetComponent<Button>().onClick.AddListener(() => createFirstHouse());
+                }
+                else if (Globals.tutorialStep == 4)
+                {
+                    character.SetActive(false);
+                }
+                else if (Globals.tutorialStep == 6)
+                {
+                    dialogText.text = "Crear más casas o subirlas de nivel te permitirá almacenar más minions";
+                    Globals.tutorialStep++;
+                }
+                else if (Globals.tutorialStep == 7)
+                {
+                    dialogText.text = "Los bancos generan dinero de manera continua aunque no estés. Mejorarlos te permite ampliar su capacidad de almacenamiento y su ratio de producción";
+                    Globals.tutorialStep++;
+                }
+                else if (Globals.tutorialStep == 8)
+                {
+                    dialogText.text = "Las fábricas permiten construir minions, subir de nivel las fábricas permite desbloquear mejores minions";
+                    Globals.tutorialStep++;
+                }
+                else if (Globals.tutorialStep == 9)
+                {
+                    dialogText.text = "Cierra la tienda y clica en el ayuntamiento";
+                    GameObject.Find("CloseBuilds").gameObject.GetComponent<Button>().enabled = true;
+                    Globals.tutorialStep++;
+                }
+                else if (Globals.tutorialStep == 10 && GameObject.Find("MinigamesButton") != null)
+                {
+                    GameObject.Find("ClosePanel").gameObject.GetComponent<Button>().enabled = false;
+                    dialogText.text = "Subir de nivel el ayuntamiento es esencial para poder mejorar el resto de edificios y crear nuevos. Pincha ahora en minijuegos";
+                    GameObject.Find("MinigamesButton").GetComponent<Button>().onClick.AddListener(() => openMinigames());
+                    Globals.tutorialStep++;
+                }
+                else if (Globals.tutorialStep == 12)
+                {
+                    dialogText.text = "Eso es todo lo que puedo enseñarte. ¡Diviertete en tu aventura!";
+                    GameObject.Find("ClosePanel").gameObject.GetComponent<Button>().enabled = true;
+                    Globals.tutorialStep++;
+                }
+                 else if (Globals.tutorialStep == 13)
+                {
+                    character.SetActive(false);
+                    Globals.tutorialStep++;
                 }
             }
         }
+    }
+
+    private void openShopTutorial1()
+    {
+        Debug.Log("Abrir tienda tuto");
+        Globals.tutorialStep++;
+        openBuilds.GetComponent<Button>().onClick.RemoveListener(() => openShopTutorial1());
+        GameObject.Find("CloseBuilds").gameObject.GetComponent<Button>().enabled = false;
+        GameObject.Find("Build1").gameObject.GetComponent<Button>().enabled = false;
+        GameObject.Find("Build2").gameObject.GetComponent<Button>().enabled = false;
+        GameObject.Find("Build3").gameObject.GetComponent<Button>().enabled = false;
+        dialogText.text = "Ahora pulsa en la casa";
+    }
+
+    private void createFirstHouse()
+    {
+        GameObject.Find("Build1").gameObject.GetComponent<Button>().onClick.RemoveListener(() => createFirstHouse());
+        character.SetActive(true);
+        dialogText.text = "Pulsa botón derecho en cualquier punto del mapa para construir el edificio";
+    }
+
+    private void openMinigames()
+    {
+        GameObject.Find("MinigamesButton").GetComponent<Button>().onClick.RemoveListener(() => openMinigames());
+        dialogText.text = "Puedes jugar minijuegos para ganar monedas usando minions. Por ahora desbloquea dos, podrás probarlos todos más adelante";
+        Globals.gameResources["Coins"].currentR = 3000;
+        Globals.tutorialStep++;
     }
 }
