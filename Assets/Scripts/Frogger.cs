@@ -19,13 +19,13 @@ public class Frogger : MonoBehaviour
     void Start()
     {
         
-        if(type== "Princess"){
+        if(Globals.style == Style.Princess){
             spriteRenderer.sprite = idleSpritePrincess;
         }
-        else if(type == "Pirate"){
+        else if(Globals.style == Style.Pirate){
             spriteRenderer.sprite = idleSpritePirate;
         }
-        else if(type == "Future"){
+        else if(Globals.style == Style.Future){
             spriteRenderer.sprite = idleSpriteFuture;
         }
     }
@@ -71,21 +71,20 @@ public class Frogger : MonoBehaviour
         }
     }
     private void Death(){
-        if(type == "Princess"){
+        if(Globals.style == Style.Princess){
             spriteRenderer.sprite = deadSpritePrincess;
             GameObject image = GameObject.Find("/Canvas/Image");
             image.SetActive(false);
         }
-        else if(type == "Pirate"){
+        else if(Globals.style == Style.Pirate){
             spriteRenderer.sprite = deadSpritePirate;
             GameObject image = GameObject.Find("/Canvas/Image");
             image.SetActive(false);
         }
-        else if(type == "Future"){
+        else if(Globals.style == Style.Future){
             spriteRenderer.sprite = deadSpriteFuture;
             GameObject image = GameObject.Find("/Canvas/Image");
             image.SetActive(false);
-            
         }
         transform.rotation = Quaternion.identity;
         enabled = false;
@@ -98,6 +97,7 @@ public class Frogger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other){
         if(enabled && other.gameObject.layer == LayerMask.NameToLayer("Obstacle")){
             Death();
+            TimerFrogger.timeLeft = 0f;
         }
     }
     

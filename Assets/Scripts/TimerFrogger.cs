@@ -8,7 +8,7 @@ public class TimerFrogger : MonoBehaviour
     //
     Image timeBar;
     public float maxTime;
-    float timeLeft;
+    public static float timeLeft;
     public GameObject timeUpText;
     public GameObject frogger;
     // Start is called before the first frame update
@@ -27,9 +27,6 @@ public class TimerFrogger : MonoBehaviour
             timeLeft-=Time.deltaTime;
             timeBar.fillAmount = timeLeft/maxTime;
         }else{
-            
-            timeUpText.GetComponent<TextMeshProUGUI>().text = "Has ganado "+ MoneyGenerateFrogger.monedasGanadas;
-            timeUpText.SetActive(true);
 
             frogger.SetActive(false);
             Time.timeScale = 0;
