@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ChangeSceneScript : MonoBehaviour
 {
     public GameObject buttonsPanel;
+    public GameObject chooseMinionsPanel;
     public GameObject payPanel;
     public AudioSource noSound;
 
@@ -39,80 +40,38 @@ public class ChangeSceneScript : MonoBehaviour
 
     public void PipeScene()
     {
-        if (Globals.minigameAccess["Pipes"])
-        {
-            GameObject.Find("SampleSceneObject").SetActive(false);
-            SceneManager.LoadScene("Tuberias", LoadSceneMode.Additive);
-        }
-        else
-        {
-            payMinigame("Pipes");
-        }
+        if (Globals.minigameAccess["Pipes"]) chooseMinion("Tuberias");
+        else payMinigame("Pipes");
     }
 
     public void FlappyScene()
     {
-        if (Globals.minigameAccess["Flappy"])
-        {
-            GameObject.Find("SampleSceneObject").SetActive(false);
-            SceneManager.LoadScene("minijuegovuelo", LoadSceneMode.Additive);
-        }
-        else
-        {
-            payMinigame("Flappy");
-        }
+        if (Globals.minigameAccess["Flappy"]) chooseMinion("minijuegovuelo");
+        else payMinigame("Flappy");
     }
 
     public void SaltosScene()
     {
-        if (Globals.minigameAccess["Jumps"])
-        {
-            GameObject.Find("SampleSceneObject").SetActive(false);
-            SceneManager.LoadScene("saltosVerticalesScene", LoadSceneMode.Additive);
-        }
-        else
-        {
-            payMinigame("Jumps");
-        }
+        if (Globals.minigameAccess["Jumps"]) chooseMinion("saltosVerticalesScene");
+        else payMinigame("Jumps");
     }
 
     public void FroggerScene()
     {
-        if (Globals.minigameAccess["Frogger"])
-        {
-            GameObject.Find("SampleSceneObject").SetActive(false);
-            SceneManager.LoadScene("froggerScene", LoadSceneMode.Additive);
-        }
-        else
-        {
-            payMinigame("Frogger");
-        }
+        if (Globals.minigameAccess["Frogger"]) chooseMinion("froggerScene");
+        else payMinigame("Frogger");
     }
 
     public void memoriaScene()
     {
-        if (Globals.minigameAccess["Memory"])
-        {
-            GameObject.Find("SampleSceneObject").SetActive(false);
-            SceneManager.LoadScene("memoriaScene", LoadSceneMode.Additive);
-        }
-        else
-        {
-            payMinigame("Memory");
-        }
+        if (Globals.minigameAccess["Memory"]) chooseMinion("memoriaScene");
+        else payMinigame("Memory");
     }
 
     public void AssociationScene()
     {
-        if (Globals.minigameAccess["Association"])
-        {
-            GameObject.Find("SampleSceneObject").SetActive(false);
-            SceneManager.LoadScene("minijuego-asociacion", LoadSceneMode.Additive);
-        }
-        else
-        {
-            payMinigame("Association");
-        }
+        if (Globals.minigameAccess["Association"]) chooseMinion("minijuego-asociacion");
+        else payMinigame("Association");
     }
 
     private void payMinigame(string game)
@@ -157,5 +116,56 @@ public class ChangeSceneScript : MonoBehaviour
             }
         });
 
+    }
+
+    private void chooseMinion(string scene)
+    {
+        chooseMinionsPanel.SetActive(true);
+        
+        chooseMinionsPanel.transform.Find("miniontier1").gameObject.transform.Find("Quantity").gameObject.GetComponent<Text>().text = Globals.minionsQuantity[1].ToString();
+        if (Globals.minionsQuantity[1] != 0)
+        {
+            chooseMinionsPanel.transform.Find("miniontier1").gameObject.GetComponent<Button>().interactable = true;
+            chooseMinionsPanel.transform.Find("miniontier1").gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            chooseMinionsPanel.transform.Find("miniontier1").gameObject.GetComponent<Button>().onClick.AddListener(() => loadScene(scene, 1));
+        }
+        else chooseMinionsPanel.transform.Find("miniontier1").gameObject.GetComponent<Button>().interactable = false;
+        
+        chooseMinionsPanel.transform.Find("miniontier2").gameObject.transform.Find("Quantity").gameObject.GetComponent<Text>().text = Globals.minionsQuantity[2].ToString();
+        if (Globals.minionsQuantity[2] != 0)
+        {
+            chooseMinionsPanel.transform.Find("miniontier2").gameObject.GetComponent<Button>().interactable = true;
+            chooseMinionsPanel.transform.Find("miniontier2").gameObject.GetComponent<Button>().onClick.AddListener(() => loadScene(scene, 2));
+        }
+        else chooseMinionsPanel.transform.Find("miniontier2").gameObject.GetComponent<Button>().interactable = false;
+
+        chooseMinionsPanel.transform.Find("miniontier3").gameObject.transform.Find("Quantity").gameObject.GetComponent<Text>().text = Globals.minionsQuantity[3].ToString();
+        if (Globals.minionsQuantity[3] != 0)
+        {
+            chooseMinionsPanel.transform.Find("miniontier3").gameObject.GetComponent<Button>().interactable = true;
+            chooseMinionsPanel.transform.Find("miniontier3").gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            chooseMinionsPanel.transform.Find("miniontier3").gameObject.GetComponent<Button>().onClick.AddListener(() => loadScene(scene, 3));
+        }
+        else chooseMinionsPanel.transform.Find("miniontier3").gameObject.GetComponent<Button>().interactable = false;
+
+        chooseMinionsPanel.transform.Find("miniontier4").gameObject.transform.Find("Quantity").gameObject.GetComponent<Text>().text = Globals.minionsQuantity[4].ToString();
+        if (Globals.minionsQuantity[4] != 0)
+        {
+            chooseMinionsPanel.transform.Find("miniontier4").gameObject.GetComponent<Button>().interactable = true;
+            chooseMinionsPanel.transform.Find("miniontier4").gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            chooseMinionsPanel.transform.Find("miniontier4").gameObject.GetComponent<Button>().onClick.AddListener(() => loadScene(scene, 4));
+        }
+        else chooseMinionsPanel.transform.Find("miniontier4").gameObject.GetComponent<Button>().interactable = false;
+
+
+    }
+
+    private void loadScene(string scene, int minion)
+    {
+        Globals.minionsQuantity[minion] = Globals.minionsQuantity[minion] - 1;
+        Globals.gameResources["Minions"].DedactResources(1);
+        chooseMinionsPanel.SetActive(false);
+        GameObject.Find("SampleSceneObject").SetActive(false);
+        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
     }
 }
