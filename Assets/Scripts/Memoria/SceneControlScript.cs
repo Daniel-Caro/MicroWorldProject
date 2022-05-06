@@ -25,12 +25,16 @@ public class SceneControlScript : MonoBehaviour
             cartaPrincesa.SetActive(true);
             GameObject fondoPrincesa = GameObject.Find("/SceneControl/fondos/princess");
             fondoPrincesa.SetActive(true);
+            GameObject monedaPrincesa = GameObject.Find("/SceneControl/Canvas/DIAMANTE");
+            monedaPrincesa.SetActive(true);
         } else if(Globals.style == Style.Pirate){
             originalCard =originalCardPirate;
             GameObject cartaPirata = GameObject.Find("/SceneControl/cartas/pirate");
             cartaPirata.SetActive(true);
             GameObject fondoPirata = GameObject.Find("/SceneControl/fondos/pirata");
             fondoPirata.SetActive(true);
+            GameObject monedaPirate = GameObject.Find("/SceneControl/Canvas/PIRATACOIN");
+            monedaPirate.SetActive(true);
         }
         else if(Globals.style == Style.Future){
             originalCard = originalCardFuture;
@@ -38,6 +42,8 @@ public class SceneControlScript : MonoBehaviour
             cartaFuturo.SetActive(true);
             GameObject fondoFuturo = GameObject.Find("/SceneControl/fondos/future");
             fondoFuturo.SetActive(true);
+            GameObject monedaFuturo = GameObject.Find("/SceneControl/Canvas/CHIP");
+            monedaFuturo.SetActive(true);
         }
         Vector3 startPos = originalCard.transform.position;
         int[] numbers = new int[16];
@@ -103,10 +109,10 @@ public class SceneControlScript : MonoBehaviour
         IEnumerator CheckedMatch(){
             if (_firstRevealed.id == _secondRevealed.id){
                 _score++;
-                scoreLabel.text = "Score: " + _score;
+                scoreLabel.text = _score.ToString();
             }
             else{
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.5f);
                 _firstRevealed.Unreveal();
                 _secondRevealed.Unreveal();
             }
