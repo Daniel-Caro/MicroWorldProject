@@ -103,10 +103,10 @@ public class SceneControlScript : MonoBehaviour
         IEnumerator CheckedMatch(){
             if (_firstRevealed.id == _secondRevealed.id){
                 _score++;
-                scoreLabel.text = "Score: " + _score;
+                scoreLabel.text = _score.ToString();
             }
             else{
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.5f);
                 _firstRevealed.Unreveal();
                 _secondRevealed.Unreveal();
             }
