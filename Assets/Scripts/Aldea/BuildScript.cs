@@ -40,7 +40,7 @@ public class BuildScript : MonoBehaviour//, IClick
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             //Debug.Log(hit.collider.gameObject.transform.parent.gameObject.GetInstanceID());
-            if (hit.collider != null && !buildingPanel.activeSelf &&!factoryPanel.activeSelf && !housePanel.activeSelf && (Globals.tutorialStep>13 || Globals.tutorialStep==10))
+            if (hit.collider != null && !buildingPanel.activeSelf &&!factoryPanel.activeSelf && !housePanel.activeSelf && (Globals.tutorialStep>15 || Globals.tutorialStep==10 || Globals.tutorialStep==11))
             {
                 if(hit.collider.gameObject.tag == "building"){
                     building = hit.collider.gameObject.transform.parent.gameObject;
@@ -105,6 +105,7 @@ public class BuildScript : MonoBehaviour//, IClick
         infoText = panel.transform.Find("InfoText").gameObject;
         switch(type){
             case("TownHall"):
+                if (Globals.tutorialStep == 10) TutorialScript.townHallExplain(panel.transform.Find("ClosePanel").gameObject, panel.transform.Find("MinigamesButton").gameObject);
                 infoText.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
                 panel.transform.Find("MinigamesButton").gameObject.SetActive(true);
                 break;

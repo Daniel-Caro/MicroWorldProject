@@ -26,7 +26,8 @@ public class GridBuildingSystem : MonoBehaviour
     private BoundsInt prevArea;
     private bool buildingPicked = false;
 
-    private GameObject character;
+    private GameObject darkPanel;
+    private GameObject openBuilds;
     
     #region Unity Methods
 
@@ -47,11 +48,12 @@ public class GridBuildingSystem : MonoBehaviour
             });
         }
         
-        character = GameObject.Find("Character").gameObject;
+        darkPanel = GameObject.Find("DarkPanel").gameObject;
+        openBuilds = GameObject.Find("OpenBuilds").gameObject;
 
         if (Globals.tutorialStep >= 10)
         {
-            character.SetActive(false);
+            darkPanel.SetActive(false);
         }
         else
         {
@@ -185,7 +187,7 @@ public class GridBuildingSystem : MonoBehaviour
                 if (Globals.tutorialStep == 3)
                 {
                     Globals.tutorialStep++;
-                    character.SetActive(true);
+                    darkPanel.SetActive(true);
                     GameObject.Find("TutorialText").gameObject.GetComponent<TextMeshProUGUI>().text = "Sigue los mismos pasos para construir un banco y una fábrica";
                     GameObject.Find("Build1").gameObject.GetComponent<Button>().enabled = false;
                     GameObject.Find("Build2").gameObject.GetComponent<Button>().enabled = true;
@@ -199,7 +201,7 @@ public class GridBuildingSystem : MonoBehaviour
                 else if (Globals.tutorialStep == 5)
                 {
                     Globals.tutorialStep++;
-                    character.SetActive(true);
+                    darkPanel.SetActive(true);
                     GameObject.Find("Build1").gameObject.GetComponent<Button>().enabled = true;
                     GameObject.Find("Build2").gameObject.GetComponent<Button>().enabled = true;
                     GameObject.Find("TutorialText").gameObject.GetComponent<TextMeshProUGUI>().text = "Estos son los tres edificios principales con los que contarás durante tu aventura";
@@ -226,8 +228,11 @@ public class GridBuildingSystem : MonoBehaviour
                 }else if (buildingData.type == "House"){
                     buildingGeneral.GetComponent<MinionProduction>().RegisterHouse(buildingGeneral);
                 }
-                
                 Destroy(temp);
+                //Se cierra la tienda
+                GameObject.Find("Buildings").SetActive(false);
+                GameObject.Find("CloseBuilds").SetActive(false);
+                openBuilds.SetActive(true);
             }
         }
         
