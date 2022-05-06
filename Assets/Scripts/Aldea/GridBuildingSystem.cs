@@ -226,6 +226,7 @@ public class GridBuildingSystem : MonoBehaviour
                 }else if (buildingData.type == "House"){
                     buildingGeneral.GetComponent<MinionProduction>().RegisterHouse(buildingGeneral);
                 }
+                
                 Destroy(temp);
             }
         }
@@ -262,6 +263,7 @@ public class GridBuildingSystem : MonoBehaviour
             if (buildingPicked) Destroy(temp.gameObject);
             buildingPicked = true;
             buildingGeneral = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            //buildingGeneral.transform.parent = GameObject.Find("SampleSceneObject").transform;
             temp = buildingGeneral.GetComponent<Building>();
             temp.gameObject.SetActive(true);
             SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
