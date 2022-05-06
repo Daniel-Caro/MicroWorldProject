@@ -40,7 +40,7 @@ public class BuildScript : MonoBehaviour//, IClick
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             //Debug.Log(hit.collider.gameObject.transform.parent.gameObject.GetInstanceID());
-            if (hit.collider != null && !buildingPanel.activeSelf &&!factoryPanel.activeSelf && !housePanel.activeSelf && (Globals.tutorialStep>=15 || Globals.tutorialStep==10 || Globals.tutorialStep==11))
+            if (hit.collider != null && !buildingPanel.activeSelf &&!factoryPanel.activeSelf && !housePanel.activeSelf && (Globals.tutorialStep>=14 || Globals.tutorialStep==10 || Globals.tutorialStep==11))
             {
                 if(hit.collider.gameObject.tag == "building"){
                     building = hit.collider.gameObject.transform.parent.gameObject;

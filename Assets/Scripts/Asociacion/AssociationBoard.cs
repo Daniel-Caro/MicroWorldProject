@@ -65,6 +65,8 @@ public class AssociationBoard : MonoBehaviour
         switch (Globals.style)
         {
             case Style.Pirate:
+                GameObject.Find("backgroundFuture").SetActive(false);
+                GameObject.Find("backgroundPrincess").SetActive(false);
                 dots[0].GetComponent<SpriteRenderer>().sprite = dotRedPirate;
                 dots[0].GetComponent<AssociationDot>().shinySprite = dotRedPirateShiny;
                 dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowPirate;
@@ -75,6 +77,8 @@ public class AssociationBoard : MonoBehaviour
                 dots[3].GetComponent<AssociationDot>().shinySprite = dotGreenPirateShiny;
                 break;
             case Style.Future:
+                GameObject.Find("backgroundPrincess").SetActive(false);
+                GameObject.Find("backgroundPirate").SetActive(false);
                 dots[0].GetComponent<SpriteRenderer>().sprite = dotRedFuture;
                 dots[0].GetComponent<AssociationDot>().shinySprite = dotRedFutureShiny;
                 dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowFuture;
@@ -85,6 +89,8 @@ public class AssociationBoard : MonoBehaviour
                 dots[3].GetComponent<AssociationDot>().shinySprite = dotGreenFutureShiny;
                 break;
             case Style.Princess:
+                GameObject.Find("backgroundFuture").SetActive(false);
+                GameObject.Find("backgroundPirate").SetActive(false);
                 dots[0].GetComponent<SpriteRenderer>().sprite = dotRedPrincess;
                 dots[0].GetComponent<AssociationDot>().shinySprite = dotRedPrincessShiny;
                 dots[1].GetComponent<SpriteRenderer>().sprite = dotYellowPrincess;

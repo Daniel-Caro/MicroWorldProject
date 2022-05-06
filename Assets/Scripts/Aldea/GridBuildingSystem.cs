@@ -92,7 +92,9 @@ public class GridBuildingSystem : MonoBehaviour
                 greenTiles.Add( Resources.Load<TileBase>(tilePath + "future_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
+                GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(137/255f,80/255f,54/255f);
                 break;
+
             case(Style.Pirate):
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_concha"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_estrella"));
@@ -114,6 +116,7 @@ public class GridBuildingSystem : MonoBehaviour
                 greenTiles.Add( Resources.Load<TileBase>(tilePath + "arena_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
+                GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(82/255f,185/255f,242/255f);
                 break;
 
             case(Style.Princess):
@@ -146,6 +149,7 @@ public class GridBuildingSystem : MonoBehaviour
                 greenTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_green"));
                 tileBases.Add(TileType.White, whiteTiles);
                 tileBases.Add(TileType.Green, greenTiles);
+                GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(28/255f,143/255f,74/255f);
                 break;
         }
         BoundsInt area = new BoundsInt(-15,-15,0,29,29,1);
