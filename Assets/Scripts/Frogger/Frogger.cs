@@ -12,6 +12,7 @@ public class Frogger : MonoBehaviour
     public Sprite deadSpriteFuture;
     public Sprite idleSpriteFuture;
     public string type;
+    public static bool haMuerto = false;
     // Start is called before the first frame update
     private void Awake(){
         spriteRenderer = GetComponent<SpriteRenderer>(); 
@@ -86,6 +87,7 @@ public class Frogger : MonoBehaviour
             GameObject image = GameObject.Find("/Canvas/Image");
             image.SetActive(false);
         }
+        haMuerto = true;
         transform.rotation = Quaternion.identity;
         enabled = false;
     }

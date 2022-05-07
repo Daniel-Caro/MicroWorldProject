@@ -19,19 +19,22 @@ public class MoveCycle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(direction.x > 0 &&  (transform.position.x - size) > rightEdge.x){
+        if(Frogger.haMuerto == false){
+            if(direction.x > 0 &&  (transform.position.x - size) > rightEdge.x){
             Vector3 position = transform.position;
             position.x = leftEdge.x - size;
             transform.position = position;
+            }
+            else if(direction.x < 0 &&  (transform.position.x + size) < leftEdge.x){
+                Vector3 position = transform.position;
+                position.x = rightEdge.x + size;
+                transform.position = position;
+            }
+            else{
+                transform.Translate(direction * speed *Time.deltaTime);
+            }
         }
-        else if(direction.x < 0 &&  (transform.position.x + size) < leftEdge.x){
-            Vector3 position = transform.position;
-            position.x = rightEdge.x + size;
-            transform.position = position;
-        }
-        else{
-            transform.Translate(direction * speed *Time.deltaTime);
-        }
+        
     }
     
 }

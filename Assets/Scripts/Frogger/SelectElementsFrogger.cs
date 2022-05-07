@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Threading.Tasks;
 public class SelectElementsFrogger : MonoBehaviour
 {
     private GameObject car1;
@@ -16,6 +16,9 @@ public class SelectElementsFrogger : MonoBehaviour
     private GameObject monedaModeloFuturo;
     private GameObject monedaModeloPrincesa;
     private GameObject monedaModeloPirata;
+    private GameObject audioFuturoFondo;
+    private GameObject audioPrincesaFondo;
+    private GameObject audioPirataFondo;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,8 @@ public class SelectElementsFrogger : MonoBehaviour
             road.SetActive(true);
             monedaModeloPirata = GameObject.Find("/SceneController/MonedasModelo/PIRATACOIN");
             monedaModeloPirata.SetActive(true);
+            audioPirataFondo = GameObject.Find("/SceneController/audiosFondo/audioPirataFondo");
+            audioPirataFondo.SetActive(true);
             
         }else if(Globals.style == Style.Princess){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Princess");
@@ -60,6 +65,8 @@ public class SelectElementsFrogger : MonoBehaviour
             road.SetActive(true);
             monedaModeloPrincesa = GameObject.Find("/SceneController/MonedasModelo/DIAMANTE");
             monedaModeloPrincesa.SetActive(true);
+            audioPrincesaFondo = GameObject.Find("/SceneController/audiosFondo/audioPrincesaFondo");
+            audioPrincesaFondo.SetActive(true);
         }else if(Globals.style == Style.Future){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Future");
             car1.SetActive(true);
@@ -79,6 +86,8 @@ public class SelectElementsFrogger : MonoBehaviour
             road.SetActive(true);
             monedaModeloFuturo = GameObject.Find("/SceneController/MonedasModelo/CHIP");
             monedaModeloFuturo.SetActive(true);
+            audioFuturoFondo = GameObject.Find("/SceneController/audiosFondo/audioFuturoFondo");
+            audioFuturoFondo.SetActive(true);
         }
         
     }
