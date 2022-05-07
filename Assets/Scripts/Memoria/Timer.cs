@@ -4,22 +4,21 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System.Threading.Tasks;
 public class Timer : MonoBehaviour 
 {
     Image timeBar;
     public float maxTime = 5f;
     float timeLeft;
-    public GameObject timeUpText;
     private bool coroutineCalled = false;
 
     // Start is called before the first frame update
     void Start()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("memoriaScene"));
-        timeUpText.SetActive(false);
         timeBar = GetComponent<Image>();
         timeLeft = maxTime;
+        Globals.doubleCoinsBoost = true;
     }
 
     // Update is called once per frame
@@ -29,14 +28,29 @@ public class Timer : MonoBehaviour
             timeLeft-=Time.deltaTime;
             timeBar.fillAmount = timeLeft/maxTime;
         }else{
-            timeUpText.SetActive(true);
-            Time.timeScale = 1f;
-            if (!coroutineCalled)
+            if (Globals.restartGameBoost)
             {
-                StartCoroutine(changeScene());
-                Debug.Log("after calling corot");
-                coroutineCalled = true;
+                timeLeft += maxTime;
+                Globals.restartGameBoost = false;
             }
+            else{
+                if (Globals.doubleCoinsBoost)
+                {
+                    Globals.gameResources["Coins"].currentR += Globals.obtainedCoins * 2;
+                    Globals.doubleCoinsBoost = false;
+                }
+                else Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
+                Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
+                Globals.obtainedCoins = 0;
+                Time.timeScale = 1f;
+                if (!coroutineCalled)
+                {
+                    StartCoroutine(changeScene());
+                    Debug.Log("after calling corot");
+                    coroutineCalled = true;
+                }
+            }
+            
         }
 
     }
