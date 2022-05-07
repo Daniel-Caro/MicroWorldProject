@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3273626e16550234d82cdbde4c8d129a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 1.3
+  velocity: 1.8
   controladorEscena: {fileID: 1039651836}
 --- !u!95 &335076376
 Animator:
@@ -721,7 +721,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 45.299503, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -735,7 +735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401040454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.92, y: 0.94, z: 0.1851811}
+  m_LocalPosition: {x: 3.1586, y: 0.94, z: 0.1851811}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2038007993}
@@ -759,7 +759,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
+    newSize: {x: 45.299503, y: 10.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
@@ -900,7 +900,7 @@ MonoBehaviour:
   obstaculoPirata: {fileID: 6094955432832159036, guid: 4e036bb29302c44449a188dbf46f0abd, type: 3}
   obstaculoPrincesa: {fileID: 6094955432832159036, guid: 9aa6b491075508343b0d446bdc21c7be, type: 3}
   obstaculoFuturo: {fileID: 6094955432832159036, guid: 7e4e12c180af44a44a146150c23008ba, type: 3}
-  altura: 0.2
+  altura: 0.3
 --- !u!1 &1039651834
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 public class TimerFrogger : MonoBehaviour 
 {
     //
     Image timeBar;
     public float maxTime;
-    float timeLeft;
+    public static float timeLeft;
     public GameObject timeUpText;
     public GameObject frogger;
     private bool coroutineCalled = false;
@@ -29,7 +31,7 @@ public class TimerFrogger : MonoBehaviour
             timeLeft-=Time.deltaTime;
             timeBar.fillAmount = timeLeft/maxTime;
         }else{
-            timeUpText.SetActive(true);
+
             frogger.SetActive(false);
             Time.timeScale = 1;
             if (!coroutineCalled)
