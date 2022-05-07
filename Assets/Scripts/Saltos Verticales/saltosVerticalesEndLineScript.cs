@@ -14,8 +14,8 @@ public class saltosVerticalesEndLineScript : MonoBehaviour
         GameObject interceptedObject = collider.gameObject;
         if (interceptedObject.name == "Player")
         {
-            //Se tiene que añadir las monedas obtenidas a la cantidad de monedas del jugador (10 monedas por cada una? 100?)
             Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
+            Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
             Globals.obtainedCoins = 0;
             gameOverText.SetActive(true);
             if (!coroutineCalled)

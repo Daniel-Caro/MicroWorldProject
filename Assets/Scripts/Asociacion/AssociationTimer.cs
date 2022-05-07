@@ -30,7 +30,7 @@ public class AssociationTimer : MonoBehaviour
             timerBar.fillAmount = timeLeft / maxTime;
         } else{
             timesUpText.SetActive(true);
-            //Se tiene que añadir las monedas obtenidas a la cantidad de monedas del jugador (10 monedas por cada una? 100?)
+            Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
             Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
             Globals.obtainedCoins = 0;
             Time.timeScale = 1f;
