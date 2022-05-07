@@ -138,7 +138,7 @@ Transform:
   m_LocalPosition: {x: 0.112, y: -0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 244479689283115520}
+  - {fileID: 3839942836995803448}
   m_Father: {fileID: 7521752732147438339}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidad: 0.5
---- !u!1 &6420521545721397397
+--- !u!1 &8307255701562932662
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -345,36 +345,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 244479689283115520}
-  - component: {fileID: 7036691773451390635}
+  - component: {fileID: 3839942836995803448}
+  - component: {fileID: 7883823521275475246}
   m_Layer: 0
-  m_Name: money
+  m_Name: CHIP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &244479689283115520
+--- !u!4 &3839942836995803448
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6420521545721397397}
+  m_GameObject: {fileID: 8307255701562932662}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.061, y: 0.063, z: 10}
-  m_LocalScale: {x: 0.040380225, y: 0.04043201, z: 1}
+  m_LocalPosition: {x: 0.07, y: 0.05, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1717074441063205774}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7036691773451390635
+--- !u!212 &7883823521275475246
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6420521545721397397}
+  m_GameObject: {fileID: 8307255701562932662}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -407,13 +407,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 736cfa16185cc85408477aa213b9e482, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: b629d648602a95f4eb382bd8ea337c08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
