@@ -5,6 +5,7 @@ using UnityEngine;
 public class obstaculoScript : MonoBehaviour
 {
     public float velocidad;
+    public static bool enMovimiento;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,10 @@ public class obstaculoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position+=Vector3.left * velocidad*Time.deltaTime;
+        if(enMovimiento == true){
+            transform.position+=Vector3.left * velocidad*Time.deltaTime;
+        }
+        
     }
 }
  
