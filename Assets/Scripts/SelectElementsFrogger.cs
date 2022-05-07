@@ -12,7 +12,9 @@ public class SelectElementsFrogger : MonoBehaviour
     private GameObject home;
     private GameObject median;
     private GameObject road;
-    
+    private GameObject monedaModeloFuturo;
+    private GameObject monedaModeloPrincesa;
+    private GameObject monedaModeloPirata;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,9 @@ public class SelectElementsFrogger : MonoBehaviour
             median.SetActive(true);
             road = GameObject.Find("/SceneController/RoadGroup/RoadPirateGroupMax");
             road.SetActive(true);
+            monedaModeloPirata = GameObject.Find("/SceneController/MonedasModelo/PIRATACOIN");
+            monedaModeloPirata.SetActive(true);
+            
         }else if(Globals.style == Style.Princess){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Princess");
             car1.SetActive(true);
@@ -51,6 +56,8 @@ public class SelectElementsFrogger : MonoBehaviour
             median.SetActive(true);
             road = GameObject.Find("/SceneController/RoadGroup/RoadPrincessGroupMax");
             road.SetActive(true);
+            monedaModeloPrincesa = GameObject.Find("/SceneController/MonedasModelo/DIAMANTE");
+            monedaModeloPrincesa.SetActive(true);
         }else if(Globals.style == Style.Future){
             car1 = GameObject.Find("/SceneController/Car1Group/Car1Future");
             car1.SetActive(true);
@@ -68,6 +75,8 @@ public class SelectElementsFrogger : MonoBehaviour
             median.SetActive(true);
             road = GameObject.Find("/SceneController/RoadGroup/RoadFutureGroupMax");
             road.SetActive(true);
+            monedaModeloFuturo = GameObject.Find("/SceneController/MonedasModelo/CHIP");
+            monedaModeloFuturo.SetActive(true);
         }
         
     }
