@@ -15,7 +15,12 @@ public class saltosVerticalesEndLineScript : MonoBehaviour
         if (interceptedObject.name == "Player")
         {
             Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
-            Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
+            if (Globals.doubleCoinsBoost)
+            {
+                Globals.gameResources["Coins"].currentR += Globals.obtainedCoins * 2;
+                Globals.doubleCoinsBoost = false;
+            }
+            else Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
             Globals.obtainedCoins = 0;
             gameOverText.SetActive(true);
             if (!coroutineCalled)

@@ -29,11 +29,16 @@ public class AssociationTimer : MonoBehaviour
             timeLeft -= Time.deltaTime;
             timerBar.fillAmount = timeLeft / maxTime;
         } else{
-            timesUpText.SetActive(true);
-            Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
+            if (Globals.doubleCoinsBoost)
+            {
+                Globals.gameResources["Coins"].currentR += Globals.obtainedCoins * 2;
+                Globals.doubleCoinsBoost = false;
+            }
+            else Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
             Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
             Globals.obtainedCoins = 0;
             Time.timeScale = 1f;
+            timesUpText.SetActive(true);
             if (!coroutineCalled)
             {
                 StartCoroutine(changeScene());
