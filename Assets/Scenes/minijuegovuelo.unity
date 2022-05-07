@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3273626e16550234d82cdbde4c8d129a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 1.3
+  velocity: 1.8
   controladorEscena: {fileID: 1039651836}
 --- !u!95 &335076376
 Animator:
@@ -900,7 +900,7 @@ MonoBehaviour:
   obstaculoPirata: {fileID: 6094955432832159036, guid: 4e036bb29302c44449a188dbf46f0abd, type: 3}
   obstaculoPrincesa: {fileID: 6094955432832159036, guid: 9aa6b491075508343b0d446bdc21c7be, type: 3}
   obstaculoFuturo: {fileID: 6094955432832159036, guid: 7e4e12c180af44a44a146150c23008ba, type: 3}
-  altura: 0.2
+  altura: 0.3
 --- !u!1 &1039651834
 GameObject:
   m_ObjectHideFlags: 0
