@@ -164,6 +164,8 @@ public class ChangeSceneScript : MonoBehaviour
         Globals.minionsQuantity[minion] = Globals.minionsQuantity[minion] - 1;
         Globals.gameResources["Minions"].DedactResources(1);
         chooseMinionsPanel.SetActive(false);
+        if (minion == 3 || minion == 4) Globals.doubleCoinsBoost = true;
+        if (minion == 2 || minion == 4) Globals.restartGameBoost = true;
         GameObject.Find("SampleSceneObject").SetActive(false);
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);
     }

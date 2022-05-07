@@ -7,7 +7,6 @@ public enum Style {Future,Pirate,Princess}
 
 public class Globals
 {
-
     public static Style style = Style.Pirate;
 
     public static int tutorialStep = 15;
@@ -25,6 +24,9 @@ public class Globals
         {"Jumps", false},
         {"Flappy", false},
     };
+
+    public static bool doubleCoinsBoost = false;
+    public static bool restartGameBoost = false;
 
     public static int moneyCapacity = 100000;
     public static int minionCapacity = 2;
