@@ -101,7 +101,7 @@ public class SceneControlScript : MonoBehaviour
     private cartaScript _firstRevealed;
     private cartaScript _secondRevealed;
     private int _score = 0;
-    [SerializeField] private TextMesh scoreLabel;
+    [SerializeField] private TextMeshProUGUI scoreLabel;
     public bool canReveal{
         get{
             return _firstRevealed == null || _secondRevealed == null;
