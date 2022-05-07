@@ -12,7 +12,7 @@ public class creadorObstaculoScript : MonoBehaviour
     public GameObject obstaculoFuturo;
     private GameObject obstaculo;
     public float altura;
-    private int probMoneda = 101;
+    private int probMoneda = 20;
     // Start is called before the first frame update
     void Start()
     {
