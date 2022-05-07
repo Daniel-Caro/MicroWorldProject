@@ -11,6 +11,7 @@ public class TimerScript : MonoBehaviour
     public float maxTime = 5f;
     float timeLeft;
     public GameObject timesUpText;
+    public GameObject secondChanceText;
     private bool coroutineCalled = false;
 
     // Start is called before the first frame update
@@ -29,21 +30,30 @@ public class TimerScript : MonoBehaviour
             timeLeft -= Time.deltaTime;
             timerBar.fillAmount = timeLeft / maxTime;
         } else{
-            timesUpText.SetActive(true);
-            Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
-            if (Globals.doubleCoinsBoost)
+            if (Globals.restartGameBoost)
             {
-                Globals.gameResources["Coins"].currentR += Globals.obtainedCoins * 2;
-                Globals.doubleCoinsBoost = false;
+                timeLeft += maxTime;
+                Globals.restartGameBoost = false;
+                StartCoroutine(secondChance());
             }
-            else Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
-            Globals.obtainedCoins = 0;
-            Time.timeScale = 1f;
-            if (!coroutineCalled)
+            else
             {
-                StartCoroutine(changeScene());
-                Debug.Log("after calling corot");
-                coroutineCalled = true;
+                timesUpText.SetActive(true);
+                Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
+                if (Globals.doubleCoinsBoost)
+                {
+                    Globals.gameResources["Coins"].currentR += Globals.obtainedCoins * 2;
+                    Globals.doubleCoinsBoost = false;
+                }
+                else Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
+                Globals.obtainedCoins = 0;
+                Time.timeScale = 1f;
+                if (!coroutineCalled)
+                {
+                    StartCoroutine(changeScene());
+                    Debug.Log("after calling corot");
+                    coroutineCalled = true;
+                }
             }
         }
     }
@@ -56,5 +66,13 @@ public class TimerScript : MonoBehaviour
         SceneManager.SetActiveScene(mainScene);
         mainScene.GetRootGameObjects().First().gameObject.SetActive(true);
         SceneManager.UnloadSceneAsync("Tuberias");
+    }
+
+    IEnumerator secondChance() {
+        Debug.Log("Empieza la corrutina");
+        secondChanceText.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        secondChanceText.SetActive(false);
+        Debug.Log("Termina el tiempo");
     }
 }
