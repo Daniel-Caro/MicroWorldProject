@@ -26,7 +26,7 @@ public class Globals
     };
 
     public static bool doubleCoinsBoost = false;
-    public static bool restartGameBoost = false;
+    public static bool restartGameBoost = true;
 
     public static int moneyCapacity = 100000;
     public static int minionCapacity = 2;
