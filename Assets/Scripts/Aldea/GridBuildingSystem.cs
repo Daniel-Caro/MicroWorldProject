@@ -136,6 +136,7 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryFuture;
                 futureMusic.gameObject.SetActive(true);
                 futureBackground.SetActive(true);
+                GameObject.Find("StatsBlock").transform.Find("CoinsImg").gameObject.GetComponent<Image>().sprite = moneyFuture;
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(137/255f,80/255f,54/255f);
                 break;
             }
@@ -172,6 +173,7 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryPirate;
                 pirateMusic.gameObject.SetActive(true);
                 pirateBackground.SetActive(true);
+                GameObject.Find("StatsBlock").transform.Find("CoinsImg").gameObject.GetComponent<Image>().sprite = moneyPirate;
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(82/255f,185/255f,242/255f);
                 break;
 
@@ -216,13 +218,17 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build1").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = housePrincess;
                 shop.transform.Find("Build2").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = bankPrincess;
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryPrincess;
+                GameObject.Find("StatsBlock").transform.Find("CoinsImg").gameObject.GetComponent<Image>().sprite = moneyPrincess;
                 princessMusic.gameObject.SetActive(true);
                 princessBackground.SetActive(true);
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(28/255f,143/255f,74/255f);
                 break;
             }
-                
         }
+        reiniciarCollider(GameObject.Find("House").transform.Find("building1").gameObject);
+        reiniciarCollider(GameObject.Find("House2").transform.Find("building2").gameObject);
+        reiniciarCollider(GameObject.Find("House3").transform.Find("building3").gameObject);
+        reiniciarCollider(GameObject.Find("House4").transform.Find("Townhall").gameObject);
         GameObject.Find("House").SetActive(false);
         GameObject.Find("House2").transform.Find("money").gameObject.SetActive(false);
         GameObject.Find("House2").SetActive(false);
@@ -465,6 +471,12 @@ public class GridBuildingSystem : MonoBehaviour
             }
            
         }
+    }
+
+    private void reiniciarCollider(GameObject building)
+    {
+        Destroy(building.GetComponent<PolygonCollider2D>());
+        building.AddComponent<PolygonCollider2D>();
     }
     #endregion
     
