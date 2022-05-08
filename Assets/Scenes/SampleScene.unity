@@ -13972,6 +13972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c0be0bfb19c848a229f9c5cb9bf09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   panel: {fileID: 798449980}
   thisBuilding: {fileID: 599104328}
   type: TownHall
@@ -21742,6 +21743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c0be0bfb19c848a229f9c5cb9bf09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   panel: {fileID: 798449980}
   thisBuilding: {fileID: 1714508644}
   type: Bank
@@ -22113,6 +22115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c0be0bfb19c848a229f9c5cb9bf09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   panel: {fileID: 410234993}
   thisBuilding: {fileID: 1746263642}
   type: Factory

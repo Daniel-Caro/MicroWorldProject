@@ -65,7 +65,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
-        Globals.townHallId = GameObject.Find("House4").GetInstanceID();
+        //Globals.townHallId = GameObject.Find("House4").GetInstanceID();
         if (!Globals.buildingDataDic.ContainsKey(Globals.townHallId))
         {
             Debug.Log("Cargar diccionario edificios");
@@ -238,6 +238,7 @@ public class GridBuildingSystem : MonoBehaviour
         BoundsInt green_area = new BoundsInt(-4,-4,0,7,7,1);
         SetTilesBlock(area, TileType.White, MainTileMap);
         SetTilesBlock(green_area, TileType.Green, MainTileMap);
+        StartCoroutine(saveDataCoroutine());
     }
 
     void Update()
@@ -299,15 +300,18 @@ public class GridBuildingSystem : MonoBehaviour
                 Transform spriteTransform = temp.transform.GetChild(0).gameObject.GetComponent<Transform>();
                 spriteTransform.position = new Vector3(spriteTransform.position.x, spriteTransform.position.y, objectTransform.position.y/0.55f);
                 constructionSound.Play();
+                Globals.buildingPositions.Add(Globals.nextId, temp.transform.position);
                 temp.Place();
                 buildingPicked = false;
                 BuildScript buildingData = buildingGeneral.GetComponent<BuildScript>();
+                buildingData.id = Globals.nextId;
+                Globals.nextId += 1;
                 Globals.gameResources["Coins"].DedactResources(buildingData.cost);
                 Dictionary<string, string> buildingDataEntry = new Dictionary<string, string>();
                 buildingDataEntry.Add("Type", buildingData.type);
                 buildingDataEntry.Add("Level", buildingData.level.ToString());
-                Globals.buildingDataDic.Add(buildingGeneral.GetInstanceID(), buildingDataEntry);
-                Globals.buildingTypesDic[buildingData.type].Add(buildingGeneral.GetInstanceID());
+                Globals.buildingDataDic.Add(buildingData.id, buildingDataEntry);
+                Globals.buildingTypesDic[buildingData.type].Add(buildingData.id);
                 if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
                 else if (buildingData.type == "Factory") {
                     buildingGeneral.GetComponent<MinionProduction>().RegisterFactory(buildingGeneral);
@@ -478,6 +482,14 @@ public class GridBuildingSystem : MonoBehaviour
         Destroy(building.GetComponent<PolygonCollider2D>());
         building.AddComponent<PolygonCollider2D>();
     }
+
+    IEnumerator saveDataCoroutine()
+    {
+        yield return new WaitForSeconds(15f);
+        SaveManager.SaveGameData();
+        StartCoroutine(saveDataCoroutine());
+    }
+    
     #endregion
     
 }
