@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Threading.Tasks;
 public class SceneControlScript : MonoBehaviour
 {
     public int griRows = 2;
@@ -15,10 +16,11 @@ public class SceneControlScript : MonoBehaviour
     [SerializeField] private cartaScript originalCard;
     [SerializeField] private Sprite[] images;
     public int score = 0;
-    
+    private GameObject audioMoneda;
     // Start is called before the first frame update
     void Start()
     {   
+        audioMoneda = GameObject.Find("/SceneControl/audiosFondo/audioMoneda");
         if(Globals.style == Style.Princess){
             originalCard = originalCardPrincess;
             GameObject cartaPrincesa = GameObject.Find("/SceneControl/cartas/princess");
@@ -27,6 +29,8 @@ public class SceneControlScript : MonoBehaviour
             fondoPrincesa.SetActive(true);
             GameObject monedaPrincesa = GameObject.Find("/SceneControl/Canvas/DIAMANTE");
             monedaPrincesa.SetActive(true);
+            GameObject audioFondoPrincesa = GameObject.Find("/SceneControl/audiosFondo/audioFondoPrincesa");
+            audioFondoPrincesa.SetActive(true);
         } else if(Globals.style == Style.Pirate){
             originalCard =originalCardPirate;
             GameObject cartaPirata = GameObject.Find("/SceneControl/cartas/pirate");
@@ -35,6 +39,8 @@ public class SceneControlScript : MonoBehaviour
             fondoPirata.SetActive(true);
             GameObject monedaPirate = GameObject.Find("/SceneControl/Canvas/PIRATACOIN");
             monedaPirate.SetActive(true);
+            GameObject audioFondoPirata = GameObject.Find("/SceneControl/audiosFondo/audioFondoPrincesa");
+            audioFondoPirata.SetActive(true);
         }
         else if(Globals.style == Style.Future){
             originalCard = originalCardFuture;
@@ -44,6 +50,8 @@ public class SceneControlScript : MonoBehaviour
             fondoFuturo.SetActive(true);
             GameObject monedaFuturo = GameObject.Find("/SceneControl/Canvas/CHIP");
             monedaFuturo.SetActive(true);
+            GameObject audioFondoFuturo = GameObject.Find("/SceneControl/audiosFondo/audioFondoFuturo");
+            audioFondoFuturo.SetActive(true);
         }
         Vector3 startPos = originalCard.transform.position;
         int[] numbers = new int[16];
@@ -93,23 +101,28 @@ public class SceneControlScript : MonoBehaviour
     private cartaScript _firstRevealed;
     private cartaScript _secondRevealed;
     private int _score = 0;
-    [SerializeField] private TextMesh scoreLabel;
+    [SerializeField] private TextMeshProUGUI scoreLabel;
     public bool canReveal{
         get{
             return _firstRevealed == null || _secondRevealed == null;
         }
     }
-    public void CardRevealed(cartaScript card){
+    public async Task CardRevealed(cartaScript card){
         if(_firstRevealed == null){
             _firstRevealed = card;
         }else {
             _secondRevealed = card;
             StartCoroutine(CheckedMatch());
+            await Task.Delay(1000);
+            audioMoneda.SetActive(false);
         }
         IEnumerator CheckedMatch(){
             if (_firstRevealed.id == _secondRevealed.id){
-                _score++;
-                scoreLabel.text = _score.ToString();
+                audioMoneda.SetActive(true);
+                Globals.obtainedCoins++;
+                scoreLabel.text = Globals.obtainedCoins.ToString();
+                
+                
             }
             else{
                 yield return new WaitForSeconds(0.5f);
