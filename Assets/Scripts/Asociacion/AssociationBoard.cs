@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using TMPro;
 
 public enum GameState
 {
@@ -196,6 +197,7 @@ public class AssociationBoard : MonoBehaviour
             {
                 coinSound.Play();
                 Globals.obtainedCoins++;
+                GameObject.Find("CoinCounter").GetComponent<TextMeshProUGUI>().text = "Monedas: " + Globals.obtainedCoins.ToString();
             }
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
@@ -253,6 +255,11 @@ public class AssociationBoard : MonoBehaviour
                     Vector3 tempPosition = new Vector3(i, j + offSet, 0);
                     int dotToUse = UnityEngine.Random.Range(0, dots.Length);
                     GameObject piece = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
+                    if (UnityEngine.Random.Range(0, 7) == 6)
+                {
+                    piece.GetComponent<AssociationDot>().hasCoin = true; 
+                    piece.GetComponent<SpriteRenderer>().sprite = piece.GetComponent<AssociationDot>().shinySprite;
+                } 
                     piece.SetActive(true);
                     allDots[i, j] = piece;
                     piece.GetComponent<AssociationDot>().row = j;

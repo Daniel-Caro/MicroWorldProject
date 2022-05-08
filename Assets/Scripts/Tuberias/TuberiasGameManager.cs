@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class TuberiasGameManager : MonoBehaviour
 {
@@ -194,7 +195,7 @@ public class TuberiasGameManager : MonoBehaviour
             if (child.gameObject.GetComponent<PipeScript>().hasCoin && child.gameObject.GetComponent<PipeScript>().hasWater) Globals.obtainedCoins++;
             Destroy(child.gameObject);
         }
-
+        GameObject.Find("CoinCounter").GetComponent<TextMeshProUGUI>().text = "Monedas: " + Globals.obtainedCoins.ToString();
         GameObject startPipe = null;
         switch(Globals.style)
         {
