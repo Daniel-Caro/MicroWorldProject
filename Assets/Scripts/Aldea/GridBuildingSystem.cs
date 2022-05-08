@@ -27,6 +27,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     private GameObject darkPanel;
     private GameObject openBuilds;
+    public static string respuestaNombreSample;
 
     //Sprites
     public Sprite housePirate;
@@ -60,8 +61,9 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
-        if(DialogueStart.respuestaNombre != null){
-            GameObject.Find("/SampleSceneObject/UI/StatsBlock/Coins").GetComponent<TextMeshProUGUI>().text = DialogueStart.respuestaNombre.text;
+        if(respuestaNombreSample != null){
+            Debug.Log(respuestaNombreSample);
+            GameObject.Find("/SampleSceneObject/UI/StatsBlock/Coins").GetComponent<TextMeshProUGUI>().text = respuestaNombreSample;
         }
         
 

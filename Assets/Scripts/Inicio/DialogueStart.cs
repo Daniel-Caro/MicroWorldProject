@@ -284,6 +284,7 @@ public class DialogueStart : MonoBehaviour
             enviarNombre.onClick.AddListener(() => {
                 if(onetime == false){
                     respuestaNombre = insertarNombre.transform.Find("Text").GetComponent<Text>();
+                    GridBuildingSystem.respuestaNombreSample = respuestaNombre.text;
                     insertarNombre.SetActive(false);
                     lineIndex = 1;
                     NextDialogueLine();
