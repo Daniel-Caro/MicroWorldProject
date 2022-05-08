@@ -60,6 +60,11 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
+        if(DialogueStart.respuestaNombre != null){
+            GameObject.Find("/SampleSceneObject/UI/StatsBlock/Coins").GetComponent<TextMeshProUGUI>().text = DialogueStart.respuestaNombre.text;
+        }
+        
+
         Globals.townHallId = GameObject.Find("House4").GetInstanceID();
         if (!Globals.buildingDataDic.ContainsKey(Globals.townHallId))
         {

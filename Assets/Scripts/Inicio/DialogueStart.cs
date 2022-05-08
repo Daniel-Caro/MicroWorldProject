@@ -26,7 +26,7 @@ public class DialogueStart : MonoBehaviour
     private Button enviarEdad;
     private Text respuestaEdad;
     private Button enviarNombre;
-    private Text respuestaNombre;
+    public static Text respuestaNombre;
     private Text respuestaPanel1; 
     private Text respuestaPanel3;
     private List<int> decisiones = new List<int>();
