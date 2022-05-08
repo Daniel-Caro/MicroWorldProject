@@ -78,17 +78,17 @@ public class ControladorEscena : MonoBehaviour
             GameObject personajePrincesa = GameObject.Find("/SceneController/personajes/personajePrincesa");
             personajePrincesa.SetActive(atributo);
             GameObject sueloPrincesa = GameObject.Find("/SceneController/suelos/sueloPrincesa");
-            sueloPrincesa.SetActive(atributo);
+            sueloPrincesa.GetComponent<Animator>().enabled = atributo;
         }else if(Globals.style == Style.Pirate){
             GameObject personajePirata = GameObject.Find("/SceneController/personajes/personajePirata");
             personajePirata.SetActive(atributo);
             GameObject sueloPirata = GameObject.Find("/SceneController/suelos/sueloPirata");
-            sueloPirata.SetActive(atributo);
+            sueloPirata.GetComponent<Animator>().enabled = atributo;
         }else if (Globals.style == Style.Future){
             GameObject personajeFuturo = GameObject.Find("/SceneController/personajes/personajeFuturo");
             personajeFuturo.SetActive(atributo);
             GameObject sueloFuturo = GameObject.Find("/SceneController/suelos/sueloFuturo");
-            sueloFuturo.SetActive(atributo);
+            sueloFuturo.GetComponent<Animator>().enabled = atributo;
         }
         obstaculoScript.enMovimiento = atributo;
     }
