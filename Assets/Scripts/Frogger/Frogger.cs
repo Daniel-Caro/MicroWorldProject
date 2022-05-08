@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using System.Linq;
 public class Frogger : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
@@ -12,6 +13,10 @@ public class Frogger : MonoBehaviour
     public Sprite deadSpriteFuture;
     public Sprite idleSpriteFuture;
     public string type;
+    public static bool haMuerto = false;
+    public GameObject gameOverText;
+    public GameObject secondChanceText;
+    private bool coroutineCalled = false;
     // Start is called before the first frame update
     private void Awake(){
         spriteRenderer = GetComponent<SpriteRenderer>(); 
@@ -86,6 +91,31 @@ public class Frogger : MonoBehaviour
             GameObject image = GameObject.Find("/Canvas/Image");
             image.SetActive(false);
         }
+        haMuerto = true;
+         if (Globals.restartGameBoost)
+            {
+                Globals.restartGameBoost = false;
+                haMuerto = false;
+                StartCoroutine(secondChance());
+            }
+            else
+            {
+                Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
+                if (Globals.doubleCoinsBoost)
+                {
+                    Globals.gameResources["Coins"].currentR += Globals.obtainedCoins * 2;
+                    Globals.doubleCoinsBoost = false;
+                }
+                else Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
+                Globals.obtainedCoins = 0;
+                gameOverText.SetActive(true);
+                if (!coroutineCalled)
+                {
+                    StartCoroutine(changeScene());
+                    Debug.Log("after calling corot");
+                    coroutineCalled = true;
+                }
+            }
         transform.rotation = Quaternion.identity;
         enabled = false;
     }
@@ -99,6 +129,25 @@ public class Frogger : MonoBehaviour
             Death();
             TimerFrogger.timeLeft = 0f;
         }
+    }
+    IEnumerator changeScene() {
+        Debug.Log("Empieza la corrutina");
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Termina el tiempo");
+        Scene mainScene = SceneManager.GetSceneByName("SampleScene");
+        SceneManager.SetActiveScene(mainScene);
+        mainScene.GetRootGameObjects().First().gameObject.SetActive(true);
+        SceneManager.UnloadSceneAsync("froggerScene");
+    }
+
+    IEnumerator secondChance() {
+        Debug.Log("Empieza la corrutina");
+        secondChanceText.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        secondChanceText.SetActive(false);
+        SceneManager.UnloadSceneAsync("froggerScene");
+        SceneManager.LoadScene("froggerScene", LoadSceneMode.Additive);
+        Debug.Log("Termina el tiempo");
     }
     
 }
