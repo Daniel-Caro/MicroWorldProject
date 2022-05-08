@@ -28,6 +28,12 @@ public class saltosVerticalesGenerator : MonoBehaviour
     public GameObject princessBack1;
     public GameObject princessBack2;
 
+    //Musicas
+    public AudioSource futureMusic;
+    public AudioSource pirateMusic;
+    public AudioSource princessMusic; 
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -41,16 +47,19 @@ public class saltosVerticalesGenerator : MonoBehaviour
                 GameObject.Find("PirateBackground1").SetActive(false);
                 GameObject.Find("PrincessBackground1").SetActive(false);
                 platformPrefab.GetComponent<SpriteRenderer>().sprite = futurePlatform;
+                futureMusic.gameObject.SetActive(true);
                 break;
             case (Style.Pirate):
                 GameObject.Find("FutureBackground1").SetActive(false);
                 GameObject.Find("PrincessBackground1").SetActive(false);
                 platformPrefab.GetComponent<SpriteRenderer>().sprite = piratePlatform;
+                pirateMusic.gameObject.SetActive(true);
                 break;
             case (Style.Princess):
                 GameObject.Find("PirateBackground1").SetActive(false);
                 GameObject.Find("FutureBackground1").SetActive(false);
                 platformPrefab.GetComponent<SpriteRenderer>().sprite = princessPlatform;
+                princessMusic.gameObject.SetActive(true);
                 break;
         }
         for (int j = 1; j < 210; j++){

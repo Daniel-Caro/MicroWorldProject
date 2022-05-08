@@ -50,7 +50,12 @@ public class AssociationBoard : MonoBehaviour
     public Sprite dotRedPrincessShiny; 
     public Sprite dotYellowPrincessShiny; 
     public Sprite dotBluePrincessShiny; 
-    public Sprite dotGreenPrincessShiny;       
+    public Sprite dotGreenPrincessShiny;
+
+    //Sounds
+    public AudioSource futureMusic;
+    public AudioSource pirateMusic;
+    public AudioSource princessMusic;   
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +80,7 @@ public class AssociationBoard : MonoBehaviour
                 dots[2].GetComponent<AssociationDot>().shinySprite = dotBluePirateShiny;
                 dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenPirate;
                 dots[3].GetComponent<AssociationDot>().shinySprite = dotGreenPirateShiny;
+                pirateMusic.gameObject.SetActive(true);
                 break;
             case Style.Future:
                 GameObject.Find("backgroundPrincess").SetActive(false);
@@ -87,6 +93,7 @@ public class AssociationBoard : MonoBehaviour
                 dots[2].GetComponent<AssociationDot>().shinySprite = dotBlueFutureShiny;
                 dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenFuture;
                 dots[3].GetComponent<AssociationDot>().shinySprite = dotGreenFutureShiny;
+                futureMusic.gameObject.SetActive(true);
                 break;
             case Style.Princess:
                 GameObject.Find("backgroundFuture").SetActive(false);
@@ -99,6 +106,7 @@ public class AssociationBoard : MonoBehaviour
                 dots[2].GetComponent<AssociationDot>().shinySprite = dotBluePrincessShiny;
                 dots[3].GetComponent<SpriteRenderer>().sprite = dotGreenPrincess;
                 dots[3].GetComponent<AssociationDot>().shinySprite = dotGreenPrincessShiny;
+                princessMusic.gameObject.SetActive(true);
                 break;
             default:
                 break;

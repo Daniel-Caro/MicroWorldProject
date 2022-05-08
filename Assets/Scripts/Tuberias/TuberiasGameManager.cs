@@ -14,6 +14,11 @@ public class TuberiasGameManager : MonoBehaviour
     public Sprite coinSpritePirate;
     public Sprite coinSpritePrincess;
 
+    //Sounds
+    public AudioSource futureMusic;
+    public AudioSource pirateMusic;
+    public AudioSource princessMusic; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +40,7 @@ public class TuberiasGameManager : MonoBehaviour
                 GameObject.Find("PrincessBackground").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesFuture");
                 coinPrefab.GetComponent<SpriteRenderer>().sprite = coinSpriteFuture;
+                futureMusic.gameObject.SetActive(true);
                 break;
             case(Style.Pirate):
                 GameObject.Find("startPipePrincess").SetActive(false);
@@ -45,6 +51,7 @@ public class TuberiasGameManager : MonoBehaviour
                 GameObject.Find("FutureBackground").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesPirate");
                 coinPrefab.GetComponent<SpriteRenderer>().sprite = coinSpritePirate;
+                pirateMusic.gameObject.SetActive(true);
                 break;
             case(Style.Princess):
                 GameObject.Find("startPipePirate").SetActive(false);
@@ -55,6 +62,7 @@ public class TuberiasGameManager : MonoBehaviour
                 GameObject.Find("FutureBackground").SetActive(false);
                 drySpriteHolder = GameObject.Find("emptyPipesPrincess");
                 coinPrefab.GetComponent<SpriteRenderer>().sprite = coinSpritePrincess;
+                princessMusic.gameObject.SetActive(true);
                 break;
         }
         noWaterPipes = new GameObject[4];

@@ -44,6 +44,11 @@ public class GridBuildingSystem : MonoBehaviour
     public Sprite moneyPirate;
     public Sprite moneyPrincess;
     public Sprite moneyFuture;
+
+    //Sounds
+    public AudioSource futureMusic;
+    public AudioSource pirateMusic;
+    public AudioSource princessMusic;
     
     
     #region Unity Methods
@@ -124,6 +129,7 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build1").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = houseFuture;
                 shop.transform.Find("Build2").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = bankFuture;
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryFuture;
+                futureMusic.gameObject.SetActive(true);
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(137/255f,80/255f,54/255f);
                 break;
             }
@@ -158,6 +164,7 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build1").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = housePirate;
                 shop.transform.Find("Build2").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = bankPirate;
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryPirate;
+                pirateMusic.gameObject.SetActive(true);
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(82/255f,185/255f,242/255f);
                 break;
 
@@ -202,6 +209,7 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build1").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = housePrincess;
                 shop.transform.Find("Build2").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = bankPrincess;
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryPrincess;
+                princessMusic.gameObject.SetActive(true);
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(28/255f,143/255f,74/255f);
                 break;
             }
