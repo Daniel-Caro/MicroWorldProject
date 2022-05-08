@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class platformScript : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class platformScript : MonoBehaviour
                     Globals.obtainedCoins += 1;
                     hasCoin = false;
                     coinSound.Play();
+                    GameObject.Find("CoinCounter").GetComponent<TextMeshProUGUI>().text = "Monedas: " + Globals.obtainedCoins.ToString();
                 } 
             }
         }
