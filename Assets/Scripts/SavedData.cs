@@ -8,6 +8,7 @@ public class SavedData
     //Variables de guardado
     public int style;
     public int tutorialStep;
+    public int nextId;
     public int[] resourcesQuantities;
     public bool[] minigameAccess;
     public int moneyCapacity;
@@ -40,8 +41,9 @@ public class SavedData
     //Constructor de clase de guardado
     public SavedData()
     {
-        style = Globals.style.GetHashCode();
+        style = (int) Globals.style;
         tutorialStep = Globals.tutorialStep;
+        nextId = Globals.nextId;
         resourcesQuantities[0] = Globals.gameResources["Coins"].currentR;
         resourcesQuantities[1] = Globals.gameResources["Minions"].currentR;
         minigameAccess = new bool[Globals.minigameAccess.Count];

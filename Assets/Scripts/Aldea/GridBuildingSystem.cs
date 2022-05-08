@@ -140,8 +140,6 @@ public class GridBuildingSystem : MonoBehaviour
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(137/255f,80/255f,54/255f);
                 break;
             }
-                
-
             case(Style.Pirate):
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_concha"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_estrella"));
@@ -229,15 +227,94 @@ public class GridBuildingSystem : MonoBehaviour
         reiniciarCollider(GameObject.Find("House2").transform.Find("building2").gameObject);
         reiniciarCollider(GameObject.Find("House3").transform.Find("building3").gameObject);
         reiniciarCollider(GameObject.Find("House4").transform.Find("Townhall").gameObject);
+        BoundsInt area = new BoundsInt(-15,-15,0,29,29,1);
+        BoundsInt green_area = new BoundsInt(-4,-4,0,7,7,1);
+        SetTilesBlock(area, TileType.White, MainTileMap);
+        SetTilesBlock(green_area, TileType.Green, MainTileMap);
         GameObject.Find("House").SetActive(false);
         GameObject.Find("House2").transform.Find("money").gameObject.SetActive(false);
         GameObject.Find("House2").SetActive(false);
         GameObject.Find("House3").SetActive(false);
         shop.SetActive(false);
-        BoundsInt area = new BoundsInt(-15,-15,0,29,29,1);
-        BoundsInt green_area = new BoundsInt(-4,-4,0,7,7,1);
-        SetTilesBlock(area, TileType.White, MainTileMap);
-        SetTilesBlock(green_area, TileType.Green, MainTileMap);
+        SavedData savedData = SaveManager.LoadGameData();
+        if (savedData != null) //Existen datos de guardado
+        {
+            Globals.style = (Style) savedData.style;
+            Globals.tutorialStep = savedData.tutorialStep;
+            Globals.nextId = savedData.nextId;
+            Globals.gameResources["Coins"].currentR = savedData.resourcesQuantities[0];
+            Globals.gameResources["Minions"].currentR = savedData.resourcesQuantities[1];
+            Globals.minigameAccess["Pipes"] = savedData.minigameAccess[0];
+            Globals.minigameAccess["Frogger"] = savedData.minigameAccess[1];
+            Globals.minigameAccess["Association"] = savedData.minigameAccess[2];
+            Globals.minigameAccess["Memory"] = savedData.minigameAccess[3];
+            Globals.minigameAccess["Jumps"] = savedData.minigameAccess[4];
+            Globals.minigameAccess["Flappy"] = savedData.minigameAccess[5];
+            Globals.moneyCapacity = savedData.moneyCapacity;
+            Globals.minionCapacity = savedData.minionCapacity;
+            int i = 0;
+            while (i < savedData.keysBuildingDataDic.Count())
+            {
+                if (Globals.buildingDataDic.ContainsKey(savedData.keysBuildingDataDic[i])) continue;
+                Globals.buildingDataDic.Add(savedData.keysBuildingDataDic[i], new Dictionary<string, string>(){
+                    {"Type", savedData.typesBuildingDataDic[i]},
+                    {"Level", savedData.levelsBuildingDataDic[i]}
+                });
+                i++;
+            }
+            i = 0;
+            while (i < savedData.keysBuildingPositions.Count())
+            {
+                if (Globals.buildingPositions.ContainsKey(savedData.keysBuildingPositions[i])) continue;
+                Globals.buildingPositions.Add(savedData.keysBuildingPositions[i], new Vector3(savedData.buildingPositionsX[i], savedData.buildingPositionsY[i], savedData.buildingPositionsZ[i]));
+                i++;
+            }
+            Globals.buildingTypesDic["House"].AddRange(savedData.houseIds);
+            Globals.buildingTypesDic["Bank"].AddRange(savedData.bankIds);
+            Globals.buildingTypesDic["Factory"].AddRange(savedData.factoryIds);
+            i = 0;
+            while (i < savedData.keysBankDataDic.Count())
+            {
+                if (Globals.bankDataDic.ContainsKey(savedData.keysBankDataDic[i])) continue;
+                Globals.bankDataDic.Add(savedData.keysBankDataDic[i], new Dictionary<string, int>(){
+                    {"Storage", savedData.storageBankDataDic[i]},
+                    {"Quantity", savedData.quantityBankDataDic[i]},
+                    {"Accumulated", savedData.accumulatedBankDataDic[i]}
+                });
+                i++;
+            }
+            i = 0;
+            while (i < savedData.keysFactoryDataDic.Count())
+            {
+                if (Globals.factoryDataDic.ContainsKey(savedData.keysFactoryDataDic[i])) continue;
+                Globals.factoryDataDic.Add(savedData.keysFactoryDataDic[i], new Dictionary<int, int>(){
+                    {1, savedData.tier1FactoryDataDic[i]},
+                    {2, savedData.tier2FactoryDataDic[i]},
+                    {3, savedData.tier3FactoryDataDic[i]},
+                    {4, savedData.tier4FactoryDataDic[i]}
+                });
+                i++;
+            }
+            i = 0;
+            while (i < savedData.keysColaFactoria.Count())
+            {
+                if (Globals.colaFactoria.ContainsKey(savedData.keysColaFactoria[i])) continue;
+                Globals.colaFactoria.Add(savedData.keysColaFactoria[i], savedData.valuesColaFactoria[i].ToList());
+                i++;
+            }
+            Globals.minionsQuantity[1] = savedData.minionsQuantity[0];
+            Globals.minionsQuantity[2] = savedData.minionsQuantity[1];
+            Globals.minionsQuantity[3] = savedData.minionsQuantity[2];
+            Globals.minionsQuantity[4] = savedData.minionsQuantity[3];
+            i = 0;
+            while (i < savedData.keysHouseDataDic.Count())
+            {
+                if (Globals.houseDataDic.ContainsKey(savedData.keysHouseDataDic[i])) continue;
+                Globals.houseDataDic.Add(savedData.keysHouseDataDic[i], savedData.valuesHouseDataDic[i]);
+                i++;
+            }
+
+        }
         StartCoroutine(saveDataCoroutine());
     }
 
@@ -489,7 +566,7 @@ public class GridBuildingSystem : MonoBehaviour
         SaveManager.SaveGameData();
         StartCoroutine(saveDataCoroutine());
     }
-    
+
     #endregion
     
 }
