@@ -7,7 +7,9 @@ public enum Style {Future,Pirate,Princess}
 
 public class Globals
 {
-    public static Style style = Style.Future;
+
+    public static Style style = Style.Princess;
+
 
     public static int tutorialStep = 15;
 

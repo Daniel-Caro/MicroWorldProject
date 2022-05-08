@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: {fileID: 3094323605202842483}
+  audioMoneda: {fileID: 0}
 --- !u!1 &6094955432832159036
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a509bad7f2bf9ed4584d34857624244a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 0.5
+  velocidad: 1
 --- !u!1 &7036248990635866461
 GameObject:
   m_ObjectHideFlags: 0

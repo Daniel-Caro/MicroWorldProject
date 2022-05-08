@@ -19,7 +19,7 @@ public class puntajeScript : MonoBehaviour
     }
     
     public static void meterMonedas(){
-        Globals.gameResources["Coins"].currentR += monedasGanadas;
+        Globals.obtainedCoins += monedasGanadas;
         Debug.Log(Globals.gameResources["Coins"].currentR);
     }
 }
