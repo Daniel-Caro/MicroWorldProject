@@ -94,6 +94,7 @@ public class GridBuildingSystem : MonoBehaviour
         switch(Globals.style){
 
             case(Style.Future): 
+            {
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter1"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_alter2"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "future_basic"));
@@ -116,11 +117,17 @@ public class GridBuildingSystem : MonoBehaviour
                 GameObject.Find("House2").transform.Find("money").gameObject.GetComponent<SpriteRenderer>().sprite = moneyFuture;
                 GameObject.Find("House3").transform.Find("building3").gameObject.GetComponent<SpriteRenderer>().sprite = factoryFuture;
                 GameObject.Find("House4").transform.Find("Townhall").gameObject.GetComponent<SpriteRenderer>().sprite = townHallFuture;
+                //Vector3 scale = GameObject.Find("House4").transform.Find("Townhall").transform.localScale;
+                Vector3 pos = GameObject.Find("House4").transform.Find("Townhall").transform.position;
+                GameObject.Find("House4").transform.Find("Townhall").transform.localScale = new Vector3(1.124288f, 1.097079f, 1.124288f);
+                GameObject.Find("House4").transform.Find("Townhall").transform.position = new Vector3(0.01f, 2.6f, pos.z);
                 shop.transform.Find("Build1").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = houseFuture;
                 shop.transform.Find("Build2").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = bankFuture;
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryFuture;
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(137/255f,80/255f,54/255f);
                 break;
+            }
+                
 
             case(Style.Pirate):
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_concha"));
@@ -155,6 +162,7 @@ public class GridBuildingSystem : MonoBehaviour
                 break;
 
             case(Style.Princess):
+            {
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
@@ -196,6 +204,8 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryPrincess;
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(28/255f,143/255f,74/255f);
                 break;
+            }
+                
         }
         GameObject.Find("House").SetActive(false);
         GameObject.Find("House2").transform.Find("money").gameObject.SetActive(false);

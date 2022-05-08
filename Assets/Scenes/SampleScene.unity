@@ -17132,11 +17132,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5650177417714718581, guid: a38583dbec8a137469cbf12ed664d312, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5650177417714718581, guid: a38583dbec8a137469cbf12ed664d312, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5650177417714718581, guid: a38583dbec8a137469cbf12ed664d312, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20132,13 +20132,13 @@ MonoBehaviour:
   noSound: {fileID: 1202963118}
   housePirate: {fileID: 21300000, guid: 6463a139a1ba79c418a69005f019dccb, type: 3}
   housePrincess: {fileID: 21300000, guid: 070cb2199569d8f4bb36eb26aa31be4c, type: 3}
-  houseFuture: {fileID: 21300000, guid: 31795edf6e8e9cd4ab716ce143e406c8, type: 3}
+  houseFuture: {fileID: 21300000, guid: 96ef966a20ba5bb4fb2932514cd8e414, type: 3}
   bankPirate: {fileID: 21300000, guid: 80f6cc9352c9fa5469e14894fdfea4e7, type: 3}
   bankPrincess: {fileID: 21300000, guid: c183f5c3e2a32ef4aa0c7a55aaa65bd5, type: 3}
-  bankFuture: {fileID: 21300000, guid: 9f2dfcdc147e0794f9f5a43ee8c4a1ed, type: 3}
+  bankFuture: {fileID: 21300000, guid: eee5f647bc3be8c46b6a9b54014a8665, type: 3}
   factoryPirate: {fileID: 21300000, guid: 6e9457325f176c643886accb594c1dfd, type: 3}
   factoryPrincess: {fileID: 21300000, guid: 14c345f11f4e8b14f951c415629ca12d, type: 3}
-  factoryFuture: {fileID: 21300000, guid: 894ff2cfe870f0f4484b88b4e385d0f4, type: 3}
+  factoryFuture: {fileID: 21300000, guid: aa82c71100b8ab74a90a58f977168719, type: 3}
   townHallPirate: {fileID: 21300000, guid: b0629d59b5a106040b9b650062361136, type: 3}
   townHallPrincess: {fileID: 21300000, guid: 32a849c6fb1736044bde49cf70154ce8, type: 3}
   townHallFuture: {fileID: 21300000, guid: d7ded372ff0ed8947ab28d8de9007b11, type: 3}
