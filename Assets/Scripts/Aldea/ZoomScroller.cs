@@ -17,7 +17,9 @@ public class ZoomScroller : MonoBehaviour
     
     void Update()
     {
-        if(ZoomCamera == null) ZoomCamera = Camera.main;
+
+        if (ZoomCamera == null) ZoomCamera = Camera.main;
+
         if(ZoomCamera.orthographicSize <= 16f && ZoomCamera.orthographicSize >= 7f){
             ZoomCamera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * ScrollSpeed;
             if(ZoomCamera.orthographicSize > 16f){
