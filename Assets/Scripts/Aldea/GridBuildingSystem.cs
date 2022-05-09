@@ -231,10 +231,6 @@ public class GridBuildingSystem : MonoBehaviour
         BoundsInt green_area = new BoundsInt(-4,-4,0,7,7,1);
         SetTilesBlock(area, TileType.White, MainTileMap);
         SetTilesBlock(green_area, TileType.Green, MainTileMap);
-        GameObject.Find("House").SetActive(false);
-        GameObject.Find("House2").transform.Find("money").gameObject.SetActive(false);
-        GameObject.Find("House2").SetActive(false);
-        GameObject.Find("House3").SetActive(false);
         shop.SetActive(false);
         SavedData savedData = SaveManager.LoadGameData();
         if (savedData != null) //Existen datos de guardado
@@ -255,7 +251,11 @@ public class GridBuildingSystem : MonoBehaviour
             int i = 0;
             while (i < savedData.keysBuildingDataDic.Count())
             {
-                if (Globals.buildingDataDic.ContainsKey(savedData.keysBuildingDataDic[i])) continue;
+                if (Globals.buildingDataDic.ContainsKey(savedData.keysBuildingDataDic[i]))
+                {
+                    i++;
+                    continue;
+                }
                 Globals.buildingDataDic.Add(savedData.keysBuildingDataDic[i], new Dictionary<string, string>(){
                     {"Type", savedData.typesBuildingDataDic[i]},
                     {"Level", savedData.levelsBuildingDataDic[i]}
@@ -265,7 +265,11 @@ public class GridBuildingSystem : MonoBehaviour
             i = 0;
             while (i < savedData.keysBuildingPositions.Count())
             {
-                if (Globals.buildingPositions.ContainsKey(savedData.keysBuildingPositions[i])) continue;
+                if (Globals.buildingPositions.ContainsKey(savedData.keysBuildingPositions[i])) 
+                {
+                    i++;
+                    continue;
+                }
                 Globals.buildingPositions.Add(savedData.keysBuildingPositions[i], new Vector3(savedData.buildingPositionsX[i], savedData.buildingPositionsY[i], savedData.buildingPositionsZ[i]));
                 i++;
             }
@@ -275,7 +279,11 @@ public class GridBuildingSystem : MonoBehaviour
             i = 0;
             while (i < savedData.keysBankDataDic.Count())
             {
-                if (Globals.bankDataDic.ContainsKey(savedData.keysBankDataDic[i])) continue;
+                if (Globals.bankDataDic.ContainsKey(savedData.keysBankDataDic[i]))
+                {
+                    i++;
+                    continue;
+                }
                 Globals.bankDataDic.Add(savedData.keysBankDataDic[i], new Dictionary<string, int>(){
                     {"Storage", savedData.storageBankDataDic[i]},
                     {"Quantity", savedData.quantityBankDataDic[i]},
@@ -286,7 +294,11 @@ public class GridBuildingSystem : MonoBehaviour
             i = 0;
             while (i < savedData.keysFactoryDataDic.Count())
             {
-                if (Globals.factoryDataDic.ContainsKey(savedData.keysFactoryDataDic[i])) continue;
+                if (Globals.factoryDataDic.ContainsKey(savedData.keysFactoryDataDic[i]))
+                {
+                    i++;
+                    continue;
+                }
                 Globals.factoryDataDic.Add(savedData.keysFactoryDataDic[i], new Dictionary<int, int>(){
                     {1, savedData.tier1FactoryDataDic[i]},
                     {2, savedData.tier2FactoryDataDic[i]},
@@ -298,7 +310,11 @@ public class GridBuildingSystem : MonoBehaviour
             i = 0;
             while (i < savedData.keysColaFactoria.Count())
             {
-                if (Globals.colaFactoria.ContainsKey(savedData.keysColaFactoria[i])) continue;
+                if (Globals.colaFactoria.ContainsKey(savedData.keysColaFactoria[i]))
+                {
+                    i++;
+                    continue;
+                }
                 Globals.colaFactoria.Add(savedData.keysColaFactoria[i], savedData.valuesColaFactoria[i].ToList());
                 i++;
             }
@@ -309,12 +325,45 @@ public class GridBuildingSystem : MonoBehaviour
             i = 0;
             while (i < savedData.keysHouseDataDic.Count())
             {
-                if (Globals.houseDataDic.ContainsKey(savedData.keysHouseDataDic[i])) continue;
+                if (Globals.houseDataDic.ContainsKey(savedData.keysHouseDataDic[i]))
+                {
+                    i++;
+                    continue;
+                }
                 Globals.houseDataDic.Add(savedData.keysHouseDataDic[i], savedData.valuesHouseDataDic[i]);
                 i++;
             }
-
+            //Una vez cargados los datos tenemos que volver a poner los edificios
+            //buildingGeneral = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            foreach(KeyValuePair<int, Vector3> entry in Globals.buildingPositions)
+            {
+                GameObject building = null;
+                switch (Globals.buildingDataDic[entry.Key]["Type"])
+                {
+                    case "House":
+                        building = GameObject.Find("House");
+                        break;
+                    case "Bank":
+                        building = GameObject.Find("House2");
+                        break;
+                    case "Factory":
+                        building = GameObject.Find("House3");
+                        break;
+                }
+                GameObject realBuilding = Instantiate(building, new Vector3(entry.Value.x, entry.Value.y, entry.Value.z), Quaternion.identity);
+                var temp = realBuilding.GetComponent<Building>();
+                temp.Place();
+                BuildScript buildingData = realBuilding.GetComponent<BuildScript>();
+                buildingData.id = entry.Key;
+                buildingData.level = Int32.Parse(Globals.buildingDataDic[entry.Key]["Level"]);
+                if (Globals.buildingDataDic[entry.Key]["Type"] == "Bank") realBuilding.GetComponent<BankProduction>().BeginProducing(realBuilding);
+                Destroy(temp);
+            }
         }
+        GameObject.Find("House").SetActive(false);
+        GameObject.Find("House2").transform.Find("money").gameObject.SetActive(false);
+        GameObject.Find("House2").SetActive(false);
+        GameObject.Find("House3").SetActive(false);
         StartCoroutine(saveDataCoroutine());
     }
 
@@ -564,6 +613,7 @@ public class GridBuildingSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(15f);
         SaveManager.SaveGameData();
+        Debug.Log("Se han guardado los datos");
         StartCoroutine(saveDataCoroutine());
     }
 

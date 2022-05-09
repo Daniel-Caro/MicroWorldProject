@@ -13,15 +13,18 @@ public class BankProduction : MonoBehaviour
     public int storage;
     public GameObject imageCoin;
     private bool producing;
-    private CancellationTokenSource cts;
+    public CancellationTokenSource cts;
 
     public void BeginProducing(GameObject building){
-        Dictionary<string, int> bankInitialProperties = new Dictionary<string, int>();
-        bankInitialProperties.Add("Storage", storage);
-        bankInitialProperties.Add("Quantity", quantity);
-        bankInitialProperties.Add("Accumulated", 0);
-        Globals.moneyCapacity += storage;
-        Globals.bankDataDic.Add(building.GetComponent<BuildScript>().id, bankInitialProperties);
+        if (!Globals.bankDataDic.ContainsKey(building.GetComponent<BuildScript>().id))
+        {
+            Dictionary<string, int> bankInitialProperties = new Dictionary<string, int>();
+            bankInitialProperties.Add("Storage", storage);
+            bankInitialProperties.Add("Quantity", quantity);
+            bankInitialProperties.Add("Accumulated", 0);
+            Globals.moneyCapacity += storage;
+            Globals.bankDataDic.Add(building.GetComponent<BuildScript>().id, bankInitialProperties);
+        }
         cts = new CancellationTokenSource();
         CancellationToken token = cts.Token;
         Produce(building, token);

@@ -9,7 +9,7 @@ public class SavedData
     public int style;
     public int tutorialStep;
     public int nextId;
-    public int[] resourcesQuantities;
+    public int[] resourcesQuantities = new int[2];
     public bool[] minigameAccess;
     public int moneyCapacity;
     public int minionCapacity;
@@ -67,6 +67,9 @@ public class SavedData
         factoryIds = Globals.buildingTypesDic["Factory"].ToArray();
         //BuildingPositions
         keysBuildingPositions = new int[Globals.buildingPositions.Count];
+        buildingPositionsX = new float[Globals.buildingPositions.Count];
+        buildingPositionsY = new float[Globals.buildingPositions.Count];
+        buildingPositionsZ = new float[Globals.buildingPositions.Count];
         Globals.buildingPositions.Keys.CopyTo(keysBuildingPositions, 0);
         i = 0;
         foreach(KeyValuePair<int, Vector3> entry in Globals.buildingPositions)
