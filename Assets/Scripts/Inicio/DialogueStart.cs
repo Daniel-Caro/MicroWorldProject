@@ -26,7 +26,7 @@ public class DialogueStart : MonoBehaviour
     private Button enviarEdad;
     private Text respuestaEdad;
     private Button enviarNombre;
-    private Text respuestaNombre;
+    public static Text respuestaNombre;
     private Text respuestaPanel1; 
     private Text respuestaPanel3;
     private List<int> decisiones = new List<int>();
@@ -284,6 +284,7 @@ public class DialogueStart : MonoBehaviour
             enviarNombre.onClick.AddListener(() => {
                 if(onetime == false){
                     respuestaNombre = insertarNombre.transform.Find("Text").GetComponent<Text>();
+                    GridBuildingSystem.respuestaNombreSample = respuestaNombre.text;
                     insertarNombre.SetActive(false);
                     lineIndex = 1;
                     NextDialogueLine();

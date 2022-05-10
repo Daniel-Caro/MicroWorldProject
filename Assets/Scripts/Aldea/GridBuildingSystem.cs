@@ -27,6 +27,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     private GameObject darkPanel;
     private GameObject openBuilds;
+    public static string respuestaNombreSample;
 
     //Sprites
     public Sprite housePirate;
@@ -65,7 +66,20 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
-        //Globals.townHallId = GameObject.Find("House4").GetInstanceID();
+        if(respuestaNombreSample != null){
+            Debug.Log(respuestaNombreSample);
+            GameObject.Find("/SampleSceneObject/UI/StatsBlock/Coins").GetComponent<TextMeshProUGUI>().text = respuestaNombreSample;
+        }
+        if(Globals.style == Style.Princess){
+            GameObject.Find("/SampleSceneObject/UI/StatsBlock/diamante").SetActive(true);
+        }else if(Globals.style == Style.Pirate){
+            GameObject.Find("/SampleSceneObject/UI/StatsBlock/piratacoin").SetActive(true);
+        }else if(Globals.style == Style.Future){
+            GameObject.Find("/SampleSceneObject/UI/StatsBlock/chip").SetActive(true);
+        }
+        
+
+        Globals.townHallId = GameObject.Find("House4").GetInstanceID();
         if (!Globals.buildingDataDic.ContainsKey(Globals.townHallId))
         {
             Debug.Log("Cargar diccionario edificios");
@@ -136,10 +150,11 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryFuture;
                 futureMusic.gameObject.SetActive(true);
                 futureBackground.SetActive(true);
-                GameObject.Find("StatsBlock").transform.Find("CoinsImg").gameObject.GetComponent<Image>().sprite = moneyFuture;
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(137/255f,80/255f,54/255f);
                 break;
             }
+                
+
             case(Style.Pirate):
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_concha"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_estrella"));
@@ -171,7 +186,6 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryPirate;
                 pirateMusic.gameObject.SetActive(true);
                 pirateBackground.SetActive(true);
-                GameObject.Find("StatsBlock").transform.Find("CoinsImg").gameObject.GetComponent<Image>().sprite = moneyPirate;
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(82/255f,185/255f,242/255f);
                 break;
 
@@ -216,7 +230,6 @@ public class GridBuildingSystem : MonoBehaviour
                 shop.transform.Find("Build1").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = housePrincess;
                 shop.transform.Find("Build2").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = bankPrincess;
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryPrincess;
-                GameObject.Find("StatsBlock").transform.Find("CoinsImg").gameObject.GetComponent<Image>().sprite = moneyPrincess;
                 princessMusic.gameObject.SetActive(true);
                 princessBackground.SetActive(true);
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(28/255f,143/255f,74/255f);
@@ -227,154 +240,15 @@ public class GridBuildingSystem : MonoBehaviour
         reiniciarCollider(GameObject.Find("House2").transform.Find("building2").gameObject);
         reiniciarCollider(GameObject.Find("House3").transform.Find("building3").gameObject);
         reiniciarCollider(GameObject.Find("House4").transform.Find("Townhall").gameObject);
-        BoundsInt area = new BoundsInt(-15,-15,0,29,29,1);
-        BoundsInt green_area = new BoundsInt(-4,-4,0,7,7,1);
-        SetTilesBlock(area, TileType.White, MainTileMap);
-        SetTilesBlock(green_area, TileType.Green, MainTileMap);
-        shop.SetActive(false);
-        SavedData savedData = SaveManager.LoadGameData();
-        if (savedData != null) //Existen datos de guardado
-        {
-            Globals.style = (Style) savedData.style;
-            Globals.tutorialStep = savedData.tutorialStep;
-            Globals.nextId = savedData.nextId;
-            Globals.gameResources["Coins"].currentR = savedData.resourcesQuantities[0];
-            Globals.gameResources["Minions"].currentR = savedData.resourcesQuantities[1];
-            Globals.minigameAccess["Pipes"] = savedData.minigameAccess[0];
-            Globals.minigameAccess["Frogger"] = savedData.minigameAccess[1];
-            Globals.minigameAccess["Association"] = savedData.minigameAccess[2];
-            Globals.minigameAccess["Memory"] = savedData.minigameAccess[3];
-            Globals.minigameAccess["Jumps"] = savedData.minigameAccess[4];
-            Globals.minigameAccess["Flappy"] = savedData.minigameAccess[5];
-            Globals.moneyCapacity = savedData.moneyCapacity;
-            Globals.minionCapacity = savedData.minionCapacity;
-            int i = 0;
-            while (i < savedData.keysBuildingDataDic.Count())
-            {
-                if (Globals.buildingDataDic.ContainsKey(savedData.keysBuildingDataDic[i]))
-                {
-                    i++;
-                    continue;
-                }
-                Globals.buildingDataDic.Add(savedData.keysBuildingDataDic[i], new Dictionary<string, string>(){
-                    {"Type", savedData.typesBuildingDataDic[i]},
-                    {"Level", savedData.levelsBuildingDataDic[i]}
-                });
-                i++;
-            }
-            i = 0;
-            while (i < savedData.keysBuildingPositions.Count())
-            {
-                if (Globals.buildingPositions.ContainsKey(savedData.keysBuildingPositions[i])) 
-                {
-                    i++;
-                    continue;
-                }
-                Globals.buildingPositions.Add(savedData.keysBuildingPositions[i], new Vector3(savedData.buildingPositionsX[i], savedData.buildingPositionsY[i], savedData.buildingPositionsZ[i]));
-                i++;
-            }
-            Globals.buildingTypesDic["House"].AddRange(savedData.houseIds);
-            Globals.buildingTypesDic["Bank"].AddRange(savedData.bankIds);
-            Globals.buildingTypesDic["Factory"].AddRange(savedData.factoryIds);
-            i = 0;
-            while (i < savedData.keysBankDataDic.Count())
-            {
-                if (Globals.bankDataDic.ContainsKey(savedData.keysBankDataDic[i]))
-                {
-                    i++;
-                    continue;
-                }
-                Globals.bankDataDic.Add(savedData.keysBankDataDic[i], new Dictionary<string, int>(){
-                    {"Storage", savedData.storageBankDataDic[i]},
-                    {"Quantity", savedData.quantityBankDataDic[i]},
-                    {"Accumulated", savedData.accumulatedBankDataDic[i]}
-                });
-                i++;
-            }
-            i = 0;
-            while (i < savedData.keysFactoryDataDic.Count())
-            {
-                if (Globals.factoryDataDic.ContainsKey(savedData.keysFactoryDataDic[i]))
-                {
-                    i++;
-                    continue;
-                }
-                Globals.factoryDataDic.Add(savedData.keysFactoryDataDic[i], new Dictionary<int, int>(){
-                    {1, savedData.tier1FactoryDataDic[i]},
-                    {2, savedData.tier2FactoryDataDic[i]},
-                    {3, savedData.tier3FactoryDataDic[i]},
-                    {4, savedData.tier4FactoryDataDic[i]}
-                });
-                i++;
-            }
-            i = 0;
-            while (i < savedData.keysColaFactoria.Count())
-            {
-                if (Globals.colaFactoria.ContainsKey(savedData.keysColaFactoria[i]))
-                {
-                    i++;
-                    continue;
-                }
-                Globals.colaFactoria.Add(savedData.keysColaFactoria[i], savedData.valuesColaFactoria[i].ToList());
-                i++;
-            }
-            Globals.minionsQuantity[1] = savedData.minionsQuantity[0];
-            Globals.minionsQuantity[2] = savedData.minionsQuantity[1];
-            Globals.minionsQuantity[3] = savedData.minionsQuantity[2];
-            Globals.minionsQuantity[4] = savedData.minionsQuantity[3];
-            i = 0;
-            while (i < savedData.keysHouseDataDic.Count())
-            {
-                if (Globals.houseDataDic.ContainsKey(savedData.keysHouseDataDic[i]))
-                {
-                    i++;
-                    continue;
-                }
-                Globals.houseDataDic.Add(savedData.keysHouseDataDic[i], savedData.valuesHouseDataDic[i]);
-                i++;
-            }
-            //Una vez cargados los datos tenemos que volver a poner los edificios
-            foreach(KeyValuePair<int, Vector3> entry in Globals.buildingPositions)
-            {
-                GameObject building = null;
-                switch (Globals.buildingDataDic[entry.Key]["Type"])
-                {
-                    case "House":
-                        building = GameObject.Find("House");
-                        break;
-                    case "Bank":
-                        building = GameObject.Find("House2");
-                        break;
-                    case "Factory":
-                        building = GameObject.Find("House3");
-                        break;
-                }
-                GameObject realBuilding = Instantiate(building, new Vector3(entry.Value.x, entry.Value.y, entry.Value.z), Quaternion.identity);
-                var temp = realBuilding.GetComponent<Building>();
-                temp.Place();
-                BuildScript buildingData = realBuilding.GetComponent<BuildScript>();
-                buildingData.id = entry.Key;
-                buildingData.level = Int32.Parse(Globals.buildingDataDic[entry.Key]["Level"]);
-                var diffInSeconds = (DateTime.Now - savedData.savedTime).TotalSeconds;
-                if (Globals.buildingDataDic[entry.Key]["Type"] == "Bank")
-                {
-                    BankProduction bankInfo = realBuilding.GetComponent<BankProduction>();
-                    bankInfo.BeginProducing(realBuilding);
-                    int coinsProduced = (int) (diffInSeconds * bankInfo.quantity) / bankInfo.time;
-                    if (coinsProduced > 0)
-                    {
-                        if (Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced > Globals.bankDataDic[buildingData.id]["Storage"]) Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Storage"];
-                        else Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced;
-                    }
-                }
-                Destroy(temp);
-            }
-        }
         GameObject.Find("House").SetActive(false);
         GameObject.Find("House2").transform.Find("money").gameObject.SetActive(false);
         GameObject.Find("House2").SetActive(false);
         GameObject.Find("House3").SetActive(false);
-        StartCoroutine(saveDataCoroutine());
+        shop.SetActive(false);
+        BoundsInt area = new BoundsInt(-15,-15,0,29,29,1);
+        BoundsInt green_area = new BoundsInt(-4,-4,0,7,7,1);
+        SetTilesBlock(area, TileType.White, MainTileMap);
+        SetTilesBlock(green_area, TileType.Green, MainTileMap);
     }
 
     void Update()
@@ -436,18 +310,15 @@ public class GridBuildingSystem : MonoBehaviour
                 Transform spriteTransform = temp.transform.GetChild(0).gameObject.GetComponent<Transform>();
                 spriteTransform.position = new Vector3(spriteTransform.position.x, spriteTransform.position.y, objectTransform.position.y/0.55f);
                 constructionSound.Play();
-                Globals.buildingPositions.Add(Globals.nextId, temp.transform.position);
                 temp.Place();
                 buildingPicked = false;
                 BuildScript buildingData = buildingGeneral.GetComponent<BuildScript>();
-                buildingData.id = Globals.nextId;
-                Globals.nextId += 1;
                 Globals.gameResources["Coins"].DedactResources(buildingData.cost);
                 Dictionary<string, string> buildingDataEntry = new Dictionary<string, string>();
                 buildingDataEntry.Add("Type", buildingData.type);
                 buildingDataEntry.Add("Level", buildingData.level.ToString());
-                Globals.buildingDataDic.Add(buildingData.id, buildingDataEntry);
-                Globals.buildingTypesDic[buildingData.type].Add(buildingData.id);
+                Globals.buildingDataDic.Add(buildingGeneral.GetInstanceID(), buildingDataEntry);
+                Globals.buildingTypesDic[buildingData.type].Add(buildingGeneral.GetInstanceID());
                 if (buildingData.type == "Bank") buildingGeneral.GetComponent<BankProduction>().BeginProducing(buildingGeneral);
                 else if (buildingData.type == "Factory") {
                     buildingGeneral.GetComponent<MinionProduction>().RegisterFactory(buildingGeneral);
@@ -618,15 +489,6 @@ public class GridBuildingSystem : MonoBehaviour
         Destroy(building.GetComponent<PolygonCollider2D>());
         building.AddComponent<PolygonCollider2D>();
     }
-
-    IEnumerator saveDataCoroutine()
-    {
-        yield return new WaitForSeconds(15f);
-        SaveManager.SaveGameData();
-        Debug.Log("Se han guardado los datos");
-        StartCoroutine(saveDataCoroutine());
-    }
-
     #endregion
     
 }
