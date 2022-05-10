@@ -75,7 +75,6 @@ public class TutorialScript : MonoBehaviour
         character = GameObject.Find("Character");
         dialogText = GameObject.Find("TutorialText").gameObject.GetComponent<TextMeshProUGUI>();
         openBuilds = GameObject.Find("OpenBuilds").gameObject;
-        
         switch (Globals.style)
         {
             case Style.Future:
@@ -100,7 +99,6 @@ public class TutorialScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (Globals.tutorialStep <= 14)
