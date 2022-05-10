@@ -328,6 +328,28 @@ public class GridBuildingSystem : MonoBehaviour
                 Globals.colaFactoria.Add(savedData.keysColaFactoria[i], savedData.valuesColaFactoria[i].ToList());
                 i++;
             }
+            i = 0;
+            while (i < savedData.keysFactoryProducingDic.Count())
+            {
+                if (Globals.factoryProducingDic.ContainsKey(savedData.keysFactoryProducingDic[i]))
+                {
+                    i++;
+                    continue;
+                }
+                Globals.factoryProducingDic.Add(savedData.keysFactoryProducingDic[i], savedData.valuesFactoryProducingDic[i]);
+                i++;
+            }
+            i = 0;
+            while (i < savedData.keysFactoryMinionBeingProducedDic.Count())
+            {
+                if (Globals.factoryMinionBeingProducedDic.ContainsKey(savedData.keysFactoryMinionBeingProducedDic[i]))
+                {
+                    i++;
+                    continue;
+                }
+                Globals.factoryMinionBeingProducedDic.Add(savedData.keysFactoryMinionBeingProducedDic[i], savedData.valuesFactoryMinionBeingProducedDic[i]);
+                i++;
+            }
             Globals.minionsQuantity[1] = savedData.minionsQuantity[0];
             Globals.minionsQuantity[2] = savedData.minionsQuantity[1];
             Globals.minionsQuantity[3] = savedData.minionsQuantity[2];
@@ -375,6 +397,36 @@ public class GridBuildingSystem : MonoBehaviour
                     {
                         if (Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced > Globals.bankDataDic[buildingData.id]["Storage"]) Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Storage"];
                         else Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced;
+                    }
+                }
+                else if (Globals.buildingDataDic[entry.Key]["Type"] == "Factory")
+                {
+                    MinionProduction factoryInfo = realBuilding.GetComponent<MinionProduction>();
+                    if (savedData.minionSecondsLeft < diffInSeconds && Globals.factoryMinionBeingProducedDic[buildingData.id] != 0) //El minion que estaba en cola se ha hecho
+                    {
+                        Globals.factoryDataDic[buildingData.id][Globals.factoryMinionBeingProducedDic[buildingData.id]]++;
+                        diffInSeconds = diffInSeconds - savedData.minionSecondsLeft;
+                        while (diffInSeconds >= 500 && Globals.colaFactoria[buildingData.id].Count > 0)
+                        {
+                            int nextMinion = Globals.colaFactoria[buildingData.id][0];
+                            Globals.factoryDataDic[buildingData.id][nextMinion]++;
+                            Globals.colaFactoria[buildingData.id].RemoveAt(0);
+                            diffInSeconds= diffInSeconds - 500;
+                        }
+                        if (Globals.colaFactoria[buildingData.id].Count > 0) //Aun quedan minions por producir
+                        {
+                            double timeLeft = 500 - diffInSeconds;
+                            StartCoroutine(factoryInfo.produceMinionParcialTime(buildingData.id, Globals.colaFactoria[buildingData.id][0], timeLeft));
+                        }
+                        else
+                        {
+                            Globals.factoryProducingDic[buildingData.id] = false;
+                        }
+                    }
+                    else if (Globals.factoryMinionBeingProducedDic[buildingData.id] != 0)
+                    {
+                        double timeLeft = 500 - diffInSeconds;
+                        StartCoroutine(factoryInfo.produceMinionParcialTime(buildingData.id, Globals.factoryMinionBeingProducedDic[buildingData.id], timeLeft));
                     }
                 }
                 Destroy(temp);

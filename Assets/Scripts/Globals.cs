@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Style {Future,Pirate,Princess}
 
@@ -35,6 +37,7 @@ public class Globals
     public static int townHallId = 0;
     public static int nextId = 1;
     public static System.Random random = new System.Random();
+    public static Stopwatch stopwatch = new Stopwatch();
 
 
     public static Dictionary<int, Dictionary<string, string>> buildingDataDic = new Dictionary<int, Dictionary<string, string>>();  // Clave: ID instancia edificio Valor: diccionario con valores de tipo, nivel y coste
@@ -71,7 +74,8 @@ public class Globals
     public static Dictionary<int,int> minionsQuantity = new Dictionary<int,int>(); // Clave Tier minion: Valor cantidad minions
     public static Dictionary<int, int> houseDataDic = new Dictionary<int, int>(); //
     public static Dictionary<int,bool> factoryProducingDic = new Dictionary<int,bool>(); //Clave ID Factoria: Valor Si esta produciendo en ese momento
-
+    public static Dictionary<int,int> factoryMinionBeingProducedDic = new Dictionary<int,int>();
+    
     //VARIABLES COMUNES MINIJUEGOS
     public static int obtainedCoins;
 

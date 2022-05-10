@@ -36,6 +36,7 @@ public class MinionProduction : MonoBehaviour
         Globals.factoryDataDic.Add(building.GetComponent<BuildScript>().id, factoryInitialProperties);
         Globals.colaFactoria.Add(building.GetComponent<BuildScript>().id, cola);
         Globals.factoryProducingDic.Add(building.GetComponent<BuildScript>().id, false);
+        Globals.factoryMinionBeingProducedDic.Add(building.GetComponent<BuildScript>().id,0);
         Debug.Log("El id de la nueva factoria  es"+ building.GetComponent<BuildScript>().id);
         
     }
@@ -114,7 +115,10 @@ public class MinionProduction : MonoBehaviour
                         if (text.Equals("Tier1")){
                             Debug.Log("Se produce minion tier 1");
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id] = true;
+                            Globals.stopwatch.Start();
+                            Globals.factoryMinionBeingProducedDic[building.GetComponent<BuildScript>().id] = 1;
                             await Task.Delay(TimeSpan.FromSeconds(time)); //20 minutos 
+                            Globals.stopwatch.Reset();
                             Debug.Log("Se ha producido minion tier 1");
                             Globals.factoryDataDic[building.GetComponent<BuildScript>().id][1] += 1;
                             Debug.Log(Globals.factoryDataDic[building.GetComponent<BuildScript>().id][1]);
@@ -123,7 +127,10 @@ public class MinionProduction : MonoBehaviour
                         else if (text.Equals("Tier2") && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"])>= 4){
                             Debug.Log("Se produce minion tier 2");
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id] = true;
-                            await Task.Delay(TimeSpan.FromSeconds(time*60)); //20 minutos 
+                            Globals.stopwatch.Start();
+                            Globals.factoryMinionBeingProducedDic[building.GetComponent<BuildScript>().id] = 2;
+                            await Task.Delay(TimeSpan.FromSeconds(time*60)); //20 minutos
+                            Globals.stopwatch.Reset();
                             Globals.factoryDataDic[building.GetComponent<BuildScript>().id][2] += 1;
                             Debug.Log(Globals.factoryDataDic[building.GetComponent<BuildScript>().id][2]);
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id]  = false;
@@ -131,7 +138,10 @@ public class MinionProduction : MonoBehaviour
                         else if (text.Equals("Tier3") && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 7){
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id] = true;
                             Debug.Log("Se produce minion tier 3");
+                            Globals.stopwatch.Start();
+                            Globals.factoryMinionBeingProducedDic[building.GetComponent<BuildScript>().id] = 3;
                             await Task.Delay(TimeSpan.FromSeconds(time*60)); //20 minutos 
+                            Globals.stopwatch.Reset();
                             Globals.factoryDataDic[building.GetComponent<BuildScript>().id][3] += 1;
                             Debug.Log(Globals.factoryDataDic[building.GetComponent<BuildScript>().id][3]);
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id]  = false;
@@ -139,7 +149,10 @@ public class MinionProduction : MonoBehaviour
                         else if (text.Equals("Tier4") && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 10){
                             Debug.Log("Se produce minion tier 4");
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id] = true;
+                            Globals.stopwatch.Start();
+                            Globals.factoryMinionBeingProducedDic[building.GetComponent<BuildScript>().id] = 4;
                             await Task.Delay(TimeSpan.FromSeconds(time*60)); //20 minutos 
+                            Globals.stopwatch.Reset();
                             Globals.factoryDataDic[building.GetComponent<BuildScript>().id][4] += 1;
                             Debug.Log(Globals.factoryDataDic[building.GetComponent<BuildScript>().id][4]);
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id]  = false;
@@ -264,42 +277,58 @@ public class MinionProduction : MonoBehaviour
     {
         foreach(int factoryId in Globals.factoryDataDic.Keys){
             if(Globals.colaFactoria[factoryId].Count> 0 && Globals.factoryProducingDic[factoryId] == false){
-                        int miniontoproduce =Globals.colaFactoria[factoryId][0];
-                        if (miniontoproduce == 1){
-                            Debug.Log("Se produce minion desde cola tier 1");
-                            Globals.factoryProducingDic[factoryId] = true;
-                            StartCoroutine(waitToDo(factoryId,1));//20 minutos 
-                            
-                        }
-                        else if (miniontoproduce == 2 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 4){
-                            Debug.Log("Se produce minion desde cola tier 2");
-                            Globals.factoryProducingDic[factoryId] = true;
-                            StartCoroutine(waitToDo(factoryId,2)); //20 minutos 
-                        }
-                        else if (miniontoproduce== 3 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 7){
-                            Globals.factoryProducingDic[factoryId] = true;
-                            Debug.Log("Se produce minion desde cola tier 3");
-                            StartCoroutine(waitToDo(factoryId,3)); //20 minutos 
-                            
-                        }
-                        else if (miniontoproduce == 4 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 10){
-                            Debug.Log("Se produce minion desde cola tier 4");
-                            Globals.factoryProducingDic[factoryId] = true;
-                            StartCoroutine(waitToDo(factoryId,4)); //20 minutos 
-                            
-                        }
+                int miniontoproduce =Globals.colaFactoria[factoryId][0];
+                Globals.factoryMinionBeingProducedDic[factoryId] = miniontoproduce;
+                if (miniontoproduce == 1){
+                    Debug.Log("Se produce minion desde cola tier 1");
+                    Globals.factoryProducingDic[factoryId] = true;
+                    StartCoroutine(waitToDo(factoryId,1));//20 minutos 
+                    
+                }
+                else if (miniontoproduce == 2 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 4){
+                    Debug.Log("Se produce minion desde cola tier 2");
+                    Globals.factoryProducingDic[factoryId] = true;
+                    StartCoroutine(waitToDo(factoryId,2)); //20 minutos 
+                }
+                else if (miniontoproduce== 3 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 7){
+                    Globals.factoryProducingDic[factoryId] = true;
+                    Debug.Log("Se produce minion desde cola tier 3");
+                    StartCoroutine(waitToDo(factoryId,3)); //20 minutos 
+                    
+                }
+                else if (miniontoproduce == 4 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 10){
+                    Debug.Log("Se produce minion desde cola tier 4");
+                    Globals.factoryProducingDic[factoryId] = true;
+                    StartCoroutine(waitToDo(factoryId,4)); //20 minutos 
+                    
+                }
+            }
+            else if (Globals.factoryProducingDic[factoryId] == false)
+            {
+                Globals.factoryMinionBeingProducedDic[factoryId] = 0;
             }   
         }
     
     }
     IEnumerator waitToDo(int factoria,int tier) {
-        
+        Globals.stopwatch.Start();
         yield return new WaitForSeconds(500f);
+        Globals.stopwatch.Reset();
         Globals.factoryDataDic[factoria][tier] += 1;
         Debug.Log(Globals.factoryDataDic[factoria][1]);
         Globals.colaFactoria[factoria].RemoveAt(0);
         Globals.factoryProducingDic[factoria]  = false;
-        
+    }
+
+    public IEnumerator produceMinionParcialTime(int id, int tier,double time) {
+        Globals.factoryProducingDic[id]  = true;
+        Globals.stopwatch.Start();
+        yield return new WaitForSeconds((float)time);
+        Globals.stopwatch.Reset();
+        Globals.factoryDataDic[id][tier] += 1;
+        Debug.Log(Globals.factoryDataDic[id][1]);
+        Globals.colaFactoria[id].RemoveAt(0);
+        Globals.factoryProducingDic[id]  = false;
     }
     
 }

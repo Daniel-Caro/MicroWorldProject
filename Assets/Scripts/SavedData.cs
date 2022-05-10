@@ -35,10 +35,15 @@ public class SavedData
     public int[] tier4FactoryDataDic;
     public int[] keysColaFactoria;
     public int[][] valuesColaFactoria;
+    public int[] keysFactoryProducingDic;
+    public bool[] valuesFactoryProducingDic;
+    public int [] keysFactoryMinionBeingProducedDic;
+    public int [] valuesFactoryMinionBeingProducedDic;
     public int[] minionsQuantity;
     public int[] keysHouseDataDic;
     public int[] valuesHouseDataDic;
     public DateTime savedTime;
+    public float minionSecondsLeft;
 
     //Constructor de clase de guardado
     public SavedData()
@@ -122,6 +127,21 @@ public class SavedData
             valuesColaFactoria[i] = entry.Value.ToArray();
             i++;
         }
+        //FactoriaProducing
+        keysFactoryProducingDic = new int[Globals.factoryProducingDic.Count];
+        Globals.factoryProducingDic.Keys.CopyTo(keysFactoryProducingDic, 0);
+        valuesFactoryProducingDic = new bool[Globals.factoryProducingDic.Count];
+        i = 0;
+        foreach(KeyValuePair<int, bool> entry in Globals.factoryProducingDic)
+        {
+            valuesFactoryProducingDic[i] = entry.Value;
+            i++;
+        }
+        //MinionBeingProduced
+        keysFactoryMinionBeingProducedDic = new int[Globals.factoryMinionBeingProducedDic.Count];
+        valuesFactoryMinionBeingProducedDic = new int[Globals.factoryMinionBeingProducedDic.Count];
+        Globals.factoryMinionBeingProducedDic.Keys.CopyTo(keysFactoryMinionBeingProducedDic, 0);
+        Globals.factoryMinionBeingProducedDic.Values.CopyTo(valuesFactoryMinionBeingProducedDic, 0);
         //MinionsQuiantities
         minionsQuantity = new int[Globals.minionsQuantity.Count];
         Globals.minionsQuantity.Values.CopyTo(minionsQuantity, 0);
@@ -130,5 +150,9 @@ public class SavedData
         valuesHouseDataDic = new int[Globals.houseDataDic.Count];
         Globals.houseDataDic.Values.CopyTo(valuesHouseDataDic, 0);
         Globals.houseDataDic.Keys.CopyTo(keysHouseDataDic, 0);
+        if (Globals.stopwatch.IsRunning)
+        {
+            minionSecondsLeft =  (float)(500f - Globals.stopwatch.Elapsed.TotalSeconds);
+        }
     }
 }
