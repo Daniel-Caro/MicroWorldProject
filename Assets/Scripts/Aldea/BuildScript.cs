@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class BuildScript : MonoBehaviour//, IClick
 {
-    public int id;
     public GameObject panel;
     public GameObject thisBuilding;
     private GameObject building;
@@ -27,13 +26,11 @@ public class BuildScript : MonoBehaviour//, IClick
     private GameObject buildingPanel;
     private GameObject factoryPanel;
     private GameObject housePanel;
-    private GameObject closePanel;
     void Start() {
         GameObject uiuiuiui = GameObject.Find("UI").gameObject;
         buildingPanel = FindObject(uiuiuiui,"InfoBuildingPanel").gameObject;
         factoryPanel = FindObject(uiuiuiui,"InfoMinionPanel").gameObject;
         housePanel = FindObject(uiuiuiui,"InfoHousePanel").gameObject;
-        closePanel = FindObject(uiuiuiui, "CloseGameFunction").gameObject;
     }
 
     void Update()
@@ -43,13 +40,13 @@ public class BuildScript : MonoBehaviour//, IClick
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             //Debug.Log(hit.collider.gameObject.transform.parent.gameObject.GetInstanceID());
-            if (hit.collider != null && !buildingPanel.activeSelf &&!factoryPanel.activeSelf && !housePanel.activeSelf && !closePanel.activeSelf && (Globals.tutorialStep>=14 || Globals.tutorialStep==10 || Globals.tutorialStep==11))
+            if (hit.collider != null && !buildingPanel.activeSelf &&!factoryPanel.activeSelf && !housePanel.activeSelf && (Globals.tutorialStep>=14 || Globals.tutorialStep==10 || Globals.tutorialStep==11))
             {
                 if(hit.collider.gameObject.tag == "building"){
                     building = hit.collider.gameObject.transform.parent.gameObject;
-                    if (building.GetComponent<BuildScript>().id != thisBuilding.GetComponent<BuildScript>().id) return;
-                    type = Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Type"];
-                    level = Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]);
+                    if (building.GetInstanceID() != thisBuilding.GetInstanceID()) return;
+                    type = Globals.buildingDataDic[building.GetInstanceID()]["Type"];
+                    level = Int32.Parse(Globals.buildingDataDic[building.GetInstanceID()]["Level"]);
                     cost = Globals.buildingCostsDic[type].ElementAt(level);
                     if (type == "Bank"){
                         if (bankProduction.HarvestResource(building)){
@@ -62,7 +59,7 @@ public class BuildScript : MonoBehaviour//, IClick
                     }else if (type == "Factory"){
                         if(minionProduction.HarvestResource(building) == true){
                             building.transform.Find("pngwing.com (2)").gameObject.SetActive(false);
-                            Dictionary<int,int> buildingFactory = Globals.factoryDataDic[building.GetComponent<BuildScript>().id];
+                            Dictionary<int,int> buildingFactory = Globals.factoryDataDic[building.GetInstanceID()];
                             if(Globals.houseDataDic.Count == 0  ){
                                 Debug.Log("No hay casas aun construidas");
                             }else{
@@ -219,7 +216,7 @@ public class BuildScript : MonoBehaviour//, IClick
         }
         tier2button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier2button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            if(Globals.gameResources["Coins"].currentR >= 500&& Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 4 && minionProduction.storageComplete() == false){
+            if(Globals.gameResources["Coins"].currentR >= 500&& Int32.Parse(Globals.buildingDataDic[building.GetInstanceID()]["Level"]) >= 4 && minionProduction.storageComplete() == false){
                 Globals.gameResources["Coins"].currentR -= 500;
                 minionProduction.Produce(building, "Tier2");
             }else{
@@ -247,7 +244,7 @@ public class BuildScript : MonoBehaviour//, IClick
         
         tier3button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier3button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            if(Globals.gameResources["Coins"].currentR >= 1000 && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 7 && minionProduction.storageComplete() == false){
+            if(Globals.gameResources["Coins"].currentR >= 1000 && Int32.Parse(Globals.buildingDataDic[building.GetInstanceID()]["Level"]) >= 7 && minionProduction.storageComplete() == false){
                 Globals.gameResources["Coins"].currentR -= 1000;
                 minionProduction.Produce(building, "Tier3");
             }else{
@@ -274,7 +271,7 @@ public class BuildScript : MonoBehaviour//, IClick
         }
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-             if(Globals.gameResources["Coins"].currentR >= 2000 && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 10 && minionProduction.storageComplete() == false){
+             if(Globals.gameResources["Coins"].currentR >= 2000 && Int32.Parse(Globals.buildingDataDic[building.GetInstanceID()]["Level"]) >= 10 && minionProduction.storageComplete() == false){
                 Globals.gameResources["Coins"].currentR -= 2000;
                 minionProduction.Produce(building, "Tier4");
             }else{
@@ -314,7 +311,7 @@ public class BuildScript : MonoBehaviour//, IClick
             if (type == "TownHall") LevelUp();
             else if (level+1 <= Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"]))
             {
-                if (Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Type"] == "Bank") bankProduction.chooseAttribute(building, panel, this);
+                if (Globals.buildingDataDic[building.GetInstanceID()]["Type"] == "Bank") bankProduction.chooseAttribute(building, panel, this);
                 else LevelUp();
             }
             else noSound.Play();
@@ -327,9 +324,9 @@ public class BuildScript : MonoBehaviour//, IClick
 
     public void LevelUp(){
         level++;
-        Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"] = level.ToString();
-        if(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Type"] == "House"){
-            Globals.houseDataDic[building.GetComponent<BuildScript>().id] += 1;
+        Globals.buildingDataDic[building.GetInstanceID()]["Level"] = level.ToString();
+        if(Globals.buildingDataDic[building.GetInstanceID()]["Type"] == "House"){
+            Globals.houseDataDic[building.GetInstanceID()] += 1;
         }
         Globals.gameResources["Coins"].DedactResources(cost);
 

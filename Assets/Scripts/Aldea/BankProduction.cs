@@ -13,18 +13,15 @@ public class BankProduction : MonoBehaviour
     public int storage;
     public GameObject imageCoin;
     private bool producing;
-    public CancellationTokenSource cts;
+    private CancellationTokenSource cts;
 
     public void BeginProducing(GameObject building){
-        if (!Globals.bankDataDic.ContainsKey(building.GetComponent<BuildScript>().id))
-        {
-            Dictionary<string, int> bankInitialProperties = new Dictionary<string, int>();
-            bankInitialProperties.Add("Storage", storage);
-            bankInitialProperties.Add("Quantity", quantity);
-            bankInitialProperties.Add("Accumulated", 0);
-            Globals.moneyCapacity += storage;
-            Globals.bankDataDic.Add(building.GetComponent<BuildScript>().id, bankInitialProperties);
-        }
+        Dictionary<string, int> bankInitialProperties = new Dictionary<string, int>();
+        bankInitialProperties.Add("Storage", storage);
+        bankInitialProperties.Add("Quantity", quantity);
+        bankInitialProperties.Add("Accumulated", 0);
+        Globals.moneyCapacity += storage;
+        Globals.bankDataDic.Add(building.GetInstanceID(), bankInitialProperties);
         cts = new CancellationTokenSource();
         CancellationToken token = cts.Token;
         Produce(building, token);
@@ -32,15 +29,15 @@ public class BankProduction : MonoBehaviour
 
     public async void Produce(GameObject building, CancellationToken token)
     {
-        while (Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Storage"] > Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"]) //Condicional de parada si se llena el almacenamiento
+        while (Globals.bankDataDic[building.GetInstanceID()]["Storage"] > Globals.bankDataDic[building.GetInstanceID()]["Accumulated"]) //Condicional de parada si se llena el almacenamiento
         {
             producing = true;
             await Task.Delay(TimeSpan.FromSeconds(time));
-            int accumulated = Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"];
-            int storage = Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Storage"];
-            int quantity = Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Quantity"];
-            if (accumulated + quantity > storage) Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] = storage; //añadir if de almacenamiento
-            else Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] += quantity;
+            int accumulated = Globals.bankDataDic[building.GetInstanceID()]["Accumulated"];
+            int storage = Globals.bankDataDic[building.GetInstanceID()]["Storage"];
+            int quantity = Globals.bankDataDic[building.GetInstanceID()]["Quantity"];
+            if (accumulated + quantity > storage) Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] = storage; //añadir if de almacenamiento
+            else Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] += quantity;
 
             imageCoin.SetActive(true);
             Debug.Log("activasion de monedas");
@@ -54,12 +51,12 @@ public class BankProduction : MonoBehaviour
     }
     
     public bool HarvestResource(GameObject building){
-        if (Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] > 0){
+        if (Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] > 0){
             
             int left = 0;
-            if (Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] > Globals.moneyCapacity) left = Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] - Globals.moneyCapacity;
-            Globals.gameResources["Coins"].AddResource(Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"]);
-            Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] = left;
+            if (Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] > Globals.moneyCapacity) left = Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] - Globals.moneyCapacity;
+            Globals.gameResources["Coins"].AddResource(Globals.bankDataDic[building.GetInstanceID()]["Accumulated"]);
+            Globals.bankDataDic[building.GetInstanceID()]["Accumulated"] = left;
             cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
             if(!producing) Produce(building, token);
@@ -71,7 +68,7 @@ public class BankProduction : MonoBehaviour
     public void chooseAttribute(GameObject building, GameObject panel, BuildScript buildScript){
         GameObject choosePanel = panel.transform.Find("ChoosingPanel").gameObject;
         choosePanel.SetActive(true);
-        Dictionary<string, int> bankData = Globals.bankDataDic[building.GetComponent<BuildScript>().id];
+        Dictionary<string, int> bankData = Globals.bankDataDic[building.GetInstanceID()];
         int storage = bankData["Storage"];
         int quantity = bankData["Quantity"];
         GameObject storageButton = choosePanel.transform.Find("StorageButton").gameObject;
@@ -80,7 +77,7 @@ public class BankProduction : MonoBehaviour
         quantityButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = quantity.ToString() + " > " + (quantity+3).ToString();
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Storage"] = storage + 500;
+            Globals.bankDataDic[building.GetInstanceID()]["Storage"] = storage + 500;
             Globals.moneyCapacity += 500;
             cts.Cancel();
             cts = new CancellationTokenSource();
@@ -91,7 +88,7 @@ public class BankProduction : MonoBehaviour
         });
         quantityButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         quantityButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Quantity"] = quantity + 3;
+            Globals.bankDataDic[building.GetInstanceID()]["Quantity"] = quantity + 3;
             cts.Cancel();
             cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;

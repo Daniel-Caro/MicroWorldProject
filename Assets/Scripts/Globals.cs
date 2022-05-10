@@ -8,8 +8,8 @@ public enum Style {Future,Pirate,Princess}
 public class Globals
 {
 
-    public static Style style = Style.Future;
-    public static int nextId = 1;
+    public static Style style = Style.Pirate;
+
 
     public static int tutorialStep = 15;
 
@@ -32,17 +32,17 @@ public class Globals
 
     public static int moneyCapacity = 100000;
     public static int minionCapacity = 2;
-    public static int townHallId = 0;
+    public static int townHallId;
     public static System.Random random = new System.Random();
 
 
-    public static Dictionary<int, Dictionary<string, string>> buildingDataDic = new Dictionary<int, Dictionary<string, string>>();  // Clave: ID a edificio Valor: diccionario con valores de tipo, nivel y coste
-    public static Dictionary<int, Vector3> buildingPositions = new Dictionary<int, Vector3>(); //Clave: id edificio, Valor: vector de posición del edificio
+    public static Dictionary<int, Dictionary<string, string>> buildingDataDic = new Dictionary<int, Dictionary<string, string>>();  // Clave: ID instancia edificio Valor: diccionario con valores de tipo, nivel y coste
+
     public static Dictionary<string, List<int>> buildingTypesDic = new Dictionary<string, List<int>>(){
         {"House", new List<int>()},
         {"Bank", new List<int>()},
         {"Factory", new List<int>()}
-    }; // Clave: tipo del edificio (House, Bank, Factory) edificio Valor: lista de ID edificio
+    }; // Clave: tipo del edificio (House, Bank, Factory) edificio Valor: lista de ID instancia edificio
     public static Dictionary<string, List<int>> buildingCostsDic = new Dictionary<string, List<int>>(){
         {"TownHall", new List<int> {3000, 3500, 4000, 4000, 4500, 5000, 5500, 6000, 6500, 7000}},
         {"House", new List<int> {1000, 1500, 2000, 2500, 3000, 3000, 3500, 4000, 5000, 5000}},
@@ -65,7 +65,7 @@ public class Globals
 
     public static Dictionary<int, Dictionary<string, int>> bankDataDic = new Dictionary<int, Dictionary<string, int>>(); // Clave: ID instancia edificio banco Valor: diccionario con valores de almacenamiento, cantidad que genera, acumulación en el edificio
     public static Dictionary<int, Dictionary<int, int>> factoryDataDic = new Dictionary<int, Dictionary<int, int>>(); //Minions que contiene la factoria
-
+  
     public static Dictionary<int, List<int>> colaFactoria = new Dictionary<int, List<int>>(); // Clave ID Factoria: Lista con cola de Minions por factoria
     public static Dictionary<int,int> minionsQuantity = new Dictionary<int,int>(); // Clave Tier minion: Valor cantidad minions
     public static Dictionary<int, int> houseDataDic = new Dictionary<int, int>(); //
@@ -73,6 +73,11 @@ public class Globals
 
     //VARIABLES COMUNES MINIJUEGOS
     public static int obtainedCoins;
+
+
     //MINIJUEGO TUBERIAS
     public static GameObject selectedPipe = null;
+
+
+
 }
