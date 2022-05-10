@@ -43,9 +43,9 @@ public class MinionProduction : MonoBehaviour
         Globals.houseDataDic.Add(building.GetInstanceID(), 1);
         Debug.Log("El id de la nueva casa es"+ building.GetInstanceID());
     }
-    public async void Produce(GameObject building, string text)
+    public async Task Produce(GameObject building, string text)
     {   
-        time = 5;
+        time = 100;
         int capacityExtra = 0;
         foreach(KeyValuePair<int,int> kv in Globals.houseDataDic){
             capacityExtra += kv.Value;
@@ -115,6 +115,7 @@ public class MinionProduction : MonoBehaviour
                             Debug.Log("Se produce minion tier 1");
                             Globals.factoryProducingDic[building.GetInstanceID()] = true;
                             await Task.Delay(TimeSpan.FromSeconds(time)); //20 minutos 
+                            Debug.Log("Se ha producido minion tier 1");
                             Globals.factoryDataDic[building.GetInstanceID()][1] += 1;
                             Debug.Log(Globals.factoryDataDic[building.GetInstanceID()][1]);
                             Globals.factoryProducingDic[building.GetInstanceID()]  = false;
