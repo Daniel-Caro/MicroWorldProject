@@ -128,7 +128,7 @@ public class TuberiasGameManager : MonoBehaviour
                     }
                     else
                     {
-                        if (Globals.selectedPipe.GetInstanceID() == pipe.GetInstanceID()) 
+                        if (Globals.selectedPipe.GetComponent<BuildScript>().id == pipe.GetComponent<BuildScript>().id) 
                         {
                             Globals.selectedPipe = null;
                             pipe.GetComponentInChildren<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
