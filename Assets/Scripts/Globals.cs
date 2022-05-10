@@ -14,7 +14,7 @@ public class Globals
     public static int tutorialStep = 15;
 
     public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>() {
-        {"Coins", new GameResource("Coins", 6000)},
+        {"Coins", new GameResource("Coins", 50000)},
         {"Minions", new GameResource("Minions", 0)}
     };
 
@@ -62,11 +62,14 @@ public class Globals
         {9, new Dictionary<string, int>{{"House", 4}, {"Bank", 4}, {"Factory", 3}}},
         {10, new Dictionary<string, int>{{"House", 5}, {"Bank", 4}, {"Factory", 3}}}
     };
-    public static Dictionary<int, Dictionary<string, int>> bankDataDic = new Dictionary<int, Dictionary<string, int>>(); // Clave: ID edificio banco Valor: diccionario con valores de almacenamiento, cantidad que genera, acumulación en el edificio
-    public static Dictionary<int, Dictionary<int, int>> factoryDataDic = new Dictionary<int, Dictionary<int, int>>(); //
+
+    public static Dictionary<int, Dictionary<string, int>> bankDataDic = new Dictionary<int, Dictionary<string, int>>(); // Clave: ID instancia edificio banco Valor: diccionario con valores de almacenamiento, cantidad que genera, acumulación en el edificio
+    public static Dictionary<int, Dictionary<int, int>> factoryDataDic = new Dictionary<int, Dictionary<int, int>>(); //Minions que contiene la factoria
+
     public static Dictionary<int, List<int>> colaFactoria = new Dictionary<int, List<int>>(); // Clave ID Factoria: Lista con cola de Minions por factoria
     public static Dictionary<int,int> minionsQuantity = new Dictionary<int,int>(); // Clave Tier minion: Valor cantidad minions
-    public static Dictionary<int, int> houseDataDic = new Dictionary<int, int>();
+    public static Dictionary<int, int> houseDataDic = new Dictionary<int, int>(); //
+    public static Dictionary<int,bool> factoryProducingDic = new Dictionary<int,bool>(); //Clave ID Factoria: Valor Si esta produciendo en ese momento
 
     //VARIABLES COMUNES MINIJUEGOS
     public static int obtainedCoins;
