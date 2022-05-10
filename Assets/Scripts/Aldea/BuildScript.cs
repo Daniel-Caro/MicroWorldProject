@@ -78,7 +78,7 @@ public class BuildScript : MonoBehaviour//, IClick
                                             Globals.minionsQuantity[i] += buildingFactory[i];
                                         }
                                         else Globals.minionsQuantity.Add(i,buildingFactory[i]);
-                                        Globals.factoryDataDic[building.GetInstanceID()][i] -= buildingFactory[i];
+                                        Globals.factoryDataDic[building.GetComponent<BuildScript>().id][i] -= buildingFactory[i];
                                         Debug.Log("Se recoge el minion");
                                     }else{
                                         Debug.Log("No tienes espacio para recoger esta cantidad de minions");

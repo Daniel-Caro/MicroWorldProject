@@ -77,9 +77,6 @@ public class GridBuildingSystem : MonoBehaviour
         }else if(Globals.style == Style.Future){
             GameObject.Find("/SampleSceneObject/UI/StatsBlock/chip").SetActive(true);
         }
-        
-
-        Globals.townHallId = GameObject.Find("House4").GetInstanceID();
         if (!Globals.buildingDataDic.ContainsKey(Globals.townHallId))
         {
             Debug.Log("Cargar diccionario edificios");
