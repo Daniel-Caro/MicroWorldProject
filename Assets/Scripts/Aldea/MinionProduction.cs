@@ -86,7 +86,7 @@ public class MinionProduction : MonoBehaviour
                             Globals.colaFactoria[building.GetComponent<BuildScript>().id].RemoveAt(0);
                             producing  = false;
                         }
-                        else if (miniontoproduce== 3 && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 7){
+                        else if (miniontoproduce == 3 && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 7){
                             producing = true;
                             Debug.Log("Se produce minion desde cola tier 3");
                             await Task.Delay(TimeSpan.FromSeconds(time*60)); //20 minutos 

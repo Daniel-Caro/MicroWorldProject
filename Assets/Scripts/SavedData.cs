@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,10 +38,12 @@ public class SavedData
     public int[] minionsQuantity;
     public int[] keysHouseDataDic;
     public int[] valuesHouseDataDic;
+    public DateTime savedTime;
 
     //Constructor de clase de guardado
     public SavedData()
     {
+        savedTime = DateTime.Now;
         style = (int) Globals.style;
         tutorialStep = Globals.tutorialStep;
         nextId = Globals.nextId;

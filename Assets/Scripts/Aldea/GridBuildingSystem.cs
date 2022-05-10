@@ -334,7 +334,6 @@ public class GridBuildingSystem : MonoBehaviour
                 i++;
             }
             //Una vez cargados los datos tenemos que volver a poner los edificios
-            //buildingGeneral = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity);
             foreach(KeyValuePair<int, Vector3> entry in Globals.buildingPositions)
             {
                 GameObject building = null;
@@ -356,7 +355,18 @@ public class GridBuildingSystem : MonoBehaviour
                 BuildScript buildingData = realBuilding.GetComponent<BuildScript>();
                 buildingData.id = entry.Key;
                 buildingData.level = Int32.Parse(Globals.buildingDataDic[entry.Key]["Level"]);
-                if (Globals.buildingDataDic[entry.Key]["Type"] == "Bank") realBuilding.GetComponent<BankProduction>().BeginProducing(realBuilding);
+                var diffInSeconds = (DateTime.Now - savedData.savedTime).TotalSeconds;
+                if (Globals.buildingDataDic[entry.Key]["Type"] == "Bank")
+                {
+                    BankProduction bankInfo = realBuilding.GetComponent<BankProduction>();
+                    bankInfo.BeginProducing(realBuilding);
+                    int coinsProduced = (int) (diffInSeconds * bankInfo.quantity) / bankInfo.time;
+                    if (coinsProduced > 0)
+                    {
+                        if (Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced > Globals.bankDataDic[buildingData.id]["Storage"]) Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Storage"];
+                        else Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced;
+                    }
+                }
                 Destroy(temp);
             }
         }
