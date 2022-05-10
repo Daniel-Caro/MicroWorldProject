@@ -29,6 +29,7 @@ public class BuildScript : MonoBehaviour//, IClick
     private GameObject housePanel;
     private GameObject infoPanel;
     private GameObject savePanel;
+    private GameObject settingsPanel;
     void Start() {
         GameObject uiuiuiui = GameObject.Find("UI").gameObject;
         buildingPanel = FindObject(uiuiuiui,"InfoBuildingPanel").gameObject;
@@ -36,6 +37,7 @@ public class BuildScript : MonoBehaviour//, IClick
         housePanel = FindObject(uiuiuiui,"InfoHousePanel").gameObject;
         infoPanel = FindObject(uiuiuiui, "InfoPanel").gameObject;
         savePanel = FindObject(uiuiuiui, "SaveGame").gameObject;
+        settingsPanel = FindObject(uiuiuiui, "SettingsPanel").gameObject;
     }
 
     void Update()
@@ -45,7 +47,7 @@ public class BuildScript : MonoBehaviour//, IClick
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             //Debug.Log(hit.collider.gameObject.transform.parent.gameObject.GetComponent<BuildScript>().id);
-            if (hit.collider != null && !buildingPanel.activeSelf &&!factoryPanel.activeSelf && !housePanel.activeSelf && !infoPanel.activeSelf && !savePanel.activeSelf && (Globals.tutorialStep>=14 || Globals.tutorialStep==10 || Globals.tutorialStep==11))
+            if (hit.collider != null && !buildingPanel.activeSelf && !factoryPanel.activeSelf && !housePanel.activeSelf && !infoPanel.activeSelf && !settingsPanel.activeSelf && !savePanel.activeSelf && (Globals.tutorialStep>=14 || Globals.tutorialStep==10 || Globals.tutorialStep==11))
             {
                 if(hit.collider.gameObject.tag == "building"){
                     building = hit.collider.gameObject.transform.parent.gameObject;

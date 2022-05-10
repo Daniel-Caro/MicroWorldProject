@@ -18756,7 +18756,7 @@ AudioSource:
   m_GameObject: {fileID: 496411170}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 977a461a2f4406443838fb2adb5a7b72, type: 2}
   m_audioClip: {fileID: 8300000, guid: f7eca6c533a485543b23c78f089a5e21, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.033
@@ -30674,7 +30674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PERDISTE! :(
+  m_text: 'RIP
 
 '
   m_isRightToLeft: 0
@@ -72252,7 +72252,7 @@ AudioSource:
   m_GameObject: {fileID: 1765462678}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f2ed0134e620502448ae422330ae3a48, type: 2}
   m_audioClip: {fileID: 8300000, guid: 35172a40c962cd5419e761820dc5db06, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.261
@@ -75109,7 +75109,7 @@ AudioSource:
   m_GameObject: {fileID: 1856839440}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 977a461a2f4406443838fb2adb5a7b72, type: 2}
   m_audioClip: {fileID: 8300000, guid: 530474d9391dd534781b2cbcd06203f1, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.033
@@ -87031,7 +87031,7 @@ AudioSource:
   m_GameObject: {fileID: 2108010788}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 977a461a2f4406443838fb2adb5a7b72, type: 2}
   m_audioClip: {fileID: 8300000, guid: 8ab9579df591bba44854bf43e9f14cf6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.033
