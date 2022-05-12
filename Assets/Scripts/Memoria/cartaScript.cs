@@ -8,7 +8,7 @@ public class cartaScript : MonoBehaviour
     [SerializeField] private GameObject Carta;
     [SerializeField] private SceneControlScript controller;
     public void OnMouseDown(){
-        if(Carta.activeSelf){
+        if(Carta.activeSelf && SceneControlScript.dosCartas == true){
             Carta.SetActive(false);
             controller.CardRevealed(this);
         }

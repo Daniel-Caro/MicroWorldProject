@@ -17,6 +17,7 @@ public class SceneControlScript : MonoBehaviour
     [SerializeField] private Sprite[] images;
     public int score = 0;
     private GameObject audioMoneda;
+    public static bool dosCartas = true;
     // Start is called before the first frame update
     void Start()
     {   
@@ -98,15 +99,11 @@ public class SceneControlScript : MonoBehaviour
         }
         return newArray;
     }
-    private cartaScript _firstRevealed;
-    private cartaScript _secondRevealed;
+    private  cartaScript _firstRevealed = null;
+    private  cartaScript _secondRevealed = null;
     private int _score = 0;
     [SerializeField] private TextMeshProUGUI scoreLabel;
-    public bool canReveal{
-        get{
-            return _firstRevealed == null || _secondRevealed == null;
-        }
-    }
+    
     public async Task CardRevealed(cartaScript card){
         if(_firstRevealed == null){
             _firstRevealed = card;
@@ -125,12 +122,17 @@ public class SceneControlScript : MonoBehaviour
                 
             }
             else{
+                dosCartas =false;
                 yield return new WaitForSeconds(0.5f);
                 _firstRevealed.Unreveal();
                 _secondRevealed.Unreveal();
+                dosCartas = true;
+                
             }
+
             _firstRevealed = null;
             _secondRevealed = null;
+            
         }
     }
 }

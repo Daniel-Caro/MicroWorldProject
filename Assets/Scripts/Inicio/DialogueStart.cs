@@ -153,6 +153,7 @@ public class DialogueStart : MonoBehaviour
            button8.onClick.AddListener(() => {
                if(onetime == true){
                     decisiones.Add(8);
+                    Globals.style = Style.Princess;
                     decisionPanel4.SetActive(false);
                     lineIndex =9;
                     NextDialogueLine();
@@ -163,6 +164,7 @@ public class DialogueStart : MonoBehaviour
            button9.onClick.AddListener(() => {
                if(onetime == true){
                     decisiones.Add(9);
+                    Globals.style = Style.Pirate;
                     decisionPanel4.SetActive(false);
                     lineIndex =9;
                     NextDialogueLine();
@@ -172,6 +174,7 @@ public class DialogueStart : MonoBehaviour
            button10.onClick.AddListener(() => {
                if(onetime == true){
                     decisiones.Add(10);
+                    Globals.style = Style.Future;
                     decisionPanel4.SetActive(false);
                     lineIndex =9;
                     NextDialogueLine();
