@@ -30,6 +30,7 @@ public class BuildScript : MonoBehaviour//, IClick
     private GameObject infoPanel;
     private GameObject savePanel;
     private GameObject settingsPanel;
+    private bool isPressed;
     void Start() {
         GameObject uiuiuiui = GameObject.Find("UI").gameObject;
         buildingPanel = FindObject(uiuiuiui,"InfoBuildingPanel").gameObject;
@@ -42,7 +43,7 @@ public class BuildScript : MonoBehaviour//, IClick
 
     void Update()
     {
-        
+
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -50,6 +51,7 @@ public class BuildScript : MonoBehaviour//, IClick
             if (hit.collider != null && !buildingPanel.activeSelf && !factoryPanel.activeSelf && !housePanel.activeSelf && !infoPanel.activeSelf && !settingsPanel.activeSelf && !savePanel.activeSelf && (Globals.tutorialStep>=14 || Globals.tutorialStep==10 || Globals.tutorialStep==11))
             {
                 if(hit.collider.gameObject.tag == "building"){
+                    isPressed = true;
                     building = hit.collider.gameObject.transform.parent.gameObject;
                     if (building.GetComponent<BuildScript>().id != thisBuilding.GetComponent<BuildScript>().id) return;
                     type = Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Type"];
@@ -105,13 +107,19 @@ public class BuildScript : MonoBehaviour//, IClick
                     }   
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            isPressed = false;
+        }
     }
     
 
     IEnumerator HoldTimer()
     {
         yield return new WaitForSeconds(1);
-        showPanel();
+        if (isPressed) showPanel();
+
     }
 
     public void showPanel(){
