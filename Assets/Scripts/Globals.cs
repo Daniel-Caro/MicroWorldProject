@@ -48,10 +48,10 @@ public class Globals
         {"Factory", new List<int>()}
     }; // Clave: tipo del edificio (House, Bank, Factory) edificio Valor: lista de ID instancia edificio
     public static Dictionary<string, List<int>> buildingCostsDic = new Dictionary<string, List<int>>(){
-        {"TownHall", new List<int> {3000, 3500, 4000, 4000, 4500, 5000, 5500, 6000, 6500, 7000}},
-        {"House", new List<int> {1000, 1500, 2000, 2500, 3000, 3000, 3500, 4000, 5000, 5000}},
-        {"Bank", new List<int> {2000, 2500, 3000, 4000, 4500, 5000, 5000, 5500, 6000, 6000}},
-        {"Factory", new List<int> {3000, 3000, 3500, 3500, 4000, 5000, 5500, 6000, 6500, 6500}}
+        {"TownHall", new List<int> {2000, 2500, 3000, 3000, 3500, 3500, 4000, 4000, 5000, 5500}},
+        {"House", new List<int> {500, 750, 1000, 1250, 1500, 2000, 2250, 2500, 3000, 3500}},
+        {"Bank", new List<int> {1000, 2000, 2500, 3000, 3000, 3500, 4000, 4500, 5000, 5000}},
+        {"Factory", new List<int> {750, 1250, 1750, 2250, 2750, 3250, 3750, 4250, 4500, 4500}}
     }; // Clave: tipo del edificio (House, Bank, Factory) edificio Valor: lista de costes por nivel
 
     public static Dictionary<int, Dictionary<string, int>> numBuildingsByLevel = new Dictionary<int, Dictionary<string, int>>{
