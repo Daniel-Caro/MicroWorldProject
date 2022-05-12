@@ -161,7 +161,7 @@ public class BuildScript : MonoBehaviour//, IClick
     }
     public void showPanelMinion(){
         infoText = panel.transform.Find("InfoText").gameObject;
-        infoText.GetComponent<UnityEngine.UI.Text>().text = "Fabrica nivel: " + level.ToString();
+        infoText.GetComponent<UnityEngine.UI.Text>().text = "Fábrica nivel: " + level.ToString();
         lvlUpButton = panel.transform.Find("LevelUpButton").gameObject;
         GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
         buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
