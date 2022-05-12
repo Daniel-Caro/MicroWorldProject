@@ -197,7 +197,7 @@ public class BuildScript : MonoBehaviour//, IClick
         
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => { 
-            LevelUp();
+            AdditionalPanels();
         });
         
         
@@ -304,7 +304,7 @@ public class BuildScript : MonoBehaviour//, IClick
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
             
-            LevelUp();
+            AdditionalPanels();
         });
         
         //Globals.minionsQuantity[1];
