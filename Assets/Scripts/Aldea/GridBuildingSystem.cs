@@ -140,8 +140,8 @@ public class GridBuildingSystem : MonoBehaviour
                 GameObject.Find("House4").transform.Find("Townhall").gameObject.GetComponent<SpriteRenderer>().sprite = townHallFuture;
                 //Vector3 scale = GameObject.Find("House4").transform.Find("Townhall").transform.localScale;
                 Vector3 pos = GameObject.Find("House4").transform.Find("Townhall").transform.position;
-                GameObject.Find("House4").transform.Find("Townhall").transform.localScale = new Vector3(1.124288f, 1.097079f, 1.124288f);
-                GameObject.Find("House4").transform.Find("Townhall").transform.position = new Vector3(0.01f, 2.6f, pos.z);
+                GameObject.Find("House4").transform.Find("Townhall").transform.localScale = new Vector3(1.124288f, 1.247888f, 1.124288f);
+                GameObject.Find("House4").transform.Find("Townhall").transform.localPosition = new Vector3(0.17f, 5.61f, pos.z);
                 shop.transform.Find("Build1").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = houseFuture;
                 shop.transform.Find("Build2").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = bankFuture;
                 shop.transform.Find("Build3").transform.Find("BuildImage").gameObject.GetComponent<Image>().sprite = factoryFuture;
