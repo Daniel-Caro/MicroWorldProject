@@ -56,7 +56,7 @@ public class BuildScript : MonoBehaviour//, IClick
                     if (building.GetComponent<BuildScript>().id != thisBuilding.GetComponent<BuildScript>().id) return;
                     type = Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Type"];
                     level = Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]);
-                    cost = Globals.buildingCostsDic[type].ElementAt(level);
+                    if (level!=10) cost = Globals.buildingCostsDic[type].ElementAt(level);
                     if (type == "Bank"){
                         if (bankProduction.HarvestResource(building)){
                             building.transform.Find("money").gameObject.SetActive(false);
