@@ -46,7 +46,7 @@ public class MinionProduction : MonoBehaviour
     }
     public async Task Produce(GameObject building, string text)
     {   
-        time = 100;
+        time = 3;
         int capacityExtra = 0;
         foreach(KeyValuePair<int,int> kv in Globals.houseDataDic){
             capacityExtra += kv.Value;
@@ -174,7 +174,7 @@ public class MinionProduction : MonoBehaviour
             }else if(text.Equals("Tier4")){
                 Globals.gameResources["Coins"].currentR += 2000;
             }
-            Debug.Log("No tienes espacio para producir más");
+            Debug.Log("No tienes espacio para producir mas");
         }
     }
     
@@ -224,6 +224,7 @@ public class MinionProduction : MonoBehaviour
         }*/
         
     }
+
     public bool storageComplete(){
         int quantityStorage = 0;
         int totalMinions = 0;
@@ -241,11 +242,16 @@ public class MinionProduction : MonoBehaviour
         foreach(KeyValuePair<int, List<int>> kv in Globals.colaFactoria){
             totalMinions += kv.Value.Count;
         }
-        
-        if(totalMinions+2  <=quantityStorage+ Globals.minionCapacity){
+        foreach(KeyValuePair<int, bool> kv in Globals.factoryProducingDic){
+            if(kv.Value == true){
+                totalMinions += 1;
+            }
+        }
+        Debug.Log("Total de minions:"+totalMinions+"Storage total"+quantityStorage+Globals.minionCapacity);
+        if(totalMinions +1 <=quantityStorage+ Globals.minionCapacity){
             return false;
-        }else {
-            
+        }
+        else {
             return true;
         }
         
@@ -308,11 +314,13 @@ public class MinionProduction : MonoBehaviour
                 Globals.factoryMinionBeingProducedDic[factoryId] = 0;
             }   
         }
+
+
     
     }
     IEnumerator waitToDo(int factoria,int tier) {
         Globals.stopwatch.Start();
-        yield return new WaitForSeconds(500f);
+        yield return new WaitForSeconds(10f);
         Globals.stopwatch.Reset();
         Globals.factoryDataDic[factoria][tier] += 1;
         Debug.Log(Globals.factoryDataDic[factoria][1]);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
-
+using TMPro;
 public class BuildScript : MonoBehaviour//, IClick
 {
     public GameObject panel;
@@ -80,13 +80,17 @@ public class BuildScript : MonoBehaviour//, IClick
                                 foreach(KeyValuePair<int,int> kv5 in Globals.minionsQuantity){
                                     totalMinions += kv5.Value;
                                 }
-                                int restante = totalNivelCasas-totalMinions;
+                                Debug.Log(totalNivelCasas+" lll "+totalMinions);
                                 for(int i = 1; i < buildingFactory.Count+1; i++){
-                                    if(totalNivelCasas >= totalMinions){
+                                    if(totalNivelCasas + Globals.minionCapacity > totalMinions){
                                         if(Globals.minionsQuantity.ContainsKey(i)){
                                             Globals.minionsQuantity[i] += buildingFactory[i];
+                                            totalMinions += buildingFactory[i];
                                         }
-                                        else Globals.minionsQuantity.Add(i,buildingFactory[i]);
+                                        else{
+                                            Globals.minionsQuantity.Add(i,buildingFactory[i]);
+                                            totalMinions+= buildingFactory[i];
+                                        } 
                                         Globals.factoryDataDic[building.GetComponent<BuildScript>().id][i] -= buildingFactory[i];
                                         Debug.Log("Se recoge el minion");
                                     }else{
@@ -112,9 +116,46 @@ public class BuildScript : MonoBehaviour//, IClick
         {
             isPressed = false;
         }
+        
     }
-    
+    private int getKeyByValue(Dictionary<int,int> value, Dictionary<int ,Dictionary<int,int>> dictionary){
 
+        foreach (int keyVar in dictionary.Keys){
+            if (dictionary[keyVar] == value)
+            {
+                return keyVar;
+            }
+        }
+        return 0;
+
+    }
+    public static GameObject getObjectById(int id)
+    {
+        Dictionary<int, GameObject> m_instanceMap = new Dictionary<int, GameObject>();
+        //record instance map
+
+        m_instanceMap.Clear();
+        List<GameObject> gos = new List<GameObject>();
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+        {
+            if (gos.Contains(go))
+            {
+                continue;
+            }
+            gos.Add(go);
+            m_instanceMap[go.GetInstanceID()] = go;
+        }
+
+        if (m_instanceMap.ContainsKey(id))
+        {
+            return m_instanceMap[id];
+        }
+        else
+        {
+            return null;
+        }
+    }
+       
     IEnumerator HoldTimer()
     {
         yield return new WaitForSeconds(1);
@@ -222,7 +263,7 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion2 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier2button = groupMinion2.transform.Find("minionpirata2").gameObject;
             GameObject text2button = tier2button.transform.Find("Text").gameObject;
-            text2button.GetComponent<UnityEngine.UI.Text>().text = "Mono con flotador " + 500;
+            text2button.GetComponent<UnityEngine.UI.Text>().text = "Mono con flotador: " + 500;
         }else if(Globals.style == Style.Future){
             groupMinion2 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier2button = groupMinion2.transform.Find("minionfuture2").gameObject;
@@ -282,7 +323,7 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion4 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier4button = groupMinion4.transform.Find("minionfuture4").gameObject;
             GameObject text4button = tier4button.transform.Find("Text").gameObject;
-            text4button.GetComponent<UnityEngine.UI.Text>().text = "Marc Sukenberg " + 2000; 
+            text4button.GetComponent<UnityEngine.UI.Text>().text = "Marc Sukenberg; " + 2000; 
         }
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
@@ -309,14 +350,39 @@ public class BuildScript : MonoBehaviour//, IClick
         
         //Globals.minionsQuantity[1];
         GameObject minionInfoHouse = panel.transform.Find("ChoosingMinion").gameObject;
-        GameObject qminion1 = minionInfoHouse.transform.Find("qminion1").gameObject;
-        qminion1.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 1: "+ Globals.minionsQuantity[1];
-        GameObject qminion2 = minionInfoHouse.transform.Find("qminion2").gameObject;
-        qminion2.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 2: "+ Globals.minionsQuantity[2];
-        GameObject qminion3 = minionInfoHouse.transform.Find("qminion3").gameObject;
-        qminion3.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 3: "+ Globals.minionsQuantity[3];
-        GameObject qminion4 = minionInfoHouse.transform.Find("qminion4").gameObject;
-        qminion4.GetComponent<UnityEngine.UI.Text>().text = "Minions Tier 4: "+ Globals.minionsQuantity[4];
+        GameObject qminion1 = null;
+        GameObject qminion2 = null;
+        GameObject qminion3 = null;
+        GameObject qminion4 = null;
+        if(Globals.style == Style.Princess){
+            qminion1 = minionInfoHouse.transform.Find("qminion1").gameObject;
+            qminion1.GetComponent<TextMeshProUGUI>().text = "Plebeyos: "+ Globals.minionsQuantity[1];
+            qminion2 = minionInfoHouse.transform.Find("qminion2").gameObject;
+            qminion2.GetComponent<TextMeshProUGUI>().text = "Curanderos: "+ Globals.minionsQuantity[2];
+            qminion3 = minionInfoHouse.transform.Find("qminion3").gameObject;
+            qminion3.GetComponent<TextMeshProUGUI>().text = "Nobles: "+ Globals.minionsQuantity[3];
+            qminion4 = minionInfoHouse.transform.Find("qminion4").gameObject;
+            qminion4.GetComponent<TextMeshProUGUI>().text = "Principes: "+ Globals.minionsQuantity[4];
+        }else if(Globals.style == Style.Pirate){
+            qminion1 = minionInfoHouse.transform.Find("qminion1").gameObject;
+            qminion1.GetComponent<TextMeshProUGUI>().text = "Mono: "+ Globals.minionsQuantity[1];
+            qminion2 = minionInfoHouse.transform.Find("qminion2").gameObject;
+            qminion2.GetComponent<TextMeshProUGUI>().text = "Mono con flotador: "+ Globals.minionsQuantity[2];
+            qminion3 = minionInfoHouse.transform.Find("qminion3").gameObject;
+            qminion3.GetComponent<TextMeshProUGUI>().text = "Mono con pistolas: "+ Globals.minionsQuantity[3];
+            qminion4 = minionInfoHouse.transform.Find("qminion4").gameObject;
+            qminion4.GetComponent<TextMeshProUGUI>().text = "Rey Mono: "+ Globals.minionsQuantity[4];
+        }else if(Globals.style == Style.Future){
+            qminion1 = minionInfoHouse.transform.Find("qminion1").gameObject;
+            qminion1.GetComponent<TextMeshProUGUI>().text = "Robot: "+ Globals.minionsQuantity[1];
+            qminion2 = minionInfoHouse.transform.Find("qminion2").gameObject;
+            qminion2.GetComponent<TextMeshProUGUI>().text = "Cyborg: "+ Globals.minionsQuantity[2];
+            qminion3 = minionInfoHouse.transform.Find("qminion3").gameObject;
+            qminion3.GetComponent<TextMeshProUGUI>().text = "Cryptobro: "+ Globals.minionsQuantity[3];
+            qminion4 = minionInfoHouse.transform.Find("qminion4").gameObject;
+            qminion4.GetComponent<TextMeshProUGUI>().text = "Marc Sukenberg: "+ Globals.minionsQuantity[4];
+        }
+        
         panel.SetActive(true);
         
         
