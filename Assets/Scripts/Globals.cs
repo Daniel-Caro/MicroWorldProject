@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum Style {Future,Pirate,Princess}
 
@@ -75,6 +76,15 @@ public class Globals
     public static Dictionary<int, int> houseDataDic = new Dictionary<int, int>(); //
     public static Dictionary<int,bool> factoryProducingDic = new Dictionary<int,bool>(); //Clave ID Factoria: Valor Si esta produciendo en ese momento
     public static Dictionary<int,int> factoryMinionBeingProducedDic = new Dictionary<int,int>();
+
+    public static IEnumerator popInfoMessage(string msg)
+    {
+        GameObject panel = GameObject.Find("UI").transform.Find("WarningPanel").gameObject;
+        panel.transform.Find("Text").gameObject.GetComponent<TextMeshProUGUI>().text = msg;
+        panel.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        panel.SetActive(false);
+    }
     
     //VARIABLES COMUNES MINIJUEGOS
     public static int obtainedCoins;

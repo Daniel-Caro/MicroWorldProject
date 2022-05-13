@@ -70,6 +70,7 @@ public class BuildScript : MonoBehaviour//, IClick
                             building.transform.Find("pngwing.com (2)").gameObject.SetActive(false);
                             Dictionary<int,int> buildingFactory = Globals.factoryDataDic[building.GetComponent<BuildScript>().id];
                             if(Globals.houseDataDic.Count == 0  ){
+                                StartCoroutine(Globals.popInfoMessage("No hay casas aun construidas"));
                                 Debug.Log("No hay casas aun construidas");
                             }else{
                                 int totalNivelCasas = 0;
@@ -94,6 +95,7 @@ public class BuildScript : MonoBehaviour//, IClick
                                         Globals.factoryDataDic[building.GetComponent<BuildScript>().id][i] -= buildingFactory[i];
                                         Debug.Log("Se recoge el minion");
                                     }else{
+                                        StartCoroutine(Globals.popInfoMessage("No tienes espacio para recoger esta cantidad de minions"));
                                         Debug.Log("No tienes espacio para recoger esta cantidad de minions");
                                     }
                                         
@@ -248,6 +250,7 @@ public class BuildScript : MonoBehaviour//, IClick
                 Globals.gameResources["Coins"].currentR -= 250;
                 minionProduction.Produce(building, "Tier1");
             }else{
+                StartCoroutine(Globals.popInfoMessage("No tienes recursos/nivel de fabrica suficientes para fabricar este minion"));
                 Debug.Log("No tienes recursos/nivel de fabrica suficientes para fabricar este minion tier 1");
             }
             
@@ -276,6 +279,7 @@ public class BuildScript : MonoBehaviour//, IClick
                 Globals.gameResources["Coins"].currentR -= 500;
                 minionProduction.Produce(building, "Tier2");
             }else{
+                StartCoroutine(Globals.popInfoMessage("No tienes recursos/nivel de fabrica suficientes para fabricar este minion"));
                 Debug.Log("No tienes recursos/nivel de fabrica suficientes para fabricar este minion tier 2");
             }
         });
@@ -304,6 +308,7 @@ public class BuildScript : MonoBehaviour//, IClick
                 Globals.gameResources["Coins"].currentR -= 1000;
                 minionProduction.Produce(building, "Tier3");
             }else{
+                StartCoroutine(Globals.popInfoMessage("No tienes recursos/nivel de fabrica suficientes para fabricar este minion"));
                 Debug.Log("No tienes recursos/nivel de fabrica suficientes para fabricar este minion tier 3");
             }
         });
@@ -331,6 +336,7 @@ public class BuildScript : MonoBehaviour//, IClick
                 Globals.gameResources["Coins"].currentR -= 2000;
                 minionProduction.Produce(building, "Tier4");
             }else{
+                StartCoroutine(Globals.popInfoMessage("No tienes recursos/nivel de fabrica suficientes para fabricar este minion"));
                 Debug.Log("No tienes recursos/nivel de fabrica suficientes para fabricar este minion tier 4");
             }
         });

@@ -158,6 +158,7 @@ public class MinionProduction : MonoBehaviour
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id]  = false;
                         }
                         else{
+                            StartCoroutine(Globals.popInfoMessage("No tienes el nivel suficiente para fabricar a este minion"));
                             Debug.Log("No tienes el nivel suficiente para fabricar a este minion");
                         }
                           
@@ -174,7 +175,8 @@ public class MinionProduction : MonoBehaviour
             }else if(text.Equals("Tier4")){
                 Globals.gameResources["Coins"].currentR += 2000;
             }
-            Debug.Log("No tienes espacio para producir mas");
+            StartCoroutine(Globals.popInfoMessage("No tienes espacio para producir más"));
+            Debug.Log("No tienes espacio para producir más");
         }
     }
     
