@@ -396,12 +396,16 @@ public class BuildScript : MonoBehaviour//, IClick
     public void AdditionalPanels() {
         if(Globals.gameResources["Coins"].currentR >= cost) {
             if (type == "TownHall") LevelUp();
-            else if (level+1 <= Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"]))
+            else if (level + 1 <= Int32.Parse(Globals.buildingDataDic[Globals.townHallId]["Level"]))
             {
                 if (Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Type"] == "Bank") bankProduction.chooseAttribute(building, panel, this);
                 else LevelUp();
             }
-            else noSound.Play();
+            else
+            {
+                StartCoroutine(Globals.popInfoMessage("No tienes nivel de ayuntamiento suficiente para hacer esto"));
+                noSound.Play();
+            }
         }
         else
         {
