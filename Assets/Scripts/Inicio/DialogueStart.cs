@@ -283,18 +283,26 @@ public class DialogueStart : MonoBehaviour
                     onetime = true;
                }
             });
-        }else if(insertarNombre.activeSelf && lineIndex == 0){
-            enviarNombre.onClick.AddListener(() => {
-                if(onetime == false){
-                    respuestaNombre = insertarNombre.transform.Find("Text").GetComponent<Text>();
-                    GridBuildingSystem.respuestaNombreSample = respuestaNombre.text;
-                    insertarNombre.SetActive(false);
-                    lineIndex = 1;
-                    NextDialogueLine();
-                    onetime = true;
-                }
+        }else if(insertarNombre.activeSelf && lineIndex == 0 &&insertarNombre.transform.Find("Text").GetComponent<Text>().text.Length < 10){
+                Debug.Log(insertarNombre.transform.Find("Text").GetComponent<Text>().text.Length);
+                enviarNombre.onClick.AddListener(() => {
+                
+                    if(onetime == false){
+                        respuestaNombre = insertarNombre.transform.Find("Text").GetComponent<Text>();
+                        GridBuildingSystem.respuestaNombreSample = respuestaNombre.text;
+                        insertarNombre.SetActive(false);
+                        lineIndex = 1;
+                        NextDialogueLine();
+                        onetime = true;
+                    }
+        
+                    
                 
             }); 
+                            
+
+            
+            
         }else if(insertarEdad.activeSelf && lineIndex == 1){
             enviarEdad.onClick.AddListener(() => {
                 
