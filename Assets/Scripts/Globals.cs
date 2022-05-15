@@ -14,7 +14,7 @@ public class Globals
     public static Style style = Style.Future;
 
 
-    public static int tutorialStep;
+    public static int tutorialStep = 15;
 
     public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>() {
         {"Coins", new GameResource("Coins", 50000)},
@@ -33,7 +33,7 @@ public class Globals
     public static bool doubleCoinsBoost = false;
     public static bool restartGameBoost = false;
 
-    public static int moneyCapacity = 100000;
+    public static int moneyCapacity = 2000;
     public static int minionCapacity = 2;
     public static int townHallId = 0;
     public static int nextId = 1;
