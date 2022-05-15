@@ -284,7 +284,6 @@ public class DialogueStart : MonoBehaviour
                }
             });
         }else if(insertarNombre.activeSelf && lineIndex == 0 &&insertarNombre.transform.Find("Text").GetComponent<Text>().text.Length < 10){
-                Debug.Log(insertarNombre.transform.Find("Text").GetComponent<Text>().text.Length);
                 enviarNombre.onClick.AddListener(() => {
                 
                     if(onetime == false){
@@ -303,9 +302,8 @@ public class DialogueStart : MonoBehaviour
 
             
             
-        }else if(insertarEdad.activeSelf && lineIndex == 1){
+        }else if(insertarEdad.activeSelf && lineIndex == 1 && int.TryParse(insertarEdad.transform.Find("Text").GetComponent<Text>().text,out var n) == true){
             enviarEdad.onClick.AddListener(() => {
-                
                 if(onetime == true){
                     respuestaEdad = insertarEdad.transform.Find("Text").GetComponent<Text>();
                     insertarEdad.SetActive(false);
@@ -429,5 +427,5 @@ public class DialogueStart : MonoBehaviour
         Globals.tutorialStep = 1;
         SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
     }
-  
+
 }
