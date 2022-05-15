@@ -11,7 +11,7 @@ public class DialogueStart : MonoBehaviour
 {
     [SerializeField, TextArea(4,6)] private string[] dialogueLines;
     [SerializeField] private GameObject panel;
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private Text text;
     [SerializeField] private GameObject decisionPanel1;
     [SerializeField] private GameObject decisionPanel2;
     [SerializeField] private GameObject decisionPanel3;
