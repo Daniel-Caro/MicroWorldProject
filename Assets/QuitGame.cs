@@ -6,6 +6,7 @@ public class QuitGame : MonoBehaviour
 {
     public void doExit()
     {
+        SaveManager.SaveGameData();
         Application.Quit();
         Debug.Log("Game is exiting");
     }
