@@ -2061,7 +2061,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.1194, y: 179.6}
+  m_AnchoredPosition: {x: 4.6211, y: 179.6}
   m_SizeDelta: {x: 312.101, y: 71.906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &658131682
@@ -3163,31 +3163,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueLines:
-  - Bienvenido, como quieres que te llamen?
+  - Bienvenidx, como quieres que te llamen?
   - 
-  - "Cuentame un poco sobre ti\u2026 Estudias, trabajas, simplemente vives?"
+  - "Cuentame un poco sobre ti. \nEstudias, trabajas o simplemente vives?"
   - 
   - "Hay un tren al que se le han roto los frenos. Tienes la posibilidad de desviar
-    su curso hacia dos posibles vias: Una en la que hay 5 ni\xF1os y otra en la que
-    hay un anciano. Cual escogerias? "
+    su curso hacia dos posibles vias: Una en la que hay 5 ninos y otra en la que
+    hay un anciano. \nCual escogerias? "
   - "Bien, ya entiendo por donde vas\u2026 Ahora vamos a cambiar un poco el escenario.
     Se vuelve a repetir esta situacion, pero en este caso el anciano lo reemplazamos
-    por un familiar muy cercano al que aprecias. Escoge entre los ni\xF1os o el familiar. "
+    por un familiar muy cercano al que aprecias. \nEscoge entre los ninos o el familiar. "
   - 
-  - "Con lo que has respondido, vemos que eres una persona con decisi\xF3n, firme
-    y con habilidad de toma de decisiones, eres la persona ideal para esta aplicaci\xF3n\u2026
-    jejeje\u2026"
-  - "Ahora dime, si tuvieras que ver una pel\xEDcula de estas tres, solo por el t\xEDtulo,
-    cual verias? El tesoro del Capitan Tan, La princesa moderna o Cybertronic 2100:
-    Apocalypse."
-  - "Realmente, estas pel\xEDculas no existen, era solo una pregunta trampa. Ahora
-    s\xED, te hago unas preguntas m\xE1s concretas."
+  - "Con lo que has respondido, vemos que eres una persona con decision, firme y
+    con habilidades, eres la persona ideal para esta aplicacion\u2026 \njejeje\u2026"
+  - Ahora dime, si tuvieras que ver una pelicula de estas tres, solo por el titulo,
+    cual verias? El tesoro del Capitan Than, La princesa moderna o Cybertronic 2100.
+  - "Realmente, estas peliculas no existen, era solo una pregunta trampa. \nAhora
+    si, te hago unas preguntas mas concretas."
   - 'Elige uno de estos tres objetos: '
   - 'Elige uno de estos tres nombres:'
-  - 'Elige uno de estos 3 estilos para tu aventura: Piratas, Princesas o Futuro '
-  - "\u2026 oh espera. Creo que es demasiado tarde\u2026 !Espero que hayas elegido
-    bien tus decisiones porque est\xE1s a punto de entrar a MICROWORLD!  \xA1Espero
-    que alg\xFAn d\xEDa puedas perdonarme por esto, pero eres su \xFAnica salvaci\xF3n!"
+  - "Elige uno de estos 3 estilos para tu aventura: \nPiratas, Princesas o Futuro..."
+  - "\u2026 oh espera. Creo que es demasiado tarde\u2026 Espero que hayas elegido
+    bien tus decisiones porque estas a punto de entrar a MICROWORLD!  \nEspero que
+    algun dia puedas perdonarme por esto, pero eres su unica salvacion!"
   panel: {fileID: 2061463861}
   text: {fileID: 1939691839}
   decisionPanel1: {fileID: 382597621}
@@ -4012,8 +4010,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7, y: 148.8}
-  m_SizeDelta: {x: 395.9706, y: 109.9995}
+  m_AnchoredPosition: {x: 7, y: 143.6606}
+  m_SizeDelta: {x: 395.9706, y: 120.2782}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1233375699
 MonoBehaviour:
@@ -4289,7 +4287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.21, y: 186.11}
+  m_AnchoredPosition: {x: 4.6211, y: 186.11}
   m_SizeDelta: {x: 337.582, y: 84.923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1361996036
