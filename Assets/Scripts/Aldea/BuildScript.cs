@@ -170,19 +170,19 @@ public class BuildScript : MonoBehaviour//, IClick
         switch(type){
             case("TownHall"):
                 if (Globals.tutorialStep == 10) TutorialScript.townHallExplain(panel.transform.Find("ClosePanel").gameObject, panel.transform.Find("MinigamesButton").gameObject);
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+                infoText.GetComponent<TextMeshProUGUI>().text = "Ayuntamiento nivel: " + level.ToString();
                 panel.transform.Find("MinigamesButton").gameObject.SetActive(true);
                 break;
             case("House"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
+                infoText.GetComponent<TextMeshProUGUI>().text = "Casa nivel: " + level.ToString();
                 panel.transform.Find("MinigamesButton").gameObject.SetActive(false);
                 break;
             case("Bank"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Banco nivel: " + level.ToString();
+                infoText.GetComponent<TextMeshProUGUI>().text = "Banco nivel: " + level.ToString();
                 panel.transform.Find("MinigamesButton").gameObject.SetActive(false);
                 break;
             case("Factory"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Fábrica nivel: " + level.ToString();
+                infoText.GetComponent<TextMeshProUGUI>().text = "Fábrica nivel: " + level.ToString();
                 break;
         }
         
@@ -191,23 +191,23 @@ public class BuildScript : MonoBehaviour//, IClick
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         if(level >= 10)
         {
-            buttonText.GetComponent<UnityEngine.UI.Text>().text = "Nivel Máximo";
+            buttonText.GetComponent<TextMeshProUGUI>().text = "Nivel Máximo";
         }
         else
         {
             lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
                 AdditionalPanels();
             });
-            buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+            buttonText.GetComponent<TextMeshProUGUI>().text = "Subir de nivel\n" + cost.ToString();
         }
         panel.SetActive(true);
     }
     public void showPanelMinion(){
         infoText = panel.transform.Find("InfoText").gameObject;
-        infoText.GetComponent<UnityEngine.UI.Text>().text = "Fábrica nivel: " + level.ToString();
+        infoText.GetComponent<TextMeshProUGUI>().text = "Fábrica nivel: " + level.ToString();
         lvlUpButton = panel.transform.Find("LevelUpButton").gameObject;
         GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
-        buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+        buttonText.GetComponent<TextMeshProUGUI>().text = "Subir de nivel\n" + cost.ToString();
         GameObject choosePanelMinion =panel.transform.Find("ChoosingMinion").gameObject;
         if(Globals.style == Style.Princess){
             choosePanelMinion.transform.Find("minionspirata").gameObject.SetActive(false);
@@ -225,17 +225,17 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion1 = choosePanelMinion.transform.Find("minionsprincesa").gameObject;
             tier1button = groupMinion1.transform.Find("minionprincesa").gameObject;
             GameObject text1button = tier1button.transform.Find("Text").gameObject;
-            text1button.GetComponent<UnityEngine.UI.Text>().text = "Plebeyo: " + 250; 
+            text1button.GetComponent<TextMeshProUGUI>().text = "Plebeyo: " + 250; 
         }else if(Globals.style == Style.Pirate){
             groupMinion1 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier1button = groupMinion1.transform.Find("minionpirata").gameObject;
             GameObject text1button = tier1button.transform.Find("Text").gameObject;
-            text1button.GetComponent<UnityEngine.UI.Text>().text = "Mono:  " + 250; 
+            text1button.GetComponent<TextMeshProUGUI>().text = "Mono:  " + 250; 
         }else if(Globals.style == Style.Future){
             groupMinion1 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier1button = groupMinion1.transform.Find("minionfuture").gameObject;
             GameObject text1button = tier1button.transform.Find("Text").gameObject;
-            text1button.GetComponent<UnityEngine.UI.Text>().text = "Robot: " + 250; 
+            text1button.GetComponent<TextMeshProUGUI>().text = "Robot: " + 250; 
         }
         
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
@@ -261,17 +261,17 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion2 = choosePanelMinion.transform.Find("minionsprincesa").gameObject;
             tier2button = groupMinion2.transform.Find("minionprincesa2").gameObject;
             GameObject text2button = tier2button.transform.Find("Text").gameObject;
-            text2button.GetComponent<UnityEngine.UI.Text>().text = "Curandero: " + 500; 
+            text2button.GetComponent<TextMeshProUGUI>().text = "Curandero: " + 500; 
         }else if(Globals.style == Style.Pirate){
             groupMinion2 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier2button = groupMinion2.transform.Find("minionpirata2").gameObject;
             GameObject text2button = tier2button.transform.Find("Text").gameObject;
-            text2button.GetComponent<UnityEngine.UI.Text>().text = "Mono con flotador: " + 500;
+            text2button.GetComponent<TextMeshProUGUI>().text = "Mono con flotador: " + 500;
         }else if(Globals.style == Style.Future){
             groupMinion2 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier2button = groupMinion2.transform.Find("minionfuture2").gameObject;
             GameObject text2button = tier2button.transform.Find("Text").gameObject;
-            text2button.GetComponent<UnityEngine.UI.Text>().text = "Cyborg: " + 500;
+            text2button.GetComponent<TextMeshProUGUI>().text = "Cyborg: " + 500;
         }
         tier2button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier2button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
@@ -289,17 +289,17 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion3 = choosePanelMinion.transform.Find("minionsprincesa").gameObject;
             tier3button = groupMinion3.transform.Find("minionprincesa3").gameObject;
             GameObject text3button = tier3button.transform.Find("Text").gameObject;
-            text3button.GetComponent<UnityEngine.UI.Text>().text = "Noble: " + 1000; 
+            text3button.GetComponent<TextMeshProUGUI>().text = "Noble: " + 1000; 
         }else if(Globals.style == Style.Pirate){
             groupMinion3 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier3button = groupMinion3.transform.Find("minionpirata3").gameObject;
             GameObject text3button = tier3button.transform.Find("Text").gameObject;
-            text3button.GetComponent<UnityEngine.UI.Text>().text = "Mono con pistolas: " + 1000; 
+            text3button.GetComponent<TextMeshProUGUI>().text = "Mono con pistolas: " + 1000; 
         }else if(Globals.style == Style.Future){
             groupMinion3 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier3button = groupMinion3.transform.Find("minionfuture3").gameObject;
             GameObject text3button = tier3button.transform.Find("Text").gameObject;
-            text3button.GetComponent<UnityEngine.UI.Text>().text = "Cryptobro: " + 1000; 
+            text3button.GetComponent<TextMeshProUGUI>().text = "Cryptobro: " + 1000; 
         }
         
         tier3button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
@@ -318,17 +318,17 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion4 = choosePanelMinion.transform.Find("minionsprincesa").gameObject;
             tier4button = groupMinion4.transform.Find("minionprincesa4").gameObject;
             GameObject text4button = tier4button.transform.Find("Text").gameObject;
-            text4button.GetComponent<UnityEngine.UI.Text>().text = "Principe: " + 2000; 
+            text4button.GetComponent<TextMeshProUGUI>().text = "Principe: " + 2000; 
         }else if(Globals.style == Style.Pirate){
             groupMinion4 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier4button = groupMinion4.transform.Find("minionpirata4").gameObject;
             GameObject text4button = tier4button.transform.Find("Text").gameObject;
-            text4button.GetComponent<UnityEngine.UI.Text>().text = "Rey Mono: " + 2000; 
+            text4button.GetComponent<TextMeshProUGUI>().text = "Rey Mono: " + 2000; 
         }else if(Globals.style == Style.Future){
             groupMinion4 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier4button = groupMinion4.transform.Find("minionfuture4").gameObject;
             GameObject text4button = tier4button.transform.Find("Text").gameObject;
-            text4button.GetComponent<UnityEngine.UI.Text>().text = "Marc Sukenberg; " + 2000; 
+            text4button.GetComponent<TextMeshProUGUI>().text = "Marc Sukenberg; " + 2000; 
         }
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
@@ -344,10 +344,10 @@ public class BuildScript : MonoBehaviour//, IClick
     }
     public void showPanelInfoMinion(GameObject bulding){
         infoText = panel.transform.Find("InfoText").gameObject;
-        infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
+        infoText.GetComponent<TextMeshProUGUI>().text = "Casa nivel: " + level.ToString();
         lvlUpButton = panel.transform.Find("LevelUpButton").gameObject;
         GameObject buttonText = lvlUpButton.transform.Find("LevelUpText").gameObject;
-        buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+        buttonText.GetComponent<TextMeshProUGUI>().text = "Subir de nivel\n" + cost.ToString();
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
             
@@ -423,16 +423,16 @@ public class BuildScript : MonoBehaviour//, IClick
 
         switch(type){
             case("TownHall"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+                infoText.GetComponent<TextMeshProUGUI>().text = "Ayuntamiento nivel: " + level.ToString();
                 break;
             case("House"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Casa nivel: " + level.ToString();
+                infoText.GetComponent<TextMeshProUGUI>().text = "Casa nivel: " + level.ToString();
                 break;
             case("Bank"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Banco nivel: " + level.ToString();
+                infoText.GetComponent<TextMeshProUGUI>().text = "Banco nivel: " + level.ToString();
                 break;
             case("Factory"):
-                infoText.GetComponent<UnityEngine.UI.Text>().text = "Fábrica nivel: " + level.ToString();
+                infoText.GetComponent<TextMeshProUGUI>().text = "Fábrica nivel: " + level.ToString();
                 break;
         }
         lvlUpSound.Play();
@@ -442,7 +442,7 @@ public class BuildScript : MonoBehaviour//, IClick
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         if(level >= 10)
         {
-            buttonText.GetComponent<UnityEngine.UI.Text>().text = "Nivel Máximo";
+            buttonText.GetComponent<TextMeshProUGUI>().text = "Nivel Máximo";
         }
         else
         {
@@ -450,7 +450,7 @@ public class BuildScript : MonoBehaviour//, IClick
             lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
                 AdditionalPanels();
             });
-            buttonText.GetComponent<UnityEngine.UI.Text>().text = "Subir de nivel\n" + cost.ToString();
+            buttonText.GetComponent<TextMeshProUGUI>().text = "Subir de nivel\n" + cost.ToString();
         }
     }
     public  GameObject FindObject(GameObject parent, string name)

@@ -21,7 +21,7 @@ public class Building : MonoBehaviour
             {   
                 Debug.Log("clicaste la casa");
                 GameObject text = this.transform.Find("InfoText").gameObject;
-                text.GetComponent<UnityEngine.UI.Text>().text = "Ayuntamiento nivel: " + level.ToString();
+                text.GetComponent<TextMeshProUGUI>().text = "Ayuntamiento nivel: " + level.ToString();
                 this.transform.Find("Panel").gameObject.SetActive(true);
                 Debug.Log("Target Name: " + hit.collider.gameObject.name);
             } 

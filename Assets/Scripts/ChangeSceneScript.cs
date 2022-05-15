@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class ChangeSceneScript : MonoBehaviour
 {
@@ -121,7 +122,7 @@ public class ChangeSceneScript : MonoBehaviour
     {
         chooseMinionsPanel.SetActive(true);
         
-        chooseMinionsPanel.transform.Find("miniontier1").gameObject.transform.Find("Quantity").gameObject.GetComponent<Text>().text = Globals.minionsQuantity[1].ToString();
+        chooseMinionsPanel.transform.Find("miniontier1").gameObject.transform.Find("Quantity").gameObject.GetComponent<TextMeshProUGUI>().text = Globals.minionsQuantity[1].ToString();
         if (Globals.minionsQuantity[1] != 0)
         {
             chooseMinionsPanel.transform.Find("miniontier1").gameObject.GetComponent<Button>().interactable = true;
@@ -130,7 +131,7 @@ public class ChangeSceneScript : MonoBehaviour
         }
         else chooseMinionsPanel.transform.Find("miniontier1").gameObject.GetComponent<Button>().interactable = false;
         
-        chooseMinionsPanel.transform.Find("miniontier2").gameObject.transform.Find("Quantity").gameObject.GetComponent<Text>().text = Globals.minionsQuantity[2].ToString();
+        chooseMinionsPanel.transform.Find("miniontier2").gameObject.transform.Find("Quantity").gameObject.GetComponent<TextMeshProUGUI>().text = Globals.minionsQuantity[2].ToString();
         if (Globals.minionsQuantity[2] != 0)
         {
             chooseMinionsPanel.transform.Find("miniontier2").gameObject.GetComponent<Button>().interactable = true;
@@ -138,7 +139,7 @@ public class ChangeSceneScript : MonoBehaviour
         }
         else chooseMinionsPanel.transform.Find("miniontier2").gameObject.GetComponent<Button>().interactable = false;
 
-        chooseMinionsPanel.transform.Find("miniontier3").gameObject.transform.Find("Quantity").gameObject.GetComponent<Text>().text = Globals.minionsQuantity[3].ToString();
+        chooseMinionsPanel.transform.Find("miniontier3").gameObject.transform.Find("Quantity").gameObject.GetComponent<TextMeshProUGUI>().text = Globals.minionsQuantity[3].ToString();
         if (Globals.minionsQuantity[3] != 0)
         {
             chooseMinionsPanel.transform.Find("miniontier3").gameObject.GetComponent<Button>().interactable = true;
@@ -147,7 +148,7 @@ public class ChangeSceneScript : MonoBehaviour
         }
         else chooseMinionsPanel.transform.Find("miniontier3").gameObject.GetComponent<Button>().interactable = false;
 
-        chooseMinionsPanel.transform.Find("miniontier4").gameObject.transform.Find("Quantity").gameObject.GetComponent<Text>().text = Globals.minionsQuantity[4].ToString();
+        chooseMinionsPanel.transform.Find("miniontier4").gameObject.transform.Find("Quantity").gameObject.GetComponent<TextMeshProUGUI>().text = Globals.minionsQuantity[4].ToString();
         if (Globals.minionsQuantity[4] != 0)
         {
             chooseMinionsPanel.transform.Find("miniontier4").gameObject.GetComponent<Button>().interactable = true;

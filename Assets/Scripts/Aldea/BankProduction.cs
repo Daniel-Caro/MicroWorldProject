@@ -75,9 +75,9 @@ public class BankProduction : MonoBehaviour
         int storage = bankData["Storage"];
         int quantity = bankData["Quantity"];
         GameObject storageButton = choosePanel.transform.Find("StorageButton").gameObject;
-        storageButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = storage.ToString() + " > " + (storage+500).ToString();
+        storageButton.transform.Find("Text").gameObject.GetComponent<TextMeshProUGUI>().text = storage.ToString() + " > " + (storage+500).ToString();
         GameObject quantityButton = choosePanel.transform.Find("QuantityButton").gameObject;
-        quantityButton.transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = quantity.ToString() + " > " + (quantity+3).ToString();
+        quantityButton.transform.Find("Text").gameObject.GetComponent<TextMeshProUGUI>().text = quantity.ToString() + " > " + (quantity+3).ToString();
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         storageButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
             Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Storage"] = storage + 500;
