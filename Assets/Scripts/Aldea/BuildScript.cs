@@ -83,7 +83,7 @@ public class BuildScript : MonoBehaviour//, IClick
                                 }
                                 Debug.Log(totalNivelCasas+" lll "+totalMinions);
                                 for(int i = 1; i < buildingFactory.Count+1; i++){
-                                    if(totalNivelCasas + Globals.minionCapacity > totalMinions){
+                                    if(totalNivelCasas + Globals.minionCapacity >= totalMinions){
                                         if(Globals.minionsQuantity.ContainsKey(i)){
                                             Globals.minionsQuantity[i] += buildingFactory[i];
                                             totalMinions += buildingFactory[i];

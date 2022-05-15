@@ -378,7 +378,7 @@ public class DialogueStart : MonoBehaviour
     }
     private async Task controladorPanel(int lineIndex){
         if(lineIndex == 13){
-            await Task.Delay(3000);
+            await Task.Delay(5000);
             panel.SetActive(false);
             movilInteraccion.SetActive(false);  
             videoFinal.SetActive(true);
