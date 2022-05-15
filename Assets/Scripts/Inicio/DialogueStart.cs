@@ -40,12 +40,19 @@ public class DialogueStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartDialogue();
-        movilInteraccion = GameObject.Find("/SceneControl/Controlador/MovilInteraccion");
-        enviarNombre = insertarNombre.transform.Find("EnviarNombre").gameObject.GetComponent<Button>();
-        enviarEdad = insertarEdad.transform.Find("EnviarEdad").gameObject.GetComponent<Button>();
-        videoFinal = GameObject.Find("/SceneControl/Controlador/VideoFinal");
-        componenteVideoFinal = videoFinal.GetComponent<VideoPlayer>();
+        if (Globals.tutorialStep != 0)
+        {
+            StartCoroutine(changeScene());
+        }
+        else
+        {
+            StartDialogue();
+            movilInteraccion = GameObject.Find("/SceneControl/Controlador/MovilInteraccion");
+            enviarNombre = insertarNombre.transform.Find("EnviarNombre").gameObject.GetComponent<Button>();
+            enviarEdad = insertarEdad.transform.Find("EnviarEdad").gameObject.GetComponent<Button>();
+            videoFinal = GameObject.Find("/SceneControl/Controlador/VideoFinal");
+            componenteVideoFinal = videoFinal.GetComponent<VideoPlayer>();
+        }
     }
 
     // Update is called once per frame
