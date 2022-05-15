@@ -66,6 +66,7 @@ public class TutorialScript : MonoBehaviour
     private GameObject openBuilds;
     private static GameObject darkPanel;
     private GameObject closeBuilds;
+    private bool townhallTrig;
 
 
     // Start is called before the first frame update
@@ -255,7 +256,8 @@ public class TutorialScript : MonoBehaviour
                 }
                 else if (Globals.tutorialStep == 11)
                 {
-                    darkPanel.SetActive(false);
+                    if (townhallTrig) darkPanel.SetActive(false);
+                    else townhallTrig = true;
                 }
                 else if (Globals.tutorialStep == 12)
                 {
