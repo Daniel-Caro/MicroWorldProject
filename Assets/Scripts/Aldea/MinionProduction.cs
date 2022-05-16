@@ -46,7 +46,7 @@ public class MinionProduction : MonoBehaviour
     }
     public async Task Produce(GameObject building, string text)
     {   
-        time = 3;
+        time = 10;
         int capacityExtra = 0;
         foreach(KeyValuePair<int,int> kv in Globals.houseDataDic){
             capacityExtra += kv.Value;
@@ -129,7 +129,7 @@ public class MinionProduction : MonoBehaviour
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id] = true;
                             Globals.stopwatch.Start();
                             Globals.factoryMinionBeingProducedDic[building.GetComponent<BuildScript>().id] = 2;
-                            await Task.Delay(TimeSpan.FromSeconds(time*60)); //20 minutos
+                            await Task.Delay(TimeSpan.FromSeconds(time)); //20 minutos
                             Globals.stopwatch.Reset();
                             Globals.factoryDataDic[building.GetComponent<BuildScript>().id][2] += 1;
                             Debug.Log(Globals.factoryDataDic[building.GetComponent<BuildScript>().id][2]);
@@ -140,7 +140,7 @@ public class MinionProduction : MonoBehaviour
                             Debug.Log("Se produce minion tier 3");
                             Globals.stopwatch.Start();
                             Globals.factoryMinionBeingProducedDic[building.GetComponent<BuildScript>().id] = 3;
-                            await Task.Delay(TimeSpan.FromSeconds(time*60)); //20 minutos 
+                            await Task.Delay(TimeSpan.FromSeconds(time)); //20 minutos 
                             Globals.stopwatch.Reset();
                             Globals.factoryDataDic[building.GetComponent<BuildScript>().id][3] += 1;
                             Debug.Log(Globals.factoryDataDic[building.GetComponent<BuildScript>().id][3]);
@@ -151,7 +151,7 @@ public class MinionProduction : MonoBehaviour
                             Globals.factoryProducingDic[building.GetComponent<BuildScript>().id] = true;
                             Globals.stopwatch.Start();
                             Globals.factoryMinionBeingProducedDic[building.GetComponent<BuildScript>().id] = 4;
-                            await Task.Delay(TimeSpan.FromSeconds(time*60)); //20 minutos 
+                            await Task.Delay(TimeSpan.FromSeconds(time)); //20 minutos 
                             Globals.stopwatch.Reset();
                             Globals.factoryDataDic[building.GetComponent<BuildScript>().id][4] += 1;
                             Debug.Log(Globals.factoryDataDic[building.GetComponent<BuildScript>().id][4]);

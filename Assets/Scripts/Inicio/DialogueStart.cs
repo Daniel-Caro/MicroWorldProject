@@ -329,6 +329,7 @@ public class DialogueStart : MonoBehaviour
         }else if((Input.GetButtonDown("Fire1")) &&(lineIndex == 0 || lineIndex == 1 || lineIndex == 2 || lineIndex == 4 || lineIndex == 5 || lineIndex == 8 || lineIndex ==10 || lineIndex == 11) && haTerminado == true){
             Debug.Log("Primera linea");
             StartCoroutine(ShowLine(true));
+            haTerminado = false;
         }else if (videoFinal.activeSelf)
         {
             if ((componenteVideoFinal.frame) > 0 && (componenteVideoFinal.isPlaying == false && !coroutineCalled)){
@@ -336,7 +337,7 @@ public class DialogueStart : MonoBehaviour
                 StartCoroutine(changeScene());
                 coroutineCalled = true;
             }
-            haTerminado = false;
+            
         }
     }
     private void StartDialogue(){

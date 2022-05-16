@@ -38,11 +38,15 @@ public class ControladorEscenaVuelo : MonoBehaviour
             GameObject audioFuturoFondo = GameObject.Find("/SceneController/audiosFondo/audioFuturoFondo");
             audioFuturoFondo.SetActive(true);
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    IEnumerator esperarEmpezar(){
+        yield return new WaitForSeconds(5f);
     }
 }

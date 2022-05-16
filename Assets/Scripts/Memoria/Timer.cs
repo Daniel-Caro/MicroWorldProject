@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     public float maxTime = 5f;
     float timeLeft;
     private bool coroutineCalled = false;
-
+    public GameObject segundaOportunidad;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +30,7 @@ public class Timer : MonoBehaviour
         }else{
             if (Globals.restartGameBoost)
             {
+                segundaOportunidad.SetActive(true);
                 timeLeft += maxTime;
                 Globals.restartGameBoost = false;
             }
