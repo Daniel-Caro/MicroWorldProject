@@ -40,6 +40,8 @@ public class DialogueStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SavedData savedData = SaveManager.LoadGameData();
+        if (savedData != null) Globals.tutorialStep = savedData.tutorialStep;
         if (Globals.tutorialStep != 0)
         {
             StartCoroutine(changeScene());
