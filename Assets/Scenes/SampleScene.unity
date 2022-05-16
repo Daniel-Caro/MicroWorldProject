@@ -31841,7 +31841,7 @@ MonoBehaviour:
   id: 0
   type: Bank
   level: 1
-  cost: 2000
+  cost: 1000
   factor: 0.8
   coinSound: {fileID: 1784223696}
   minionSound: {fileID: 0}
@@ -32213,7 +32213,7 @@ MonoBehaviour:
   id: 0
   type: Factory
   level: 1
-  cost: 3000
+  cost: 750
   factor: 0.8
   coinSound: {fileID: 0}
   minionSound: {fileID: 0}
@@ -34148,7 +34148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1375814022572683967, guid: 0924d7bddb1b549498ac83542778335e, type: 3}
       propertyPath: cost
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1375814022572683967, guid: 0924d7bddb1b549498ac83542778335e, type: 3}
       propertyPath: type

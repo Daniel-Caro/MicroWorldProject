@@ -506,6 +506,7 @@ public class GridBuildingSystem : MonoBehaviour
                 buildingData.id = Globals.nextId;
                 Globals.nextId += 1;
                 Globals.gameResources["Coins"].DedactResources(buildingData.cost);
+                if (Globals.tutorialStep == 4) Globals.gameResources["Coins"].currentR = 1750;
                 Dictionary<string, string> buildingDataEntry = new Dictionary<string, string>();
                 buildingDataEntry.Add("Type", buildingData.type);
                 buildingDataEntry.Add("Level", buildingData.level.ToString());
