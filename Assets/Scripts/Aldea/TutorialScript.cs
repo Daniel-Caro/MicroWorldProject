@@ -302,7 +302,7 @@ public class TutorialScript : MonoBehaviour
     {
         GameObject.Find("Build1").gameObject.GetComponent<Button>().onClick.RemoveListener(createFirstHouse);
         character.SetActive(true);
-        dialogText.text = "Pulsa botón derecho en cualquier punto del mapa para construir el edificio.";
+        dialogText.text = "Pulsa botón derecho (o pulsa con dos dedos) en cualquier punto del mapa para construir el edificio.";
     }
 
     static void openMinigames()
