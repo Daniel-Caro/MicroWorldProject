@@ -264,6 +264,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -272,12 +273,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 3
+    wrapV: 3
+    wrapW: 3
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -306,7 +307,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -329,6 +330,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -2032,6 +2045,87 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Dibujo Flappy Bird_25: -4457364293687272067
+      Dibujo Flappy Bird_80: -5705832219074985657
+      Dibujo Flappy Bird_43: -4502284932752015806
+      Dibujo Flappy Bird_7: 1669770330741156449
+      Dibujo Flappy Bird_15: 7464493197294726388
+      Dibujo Flappy Bird_42: 7221471355584827892
+      Dibujo Flappy Bird_19: -3570040273722946765
+      Dibujo Flappy Bird_3: -6775023480992180268
+      Dibujo Flappy Bird_34: -5473207778806234050
+      Dibujo Flappy Bird_60: 3423320008430927976
+      Dibujo Flappy Bird_36: 2329881962155624004
+      Dibujo Flappy Bird_78: 8699821330621183788
+      Dibujo Flappy Bird_1: 3166630835690785501
+      Dibujo Flappy Bird_12: 4420795076251294646
+      Dibujo Flappy Bird_67: -8105277166814037200
+      Dibujo Flappy Bird_27: -8069137750830804491
+      Dibujo Flappy Bird_70: -5253047668257835870
+      Dibujo Flappy Bird_71: 872190558312388190
+      Dibujo Flappy Bird_32: 74485478135350980
+      Dibujo Flappy Bird_75: -4584603937955933363
+      Dibujo Flappy Bird_79: 772435866869666648
+      Dibujo Flappy Bird_37: 6456905335939816579
+      Dibujo Flappy Bird_53: 6631428992097503550
+      Dibujo Flappy Bird_21: 1703990629845712140
+      Dibujo Flappy Bird_4: 3088963082852517927
+      Dibujo Flappy Bird_48: -3529502220371014359
+      Dibujo Flappy Bird_0: -1301049083259089817
+      Dibujo Flappy Bird_55: -8752920407920487801
+      Dibujo Flappy Bird_22: -6517912750852973840
+      Dibujo Flappy Bird_31: 5285131150218618130
+      Dibujo Flappy Bird_9: -7982492015796651828
+      Dibujo Flappy Bird_44: 3941777229972657671
+      Dibujo Flappy Bird_72: 4215802978616675637
+      Dibujo Flappy Bird_8: -8674130104095250318
+      Dibujo Flappy Bird_24: 2831539591252351018
+      Dibujo Flappy Bird_63: 6296172119311989413
+      Dibujo Flappy Bird_51: 5164074171899274630
+      Dibujo Flappy Bird_2: 2844896333945277261
+      Dibujo Flappy Bird_76: 7660651745357317424
+      Dibujo Flappy Bird_54: 7755374115902343667
+      Dibujo Flappy Bird_26: 3937535197192628663
+      Dibujo Flappy Bird_65: 3784797588802310835
+      Dibujo Flappy Bird_28: -6252958551034665527
+      Dibujo Flappy Bird_66: 1570032601670036319
+      Dibujo Flappy Bird_5: -3943910265884220928
+      Dibujo Flappy Bird_74: 7999482136640811163
+      Dibujo Flappy Bird_68: 5909547441718102487
+      Dibujo Flappy Bird_41: -761226894797695770
+      Dibujo Flappy Bird_30: -7165484179385563710
+      Dibujo Flappy Bird_57: -1399745922501745234
+      Dibujo Flappy Bird_6: -9008601283630081108
+      Dibujo Flappy Bird_35: -8421395224189604945
+      Dibujo Flappy Bird_23: -259265887248923043
+      Dibujo Flappy Bird_61: -7361237609042547696
+      Dibujo Flappy Bird_69: -8047585533435520286
+      Dibujo Flappy Bird_39: 7544638084554065816
+      Dibujo Flappy Bird_56: -8503555696710052704
+      Dibujo Flappy Bird_77: 4598223032581774732
+      Dibujo Flappy Bird_46: -1808295682702439760
+      Dibujo Flappy Bird_58: 3786623573501088518
+      Dibujo Flappy Bird_29: 2548941505260537234
+      Dibujo Flappy Bird_18: -1193784881057645047
+      Dibujo Flappy Bird_33: 2581496452653762023
+      Dibujo Flappy Bird_11: 5134942817941892680
+      Dibujo Flappy Bird_40: -1384213546991394761
+      Dibujo Flappy Bird_47: 45769444060375333
+      Dibujo Flappy Bird_59: 8579040618528450907
+      Dibujo Flappy Bird_64: -1909108218610990230
+      Dibujo Flappy Bird_45: 1826349218529779017
+      Dibujo Flappy Bird_16: -1719226755366086586
+      Dibujo Flappy Bird_73: 8863352603397212735
+      Dibujo Flappy Bird_52: 1512599834212374813
+      Dibujo Flappy Bird_20: 6621861682937181518
+      Dibujo Flappy Bird_49: 4269659929892253260
+      Dibujo Flappy Bird_62: -173490375607450420
+      Dibujo Flappy Bird_10: 8812768507986287251
+      Dibujo Flappy Bird_14: 5986334656874258531
+      Dibujo Flappy Bird_17: -8756921611449033594
+      Dibujo Flappy Bird_50: 4053988149745149297
+      Dibujo Flappy Bird_38: 8410472132827258096
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
