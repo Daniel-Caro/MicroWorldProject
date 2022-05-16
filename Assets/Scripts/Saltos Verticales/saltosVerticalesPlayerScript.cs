@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class saltosVerticalesPlayerScript : MonoBehaviour
@@ -34,8 +36,29 @@ public class saltosVerticalesPlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement = Input.GetAxis("Horizontal") * movementSpeed;
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            var rect = new Rect(0, 0, Screen.width/2, Screen.height);
+            Debug.Log("clicaste");
+            if (rect.Contains(Input.mousePosition))
+            {
+                Debug.Log("Derecha");
+                movement = -1f * movementSpeed;
+            }
+            else
+            {
+                Debug.Log("Izquierda");
+                movement = 1f * movementSpeed;
+            }
+        }
+        else
+        {
+            Debug.Log(Input.GetAxis("Horizontal"));
+            movement = Input.GetAxis("Horizontal") * movementSpeed;
+        }
     }
+
 
     private void FixedUpdate() 
     {
