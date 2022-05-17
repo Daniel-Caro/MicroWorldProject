@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.UI;
 public class Frogger : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
@@ -17,12 +18,21 @@ public class Frogger : MonoBehaviour
     public GameObject gameOverText;
     public GameObject secondChanceText;
     private bool coroutineCalled = false;
+    private Button botonArriba;
+    private Button botonIzquierda;
+    private Button botonDerecha;
+    private Button botonAbajo;
+    private bool haMovido = false;
     // Start is called before the first frame update
     private void Awake(){
         spriteRenderer = GetComponent<SpriteRenderer>(); 
     }
     void Start()
     {
+        botonArriba = GameObject.Find("/Canvas/Botones/Arriba").GetComponent<Button>();
+        botonIzquierda = GameObject.Find("/Canvas/Botones/Izquierda").GetComponent<Button>();
+        botonDerecha = GameObject.Find("/Canvas/Botones/Derecha").GetComponent<Button>();
+        botonAbajo = GameObject.Find("/Canvas/Botones/Abajo").GetComponent<Button>();
         
         if(Globals.style == Style.Princess){
             spriteRenderer.sprite = idleSpritePrincess;
@@ -33,12 +43,35 @@ public class Frogger : MonoBehaviour
         else if(Globals.style == Style.Future){
             spriteRenderer.sprite = idleSpriteFuture;
         }
+        botonArriba.onClick.AddListener(() => {
+            Vector3 direction = new Vector3(0,0.19f,0);
+            transform.rotation = Quaternion.Euler(0f,0f,0f);
+
+            Move(direction);
+        });
+        botonAbajo.onClick.AddListener(()=> {
+            Vector3 direction = new Vector3(0,-0.19f,0);
+            transform.rotation = Quaternion.Euler(0f,0f,180f);
+
+            Move(direction);
+        });
+        botonIzquierda.onClick.AddListener(()=> {
+            Vector3 direction = new Vector3(-0.19f,0,0);
+            transform.rotation = Quaternion.Euler(0f,0f,90f);
+
+            Move(direction);
+        });
+        botonDerecha.onClick.AddListener(()=> {
+            Vector3 direction = new Vector3(0.19f,0,0);
+            transform.rotation = Quaternion.Euler(0f,0f,-90f);
+            Move(direction);
+        });
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) ){
+        if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
             Vector3 direction = new Vector3(0,0.19f,0);
             transform.rotation = Quaternion.Euler(0f,0f,0f);
             Move(direction);
@@ -58,6 +91,9 @@ public class Frogger : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f,0f,-90f);
             Move(direction);
         }
+        
+
+
     }
     private void Move(Vector3 direction){
         Vector3 destination = transform.position + direction;
@@ -74,6 +110,7 @@ public class Frogger : MonoBehaviour
         }else{
             transform.position = destination;
         }
+
     }
     private void Death(){
         if(Globals.style == Style.Princess){
