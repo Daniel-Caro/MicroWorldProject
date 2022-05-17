@@ -43,25 +43,7 @@ public class BuildScript : MonoBehaviour//, IClick
 
     void Update()
     {
-        if(Globals.style == Style.Princess){
-            if(GameObject.Find("princess(Clone)") != null ){
-                if(GameObject.Find("princess(Clone)").activeSelf){
-                    GameObject.Find("princess(Clone)").SetActive(false);
-                }
-            }
-        }else if(Globals.style == Style.Pirate){
-            if(GameObject.Find("pirate(Clone)") != null  ){
-                if(GameObject.Find("pirate(Clone)").activeSelf){
-                    GameObject.Find("pirate(Clone)").SetActive(false);
-                }
-            }  
-        }else if(Globals.style == Style.Future){
-            if(GameObject.Find("future(Clone)") != null){
-                if(GameObject.Find("future(Clone)").activeSelf){
-                    GameObject.Find("future(Clone)").SetActive(false);
-                }
-            }  
-        }
+        
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -111,6 +93,7 @@ public class BuildScript : MonoBehaviour//, IClick
                                             totalMinions+= buildingFactory[i];
                                         } 
                                         Globals.factoryDataDic[building.GetComponent<BuildScript>().id][i] -= buildingFactory[i];
+                                        coinSound.Play();
                                         Debug.Log("Se recoge el minion");
                                     }else{
                                         StartCoroutine(Globals.popInfoMessage("No tienes espacio para recoger esta cantidad de minions"));

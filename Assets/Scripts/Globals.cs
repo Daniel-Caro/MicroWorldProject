@@ -13,7 +13,7 @@ public class Globals
 
     public static Style style = Style.Princess;
 
-
+    
     public static int tutorialStep;
 
     public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>() {

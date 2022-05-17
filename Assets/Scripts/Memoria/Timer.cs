@@ -26,6 +26,9 @@ public class Timer : MonoBehaviour
     {
         if(timeLeft > 0){
             timeLeft-=Time.deltaTime;
+            if(timeLeft == maxTime -3 && segundaOportunidad.activeSelf){
+                segundaOportunidad.SetActive(false);
+            }
             timeBar.fillAmount = timeLeft/maxTime;
         }else{
             if (Globals.restartGameBoost)
@@ -39,6 +42,40 @@ public class Timer : MonoBehaviour
                 {
                     Globals.gameResources["Coins"].currentR += Globals.obtainedCoins * 2;
                     Globals.doubleCoinsBoost = false;
+                }
+                if(Globals.style == Style.Princess){
+                    if(GameObject.Find("princess(Clone)") != null ){
+                        if(GameObject.Find("princess(Clone)").activeSelf){
+                            GameObject.Find("princess(Clone)").SetActive(false);
+                            if(GameObject.Find("/SceneControl/cartas/princess") != null){
+                                if(GameObject.Find("/SceneControl/cartas/princess").activeSelf){
+                                    GameObject.Find("/SceneControl/cartas/princess").SetActive(false);
+                                }
+                            }  
+                        }
+                    }
+                }else if(Globals.style == Style.Pirate){
+                    if(GameObject.Find("pirate(Clone)") != null  ){
+                        if(GameObject.Find("pirate(Clone)").activeSelf){
+                            GameObject.Find("pirate(Clone)").SetActive(false);
+                            if(GameObject.Find("/SceneControl/cartas/pirate") != null){
+                                if(GameObject.Find("/SceneControl/cartas/pirate").activeSelf){
+                                    GameObject.Find("/SceneControl/cartas/pirate").SetActive(false);
+                                }
+                            } 
+                        }
+                    }  
+                }else if(Globals.style == Style.Future){
+                    if(GameObject.Find("future(Clone)") != null){
+                        if(GameObject.Find("future(Clone)").activeSelf){
+                            GameObject.Find("future(Clone)").SetActive(false);
+                            if(GameObject.Find("/SceneControl/cartas/future") != null){
+                                if(GameObject.Find("/SceneControl/cartas/future").activeSelf){
+                                    GameObject.Find("/SceneControl/cartas/future").SetActive(false);
+                                }
+                            } 
+                        }
+                    }  
                 }
                 else Globals.gameResources["Coins"].currentR += Globals.obtainedCoins;
                 Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
