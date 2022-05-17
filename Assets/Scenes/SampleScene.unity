@@ -15084,7 +15084,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ajustes
+  m_text: 'Subir de nivel
+
+    2500'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: b246c4190f4e46ec9352fe15a7b09ce0, type: 2}
@@ -15122,8 +15124,8 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: -5.4
-  m_wordSpacing: 24.22
-  m_lineSpacing: -13.82
+  m_wordSpacing: 3.6
+  m_lineSpacing: 12.37
   m_lineSpacingMax: 0
   m_paragraphSpacing: -28.8
   m_charWidthMaxAdj: 0
@@ -24053,7 +24055,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ajustes
+  m_text: 'Subir de nivel
+
+    2500'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: b246c4190f4e46ec9352fe15a7b09ce0, type: 2}
@@ -24091,8 +24095,8 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: -5.4
-  m_wordSpacing: 24.22
-  m_lineSpacing: -13.82
+  m_wordSpacing: 3.6
+  m_lineSpacing: 12.37
   m_lineSpacingMax: 0
   m_paragraphSpacing: -28.8
   m_charWidthMaxAdj: 0
@@ -30118,7 +30122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 38, y: -0.0025024}
+  m_AnchoredPosition: {x: 38, y: -0.0025024414}
   m_SizeDelta: {x: -868.0382, y: -482.2944}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1529230437
@@ -37215,7 +37219,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ajustes
+  m_text: 'Subir de nivel
+
+    2500'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: b246c4190f4e46ec9352fe15a7b09ce0, type: 2}
@@ -37253,8 +37259,8 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: -5.4
-  m_wordSpacing: 24.22
-  m_lineSpacing: -13.82
+  m_wordSpacing: 3.6
+  m_lineSpacing: 12.37
   m_lineSpacingMax: 0
   m_paragraphSpacing: -28.8
   m_charWidthMaxAdj: 0
