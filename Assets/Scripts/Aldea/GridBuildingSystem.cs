@@ -66,7 +66,8 @@ public class GridBuildingSystem : MonoBehaviour
 
     void Start()
     {
-        checkSavedGame();
+        SavedData savedData = checkSavedGame();
+
         if(respuestaNombreSample != null){
             Debug.Log(respuestaNombreSample);
             GameObject.Find("/SampleSceneObject/UI/StatsBlock/Coins").GetComponent<TextMeshProUGUI>().text = respuestaNombreSample;
@@ -158,8 +159,6 @@ public class GridBuildingSystem : MonoBehaviour
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(137/255f,80/255f,54/255f);
                 break;
             }
-                
-
             case(Style.Pirate):
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_concha"));
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "arena_estrella"));
@@ -193,7 +192,6 @@ public class GridBuildingSystem : MonoBehaviour
                 pirateBackground.SetActive(true);
                 GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = new Color(82/255f,185/255f,242/255f);
                 break;
-
             case(Style.Princess):
             {
                 whiteTiles.Add( Resources.Load<TileBase>(tilePath + "hierba_matojo"));
@@ -250,6 +248,8 @@ public class GridBuildingSystem : MonoBehaviour
         SetTilesBlock(area, TileType.White, MainTileMap);
         SetTilesBlock(green_area, TileType.Green, MainTileMap);
         shop.SetActive(false);
+
+        if (savedData != null) placeBuildings(savedData);
 
         GameObject.Find("House").SetActive(false);
         GameObject.Find("House2").transform.Find("money").gameObject.SetActive(false);
@@ -510,7 +510,7 @@ public class GridBuildingSystem : MonoBehaviour
     }
     #endregion
 
-    private void checkSavedGame()
+    private SavedData checkSavedGame()
     {
         SavedData savedData = SaveManager.LoadGameData();//null
         if (savedData != null) //Existen datos de guardado
@@ -635,72 +635,78 @@ public class GridBuildingSystem : MonoBehaviour
                 Globals.houseDataDic.Add(savedData.keysHouseDataDic[i], savedData.valuesHouseDataDic[i]);
                 i++;
             }
-            //Una vez cargados los datos tenemos que volver a poner los edificios
-            foreach(KeyValuePair<int, Vector3> entry in Globals.buildingPositions)
+            return savedData;
+        }
+        else return null;
+    }
+
+    private void placeBuildings(SavedData savedData)
+    {
+        //Una vez cargados los datos tenemos que volver a poner los edificios
+        foreach(KeyValuePair<int, Vector3> entry in Globals.buildingPositions)
+        {
+            GameObject building = null;
+            switch (Globals.buildingDataDic[entry.Key]["Type"])
             {
-                GameObject building = null;
-                switch (Globals.buildingDataDic[entry.Key]["Type"])
+                case "House":
+                    building = GameObject.Find("House");
+                    break;
+                case "Bank":
+                    building = GameObject.Find("House2");
+                    break;
+                case "Factory":
+                    building = GameObject.Find("House3");
+                    break;
+            }
+            GameObject realBuilding = Instantiate(building, new Vector3(entry.Value.x, entry.Value.y, entry.Value.z), Quaternion.identity);
+            var temp = realBuilding.GetComponent<Building>();
+            temp.Place();
+            BuildScript buildingData = realBuilding.GetComponent<BuildScript>();
+            buildingData.id = entry.Key;
+            buildingData.level = Int32.Parse(Globals.buildingDataDic[entry.Key]["Level"]);
+            var diffInSeconds = (DateTime.Now - savedData.savedTime).TotalSeconds;
+            if (Globals.buildingDataDic[entry.Key]["Type"] == "Bank")
+            {
+                BankProduction bankInfo = realBuilding.GetComponent<BankProduction>();
+                bankInfo.BeginProducing(realBuilding);
+                int coinsProduced = (int) (diffInSeconds * bankInfo.quantity) / bankInfo.time;
+                if (coinsProduced > 0)
                 {
-                    case "House":
-                        building = GameObject.Find("House");
-                        break;
-                    case "Bank":
-                        building = GameObject.Find("House2");
-                        break;
-                    case "Factory":
-                        building = GameObject.Find("House3");
-                        break;
+                    if (Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced > Globals.bankDataDic[buildingData.id]["Storage"]) Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Storage"];
+                    else Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced;
                 }
-                GameObject realBuilding = Instantiate(building, new Vector3(entry.Value.x, entry.Value.y, entry.Value.z), Quaternion.identity);
-                var temp = realBuilding.GetComponent<Building>();
-                temp.Place();
-                BuildScript buildingData = realBuilding.GetComponent<BuildScript>();
-                buildingData.id = entry.Key;
-                buildingData.level = Int32.Parse(Globals.buildingDataDic[entry.Key]["Level"]);
-                var diffInSeconds = (DateTime.Now - savedData.savedTime).TotalSeconds;
-                if (Globals.buildingDataDic[entry.Key]["Type"] == "Bank")
+            }
+            else if (Globals.buildingDataDic[entry.Key]["Type"] == "Factory")
+            {
+                MinionProduction factoryInfo = realBuilding.GetComponent<MinionProduction>();
+                if (savedData.minionSecondsLeft < diffInSeconds && Globals.factoryMinionBeingProducedDic[buildingData.id] != 0) //El minion que estaba en cola se ha hecho
                 {
-                    BankProduction bankInfo = realBuilding.GetComponent<BankProduction>();
-                    bankInfo.BeginProducing(realBuilding);
-                    int coinsProduced = (int) (diffInSeconds * bankInfo.quantity) / bankInfo.time;
-                    if (coinsProduced > 0)
+                    Globals.factoryDataDic[buildingData.id][Globals.factoryMinionBeingProducedDic[buildingData.id]]++;
+                    diffInSeconds = diffInSeconds - savedData.minionSecondsLeft;
+                    while (diffInSeconds >= 500 && Globals.colaFactoria[buildingData.id].Count > 0)
                     {
-                        if (Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced > Globals.bankDataDic[buildingData.id]["Storage"]) Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Storage"];
-                        else Globals.bankDataDic[buildingData.id]["Accumulated"] = Globals.bankDataDic[buildingData.id]["Accumulated"] + coinsProduced;
+                        int nextMinion = Globals.colaFactoria[buildingData.id][0];
+                        Globals.factoryDataDic[buildingData.id][nextMinion]++;
+                        Globals.colaFactoria[buildingData.id].RemoveAt(0);
+                        diffInSeconds= diffInSeconds - 500;
                     }
-                }
-                else if (Globals.buildingDataDic[entry.Key]["Type"] == "Factory")
-                {
-                    MinionProduction factoryInfo = realBuilding.GetComponent<MinionProduction>();
-                    if (savedData.minionSecondsLeft < diffInSeconds && Globals.factoryMinionBeingProducedDic[buildingData.id] != 0) //El minion que estaba en cola se ha hecho
-                    {
-                        Globals.factoryDataDic[buildingData.id][Globals.factoryMinionBeingProducedDic[buildingData.id]]++;
-                        diffInSeconds = diffInSeconds - savedData.minionSecondsLeft;
-                        while (diffInSeconds >= 500 && Globals.colaFactoria[buildingData.id].Count > 0)
-                        {
-                            int nextMinion = Globals.colaFactoria[buildingData.id][0];
-                            Globals.factoryDataDic[buildingData.id][nextMinion]++;
-                            Globals.colaFactoria[buildingData.id].RemoveAt(0);
-                            diffInSeconds= diffInSeconds - 500;
-                        }
-                        if (Globals.colaFactoria[buildingData.id].Count > 0) //Aun quedan minions por producir
-                        {
-                            double timeLeft = 500 - diffInSeconds;
-                            StartCoroutine(factoryInfo.produceMinionParcialTime(buildingData.id, Globals.colaFactoria[buildingData.id][0], timeLeft));
-                        }
-                        else
-                        {
-                            Globals.factoryProducingDic[buildingData.id] = false;
-                        }
-                    }
-                    else if (Globals.factoryMinionBeingProducedDic[buildingData.id] != 0)
+                    if (Globals.colaFactoria[buildingData.id].Count > 0) //Aun quedan minions por producir
                     {
                         double timeLeft = 500 - diffInSeconds;
-                        StartCoroutine(factoryInfo.produceMinionParcialTime(buildingData.id, Globals.factoryMinionBeingProducedDic[buildingData.id], timeLeft));
+                        StartCoroutine(factoryInfo.produceMinionParcialTime(buildingData.id, Globals.colaFactoria[buildingData.id][0], timeLeft));
+                    }
+                    else
+                    {
+                        Globals.factoryProducingDic[buildingData.id] = false;
                     }
                 }
-                Destroy(temp);
+                else if (Globals.factoryMinionBeingProducedDic[buildingData.id] != 0)
+                {
+                    double timeLeft = 500 - diffInSeconds;
+                    StartCoroutine(factoryInfo.produceMinionParcialTime(buildingData.id, Globals.factoryMinionBeingProducedDic[buildingData.id], timeLeft));
+                }
             }
+            Destroy(temp);
         }
     }
     
