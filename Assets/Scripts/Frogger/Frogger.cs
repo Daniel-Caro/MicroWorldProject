@@ -43,29 +43,32 @@ public class Frogger : MonoBehaviour
         else if(Globals.style == Style.Future){
             spriteRenderer.sprite = idleSpriteFuture;
         }
-        botonArriba.onClick.AddListener(() => {
+
+            botonArriba.onClick.AddListener(() => {
             Vector3 direction = new Vector3(0,0.19f,0);
             transform.rotation = Quaternion.Euler(0f,0f,0f);
 
             Move(direction);
-        });
-        botonAbajo.onClick.AddListener(()=> {
-            Vector3 direction = new Vector3(0,-0.19f,0);
-            transform.rotation = Quaternion.Euler(0f,0f,180f);
+             });
+            botonAbajo.onClick.AddListener(()=> {
+                Vector3 direction = new Vector3(0,-0.19f,0);
+                transform.rotation = Quaternion.Euler(0f,0f,180f);
 
-            Move(direction);
-        });
-        botonIzquierda.onClick.AddListener(()=> {
-            Vector3 direction = new Vector3(-0.19f,0,0);
-            transform.rotation = Quaternion.Euler(0f,0f,90f);
+                Move(direction);
+            });
+            botonIzquierda.onClick.AddListener(()=> {
+                Vector3 direction = new Vector3(-0.19f,0,0);
+                transform.rotation = Quaternion.Euler(0f,0f,90f);
 
-            Move(direction);
-        });
-        botonDerecha.onClick.AddListener(()=> {
-            Vector3 direction = new Vector3(0.19f,0,0);
-            transform.rotation = Quaternion.Euler(0f,0f,-90f);
-            Move(direction);
-        });
+                Move(direction);
+            });
+            botonDerecha.onClick.AddListener(()=> {
+                Vector3 direction = new Vector3(0.19f,0,0);
+                transform.rotation = Quaternion.Euler(0f,0f,-90f);
+                Move(direction);
+            });
+        
+    
     }
 
     // Update is called once per frame
@@ -137,6 +140,10 @@ public class Frogger : MonoBehaviour
             }
             else
             {
+                GameObject.Find("/Canvas/Botones/Abajo").SetActive(false);
+                GameObject.Find("/Canvas/Botones/Arriba").SetActive(false);
+                GameObject.Find("/Canvas/Botones/Izquierda").SetActive(false);
+                GameObject.Find("/Canvas/Botones/Derecha").SetActive(false);
                 Debug.Log("Monedas obtenidas: " + Globals.obtainedCoins);
                 if (Globals.doubleCoinsBoost)
                 {
