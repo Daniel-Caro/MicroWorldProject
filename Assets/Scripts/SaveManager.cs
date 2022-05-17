@@ -10,6 +10,7 @@ public static class SaveManager
     private static BinaryFormatter binaryFormatter = new BinaryFormatter();
     public static void SaveGameData()
     {
+        Debug.Log("Datos guardados");
         SavedData savedData = new SavedData();
         FileStream fileStream = new FileStream(dataPath, FileMode.Create);
         binaryFormatter.Serialize(fileStream, savedData);

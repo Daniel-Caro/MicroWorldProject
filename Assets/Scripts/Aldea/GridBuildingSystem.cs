@@ -85,6 +85,13 @@ public class GridBuildingSystem : MonoBehaviour
                 {"Type", "TownHall"}
             });
         }
+
+        GameObject UI = GameObject.Find("UI");
+        GameObject saveGame = UI.transform.Find("SaveGame").gameObject;
+        GameObject yes = saveGame.transform.Find("Panel").transform.Find("Yes").gameObject;
+        Button saveButton = yes.GetComponent<Button>();
+        saveButton.onClick.RemoveListener(SaveManager.SaveGameData);
+        saveButton.onClick.AddListener(SaveManager.SaveGameData);
         
         darkPanel = GameObject.Find("DarkPanel").gameObject;
         openBuilds = GameObject.Find("OpenBuilds").gameObject;

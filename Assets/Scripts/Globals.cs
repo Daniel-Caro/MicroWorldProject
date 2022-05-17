@@ -14,7 +14,7 @@ public class Globals
     public static Style style = Style.Future;
 
 
-    public static int tutorialStep;
+    public static int tutorialStep = 15;
 
     public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>() {
         {"Coins", new GameResource("Coins", 500)},
