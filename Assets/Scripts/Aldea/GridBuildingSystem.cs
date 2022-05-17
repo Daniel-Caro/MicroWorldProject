@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
@@ -242,7 +242,7 @@ public class GridBuildingSystem : MonoBehaviour
         SetTilesBlock(area, TileType.White, MainTileMap);
         SetTilesBlock(green_area, TileType.Green, MainTileMap);
         shop.SetActive(false);
-        SavedData savedData = null;//SaveManager.LoadGameData();
+        SavedData savedData = SaveManager.LoadGameData();//null;
         if (savedData != null) //Existen datos de guardado
         {
             Globals.style = (Style) savedData.style;
