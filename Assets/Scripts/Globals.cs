@@ -11,10 +11,10 @@ public enum Style {Future,Pirate,Princess}
 public class Globals
 {
 
-    public static Style style = Style.Future;
+    public static Style style = Style.Princess;
 
 
-    public static int tutorialStep = 15;
+    public static int tutorialStep;
 
     public static Dictionary<string, GameResource> gameResources = new Dictionary<string,GameResource>() {
         {"Coins", new GameResource("Coins", 500)},

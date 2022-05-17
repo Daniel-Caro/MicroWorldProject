@@ -62,6 +62,7 @@ public class Timer : MonoBehaviour
         Debug.Log("Termina el tiempo");
         Scene mainScene = SceneManager.GetSceneByName("SampleScene");
         SceneManager.SetActiveScene(mainScene);
+        
         mainScene.GetRootGameObjects().First().gameObject.SetActive(true);
         SceneManager.UnloadSceneAsync("memoriaScene");
     }

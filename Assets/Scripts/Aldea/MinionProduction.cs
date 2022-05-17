@@ -167,13 +167,13 @@ public class MinionProduction : MonoBehaviour
                 }
         }else{
             if(text.Equals("Tier1")){
-                Globals.gameResources["Coins"].currentR += 250;
+                Globals.gameResources["Coins"].currentR += 10;
             }else if(text.Equals("Tier2")){
-                Globals.gameResources["Coins"].currentR += 500;
+                Globals.gameResources["Coins"].currentR += 30;
             }else if(text.Equals("Tier3")){
-                Globals.gameResources["Coins"].currentR += 1000;
+                Globals.gameResources["Coins"].currentR += 30;
             }else if(text.Equals("Tier4")){
-                Globals.gameResources["Coins"].currentR += 2000;
+                Globals.gameResources["Coins"].currentR += 50;
             }
             StartCoroutine(Globals.popInfoMessage("No tienes espacio para producir más"));
             Debug.Log("No tienes espacio para producir más");
@@ -229,28 +229,39 @@ public class MinionProduction : MonoBehaviour
 
     public bool storageComplete(){
         int quantityStorage = 0;
+        int minionsQ = 0;
+        int minionsFactory = 0;
+        int minionsCola = 0;
+        int minionsProd = 0;
         int totalMinions = 0;
         foreach(KeyValuePair<int, int> kv in Globals.houseDataDic){
             quantityStorage+=kv.Value;
         }
         foreach(KeyValuePair<int, int> kv in Globals.minionsQuantity){
-            totalMinions += kv.Value;
+            minionsQ += kv.Value;
         }
         foreach(KeyValuePair<int, Dictionary<int,int>> kv in Globals.factoryDataDic){
             foreach(KeyValuePair<int,int> kv2 in kv.Value){
-                totalMinions += kv2.Value;
+                minionsFactory += kv2.Value;
             }
         }
         foreach(KeyValuePair<int, List<int>> kv in Globals.colaFactoria){
-            totalMinions += kv.Value.Count;
+            minionsCola += kv.Value.Count;
         }
         foreach(KeyValuePair<int, bool> kv in Globals.factoryProducingDic){
             if(kv.Value == true){
-                totalMinions += 1;
+                minionsProd += 1;
             }
         }
-        Debug.Log("Total de minions:"+totalMinions+"Storage total"+quantityStorage+Globals.minionCapacity);
-        if(totalMinions +1 <=quantityStorage+ Globals.minionCapacity){
+        Debug.Log("Minions recogidos: "+ minionsQ);
+        Debug.Log("Minions en fabrica: "+ minionsFactory);
+        Debug.Log("Minions en cola: "+ minionsCola);
+        Debug.Log("Minions en produccion: "+ minionsProd);
+        totalMinions = minionsQ + minionsFactory + minionsCola + minionsProd;
+        Debug.Log("Total minions:" +totalMinions);
+        int almacenamientototal = quantityStorage + Globals.minionCapacity;
+        Debug.Log("Almacenamiento total" + almacenamientototal);
+        if(totalMinions  <quantityStorage+ Globals.minionCapacity){
             return false;
         }
         else {
@@ -290,23 +301,27 @@ public class MinionProduction : MonoBehaviour
                 if (miniontoproduce == 1){
                     Debug.Log("Se produce minion desde cola tier 1");
                     Globals.factoryProducingDic[factoryId] = true;
+                    Globals.colaFactoria[factoryId].RemoveAt(0);
                     StartCoroutine(waitToDo(factoryId,1));//20 minutos 
                     
                 }
                 else if (miniontoproduce == 2 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 4){
                     Debug.Log("Se produce minion desde cola tier 2");
                     Globals.factoryProducingDic[factoryId] = true;
+                    Globals.colaFactoria[factoryId].RemoveAt(0);
                     StartCoroutine(waitToDo(factoryId,2)); //20 minutos 
                 }
                 else if (miniontoproduce== 3 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 7){
                     Globals.factoryProducingDic[factoryId] = true;
                     Debug.Log("Se produce minion desde cola tier 3");
+                    Globals.colaFactoria[factoryId].RemoveAt(0);
                     StartCoroutine(waitToDo(factoryId,3)); //20 minutos 
                     
                 }
                 else if (miniontoproduce == 4 && Int32.Parse(Globals.buildingDataDic[factoryId]["Level"]) >= 10){
                     Debug.Log("Se produce minion desde cola tier 4");
                     Globals.factoryProducingDic[factoryId] = true;
+                    Globals.colaFactoria[factoryId].RemoveAt(0);
                     StartCoroutine(waitToDo(factoryId,4)); //20 minutos 
                     
                 }
@@ -326,7 +341,6 @@ public class MinionProduction : MonoBehaviour
         Globals.stopwatch.Reset();
         Globals.factoryDataDic[factoria][tier] += 1;
         Debug.Log(Globals.factoryDataDic[factoria][1]);
-        Globals.colaFactoria[factoria].RemoveAt(0);
         Globals.factoryProducingDic[factoria]  = false;
     }
 

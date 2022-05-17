@@ -43,7 +43,25 @@ public class BuildScript : MonoBehaviour//, IClick
 
     void Update()
     {
-
+        if(Globals.style == Style.Princess){
+            if(GameObject.Find("princess(Clone)") != null ){
+                if(GameObject.Find("princess(Clone)").activeSelf){
+                    GameObject.Find("princess(Clone)").SetActive(false);
+                }
+            }
+        }else if(Globals.style == Style.Pirate){
+            if(GameObject.Find("pirate(Clone)") != null  ){
+                if(GameObject.Find("pirate(Clone)").activeSelf){
+                    GameObject.Find("pirate(Clone)").SetActive(false);
+                }
+            }  
+        }else if(Globals.style == Style.Future){
+            if(GameObject.Find("future(Clone)") != null){
+                if(GameObject.Find("future(Clone)").activeSelf){
+                    GameObject.Find("future(Clone)").SetActive(false);
+                }
+            }  
+        }
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -225,17 +243,17 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion1 = choosePanelMinion.transform.Find("minionsprincesa").gameObject;
             tier1button = groupMinion1.transform.Find("minionprincesa").gameObject;
             GameObject text1button = tier1button.transform.Find("Text").gameObject;
-            text1button.GetComponent<TextMeshProUGUI>().text = "Plebeyo: " + 250; 
+            text1button.GetComponent<TextMeshProUGUI>().text = "Plebeyo: " + 10; 
         }else if(Globals.style == Style.Pirate){
             groupMinion1 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier1button = groupMinion1.transform.Find("minionpirata").gameObject;
             GameObject text1button = tier1button.transform.Find("Text").gameObject;
-            text1button.GetComponent<TextMeshProUGUI>().text = "Mono:  " + 250; 
+            text1button.GetComponent<TextMeshProUGUI>().text = "Mono:  " + 10; 
         }else if(Globals.style == Style.Future){
             groupMinion1 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier1button = groupMinion1.transform.Find("minionfuture").gameObject;
             GameObject text1button = tier1button.transform.Find("Text").gameObject;
-            text1button.GetComponent<TextMeshProUGUI>().text = "Robot: " + 250; 
+            text1button.GetComponent<TextMeshProUGUI>().text = "Robot: " + 10; 
         }
         
         lvlUpButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
@@ -246,8 +264,8 @@ public class BuildScript : MonoBehaviour//, IClick
         
         tier1button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier1button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            if(Globals.gameResources["Coins"].currentR >= 250){
-                Globals.gameResources["Coins"].currentR -= 250;
+            if(Globals.gameResources["Coins"].currentR >= 10){
+                Globals.gameResources["Coins"].currentR -= 10;
                 minionProduction.Produce(building, "Tier1");
             }else{
                 StartCoroutine(Globals.popInfoMessage("No tienes recursos/nivel de fabrica suficientes para fabricar este minion"));
@@ -261,22 +279,22 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion2 = choosePanelMinion.transform.Find("minionsprincesa").gameObject;
             tier2button = groupMinion2.transform.Find("minionprincesa2").gameObject;
             GameObject text2button = tier2button.transform.Find("Text").gameObject;
-            text2button.GetComponent<TextMeshProUGUI>().text = "Curandero: " + 500; 
+            text2button.GetComponent<TextMeshProUGUI>().text = "Curandero: " + 30; 
         }else if(Globals.style == Style.Pirate){
             groupMinion2 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier2button = groupMinion2.transform.Find("minionpirata2").gameObject;
             GameObject text2button = tier2button.transform.Find("Text").gameObject;
-            text2button.GetComponent<TextMeshProUGUI>().text = "Mono con flotador: " + 500;
+            text2button.GetComponent<TextMeshProUGUI>().text = "Mono con flotador: " + 30;
         }else if(Globals.style == Style.Future){
             groupMinion2 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier2button = groupMinion2.transform.Find("minionfuture2").gameObject;
             GameObject text2button = tier2button.transform.Find("Text").gameObject;
-            text2button.GetComponent<TextMeshProUGUI>().text = "Cyborg: " + 500;
+            text2button.GetComponent<TextMeshProUGUI>().text = "Cyborg: " + 30;
         }
         tier2button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier2button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            if(Globals.gameResources["Coins"].currentR >= 500&& Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 4 && minionProduction.storageComplete() == false){
-                Globals.gameResources["Coins"].currentR -= 500;
+            if(Globals.gameResources["Coins"].currentR >= 30&& Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 4 && minionProduction.storageComplete() == false){
+                Globals.gameResources["Coins"].currentR -= 30;
                 minionProduction.Produce(building, "Tier2");
             }else{
                 StartCoroutine(Globals.popInfoMessage("No tienes recursos/nivel de fabrica suficientes para fabricar este minion"));
@@ -289,23 +307,23 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion3 = choosePanelMinion.transform.Find("minionsprincesa").gameObject;
             tier3button = groupMinion3.transform.Find("minionprincesa3").gameObject;
             GameObject text3button = tier3button.transform.Find("Text").gameObject;
-            text3button.GetComponent<TextMeshProUGUI>().text = "Noble: " + 1000; 
+            text3button.GetComponent<TextMeshProUGUI>().text = "Noble: " + 30; 
         }else if(Globals.style == Style.Pirate){
             groupMinion3 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier3button = groupMinion3.transform.Find("minionpirata3").gameObject;
             GameObject text3button = tier3button.transform.Find("Text").gameObject;
-            text3button.GetComponent<TextMeshProUGUI>().text = "Mono con pistolas: " + 1000; 
+            text3button.GetComponent<TextMeshProUGUI>().text = "Mono con pistolas: " + 30; 
         }else if(Globals.style == Style.Future){
             groupMinion3 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier3button = groupMinion3.transform.Find("minionfuture3").gameObject;
             GameObject text3button = tier3button.transform.Find("Text").gameObject;
-            text3button.GetComponent<TextMeshProUGUI>().text = "Cryptobro: " + 1000; 
+            text3button.GetComponent<TextMeshProUGUI>().text = "Cryptobro: " + 30; 
         }
         
         tier3button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier3button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-            if(Globals.gameResources["Coins"].currentR >= 1000 && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 7 && minionProduction.storageComplete() == false){
-                Globals.gameResources["Coins"].currentR -= 1000;
+            if(Globals.gameResources["Coins"].currentR >= 30 && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 7 && minionProduction.storageComplete() == false){
+                Globals.gameResources["Coins"].currentR -= 30;
                 minionProduction.Produce(building, "Tier3");
             }else{
                 StartCoroutine(Globals.popInfoMessage("No tienes recursos/nivel de fabrica suficientes para fabricar este minion"));
@@ -318,22 +336,22 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion4 = choosePanelMinion.transform.Find("minionsprincesa").gameObject;
             tier4button = groupMinion4.transform.Find("minionprincesa4").gameObject;
             GameObject text4button = tier4button.transform.Find("Text").gameObject;
-            text4button.GetComponent<TextMeshProUGUI>().text = "Principe: " + 2000; 
+            text4button.GetComponent<TextMeshProUGUI>().text = "Principe: " + 50; 
         }else if(Globals.style == Style.Pirate){
             groupMinion4 = choosePanelMinion.transform.Find("minionspirata").gameObject;
             tier4button = groupMinion4.transform.Find("minionpirata4").gameObject;
             GameObject text4button = tier4button.transform.Find("Text").gameObject;
-            text4button.GetComponent<TextMeshProUGUI>().text = "Rey Mono: " + 2000; 
+            text4button.GetComponent<TextMeshProUGUI>().text = "Rey Mono: " + 50; 
         }else if(Globals.style == Style.Future){
             groupMinion4 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier4button = groupMinion4.transform.Find("minionfuture4").gameObject;
             GameObject text4button = tier4button.transform.Find("Text").gameObject;
-            text4button.GetComponent<TextMeshProUGUI>().text = "Marc Sukenberg; " + 2000; 
+            text4button.GetComponent<TextMeshProUGUI>().text = "Marc Sukenberg; " + 50; 
         }
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
-             if(Globals.gameResources["Coins"].currentR >= 2000 && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 10 && minionProduction.storageComplete() == false){
-                Globals.gameResources["Coins"].currentR -= 2000;
+             if(Globals.gameResources["Coins"].currentR >= 50 && Int32.Parse(Globals.buildingDataDic[building.GetComponent<BuildScript>().id]["Level"]) >= 10 && minionProduction.storageComplete() == false){
+                Globals.gameResources["Coins"].currentR -= 50;
                 minionProduction.Produce(building, "Tier4");
             }else{
                 StartCoroutine(Globals.popInfoMessage("No tienes recursos/nivel de fabrica suficientes para fabricar este minion"));
