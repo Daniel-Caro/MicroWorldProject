@@ -8,6 +8,7 @@ public class SavedData
 {
     //Variables de guardado
     public int style;
+    public string playerName;
     public int tutorialStep;
     public int nextId;
     public int[] resourcesQuantities = new int[2];
@@ -50,6 +51,7 @@ public class SavedData
     {
         savedTime = DateTime.Now;
         style = (int) Globals.style;
+        playerName = Globals.nombreUsuario;
         tutorialStep = Globals.tutorialStep;
         nextId = Globals.nextId;
         resourcesQuantities[0] = Globals.gameResources["Coins"].currentR;

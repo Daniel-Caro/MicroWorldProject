@@ -512,7 +512,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     private SavedData checkSavedGame()
     {
-        SavedData savedData =SaveManager.LoadGameData();//null
+        SavedData savedData = SaveManager.LoadGameData();//null
         if (savedData != null) //Existen datos de guardado
         {
             Globals.style = (Style) savedData.style;
@@ -528,6 +528,8 @@ public class GridBuildingSystem : MonoBehaviour
             Globals.minigameAccess["Flappy"] = savedData.minigameAccess[5];
             Globals.moneyCapacity = savedData.moneyCapacity;
             Globals.minionCapacity = savedData.minionCapacity;
+            Globals.nombreUsuario = savedData.playerName;
+            GameObject.Find("StatsBlock").transform.Find("Coins").gameObject.GetComponent<TextMeshProUGUI>().text = Globals.nombreUsuario;
             int i = 0;
             while (i < savedData.keysBuildingDataDic.Count())
             {
