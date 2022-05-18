@@ -158,6 +158,7 @@ public class Frogger : MonoBehaviour
                     StartCoroutine(changeScene());
                     Debug.Log("after calling corot");
                     coroutineCalled = true;
+                    haMuerto = false;
                 }
             }
         transform.rotation = Quaternion.identity;
