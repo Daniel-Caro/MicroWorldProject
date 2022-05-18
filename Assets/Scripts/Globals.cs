@@ -32,7 +32,7 @@ public class Globals
 
     public static bool doubleCoinsBoost = false;
     public static bool restartGameBoost = false;
-
+    public static string nombreUsuario;
     public static int moneyCapacity = 2000;
     public static int minionCapacity = 2;
     public static int townHallId = 0;

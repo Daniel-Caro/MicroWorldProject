@@ -289,6 +289,7 @@ public class DialogueStart : MonoBehaviour
                     if(onetime == false){
                         respuestaNombre = insertarNombre.transform.Find("Text").GetComponent<Text>();
                         GridBuildingSystem.respuestaNombreSample = respuestaNombre.text;
+                        Globals.nombreUsuario = respuestaNombre.text;
                         insertarNombre.SetActive(false);
                         lineIndex = 1;
                         NextDialogueLine();
