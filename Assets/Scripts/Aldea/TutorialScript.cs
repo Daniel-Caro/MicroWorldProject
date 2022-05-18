@@ -223,6 +223,7 @@ public class TutorialScript : MonoBehaviour
                 {
                     darkPanel.SetActive(false);
                     GameObject.Find("Build1").gameObject.GetComponent<Button>().enabled = true;
+                    GameObject.Find("Build1").gameObject.GetComponent<Button>().onClick.RemoveListener(createFirstHouse);
                     GameObject.Find("Build1").gameObject.GetComponent<Button>().onClick.AddListener(createFirstHouse);
                 }
                 else if (Globals.tutorialStep == 4)
@@ -301,7 +302,7 @@ public class TutorialScript : MonoBehaviour
     void createFirstHouse()
     {
         GameObject.Find("Build1").gameObject.GetComponent<Button>().onClick.RemoveListener(createFirstHouse);
-        character.SetActive(true);
+        darkPanel.SetActive(true);
         dialogText.text = "Pulsa botón derecho (o pulsa con dos dedos) en cualquier punto del mapa para construir el edificio.";
     }
 
