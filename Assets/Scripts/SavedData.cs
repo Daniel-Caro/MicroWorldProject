@@ -154,7 +154,7 @@ public class SavedData
         Globals.houseDataDic.Keys.CopyTo(keysHouseDataDic, 0);
         if (Globals.stopwatch.IsRunning)
         {
-            minionSecondsLeft =  (float)(500f - Globals.stopwatch.Elapsed.TotalSeconds);
+            minionSecondsLeft =  (float)(15f - Globals.stopwatch.Elapsed.TotalSeconds);
         }
     }
 }

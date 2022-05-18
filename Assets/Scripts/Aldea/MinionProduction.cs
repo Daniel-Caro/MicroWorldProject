@@ -337,7 +337,7 @@ public class MinionProduction : MonoBehaviour
     }
     IEnumerator waitToDo(int factoria,int tier) {
         Globals.stopwatch.Start();
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(15f);
         Globals.stopwatch.Reset();
         Globals.factoryDataDic[factoria][tier] += 1;
         Debug.Log(Globals.factoryDataDic[factoria][1]);

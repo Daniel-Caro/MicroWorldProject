@@ -685,16 +685,16 @@ public class GridBuildingSystem : MonoBehaviour
                 {
                     Globals.factoryDataDic[buildingData.id][Globals.factoryMinionBeingProducedDic[buildingData.id]]++;
                     diffInSeconds = diffInSeconds - savedData.minionSecondsLeft;
-                    while (diffInSeconds >= 500 && Globals.colaFactoria[buildingData.id].Count > 0)
+                    while (diffInSeconds >= 15f && Globals.colaFactoria[buildingData.id].Count > 0)
                     {
                         int nextMinion = Globals.colaFactoria[buildingData.id][0];
                         Globals.factoryDataDic[buildingData.id][nextMinion]++;
                         Globals.colaFactoria[buildingData.id].RemoveAt(0);
-                        diffInSeconds= diffInSeconds - 500;
+                        diffInSeconds= diffInSeconds - 15f;
                     }
                     if (Globals.colaFactoria[buildingData.id].Count > 0) //Aun quedan minions por producir
                     {
-                        double timeLeft = 500 - diffInSeconds;
+                        double timeLeft = 15f - diffInSeconds;
                         StartCoroutine(factoryInfo.produceMinionParcialTime(buildingData.id, Globals.colaFactoria[buildingData.id][0], timeLeft));
                     }
                     else
@@ -704,7 +704,7 @@ public class GridBuildingSystem : MonoBehaviour
                 }
                 else if (Globals.factoryMinionBeingProducedDic[buildingData.id] != 0)
                 {
-                    double timeLeft = 500 - diffInSeconds;
+                    double timeLeft = 15f - diffInSeconds;
                     StartCoroutine(factoryInfo.produceMinionParcialTime(buildingData.id, Globals.factoryMinionBeingProducedDic[buildingData.id], timeLeft));
                 }
             }
