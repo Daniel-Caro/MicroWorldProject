@@ -256,7 +256,7 @@ public class GridBuildingSystem : MonoBehaviour
         GameObject.Find("House2").SetActive(false);
         GameObject.Find("House3").SetActive(false);
         shop.SetActive(false);
-        StartCoroutine(saveDataCoroutine());
+        if (Globals.tutorialStep >= 14) StartCoroutine(saveDataCoroutine());
     }
 
     void Update()

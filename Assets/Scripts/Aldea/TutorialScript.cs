@@ -237,7 +237,7 @@ public class TutorialScript : MonoBehaviour
                 }
                 else if (Globals.tutorialStep == 7)
                 {
-                    dialogText.text = "Los bancos generan dinero de manera continua aunque no estés. Mejorarlos te permite ampliar su capacidad de almacenamiento y su ratio de producción.";
+                    dialogText.text = "Los bancos generan dinero de manera continua aunque no estés. Mejorarlos te permite ampliar su capacidad de almacenamiento y su velocidad de producción.";
                     Globals.tutorialStep++;
                 }
                 else if (Globals.tutorialStep == 8)
@@ -247,7 +247,7 @@ public class TutorialScript : MonoBehaviour
                 }
                 else if (Globals.tutorialStep == 9)
                 {
-                    dialogText.text = "Cierra la tienda y clica en el ayuntamiento.";
+                    dialogText.text = "Cierra la tienda y pulsa en el ayuntamiento.";
                     closeBuilds.GetComponent<Button>().enabled = true;
                     Globals.tutorialStep++;
                 }
@@ -269,6 +269,7 @@ public class TutorialScript : MonoBehaviour
                  else if (Globals.tutorialStep == 13)
                 {
                     darkPanel.SetActive(false);
+                    StartCoroutine(saveDataCoroutine());
                     Globals.tutorialStep++;
                 }
                 Debug.Log(Globals.tutorialStep);
@@ -280,7 +281,7 @@ public class TutorialScript : MonoBehaviour
     {
         darkPanel.SetActive(true);
         closeButton.GetComponent<Button>().enabled = false;
-        dialogText.text = "Subir de nivel el ayuntamiento es esencial para poder mejorar el resto de edificios y crear nuevos. Pincha ahora en minijuegos.";
+        dialogText.text = "Subir de nivel el ayuntamiento es esencial para poder mejorar el resto de edificios y crear nuevos. Pulsa ahora en minijuegos.";
         minigameButton.GetComponent<Button>().onClick.AddListener(openMinigames);
         Globals.tutorialStep++;
     }
@@ -303,7 +304,7 @@ public class TutorialScript : MonoBehaviour
     {
         GameObject.Find("Build1").gameObject.GetComponent<Button>().onClick.RemoveListener(createFirstHouse);
         darkPanel.SetActive(true);
-        dialogText.text = "Pulsa botón derecho (o pulsa con dos dedos) en cualquier punto del mapa para construir el edificio.";
+        dialogText.text = "Pulsa botón derecho (o pulsa con dos dedos al mismo tiempo) en cualquier punto del mapa para construir el edificio.";
     }
 
     static void openMinigames()
@@ -313,5 +314,13 @@ public class TutorialScript : MonoBehaviour
         dialogText.text = "Puedes jugar minijuegos para ganar monedas usando minions. Por ahora desbloquea dos, podrás probarlos todos más adelante.";
         Globals.gameResources["Coins"].currentR = 3000;
         Globals.tutorialStep++;
+    }
+
+    IEnumerator saveDataCoroutine()
+    {
+        yield return new WaitForSeconds(15f);
+        SaveManager.SaveGameData();
+        Debug.Log("Se han guardado los datos");
+        StartCoroutine(saveDataCoroutine());
     }
 }
