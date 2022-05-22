@@ -512,7 +512,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     private SavedData checkSavedGame()
     {
-        SavedData savedData =SaveManager.LoadGameData();//null
+        SavedData savedData = SaveManager.LoadGameData();
         if (savedData != null) //Existen datos de guardado
         {
             Globals.style = (Style) savedData.style;
