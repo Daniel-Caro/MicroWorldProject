@@ -38,7 +38,7 @@ public class AssociationDot : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update() 
     {
         //FindMatches();
         if (isMatched)
@@ -53,7 +53,7 @@ public class AssociationDot : MonoBehaviour
         {
             //Move Towards the target
             tempPosition = new Vector2(targetX, transform.position.y);
-            transform.position = Vector2.Lerp(transform.position, tempPosition, .05f);
+            transform.position = Vector2.Lerp(transform.position, tempPosition, 0.3f);
             if (board.allDots[column, row] != this.gameObject)
             {
                 board.allDots[column,row] = this.gameObject;
@@ -70,7 +70,7 @@ public class AssociationDot : MonoBehaviour
         {
             //Move Towards the target
             tempPosition = new Vector2(transform.position.x, targetY);
-            transform.position = Vector2.Lerp(transform.position, tempPosition, .05f);
+            transform.position = Vector2.Lerp(transform.position, tempPosition, 0.3f);
             if (board.allDots[column, row] != this.gameObject)
             {
                 board.allDots[column,row] = this.gameObject;
