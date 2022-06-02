@@ -522,7 +522,7 @@ public class GridBuildingSystem : MonoBehaviour
             Globals.style = (Style) savedData.style;
             Globals.tutorialStep = savedData.tutorialStep;
             Globals.nextId = savedData.nextId;
-            Globals.gameResources["Coins"].currentR = 100000;
+            Globals.gameResources["Coins"].currentR = savedData.resourcesQuantities[0];
             Globals.gameResources["Minions"].currentR = savedData.resourcesQuantities[1];
             Globals.minigameAccess["Pipes"] = savedData.minigameAccess[0];
             Globals.minigameAccess["Frogger"] = savedData.minigameAccess[1];
