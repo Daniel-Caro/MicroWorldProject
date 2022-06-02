@@ -522,7 +522,7 @@ public class GridBuildingSystem : MonoBehaviour
             Globals.style = (Style) savedData.style;
             Globals.tutorialStep = savedData.tutorialStep;
             Globals.nextId = savedData.nextId;
-            Globals.gameResources["Coins"].currentR = savedData.resourcesQuantities[0];
+            Globals.gameResources["Coins"].currentR = 100000;
             Globals.gameResources["Minions"].currentR = savedData.resourcesQuantities[1];
             Globals.minigameAccess["Pipes"] = savedData.minigameAccess[0];
             Globals.minigameAccess["Frogger"] = savedData.minigameAccess[1];
@@ -665,6 +665,8 @@ public class GridBuildingSystem : MonoBehaviour
                     break;
             }
             GameObject realBuilding = Instantiate(building, new Vector3(entry.Value.x, entry.Value.y, entry.Value.z), Quaternion.identity);
+            Transform spriteTransform = realBuilding.transform.GetChild(0).gameObject.GetComponent<Transform>();
+            spriteTransform.position = new Vector3(spriteTransform.position.x, spriteTransform.position.y, realBuilding.transform.position.y/0.55f);
             var temp = realBuilding.GetComponent<Building>();
             temp.Place();
             BuildScript buildingData = realBuilding.GetComponent<BuildScript>();
