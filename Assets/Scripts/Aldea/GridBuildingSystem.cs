@@ -94,6 +94,9 @@ public class GridBuildingSystem : MonoBehaviour
         Button saveButton = yes.GetComponent<Button>();
         saveButton.onClick.RemoveListener(SaveManager.SaveGameData);
         saveButton.onClick.AddListener(SaveManager.SaveGameData);
+
+        GameObject closeShop = UI.transform.Find("CloseBuilds").gameObject;
+        closeShop.GetComponent<Button>().onClick.AddListener(destroyTempIfExists);
         
         darkPanel = GameObject.Find("DarkPanel").gameObject;
         openBuilds = GameObject.Find("OpenBuilds").gameObject;
@@ -382,6 +385,7 @@ public class GridBuildingSystem : MonoBehaviour
             temp.gameObject.SetActive(true);
             SpriteRenderer sr = temp.GetComponentInChildren<SpriteRenderer>();
             sr.color = new Color(1f,1f,1f,.5f);
+
             FollowBuilding();
         }
     }
@@ -712,6 +716,13 @@ public class GridBuildingSystem : MonoBehaviour
         }
     }
     
+    void destroyTempIfExists() {
+        if (buildingPicked) {
+            ClearArea();
+            Destroy(temp.gameObject);
+            buildingPicked = false;
+        }
+    }
 }
 public enum TileType
 {
