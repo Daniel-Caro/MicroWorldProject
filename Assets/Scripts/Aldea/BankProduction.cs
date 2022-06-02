@@ -59,6 +59,7 @@ public class BankProduction : MonoBehaviour
             int left = 0;
             if (Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] > Globals.moneyCapacity) left = Globals.gameResources["Coins"].currentR + Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] - Globals.moneyCapacity;
             Globals.gameResources["Coins"].AddResource(Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"]);
+            if (Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] == left) return false;
             Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] = left;
             cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;

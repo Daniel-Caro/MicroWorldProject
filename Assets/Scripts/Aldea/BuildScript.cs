@@ -59,7 +59,7 @@ public class BuildScript : MonoBehaviour//, IClick
                     if (level!=10) cost = Globals.buildingCostsDic[type].ElementAt(level);
                     if (type == "Bank"){
                         if (bankProduction.HarvestResource(building)){
-                            building.transform.Find("money").gameObject.SetActive(false);
+                            if (Globals.bankDataDic[building.GetComponent<BuildScript>().id]["Accumulated"] == 0) building.transform.Find("money").gameObject.SetActive(false);
                             coinSound.Play();
 
                             Debug.Log("Comienza la rutina");
