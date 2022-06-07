@@ -31997,7 +31997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a8748bf02d58a40bf3936467274293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 5
+  time: 15
   quantity: 3
   storage: 1000
   imageCoin: {fileID: 1110591305}
