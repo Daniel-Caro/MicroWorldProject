@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ca2a075bd3f564ca730d16ebe772c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 20
+  maxTime: 40
   timesUpText: {fileID: 744637768}
   secondChanceText: {fileID: 555306267}
 --- !u!1 &222073432
