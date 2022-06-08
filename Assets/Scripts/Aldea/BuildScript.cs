@@ -329,7 +329,7 @@ public class BuildScript : MonoBehaviour//, IClick
             groupMinion4 = choosePanelMinion.transform.Find("minionsfuture").gameObject;
             tier4button = groupMinion4.transform.Find("minionfuture4").gameObject;
             GameObject text4button = tier4button.transform.Find("Text").gameObject;
-            text4button.GetComponent<TextMeshProUGUI>().text = "Marc Sukenberg; " + 50; 
+            text4button.GetComponent<TextMeshProUGUI>().text = "Marc Sukenberg: " + 50; 
         }
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         tier4button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {
