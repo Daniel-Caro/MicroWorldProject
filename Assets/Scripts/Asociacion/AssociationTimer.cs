@@ -38,6 +38,7 @@ public class AssociationTimer : MonoBehaviour
             }
             else
             {
+                GameObject.Find("Board").GetComponent<AssociationBoard>().currentState = GameState.WAIT;
                 if (Globals.doubleCoinsBoost)
                 {
                     Globals.gameResources["Coins"].currentR += Globals.obtainedCoins * 2;

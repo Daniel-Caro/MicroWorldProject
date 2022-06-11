@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.iOS;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -113,7 +114,7 @@ public class TuberiasGameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonDown(1) || Input.GetTouch(0).tapCount == 2)
         {
             if (timeUpText.activeSelf) return;
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -124,11 +125,11 @@ public class TuberiasGameManager : MonoBehaviour
                     if (Globals.selectedPipe == null)
                     {
                         Globals.selectedPipe = pipe;
-                        pipe.GetComponentInChildren<SpriteRenderer>().color = new Color(1f,1f,1f,.8f);
+                        pipe.GetComponentInChildren<SpriteRenderer>().color = new Color(1f,1f,1f,.6f);
                     }
                     else
                     {
-                        if (Globals.selectedPipe.GetComponent<BuildScript>().id == pipe.GetComponent<BuildScript>().id) 
+                        if (Globals.selectedPipe.GetInstanceID() == pipe.GetInstanceID()) 
                         {
                             Globals.selectedPipe = null;
                             pipe.GetComponentInChildren<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
